@@ -1,0 +1,2353 @@
+{
+  "wTotal": 19961,
+  "wCurseTotal": 2400,
+  "groups": [
+    {
+      "groupName": "Acid Spraymist in possession at start of expedition",
+      "effects": [
+        {
+          "id": "6624500",
+          "name": "Acid Spraymist in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6624300",
+          "name": "Bloodboil Aromatic in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6624200",
+          "name": "Ironjar Aromatic in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6624400",
+          "name": "Poison Spraymist in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6624100",
+          "name": "Spark Aromatic in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6624000",
+          "name": "Uplifting Aromatic in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Arcane per Ruin Boss",
+      "effects": [
+        {
+          "id": "6060500",
+          "name": "Arcane increased for each great enemy defeated at a Ruin",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Attack Power",
+      "effects": [
+        {
+          "id": "7001602",
+          "name": "Fire Attack Power Up +2",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6001600",
+          "name": "Fire Attack Power Up +3",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6001601",
+          "name": "Fire Attack Power Up +4",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7150000",
+          "name": "Guard counter is given a boost based on current HP",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "7001802",
+          "name": "Holy Attack Power Up +2",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6001800",
+          "name": "Holy Attack Power Up +3",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6001801",
+          "name": "Holy Attack Power Up +4",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "6610800",
+          "name": "Improved Affinity Attack Power",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6610801",
+          "name": "Improved Affinity Attack Power +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6610802",
+          "name": "Improved Affinity Attack Power +2",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7081000",
+          "name": "Improved Attack Power with 3+ Axes Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7082400",
+          "name": "Improved Attack Power with 3+ Bows Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7082100",
+          "name": "Improved Attack Power with 3+ Claws Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080300",
+          "name": "Improved Attack Power with 3+ Colossal Swords Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7082300",
+          "name": "Improved Attack Power with 3+ Colossal Weapons Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080500",
+          "name": "Improved Attack Power with 3+ Curved Greatswords Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080400",
+          "name": "Improved Attack Power with 3+ Curved Swords Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080000",
+          "name": "Improved Attack Power with 3+ Daggers Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7082000",
+          "name": "Improved Attack Power with 3+ Fists Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7081400",
+          "name": "Improved Attack Power with 3+ Flails Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7081300",
+          "name": "Improved Attack Power with 3+ Great Hammers Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7081700",
+          "name": "Improved Attack Power with 3+ Great Spears Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7081100",
+          "name": "Improved Attack Power with 3+ Greataxes Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080200",
+          "name": "Improved Attack Power with 3+ Greatswords Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7081800",
+          "name": "Improved Attack Power with 3+ Halberds Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7081200",
+          "name": "Improved Attack Power with 3+ Hammers Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080900",
+          "name": "Improved Attack Power with 3+ Heavy Thrusting Swords Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080600",
+          "name": "Improved Attack Power with 3+ Katana Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7081900",
+          "name": "Improved Attack Power with 3+ Reapers Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7081500",
+          "name": "Improved Attack Power with 3+ Spears Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080100",
+          "name": "Improved Attack Power with 3+ Straight Swords Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080800",
+          "name": "Improved Attack Power with 3+ Thrusting Swords Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7080700",
+          "name": "Improved Attack Power with 3+ Twinblades Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7082200",
+          "name": "Improved Attack Power with 3+ Whips Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7331000",
+          "name": "Improved Axe Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7332400",
+          "name": "Improved Bow Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7332100",
+          "name": "Improved Claw Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7330300",
+          "name": "Improved Colossal Sword Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7332300",
+          "name": "Improved Colossal Weapon Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7040200",
+          "name": "Improved Critical Hits",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "7330500",
+          "name": "Improved Curved Greatsword Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7330400",
+          "name": "Improved Curved Sword Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7330000",
+          "name": "Improved Dagger Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7332000",
+          "name": "Improved Fist Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7331400",
+          "name": "Improved Flail Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7331300",
+          "name": "Improved Great Hammer Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7331700",
+          "name": "Improved Great Spear Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7331100",
+          "name": "Improved Greataxe Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7330200",
+          "name": "Improved Greatsword Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7040100",
+          "name": "Improved Guard Counters",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6040100",
+          "name": "Improved Guard Counters +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6040101",
+          "name": "Improved Guard Counters +2",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7331800",
+          "name": "Improved Halberd Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7331200",
+          "name": "Improved Hammer Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7330900",
+          "name": "Improved Heavy Thrusting Sword Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "6611300",
+          "name": "Improved Incantations",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6611301",
+          "name": "Improved Incantations +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6611302",
+          "name": "Improved Incantations +2",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7040000",
+          "name": "Improved Initial Standard Attack",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "7330600",
+          "name": "Improved Katana Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7331900",
+          "name": "Improved Reaper Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "6611200",
+          "name": "Improved Sorceries",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6611201",
+          "name": "Improved Sorceries +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6611202",
+          "name": "Improved Sorceries +2",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7331500",
+          "name": "Improved Spear Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7330100",
+          "name": "Improved Straight Sword Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7330800",
+          "name": "Improved Thrusting Sword Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7330700",
+          "name": "Improved Twinblade Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7332200",
+          "name": "Improved Whip Attack Power",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7001702",
+          "name": "Lightning Attack Power Up +2",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6001700",
+          "name": "Lightning Attack Power Up +3",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6001701",
+          "name": "Lightning Attack Power Up +4",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "6600100",
+          "name": "Madness in Vicinity Improves Attack Power",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6600101",
+          "name": "Madness in Vicinity Improves Attack Power +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "7001502",
+          "name": "Magic Attack Power Up +2",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6001500",
+          "name": "Magic Attack Power Up +3",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6001501",
+          "name": "Magic Attack Power Up +4",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7030900",
+          "name": "Physical attack power increases after using grease items",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6030900",
+          "name": "Physical attack power increases after using grease items +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6030901",
+          "name": "Physical attack power increases after using grease items +2",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7001402",
+          "name": "Physical Attack Up +2",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6001400",
+          "name": "Physical Attack Up +3",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6001401",
+          "name": "Physical Attack Up +4",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "6600000",
+          "name": "Sleep in Vicinity Improves Attack Power",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6600001",
+          "name": "Sleep in Vicinity Improves Attack Power +1",
+          "w": 269,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Attack Power vs Frostbite-Afflicted Enemy",
+      "effects": [
+        {
+          "id": "7260400",
+          "name": "Attack power up when facing frostbite-afflicted\nenemy",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6260400",
+          "name": "Attack power up when facing frostbite-afflicted enemy +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6260401",
+          "name": "Attack power up when facing frostbite-afflicted enemy +2",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Attack Power vs Poison / Rot Afflicted",
+      "effects": [
+        {
+          "id": "7260000",
+          "name": "Attack power up when facing poison-afflicted enemy",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6260000",
+          "name": "Attack power up when facing poison-afflicted enemy +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6260001",
+          "name": "Attack power up when facing poison-afflicted enemy +2",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7260300",
+          "name": "Attack power up when facing scarlet rot-afflicted\nenemy",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6260300",
+          "name": "Attack power up when facing scarlet rot-afflicted enemy +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6260301",
+          "name": "Attack power up when facing scarlet rot-afflicted enemy +2",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Cerulean Crystal Tear in possession at start of expedition",
+      "effects": [
+        {
+          "id": "6621200",
+          "name": "Cerulean Crystal Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622600",
+          "name": "Cerulean Hidden Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621400",
+          "name": "Crimson Bubbletear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621100",
+          "name": "Crimson Crystal Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621600",
+          "name": "Crimsonburst Crystal Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621000",
+          "name": "Crimsonspill Crystal Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622500",
+          "name": "Crimsonwhorl Bubbletear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622800",
+          "name": "Flame-Shrouding Cracked Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621700",
+          "name": "Greenburst Crystal Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6623200",
+          "name": "Greenspill Crystal Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6623100",
+          "name": "Holy-Shrouding Cracked Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622300",
+          "name": "Leaden Hardtear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6623000",
+          "name": "Lightning-Shrouding Cracked Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622900",
+          "name": "Magic-Shrouding Cracked Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621500",
+          "name": "Opaline Bubbletear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621800",
+          "name": "Opaline Hardtear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622200",
+          "name": "Ruptured Crystal Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621300",
+          "name": "Speckled Hardtear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622000",
+          "name": "Spiked Cracked Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622700",
+          "name": "Stonebarb Cracked Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6621900",
+          "name": "Thorny Cracked Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622400",
+          "name": "Twiggy Cracked Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6622100",
+          "name": "Windy Crystal Tear in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Character Ability",
+      "effects": [
+        {
+          "id": "6500000",
+          "name": "[Wylder] Character Skill inflicts Blood Loss",
+          "w": 200,
+          "hasCurse": false
+        },
+        {
+          "id": "6640000",
+          "name": "[Wylder] Improved Mind, Reduced Vigor",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6640100",
+          "name": "[Wylder] Improved Intelligence and Faith, Reduced Strength and Dexterity",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6500100",
+          "name": "[Guardian] Character Skill Boosts Damage Negation of Nearby Allies",
+          "w": 200,
+          "hasCurse": false
+        },
+        {
+          "id": "6641000",
+          "name": "[Guardian] Improved Strength and Dexterity, Reduced Vigor",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6641100",
+          "name": "[Guardian] Improved Mind and Faith, Reduced Vigor",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6500200",
+          "name": "[Ironeye] Character Skill Inflicts Heavy Poison Damage on Poisoned Enemies",
+          "w": 200,
+          "hasCurse": false
+        },
+        {
+          "id": "6642000",
+          "name": "[Ironeye] Improved Arcane, Reduced Dexterity",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6642100",
+          "name": "[Ironeye] Improved Vigor and Strength, Reduced Dexterity",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6500300",
+          "name": "[Duchess] Use Character Skill for Brief Invulnerability",
+          "w": 200,
+          "hasCurse": false
+        },
+        {
+          "id": "6643000",
+          "name": "[Duchess] Improved Vigor and Strength, Reduced Mind",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6643100",
+          "name": "[Duchess] Improved Mind and Faith, Reduced Intelligence",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6500400",
+          "name": "[Raider] Hit With Character Skill to Reduce Enemy Attack Power",
+          "w": 200,
+          "hasCurse": false
+        },
+        {
+          "id": "6644000",
+          "name": "[Raider] Improved Mind and Intelligence, Reduced Vigor and Endurance",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6644100",
+          "name": "[Raider] Improved Arcane, Reduced Vigor",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6500500",
+          "name": "[Revenant] Increased Max FP upon Ability Activation",
+          "w": 200,
+          "hasCurse": false
+        },
+        {
+          "id": "6645000",
+          "name": "[Revenant] Improved Vigor and Endurance, Reduced Mind",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6645100",
+          "name": "[Revenant] Improved Strength, Reduced Faith",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6500600",
+          "name": "[Recluse] Collect Affinity Residues to Negate Affinity",
+          "w": 200,
+          "hasCurse": false
+        },
+        {
+          "id": "6646000",
+          "name": "[Recluse] Improved Vigor, Endurance, and Dexterity, Reduced Intelligence and Faith",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6646100",
+          "name": "[Recluse] Improved Intelligence and Faith, Reduced Mind",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6500700",
+          "name": "[Executor] Slowly Restore HP upon Ability Activation",
+          "w": 200,
+          "hasCurse": false
+        },
+        {
+          "id": "6647000",
+          "name": "[Executor] Improved Vigor and Endurance, Reduced Arcane",
+          "w": 50,
+          "hasCurse": false
+        },
+        {
+          "id": "6647100",
+          "name": "[Executor] Improved Dexterity and Arcane, Reduced Vigor",
+          "w": 50,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Critical Hit Boosts Stamina Recovery Speed",
+      "effects": [
+        {
+          "id": "7035100",
+          "name": "Critical Hit Boosts Stamina Recovery Speed",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6035100",
+          "name": "Critical Hit Boosts Stamina Recovery Speed +1",
+          "w": 55,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Critical Hits Earn Runes",
+      "effects": [
+        {
+          "id": "7031900",
+          "name": "Critical Hits Earn Runes",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Critical hits fill more of the Art gauge",
+      "effects": [
+        {
+          "id": "7030800",
+          "name": "Critical hits fill more of the Art gauge",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6030800",
+          "name": "Critical hits fill more of the Art gauge +1",
+          "w": 269,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Defeating enemies fills more of the Art gauge",
+      "effects": [
+        {
+          "id": "7090000",
+          "name": "Defeating enemies fills more of the Art gauge",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6090000",
+          "name": "Defeating enemies fills more of the Art gauge +1",
+          "w": 269,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Defeating Enemies Restores HP for Allies",
+      "effects": [
+        {
+          "id": "7090100",
+          "name": "Defeating enemies restores HP for allies but not for\nself",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Dormant Power - Weapon Discovery",
+      "effects": [
+        {
+          "id": "6631000",
+          "name": "Dormant Power Helps Discover Axes",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632600",
+          "name": "Dormant Power Helps Discover Ballistas",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632300",
+          "name": "Dormant Power Helps Discover Bows",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632000",
+          "name": "Dormant Power Helps Discover Claws",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630300",
+          "name": "Dormant Power Helps Discover Colossal Swords",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632200",
+          "name": "Dormant Power Helps Discover Colossal Weapons",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632500",
+          "name": "Dormant Power Helps Discover Crossbows",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630500",
+          "name": "Dormant Power Helps Discover Curved Greatswords",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630400",
+          "name": "Dormant Power Helps Discover Curved Swords",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630000",
+          "name": "Dormant Power Helps Discover Daggers",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631900",
+          "name": "Dormant Power Helps Discover Fists",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631400",
+          "name": "Dormant Power Helps Discover Flails",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631300",
+          "name": "Dormant Power Helps Discover Great Hammers",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631600",
+          "name": "Dormant Power Helps Discover Great Spears",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631100",
+          "name": "Dormant Power Helps Discover Greataxes",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632400",
+          "name": "Dormant Power Helps Discover Greatbows",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632900",
+          "name": "Dormant Power Helps Discover Greatshields",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630200",
+          "name": "Dormant Power Helps Discover Greatswords",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631700",
+          "name": "Dormant Power Helps Discover Halberds",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631200",
+          "name": "Dormant Power Helps Discover Hammers",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630900",
+          "name": "Dormant Power Helps Discover Heavy Thrusting Swords",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630600",
+          "name": "Dormant Power Helps Discover Katana",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632800",
+          "name": "Dormant Power Helps Discover Medium Shields",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631800",
+          "name": "Dormant Power Helps Discover Reapers",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6633100",
+          "name": "Dormant Power Helps Discover Sacred Seals",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632700",
+          "name": "Dormant Power Helps Discover Small Shields",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6631500",
+          "name": "Dormant Power Helps Discover Spears",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6633000",
+          "name": "Dormant Power Helps Discover Staves",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630100",
+          "name": "Dormant Power Helps Discover Straight Swords",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630800",
+          "name": "Dormant Power Helps Discover Thrusting Swords",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6630700",
+          "name": "Dormant Power Helps Discover Twinblades",
+          "w": 31,
+          "hasCurse": false
+        },
+        {
+          "id": "6632100",
+          "name": "Dormant Power Helps Discover Whips",
+          "w": 31,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Draw enemy attention while guarding",
+      "effects": [
+        {
+          "id": "7030700",
+          "name": "Draw enemy attention while guarding",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Fire Damage Negation Up",
+      "effects": [
+        {
+          "id": "7002700",
+          "name": "Fire Damage Negation Up",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6002700",
+          "name": "Improved Fire Damage Negation +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6002701",
+          "name": "Improved Fire Damage Negation +2",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Flask Also Heals Allies",
+      "effects": [
+        {
+          "id": "7010200",
+          "name": "Flask Also Heals Allies",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "FP Restoration on Attack (by Weapon Type)",
+      "effects": [
+        {
+          "id": "7351000",
+          "name": "FP Restoration upon Axe Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7352400",
+          "name": "FP Restoration upon Bow Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7352100",
+          "name": "FP Restoration upon Claw Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350300",
+          "name": "FP Restoration upon Colossal Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7352300",
+          "name": "FP Restoration upon Colossal Weapon Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350500",
+          "name": "FP Restoration upon Curved Greatsword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350400",
+          "name": "FP Restoration upon Curved Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350000",
+          "name": "FP Restoration upon Dagger Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7352000",
+          "name": "FP Restoration upon Fist Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7351400",
+          "name": "FP Restoration upon Flail Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7351300",
+          "name": "FP Restoration upon Great Hammer Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7351700",
+          "name": "FP Restoration upon Great Spear Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7351100",
+          "name": "FP Restoration upon Greataxe Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350200",
+          "name": "FP Restoration upon Greatsword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7351800",
+          "name": "FP Restoration upon Halberd Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7351200",
+          "name": "FP Restoration upon Hammer Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350900",
+          "name": "FP Restoration upon Heavy Thrusting Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350600",
+          "name": "FP Restoration upon Katana Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7351900",
+          "name": "FP Restoration upon Reaper Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7351500",
+          "name": "FP Restoration upon Spear Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350100",
+          "name": "FP Restoration upon Straight Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350800",
+          "name": "FP Restoration upon Thrusting Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7350700",
+          "name": "FP Restoration upon Twinblade Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7352200",
+          "name": "FP Restoration upon Whip Attacks",
+          "w": 10,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Holy Damage Negation Up",
+      "effects": [
+        {
+          "id": "7002900",
+          "name": "Holy Damage Negation Up",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6002900",
+          "name": "Improved Holy Damage Negation +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6002901",
+          "name": "Improved Holy Damage Negation +2",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "HP Restoration on Attack (by Weapon Type)",
+      "effects": [
+        {
+          "id": "7341000",
+          "name": "HP Restoration upon Axe Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7342400",
+          "name": "HP Restoration upon Bow Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7342100",
+          "name": "HP Restoration upon Claw Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340300",
+          "name": "HP Restoration upon Colossal Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7342300",
+          "name": "HP Restoration upon Colossal Weapon Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340500",
+          "name": "HP Restoration upon Curved Greatsword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340400",
+          "name": "HP Restoration upon Curved Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340000",
+          "name": "HP Restoration upon Dagger Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7342000",
+          "name": "HP Restoration upon Fist Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7341400",
+          "name": "HP Restoration upon Flail Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7341300",
+          "name": "HP Restoration upon Great Hammer Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7341700",
+          "name": "HP Restoration upon Great Spear Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7341100",
+          "name": "HP Restoration upon Greataxe Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340200",
+          "name": "HP Restoration upon Greatsword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7341800",
+          "name": "HP Restoration upon Halberd Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7341200",
+          "name": "HP Restoration upon Hammer Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340900",
+          "name": "HP Restoration upon Heavy Thrusting Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340600",
+          "name": "HP Restoration upon Katana Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7341900",
+          "name": "HP Restoration upon Reaper Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7341500",
+          "name": "HP Restoration upon Spear Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340100",
+          "name": "HP Restoration upon Straight Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340800",
+          "name": "HP Restoration upon Thrusting Sword Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7340700",
+          "name": "HP Restoration upon Twinblade Attacks",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7342200",
+          "name": "HP Restoration upon Whip Attacks",
+          "w": 10,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "HP Restoration upon Thrusting Counterattack",
+      "effects": [
+        {
+          "id": "7160000",
+          "name": "HP Restoration upon Thrusting Counterattack",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6160000",
+          "name": "HP Restoration upon Thrusting Counterattack +1",
+          "w": 269,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "HP restored when using medicinal boluses, etc.",
+      "effects": [
+        {
+          "id": "7030200",
+          "name": "HP restored when using medicinal boluses, etc.",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6030200",
+          "name": "HP restored when using medicinal boluses, etc. +1",
+          "w": 55,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Affinity Damage Negation",
+      "effects": [
+        {
+          "id": "6611100",
+          "name": "Improved Affinity Damage Negation",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6611101",
+          "name": "Improved Affinity Damage Negation +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6611102",
+          "name": "Improved Affinity Damage Negation +2",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Blood Loss Resistance",
+      "effects": [
+        {
+          "id": "7003100",
+          "name": "Improved Blood Loss Resistance",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6003100",
+          "name": "Improved Blood Loss Resistance +1",
+          "w": 69,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Damage Negation at Low HP",
+      "effects": [
+        {
+          "id": "7012300",
+          "name": "Improved Damage Negation at Low HP",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Death Blight Resistance",
+      "effects": [
+        {
+          "id": "7003300",
+          "name": "Improved Death Blight Resistance",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6003300",
+          "name": "Improved Death Blight Resistance +1",
+          "w": 69,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Flask HP Restoration",
+      "effects": [
+        {
+          "id": "6611400",
+          "name": "Improved Flask HP Restoration",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Frost Resistance",
+      "effects": [
+        {
+          "id": "7003500",
+          "name": "Improved Frost Resistance",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6003500",
+          "name": "Improved Frost Resistance +1",
+          "w": 69,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Glintstone and Gravity Stone Damage",
+      "effects": [
+        {
+          "id": "7040500",
+          "name": "Improved Glintstone and Gravity Stone Damage",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6040500",
+          "name": "Improved Glintstone and Gravity Stone Damage +1",
+          "w": 28,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Lightning Damage Negation",
+      "effects": [
+        {
+          "id": "6002800",
+          "name": "Improved Lightning Damage Negation +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6002801",
+          "name": "Improved Lightning Damage Negation +2",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7002800",
+          "name": "Lightning Damage Negation Up",
+          "w": 69,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Madness Resistance",
+      "effects": [
+        {
+          "id": "7003600",
+          "name": "Improved Madness Resistance",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6003600",
+          "name": "Improved Madness Resistance +1",
+          "w": 69,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Magic Damage Negation",
+      "effects": [
+        {
+          "id": "6002600",
+          "name": "Improved Magic Damage Negation +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6002601",
+          "name": "Improved Magic Damage Negation +2",
+          "w": 130,
+          "hasCurse": true
+        },
+        {
+          "id": "7002600",
+          "name": "Magic Damage Negation Up",
+          "w": 69,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Perfuming Arts",
+      "effects": [
+        {
+          "id": "6043100",
+          "name": "Improved Perfuming Arts +1",
+          "w": 28,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Physical Damage Negation",
+      "effects": [
+        {
+          "id": "6611001",
+          "name": "Improved Physical Damage Negation +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6611002",
+          "name": "Improved Physical Damage Negation +2",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Poise & Damage Negation When Knocked Back",
+      "effects": [
+        {
+          "id": "7240000",
+          "name": "Improved Poise & Damage Negation When Knocked Back\nby Damage",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Poison Resistance",
+      "effects": [
+        {
+          "id": "7003000",
+          "name": "Improved Poison Resistance",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6003000",
+          "name": "Improved Poison Resistance +1",
+          "w": 69,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Rot Resistance",
+      "effects": [
+        {
+          "id": "7003400",
+          "name": "Improved Rot Resistance",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6003400",
+          "name": "Improved Rot Resistance +1",
+          "w": 69,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Sleep Resistance",
+      "effects": [
+        {
+          "id": "7003200",
+          "name": "Improved Sleep Resistance",
+          "w": 69,
+          "hasCurse": false
+        },
+        {
+          "id": "6003200",
+          "name": "Improved Sleep Resistance +1",
+          "w": 69,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Throwing Knife Damage",
+      "effects": [
+        {
+          "id": "7040400",
+          "name": "Improved Throwing Knife Damage",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6040400",
+          "name": "Improved Throwing Knife Damage +1",
+          "w": 28,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Improved Throwing Pot Damage",
+      "effects": [
+        {
+          "id": "7040300",
+          "name": "Improved Throwing Pot Damage",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "6040300",
+          "name": "Improved Throwing Pot Damage +1",
+          "w": 28,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Increased Maximum FP",
+      "effects": [
+        {
+          "id": "6610500",
+          "name": "Increased Maximum FP",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Increased Maximum HP",
+      "effects": [
+        {
+          "id": "6610400",
+          "name": "Increased Maximum HP",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Increased Maximum Stamina",
+      "effects": [
+        {
+          "id": "6610600",
+          "name": "Increased Maximum Stamina",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Increased rune acquisition for self and allies",
+      "effects": [
+        {
+          "id": "7110000",
+          "name": "Increased rune acquisition for self and allies",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Items confer effect to all nearby allies",
+      "effects": [
+        {
+          "id": "7050100",
+          "name": "Items confer effect to all nearby allies",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Max FP with 3+ Staves / Seals",
+      "effects": [
+        {
+          "id": "7082600",
+          "name": "Max FP Up with 3+ Sacred Seals Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7082500",
+          "name": "Max FP Up with 3+ Staves Equipped",
+          "w": 10,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Max HP per Great Church Boss",
+      "effects": [
+        {
+          "id": "6060300",
+          "name": "Max HP increased for each great enemy defeated at a Great Church.",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Max HP with 3+ Shields",
+      "effects": [
+        {
+          "id": "7082900",
+          "name": "Max HP Up with 3+ Greatshields Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7082800",
+          "name": "Max HP Up with 3+ Medium Shields Equipped",
+          "w": 10,
+          "hasCurse": false
+        },
+        {
+          "id": "7082700",
+          "name": "Max HP Up with 3+ Small Shields Equipped",
+          "w": 10,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Max Stamina per Camp Boss",
+      "effects": [
+        {
+          "id": "6060600",
+          "name": "Max stamina increased for each great enemy defeated at a Great Encampment",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Partial HP Restoration upon Post-Damage Attacks",
+      "effects": [
+        {
+          "id": "7005600",
+          "name": "Partial HP Restoration upon Post-Damage Attacks",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6005600",
+          "name": "Partial HP Restoration upon Post-Damage Attacks +1",
+          "w": 269,
+          "hasCurse": true
+        },
+        {
+          "id": "6005601",
+          "name": "Partial HP Restoration upon Post-Damage Attacks +2",
+          "w": 130,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Poise",
+      "effects": [
+        {
+          "id": "7001002",
+          "name": "Poise +3",
+          "w": 69,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Raised stamina recovery for nearby allies, but not for self",
+      "effects": [
+        {
+          "id": "7050000",
+          "name": "Raised stamina recovery for nearby allies, but not\nfor self",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Reduced FP Consumption",
+      "effects": [
+        {
+          "id": "6610700",
+          "name": "Reduced FP Consumption",
+          "w": 69,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Rune discount for shop purchases while on expedition",
+      "effects": [
+        {
+          "id": "7230000",
+          "name": "Rune discount for shop purchases while on expedition",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Runes & Discovery per Fort Boss",
+      "effects": [
+        {
+          "id": "6060400",
+          "name": "Runes and Item Discovery increased for each great enemy defeated at a Fort",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Slowly restore HP for self and nearby allies when HP is low",
+      "effects": [
+        {
+          "id": "7012200",
+          "name": "Slowly restore HP for self and nearby allies when HP\nis low",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Small Pouch in possession at start of expedition",
+      "effects": [
+        {
+          "id": "7121000",
+          "name": "Small Pouch in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Spell School",
+      "effects": [
+        {
+          "id": "7044400",
+          "name": "Improved Bestial Incantations",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7043300",
+          "name": "Improved Carian Sword Sorcery",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7043600",
+          "name": "Improved Crystalian sorcery",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7044600",
+          "name": "Improved Dragon Communion Incantations",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7044100",
+          "name": "Improved Dragon Cult Incantations",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7044500",
+          "name": "Improved Frenzied Flame Incantations",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7044000",
+          "name": "Improved Fundamentalist Incantations",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7044200",
+          "name": "Improved Giants' Flame Incantations",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7043400",
+          "name": "Improved Glintblade Sorcery",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7044300",
+          "name": "Improved Godslayer Incantations",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7043700",
+          "name": "Improved Gravity Sorcery",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7043500",
+          "name": "Improved Invisibility Sorcery",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7043200",
+          "name": "Improved Stonedigger Sorcery",
+          "w": 28,
+          "hasCurse": false
+        },
+        {
+          "id": "7043800",
+          "name": "Improved Thorn Sorcery",
+          "w": 28,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Stamina Recovery upon Landing Attacks",
+      "effects": [
+        {
+          "id": "7100100",
+          "name": "Stamina Recovery upon Landing Attacks",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Stonesword Key in possession at start of expedition",
+      "effects": [
+        {
+          "id": "7120900",
+          "name": "Stonesword Key in possession at start of expedition",
+          "w": 28,
+          "hasCurse": false
+        }
+      ]
+    },
+    {
+      "groupName": "Successful guarding fills more of the Art gauge",
+      "effects": [
+        {
+          "id": "7030600",
+          "name": "Successful guarding fills more of the Art gauge",
+          "w": 55,
+          "hasCurse": false
+        },
+        {
+          "id": "6030600",
+          "name": "Successful guarding fills more of the Art gauge +1",
+          "w": 269,
+          "hasCurse": true
+        }
+      ]
+    },
+    {
+      "groupName": "Treasure marked upon map",
+      "effects": [
+        {
+          "id": "7070000",
+          "name": "Treasure marked upon map",
+          "w": 55,
+          "hasCurse": false
+        }
+      ]
+    }
+  ],
+  "curses": [
+    {
+      "name": "All Resistances Down",
+      "w": 100
+    },
+    {
+      "name": "Continuous HP Loss",
+      "w": 100
+    },
+    {
+      "name": "Lower Attack When Below Max HP",
+      "w": 100
+    },
+    {
+      "name": "Near Death Reduces Max HP",
+      "w": 100
+    },
+    {
+      "name": "Poison Buildup When Below Max HP",
+      "w": 100
+    },
+    {
+      "name": "Reduced Damage Negation After Evading",
+      "w": 100
+    },
+    {
+      "name": "Reduced Damage Negation for Flask Usages",
+      "w": 100
+    },
+    {
+      "name": "Reduced Dexterity and Faith",
+      "w": 100
+    },
+    {
+      "name": "Reduced Faith and Strength",
+      "w": 100
+    },
+    {
+      "name": "Reduced Flask HP Restoration",
+      "w": 100
+    },
+    {
+      "name": "Reduced Intelligence and Dexterity",
+      "w": 100
+    },
+    {
+      "name": "Reduced Rune Acquisition",
+      "w": 100
+    },
+    {
+      "name": "Reduced Strength and Intelligence",
+      "w": 100
+    },
+    {
+      "name": "Reduced Vigor and Arcane",
+      "w": 100
+    },
+    {
+      "name": "Repeated Evasions Lower Damage Negation",
+      "w": 100
+    },
+    {
+      "name": "Rot Buildup When Below Max HP",
+      "w": 100
+    },
+    {
+      "name": "Taking Damage Causes Blood Loss Buildup",
+      "w": 100
+    },
+    {
+      "name": "Taking Damage Causes Death Buildup",
+      "w": 100
+    },
+    {
+      "name": "Taking Damage Causes Frost Buildup",
+      "w": 100
+    },
+    {
+      "name": "Taking Damage Causes Madness Buildup",
+      "w": 100
+    },
+    {
+      "name": "Taking Damage Causes Poison Buildup",
+      "w": 100
+    },
+    {
+      "name": "Taking Damage Causes Rot Buildup",
+      "w": 100
+    },
+    {
+      "name": "Taking Damage Causes Sleep Buildup",
+      "w": 100
+    },
+    {
+      "name": "Ultimate Art Charging Impaired",
+      "w": 100
+    }
+  ]
+}
