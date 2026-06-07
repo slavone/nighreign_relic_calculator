@@ -1,98 +1,119 @@
-// Standalone — no DOM, no imports needed.
-// Copy-paste the two functions here so we test the exact code that goes in the HTML.
+// Tests for the weighted probability formula.
+// Functions are defined inline to match the exact code in index.html.
 
-function comb(n, k) {
-  if (k < 0 || k > n) return 0;
-  if (k === 0 || k === n) return 1;
-  let r = 1;
-  for (let i = 0; i < k; i++) r = r * (n - i) / (i + 1);
-  return r;
-}
-
-// groups: array of { groupName, effects: string[] }
-// slots:  array of { groupIdx: number, effectIdx: number }
+// groups: array of { groupName, effects: [{name, w}] }
+// slots:  array of { groupIdx, effectIdx }
 // quality: 1 | 2 | 3
 // colorSelected: boolean
-function calculateProbability(groups, quality, colorSelected, slots) {
-  const G = groups.length;
+// W: total weight of the pool
+function calculateProbability(W, quality, colorSelected, slots) {
   const K = quality;
   const n = slots.length;
   if (n === 0 || n > K) return 0;
 
-  // Check for impossible: two slots from same group
   const groupIndices = slots.map(s => s.groupIdx);
   if (new Set(groupIndices).size < n) return 0;
 
-  const groupFactor = comb(G - n, K - n) / comb(G, K);
-  const effectFactor = slots.reduce((prod, s) => prod * (1 / groups[s.groupIdx].effects.length), 1);
-  const colorFactor = colorSelected ? 0.25 : 1;
+  // P ≈ K×(K-1)×…×(K-n+1) × ∏(w_i / W)
+  let ff = 1;
+  for (let i = 0; i < n; i++) ff *= (K - i);
 
-  return groupFactor * effectFactor * colorFactor;
+  let ef = 1;
+  for (const s of slots) {
+    ef *= groups[s.groupIdx].effects[s.effectIdx].w / W;
+  }
+
+  return ff * ef * (colorSelected ? 0.25 : 1);
 }
 
 // --- Test harness ---
 let passed = 0, failed = 0;
-function test(label, actual, expected, tolerance = 1e-7) {
+function test(label, actual, expected, tolerance = 1e-12) {
   const ok = Math.abs(actual - expected) < tolerance;
   if (ok) { passed++; console.log('  PASS ' + label); }
   else { failed++; console.error('  FAIL ' + label + ': got ' + actual + ', expected ' + expected); }
 }
 
-// Build a minimal groups array matching real data shape
-const G_REAL = 77;
-const groups = Array.from({ length: G_REAL }, (_, i) => ({ groupName: 'G' + i, effects: ['e'] }));
-// Override sizes for specific test slots
-groups[0].effects = ['e1', 'e2', 'e3'];       // size 3  → Vigor-like
-groups[1].effects = ['e'];                      // size 1  → Flask-like
-groups[2].effects = Array.from({ length: 71 }, (_, i) => 'e' + i); // size 71 → Attack Power
-groups[3].effects = ['e1', 'e2', 'e3'];       // size 3  → second stat group
+const W = 10046;
 
-console.log('--- comb() ---');
-test('comb(0,0)', comb(0, 0), 1);
-test('comb(5,0)', comb(5, 0), 1);
-test('comb(5,5)', comb(5, 5), 1);
-test('comb(5,2)', comb(5, 2), 10);
-test('comb(77,3)', comb(77, 3), 73150);
-test('comb(76,2)', comb(76, 2), 2850);
-test('comb(3,-1)', comb(3, -1), 0);
-test('comb(3,4)', comb(3, 4), 0);
+const groups = [
+  { groupName: 'G0', effects: [{ name: 'stat', w: 52 }] },
+  { groupName: 'G1', effects: [{ name: 'char-a', w: 53 }, { name: 'char-b', w: 53 }] },
+  { groupName: 'G2', effects: [{ name: 'atk-a', w: 9 }, { name: 'atk-b', w: 9 }] },
+  { groupName: 'G3', effects: [{ name: 'disc', w: 4 }] },
+  { groupName: 'G4', effects: [{ name: 'stat2', w: 52 }] },
+  { groupName: 'G5', effects: [{ name: 'stat3', w: 52 }] },
+];
 
 console.log('--- calculateProbability() ---');
-// n=1, size 3, Grand, no color
-test('n=1 size=3 Grand', calculateProbability(groups, 3, false, [{ groupIdx: 0, effectIdx: 0 }]), 2850 / 73150 / 3, 1e-9);
 
-// n=1, size 1, Grand
-test('n=1 size=1 Grand', calculateProbability(groups, 3, false, [{ groupIdx: 1, effectIdx: 0 }]), 2850 / 73150 / 1, 1e-9);
+// n=1, Grand (K=3), stat (w=52): P = 3 * 52/W
+test('n=1 Grand stat',
+  calculateProbability(W, 3, false, [{ groupIdx: 0, effectIdx: 0 }]),
+  3 * 52 / W);
 
-// n=1, size 71, Grand
-test('n=1 size=71 Grand', calculateProbability(groups, 3, false, [{ groupIdx: 2, effectIdx: 0 }]), 2850 / 73150 / 71, 1e-9);
+// n=1, Grand, char ability (w=53)
+test('n=1 Grand char-ability',
+  calculateProbability(W, 3, false, [{ groupIdx: 1, effectIdx: 0 }]),
+  3 * 53 / W);
 
-// n=2, both size 3, Grand
-test('n=2 size=3,3 Grand', calculateProbability(groups, 3, false, [{ groupIdx: 0, effectIdx: 0 }, { groupIdx: 3, effectIdx: 0 }]), 75 / 73150 / 9, 1e-9);
+// n=1, Grand, low-weight effect (w=9)
+test('n=1 Grand low-weight',
+  calculateProbability(W, 3, false, [{ groupIdx: 2, effectIdx: 0 }]),
+  3 * 9 / W);
 
-// n=3, all size 1, Grand
-test('n=3 all size=1 Grand', calculateProbability(groups, 3, false, [{ groupIdx: 1, effectIdx: 0 }, { groupIdx: 4, effectIdx: 0 }, { groupIdx: 5, effectIdx: 0 }]), 1 / 73150, 1e-9);
+// n=1, Polished (K=2), stat (w=52): P = 2 * 52/W
+test('n=1 Polished stat',
+  calculateProbability(W, 2, false, [{ groupIdx: 0, effectIdx: 0 }]),
+  2 * 52 / W);
 
-// color factor
-test('n=1 size=3 Grand color', calculateProbability(groups, 3, true, [{ groupIdx: 0, effectIdx: 0 }]), 2850 / 73150 / 3 / 4, 1e-9);
+// n=1, Delicate (K=1), stat (w=52): P = 1 * 52/W
+test('n=1 Delicate stat',
+  calculateProbability(W, 1, false, [{ groupIdx: 0, effectIdx: 0 }]),
+  1 * 52 / W);
 
-// Polished K=2, n=1, size 3
-test('n=1 size=3 Polished', calculateProbability(groups, 2, false, [{ groupIdx: 0, effectIdx: 0 }]), comb(76, 1) / comb(77, 2) / 3, 1e-9);
+// n=2, Grand, two stats: P = 6 * 52 * 52 / W^2
+test('n=2 Grand two stats',
+  calculateProbability(W, 3, false, [{ groupIdx: 0, effectIdx: 0 }, { groupIdx: 4, effectIdx: 0 }]),
+  6 * 52 * 52 / (W * W));
 
-// Polished K=2, n=2, both size 3
-test('n=2 size=3,3 Polished', calculateProbability(groups, 2, false, [{ groupIdx: 0, effectIdx: 0 }, { groupIdx: 3, effectIdx: 0 }]), 1 / comb(77, 2) / 9, 1e-9);
+// n=3, Grand, three stats: P = 6 * 52^3 / W^3
+test('n=3 Grand three stats',
+  calculateProbability(W, 3, false,
+    [{ groupIdx: 0, effectIdx: 0 }, { groupIdx: 4, effectIdx: 0 }, { groupIdx: 5, effectIdx: 0 }]),
+  6 * 52 * 52 * 52 / (W * W * W));
 
-// Delicate K=1, n=1, size 3
-test('n=1 size=3 Delicate', calculateProbability(groups, 1, false, [{ groupIdx: 0, effectIdx: 0 }]), 1 / 77 / 3, 1e-9);
+// Color factor
+test('n=1 Grand stat + color',
+  calculateProbability(W, 3, true, [{ groupIdx: 0, effectIdx: 0 }]),
+  3 * 52 / W * 0.25);
 
-// Impossible: n=2 on Delicate
-test('n=2 Delicate impossible', calculateProbability(groups, 1, false, [{ groupIdx: 0, effectIdx: 0 }, { groupIdx: 3, effectIdx: 0 }]), 0);
+// Weapon discovery (w=4) on Polished
+test('Weapon Discovery Polished',
+  calculateProbability(W, 2, false, [{ groupIdx: 3, effectIdx: 0 }]),
+  2 * 4 / W);
+
+// Char ability is 53/52 times more likely than a stat effect
+const pStat = calculateProbability(W, 3, false, [{ groupIdx: 0, effectIdx: 0 }]);
+const pChar = calculateProbability(W, 3, false, [{ groupIdx: 1, effectIdx: 0 }]);
+test('char-ability is 53/52 times more likely than stat',
+  Math.abs(pChar / pStat - 53 / 52),
+  0, 1e-10);
+
+// Impossible: n=2 on Delicate (K=1)
+test('n=2 on Delicate = 0',
+  calculateProbability(W, 1, false, [{ groupIdx: 0, effectIdx: 0 }, { groupIdx: 4, effectIdx: 0 }]),
+  0);
 
 // Impossible: same group twice
-test('same group twice', calculateProbability(groups, 3, false, [{ groupIdx: 0, effectIdx: 0 }, { groupIdx: 0, effectIdx: 1 }]), 0);
+test('same group twice = 0',
+  calculateProbability(W, 3, false, [{ groupIdx: 0, effectIdx: 0 }, { groupIdx: 0, effectIdx: 0 }]),
+  0);
 
 // Empty slots
-test('no slots', calculateProbability(groups, 3, false, []), 0);
+test('no slots = 0',
+  calculateProbability(W, 3, false, []),
+  0);
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 if (failed > 0) process.exit(1);
