@@ -5,6 +5,7 @@
   "groups": [
     {
       "groupName": "Acid Spraymist in possession at start of expedition",
+      "groupW": 168,
       "effects": [
         {
           "id": "6624500",
@@ -46,6 +47,7 @@
     },
     {
       "groupName": "Arcane per Ruin Boss",
+      "groupW": 55,
       "effects": [
         {
           "id": "6060500",
@@ -58,6 +60,7 @@
     },
     {
       "groupName": "Attack Power",
+      "groupW": 5945,
       "effects": [
         {
           "id": "7001602",
@@ -658,6 +661,7 @@
     },
     {
       "groupName": "Attack Power vs Frostbite-Afflicted Enemy",
+      "groupW": 454,
       "effects": [
         {
           "id": "7260400",
@@ -684,6 +688,7 @@
     },
     {
       "groupName": "Attack Power vs Poison / Rot Afflicted",
+      "groupW": 908,
       "effects": [
         {
           "id": "7260000",
@@ -731,6 +736,7 @@
     },
     {
       "groupName": "Cerulean Crystal Tear in possession at start of expedition",
+      "groupW": 644,
       "effects": [
         {
           "id": "6621200",
@@ -875,6 +881,7 @@
     },
     {
       "groupName": "Character Ability",
+      "groupW": 2400,
       "effects": [
         {
           "id": "6500000",
@@ -1024,6 +1031,7 @@
     },
     {
       "groupName": "Critical Hit Boosts Stamina Recovery Speed",
+      "groupW": 110,
       "effects": [
         {
           "id": "7035100",
@@ -1041,6 +1049,7 @@
     },
     {
       "groupName": "Critical Hits Earn Runes",
+      "groupW": 55,
       "effects": [
         {
           "id": "7031900",
@@ -1052,6 +1061,7 @@
     },
     {
       "groupName": "Critical hits fill more of the Art gauge",
+      "groupW": 324,
       "effects": [
         {
           "id": "7030800",
@@ -1069,6 +1079,7 @@
     },
     {
       "groupName": "Defeating enemies fills more of the Art gauge",
+      "groupW": 324,
       "effects": [
         {
           "id": "7090000",
@@ -1086,6 +1097,7 @@
     },
     {
       "groupName": "Defeating Enemies Restores HP for Allies",
+      "groupW": 55,
       "effects": [
         {
           "id": "7090100",
@@ -1097,6 +1109,7 @@
     },
     {
       "groupName": "Dormant Power - Weapon Discovery",
+      "groupW": 992,
       "effects": [
         {
           "id": "6631000",
@@ -1326,6 +1339,7 @@
     },
     {
       "groupName": "Draw enemy attention while guarding",
+      "groupW": 55,
       "effects": [
         {
           "id": "7030700",
@@ -1337,6 +1351,7 @@
     },
     {
       "groupName": "Fire Damage Negation Up",
+      "groupW": 468,
       "effects": [
         {
           "id": "7002700",
@@ -1363,6 +1378,7 @@
     },
     {
       "groupName": "Flask Also Heals Allies",
+      "groupW": 55,
       "effects": [
         {
           "id": "7010200",
@@ -1375,6 +1391,7 @@
     },
     {
       "groupName": "FP Restoration on Attack (by Weapon Type)",
+      "groupW": 240,
       "effects": [
         {
           "id": "7351000",
@@ -1524,6 +1541,7 @@
     },
     {
       "groupName": "Holy Damage Negation Up",
+      "groupW": 468,
       "effects": [
         {
           "id": "7002900",
@@ -1550,6 +1568,7 @@
     },
     {
       "groupName": "HP Restoration on Attack (by Weapon Type)",
+      "groupW": 240,
       "effects": [
         {
           "id": "7341000",
@@ -1699,6 +1718,7 @@
     },
     {
       "groupName": "HP Restoration upon Thrusting Counterattack",
+      "groupW": 324,
       "effects": [
         {
           "id": "7160000",
@@ -1717,6 +1737,7 @@
     },
     {
       "groupName": "HP restored when using medicinal boluses, etc.",
+      "groupW": 110,
       "effects": [
         {
           "id": "7030200",
@@ -1735,6 +1756,7 @@
     },
     {
       "groupName": "Improved Affinity Damage Negation",
+      "groupW": 468,
       "effects": [
         {
           "id": "6611100",
@@ -1761,6 +1783,7 @@
     },
     {
       "groupName": "Improved Blood Loss Resistance",
+      "groupW": 138,
       "effects": [
         {
           "id": "7003100",
@@ -1780,6 +1803,7 @@
     },
     {
       "groupName": "Improved Damage Negation at Low HP",
+      "groupW": 55,
       "effects": [
         {
           "id": "7012300",
@@ -1791,6 +1815,7 @@
     },
     {
       "groupName": "Improved Death Blight Resistance",
+      "groupW": 138,
       "effects": [
         {
           "id": "7003300",
@@ -1810,6 +1835,7 @@
     },
     {
       "groupName": "Improved Flask HP Restoration",
+      "groupW": 55,
       "effects": [
         {
           "id": "6611400",
@@ -1822,6 +1848,7 @@
     },
     {
       "groupName": "Improved Frost Resistance",
+      "groupW": 138,
       "effects": [
         {
           "id": "7003500",
@@ -1841,6 +1868,7 @@
     },
     {
       "groupName": "Improved Glintstone and Gravity Stone Damage",
+      "groupW": 56,
       "effects": [
         {
           "id": "7040500",
@@ -1860,6 +1888,7 @@
     },
     {
       "groupName": "Improved Lightning Damage Negation",
+      "groupW": 468,
       "effects": [
         {
           "id": "6002800",
@@ -1886,6 +1915,7 @@
     },
     {
       "groupName": "Improved Madness Resistance",
+      "groupW": 138,
       "effects": [
         {
           "id": "7003600",
@@ -1905,6 +1935,7 @@
     },
     {
       "groupName": "Improved Magic Damage Negation",
+      "groupW": 468,
       "effects": [
         {
           "id": "6002600",
@@ -1931,6 +1962,7 @@
     },
     {
       "groupName": "Improved Perfuming Arts",
+      "groupW": 28,
       "effects": [
         {
           "id": "6043100",
@@ -1942,6 +1974,7 @@
     },
     {
       "groupName": "Improved Physical Damage Negation",
+      "groupW": 399,
       "effects": [
         {
           "id": "6611001",
@@ -1961,6 +1994,7 @@
     },
     {
       "groupName": "Improved Poise & Damage Negation When Knocked Back",
+      "groupW": 55,
       "effects": [
         {
           "id": "7240000",
@@ -1973,6 +2007,7 @@
     },
     {
       "groupName": "Improved Poison Resistance",
+      "groupW": 138,
       "effects": [
         {
           "id": "7003000",
@@ -1992,6 +2027,7 @@
     },
     {
       "groupName": "Improved Rot Resistance",
+      "groupW": 138,
       "effects": [
         {
           "id": "7003400",
@@ -2011,6 +2047,7 @@
     },
     {
       "groupName": "Improved Sleep Resistance",
+      "groupW": 138,
       "effects": [
         {
           "id": "7003200",
@@ -2030,6 +2067,7 @@
     },
     {
       "groupName": "Improved Throwing Knife Damage",
+      "groupW": 56,
       "effects": [
         {
           "id": "7040400",
@@ -2049,6 +2087,7 @@
     },
     {
       "groupName": "Improved Throwing Pot Damage",
+      "groupW": 56,
       "effects": [
         {
           "id": "7040300",
@@ -2068,6 +2107,7 @@
     },
     {
       "groupName": "Increased Maximum FP",
+      "groupW": 130,
       "effects": [
         {
           "id": "6610500",
@@ -2080,6 +2120,7 @@
     },
     {
       "groupName": "Increased Maximum HP",
+      "groupW": 130,
       "effects": [
         {
           "id": "6610400",
@@ -2092,6 +2133,7 @@
     },
     {
       "groupName": "Increased Maximum Stamina",
+      "groupW": 130,
       "effects": [
         {
           "id": "6610600",
@@ -2104,6 +2146,7 @@
     },
     {
       "groupName": "Increased rune acquisition for self and allies",
+      "groupW": 55,
       "effects": [
         {
           "id": "7110000",
@@ -2115,6 +2158,7 @@
     },
     {
       "groupName": "Items confer effect to all nearby allies",
+      "groupW": 55,
       "effects": [
         {
           "id": "7050100",
@@ -2126,6 +2170,7 @@
     },
     {
       "groupName": "Max FP with 3+ Staves / Seals",
+      "groupW": 20,
       "effects": [
         {
           "id": "7082600",
@@ -2143,6 +2188,7 @@
     },
     {
       "groupName": "Max HP per Great Church Boss",
+      "groupW": 55,
       "effects": [
         {
           "id": "6060300",
@@ -2155,6 +2201,7 @@
     },
     {
       "groupName": "Max HP with 3+ Shields",
+      "groupW": 30,
       "effects": [
         {
           "id": "7082900",
@@ -2178,6 +2225,7 @@
     },
     {
       "groupName": "Max Stamina per Camp Boss",
+      "groupW": 55,
       "effects": [
         {
           "id": "6060600",
@@ -2190,6 +2238,7 @@
     },
     {
       "groupName": "Partial HP Restoration upon Post-Damage Attacks",
+      "groupW": 454,
       "effects": [
         {
           "id": "7005600",
@@ -2214,6 +2263,7 @@
     },
     {
       "groupName": "Poise",
+      "groupW": 69,
       "effects": [
         {
           "id": "7001002",
@@ -2226,6 +2276,7 @@
     },
     {
       "groupName": "Raised stamina recovery for nearby allies, but not for self",
+      "groupW": 55,
       "effects": [
         {
           "id": "7050000",
@@ -2237,6 +2288,7 @@
     },
     {
       "groupName": "Reduced FP Consumption",
+      "groupW": 69,
       "effects": [
         {
           "id": "6610700",
@@ -2249,6 +2301,7 @@
     },
     {
       "groupName": "Rune discount for shop purchases while on expedition",
+      "groupW": 55,
       "effects": [
         {
           "id": "7230000",
@@ -2260,6 +2313,7 @@
     },
     {
       "groupName": "Runes & Discovery per Fort Boss",
+      "groupW": 55,
       "effects": [
         {
           "id": "6060400",
@@ -2272,6 +2326,7 @@
     },
     {
       "groupName": "Slowly restore HP for self and nearby allies when HP is low",
+      "groupW": 55,
       "effects": [
         {
           "id": "7012200",
@@ -2283,6 +2338,7 @@
     },
     {
       "groupName": "Small Pouch in possession at start of expedition",
+      "groupW": 28,
       "effects": [
         {
           "id": "7121000",
@@ -2294,6 +2350,7 @@
     },
     {
       "groupName": "Spell School",
+      "groupW": 392,
       "effects": [
         {
           "id": "7044400",
@@ -2397,6 +2454,7 @@
     },
     {
       "groupName": "Stamina Recovery upon Landing Attacks",
+      "groupW": 55,
       "effects": [
         {
           "id": "7100100",
@@ -2408,6 +2466,7 @@
     },
     {
       "groupName": "Stonesword Key in possession at start of expedition",
+      "groupW": 28,
       "effects": [
         {
           "id": "7120900",
@@ -2419,6 +2478,7 @@
     },
     {
       "groupName": "Successful guarding fills more of the Art gauge",
+      "groupW": 324,
       "effects": [
         {
           "id": "7030600",
@@ -2436,6 +2496,7 @@
     },
     {
       "groupName": "Treasure marked upon map",
+      "groupW": 55,
       "effects": [
         {
           "id": "7070000",

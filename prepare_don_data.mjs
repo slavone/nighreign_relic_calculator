@@ -140,7 +140,8 @@ const groups = Object.entries(groupMap)
     const derived = (effects[0]?.name ?? '').replace(/ \+\d+$/, '').replace(/\n/g, ' ');
     const rawGroupName = NAME_OVERRIDES[cid] ?? derived;
     const groupName = unescapeHtml(rawGroupName);
-    return { compatId: cid, groupName, effects };
+    const groupW = effects.reduce((s, e) => s + e.w, 0);
+    return { compatId: cid, groupName, groupW, effects };
   })
   .sort((a, b) => a.groupName.localeCompare(b.groupName));
 
@@ -175,7 +176,7 @@ const output = {
   wTotal,
   wTotalPreDLC,
   wCurseTotal,
-  groups: groups.map(({ groupName, effects }) => ({ groupName, effects })),
+  groups: groups.map(({ groupName, groupW, effects }) => ({ groupName, groupW, effects })),
   curses,
 };
 

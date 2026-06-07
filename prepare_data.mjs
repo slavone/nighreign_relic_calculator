@@ -72,7 +72,8 @@ const clean = raw
     }
 
     const groupName = unescapeHtml(NAME_OVERRIDES[g.compatibilityId] ?? g.groupName);
-    return { groupName, effects };
+    const groupW = effects.reduce((s, e) => s + e.w, 0);
+    return { groupName, groupW, effects };
   })
   .sort((a, b) => a.groupName.localeCompare(b.groupName));
 

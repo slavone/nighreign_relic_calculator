@@ -4,6 +4,7 @@
   "groups": [
     {
       "groupName": "Arcane",
+      "groupW": 156,
       "effects": [
         {
           "name": "Arcane +1",
@@ -21,6 +22,7 @@
     },
     {
       "groupName": "Attack Power",
+      "groupW": 1505,
       "effects": [
         {
           "name": "Physical Attack Up",
@@ -381,6 +383,7 @@
     },
     {
       "groupName": "Attack power up when facing frostbite-afflicted\nenemy",
+      "groupW": 46,
       "effects": [
         {
           "name": "Attack power up when facing frostbite-afflicted\nenemy",
@@ -391,6 +394,7 @@
     },
     {
       "groupName": "Attack Power vs Poison / Rot Afflicted",
+      "groupW": 92,
       "effects": [
         {
           "name": "Attack power up when facing poison-afflicted enemy",
@@ -406,6 +410,7 @@
     },
     {
       "groupName": "Bewitching Branches in possession at start of\nexpedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Bewitching Branches in possession at start of\nexpedition",
@@ -415,6 +420,7 @@
     },
     {
       "groupName": "Character Ability",
+      "groupW": 2014,
       "effects": [
         {
           "name": "[Wylder] Art activation spreads fire in area",
@@ -580,6 +586,7 @@
     },
     {
       "groupName": "Character Skill Cooldown Reduction",
+      "groupW": 141,
       "effects": [
         {
           "name": "Character Skill Cooldown Reduction +1",
@@ -600,6 +607,7 @@
     },
     {
       "groupName": "Critical Hit Boosts Stamina Recovery Speed",
+      "groupW": 46,
       "effects": [
         {
           "name": "Critical Hit Boosts Stamina Recovery Speed",
@@ -609,6 +617,7 @@
     },
     {
       "groupName": "Critical Hits Earn Runes",
+      "groupW": 46,
       "effects": [
         {
           "name": "Critical Hits Earn Runes",
@@ -618,6 +627,7 @@
     },
     {
       "groupName": "Critical hits fill more of the Art gauge",
+      "groupW": 46,
       "effects": [
         {
           "name": "Critical hits fill more of the Art gauge",
@@ -627,6 +637,7 @@
     },
     {
       "groupName": "Crystal Darts in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Crystal Darts in possession at start of expedition",
@@ -636,6 +647,7 @@
     },
     {
       "groupName": "Defeating enemies fills more of the Art gauge",
+      "groupW": 46,
       "effects": [
         {
           "name": "Defeating enemies fills more of the Art gauge",
@@ -645,6 +657,7 @@
     },
     {
       "groupName": "Defeating Enemies Restores HP for Allies",
+      "groupW": 46,
       "effects": [
         {
           "name": "Defeating enemies restores HP for allies but not for\nself",
@@ -654,6 +667,7 @@
     },
     {
       "groupName": "Dexterity",
+      "groupW": 156,
       "effects": [
         {
           "name": "Dexterity +1",
@@ -671,6 +685,7 @@
     },
     {
       "groupName": "Dormant Power - Weapon Discovery",
+      "groupW": 128,
       "effects": [
         {
           "name": "Dormant Power Helps Discover Daggers",
@@ -836,6 +851,7 @@
     },
     {
       "groupName": "Draw enemy attention while guarding",
+      "groupW": 46,
       "effects": [
         {
           "name": "Draw enemy attention while guarding",
@@ -845,6 +861,7 @@
     },
     {
       "groupName": "Endurance",
+      "groupW": 156,
       "effects": [
         {
           "name": "Endurance +1",
@@ -865,6 +882,7 @@
     },
     {
       "groupName": "Faith",
+      "groupW": 156,
       "effects": [
         {
           "name": "Faith +1",
@@ -882,6 +900,7 @@
     },
     {
       "groupName": "Fire Damage Negation Up",
+      "groupW": 47,
       "effects": [
         {
           "name": "Fire Damage Negation Up",
@@ -892,6 +911,7 @@
     },
     {
       "groupName": "Fire Grease in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Fire Grease in possession at start of expedition",
@@ -901,6 +921,7 @@
     },
     {
       "groupName": "Fire Pots in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Fire Pots in possession at start of expedition",
@@ -910,6 +931,7 @@
     },
     {
       "groupName": "Flask Also Heals Allies",
+      "groupW": 46,
       "effects": [
         {
           "name": "Flask Also Heals Allies",
@@ -920,6 +942,7 @@
     },
     {
       "groupName": "FP Restoration on Attack (by Weapon Type)",
+      "groupW": 216,
       "effects": [
         {
           "name": "FP Restoration upon Dagger Attacks",
@@ -1021,6 +1044,7 @@
     },
     {
       "groupName": "Glintstone Scraps in possession at start of\nexpedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Glintstone Scraps in possession at start of\nexpedition",
@@ -1030,6 +1054,7 @@
     },
     {
       "groupName": "Gravity Stone Chunks in possession at start of\nexpedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Gravity Stone Chunks in possession at start of\nexpedition",
@@ -1039,6 +1064,7 @@
     },
     {
       "groupName": "Holy Damage Negation Up",
+      "groupW": 47,
       "effects": [
         {
           "name": "Holy Damage Negation Up",
@@ -1049,6 +1075,7 @@
     },
     {
       "groupName": "Holy Grease in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Holy Grease in possession at start of expedition",
@@ -1058,6 +1085,7 @@
     },
     {
       "groupName": "Holy Water Pots in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Holy Water Pots in possession at start of expedition",
@@ -1067,6 +1095,7 @@
     },
     {
       "groupName": "HP Restoration on Attack (by Weapon Type)",
+      "groupW": 216,
       "effects": [
         {
           "name": "HP Restoration upon Dagger Attacks",
@@ -1168,6 +1197,7 @@
     },
     {
       "groupName": "HP Restoration upon Thrusting Counterattack",
+      "groupW": 46,
       "effects": [
         {
           "name": "HP Restoration upon Thrusting Counterattack",
@@ -1178,6 +1208,7 @@
     },
     {
       "groupName": "HP restored when using medicinal boluses, etc.",
+      "groupW": 46,
       "effects": [
         {
           "name": "HP restored when using medicinal boluses, etc.",
@@ -1188,6 +1219,7 @@
     },
     {
       "groupName": "Improved Blood Loss Resistance",
+      "groupW": 47,
       "effects": [
         {
           "name": "Improved Blood Loss Resistance",
@@ -1198,6 +1230,7 @@
     },
     {
       "groupName": "Improved Damage Negation at Low HP",
+      "groupW": 46,
       "effects": [
         {
           "name": "Improved Damage Negation at Low HP",
@@ -1207,6 +1240,7 @@
     },
     {
       "groupName": "Improved Death Blight Resistance",
+      "groupW": 47,
       "effects": [
         {
           "name": "Improved Death Blight Resistance",
@@ -1217,6 +1251,7 @@
     },
     {
       "groupName": "Improved Frost Resistance",
+      "groupW": 47,
       "effects": [
         {
           "name": "Improved Frost Resistance",
@@ -1227,6 +1262,7 @@
     },
     {
       "groupName": "Improved Glintstone and Gravity Stone Damage",
+      "groupW": 39,
       "effects": [
         {
           "name": "Improved Glintstone and Gravity Stone Damage",
@@ -1237,6 +1273,7 @@
     },
     {
       "groupName": "Improved Madness Resistance",
+      "groupW": 47,
       "effects": [
         {
           "name": "Improved Madness Resistance",
@@ -1247,6 +1284,7 @@
     },
     {
       "groupName": "Improved Poise & Damage Negation When Knocked Back",
+      "groupW": 46,
       "effects": [
         {
           "name": "Improved Poise & Damage Negation When Knocked Back\nby Damage",
@@ -1257,6 +1295,7 @@
     },
     {
       "groupName": "Improved Poison Resistance",
+      "groupW": 47,
       "effects": [
         {
           "name": "Improved Poison Resistance",
@@ -1267,6 +1306,7 @@
     },
     {
       "groupName": "Improved Rot Resistance",
+      "groupW": 47,
       "effects": [
         {
           "name": "Improved Rot Resistance",
@@ -1277,6 +1317,7 @@
     },
     {
       "groupName": "Improved Sleep Resistance",
+      "groupW": 47,
       "effects": [
         {
           "name": "Improved Sleep Resistance",
@@ -1287,6 +1328,7 @@
     },
     {
       "groupName": "Improved Throwing Knife Damage",
+      "groupW": 39,
       "effects": [
         {
           "name": "Improved Throwing Knife Damage",
@@ -1297,6 +1339,7 @@
     },
     {
       "groupName": "Improved Throwing Pot Damage",
+      "groupW": 39,
       "effects": [
         {
           "name": "Improved Throwing Pot Damage",
@@ -1307,6 +1350,7 @@
     },
     {
       "groupName": "Increased rune acquisition for self and allies",
+      "groupW": 46,
       "effects": [
         {
           "name": "Increased rune acquisition for self and allies",
@@ -1316,6 +1360,7 @@
     },
     {
       "groupName": "Intelligence",
+      "groupW": 156,
       "effects": [
         {
           "name": "Intelligence +1",
@@ -1333,6 +1378,7 @@
     },
     {
       "groupName": "Items confer effect to all nearby allies",
+      "groupW": 46,
       "effects": [
         {
           "name": "Items confer effect to all nearby allies",
@@ -1342,6 +1388,7 @@
     },
     {
       "groupName": "Lightning Damage Negation Up",
+      "groupW": 47,
       "effects": [
         {
           "name": "Lightning Damage Negation Up",
@@ -1352,6 +1399,7 @@
     },
     {
       "groupName": "Lightning Grease in possession at start of\nexpedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Lightning Grease in possession at start of\nexpedition",
@@ -1361,6 +1409,7 @@
     },
     {
       "groupName": "Lightning Pots in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Lightning Pots in possession at start of expedition",
@@ -1370,6 +1419,7 @@
     },
     {
       "groupName": "Magic Damage Negation Up",
+      "groupW": 47,
       "effects": [
         {
           "name": "Magic Damage Negation Up",
@@ -1380,6 +1430,7 @@
     },
     {
       "groupName": "Magic Grease in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Magic Grease in possession at start of expedition",
@@ -1389,6 +1440,7 @@
     },
     {
       "groupName": "Magic Pots in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Magic Pots in possession at start of expedition",
@@ -1398,6 +1450,7 @@
     },
     {
       "groupName": "Max FP increased for each Sorcerer's Rise unlocked",
+      "groupW": 46,
       "effects": [
         {
           "name": "Max FP increased for each Sorcerer's Rise unlocked",
@@ -1407,6 +1460,7 @@
     },
     {
       "groupName": "Max FP with 3+ Staves / Seals",
+      "groupW": 18,
       "effects": [
         {
           "name": "Max FP Up with 3+ Staves Equipped",
@@ -1420,6 +1474,7 @@
     },
     {
       "groupName": "Max HP with 3+ Shields",
+      "groupW": 27,
       "effects": [
         {
           "name": "Max HP Up with 3+ Small Shields Equipped",
@@ -1437,6 +1492,7 @@
     },
     {
       "groupName": "Mind",
+      "groupW": 156,
       "effects": [
         {
           "name": "Mind +1",
@@ -1457,6 +1513,7 @@
     },
     {
       "groupName": "Partial HP Restoration upon Post-Damage Attacks",
+      "groupW": 46,
       "effects": [
         {
           "name": "Partial HP Restoration upon Post-Damage Attacks",
@@ -1467,6 +1524,7 @@
     },
     {
       "groupName": "Poise",
+      "groupW": 141,
       "effects": [
         {
           "name": "Poise +1",
@@ -1487,6 +1545,7 @@
     },
     {
       "groupName": "Poisonbone Darts in possession at start of\nexpedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Poisonbone Darts in possession at start of\nexpedition",
@@ -1496,6 +1555,7 @@
     },
     {
       "groupName": "Raised Stamina Recovery for Nearby Allies",
+      "groupW": 46,
       "effects": [
         {
           "name": "Raised stamina recovery for nearby allies, but not\nfor self",
@@ -1505,6 +1565,7 @@
     },
     {
       "groupName": "Rune discount for shop purchases while on expedition",
+      "groupW": 46,
       "effects": [
         {
           "name": "Rune discount for shop purchases while on expedition",
@@ -1514,6 +1575,7 @@
     },
     {
       "groupName": "Shield Grease in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Shield Grease in possession at start of expedition",
@@ -1523,6 +1585,7 @@
     },
     {
       "groupName": "Slowly Restore HP When HP Is Low",
+      "groupW": 46,
       "effects": [
         {
           "name": "Slowly restore HP for self and nearby allies when HP\nis low",
@@ -1532,6 +1595,7 @@
     },
     {
       "groupName": "Small Pouch in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Small Pouch in possession at start of expedition",
@@ -1541,6 +1605,7 @@
     },
     {
       "groupName": "Spell School",
+      "groupW": 546,
       "effects": [
         {
           "name": "Improved Stonedigger Sorcery",
@@ -1616,6 +1681,7 @@
     },
     {
       "groupName": "Stamina Recovery upon Landing Attacks",
+      "groupW": 46,
       "effects": [
         {
           "name": "Stamina Recovery upon Landing Attacks",
@@ -1625,6 +1691,7 @@
     },
     {
       "groupName": "Starlight Shards in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Starlight Shards in possession at start of expedition",
@@ -1634,6 +1701,7 @@
     },
     {
       "groupName": "Starting Armament Element / Status",
+      "groupW": 210,
       "effects": [
         {
           "name": "Starting armament deals magic damage",
@@ -1667,6 +1735,7 @@
     },
     {
       "groupName": "Starting Armament Skill",
+      "groupW": 800,
       "effects": [
         {
           "name": "Changes compatible armament's skill to Glintblade\nPhalanx at start of expedition",
@@ -1802,6 +1871,7 @@
     },
     {
       "groupName": "Stonesword Key in possession at start of expedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Stonesword Key in possession at start of expedition",
@@ -1811,6 +1881,7 @@
     },
     {
       "groupName": "Strength",
+      "groupW": 156,
       "effects": [
         {
           "name": "Strength +1",
@@ -1828,6 +1899,7 @@
     },
     {
       "groupName": "Successful guarding fills more of the Art gauge",
+      "groupW": 46,
       "effects": [
         {
           "name": "Successful guarding fills more of the Art gauge",
@@ -1837,6 +1909,7 @@
     },
     {
       "groupName": "Throwing Daggers in possession at start of\nexpedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Throwing Daggers in possession at start of\nexpedition",
@@ -1846,6 +1919,7 @@
     },
     {
       "groupName": "Treasure marked upon map",
+      "groupW": 46,
       "effects": [
         {
           "name": "Treasure marked upon map",
@@ -1855,6 +1929,7 @@
     },
     {
       "groupName": "Ultimate Art Auto Charge",
+      "groupW": 141,
       "effects": [
         {
           "name": "Ultimate Art Auto Charge +1",
@@ -1875,6 +1950,7 @@
     },
     {
       "groupName": "Vigor",
+      "groupW": 156,
       "effects": [
         {
           "name": "Vigor +1",
@@ -1895,6 +1971,7 @@
     },
     {
       "groupName": "Wraith Calling Bell in possession at start of\nexpedition",
+      "groupW": 39,
       "effects": [
         {
           "name": "Wraith Calling Bell in possession at start of\nexpedition",
