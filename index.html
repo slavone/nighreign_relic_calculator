@@ -177,18 +177,23 @@
       for (let i = 0; i < n; i++) ff *= (K - i);
 
       let ef = 1;
-      for (const s of slots) {
-        ef *= groups[s.groupIdx].effects[s.effectIdx].w / W;
-      }
-
-      // DON mode: multiply by (w_curse / wCurseTotal) for each specific curse selected
       let curseFactor = 1;
-      if (mode === 'don') {
-        for (const s of slots) {
-          const effect = groups[s.groupIdx].effects[s.effectIdx];
-          if (effect.hasCurse && s.specificCurseIdx !== null) {
-            const curse = DON_DATA.curses[s.specificCurseIdx];
-            curseFactor *= curse.w / DON_DATA.wCurseTotal;
+      for (const s of slots) {
+        const effects = groups[s.groupIdx].effects;
+        if (s.effectIdx === -1) {
+          // "Any": sum weights, but if a specific curse is required only cursed effects qualify
+          const relevant = (mode === 'don' && s.specificCurseIdx !== null)
+            ? effects.filter(e => e.hasCurse)
+            : effects;
+          ef *= relevant.reduce((sum, e) => sum + e.w, 0) / W;
+          if (mode === 'don' && s.specificCurseIdx !== null && relevant.length > 0) {
+            curseFactor *= DON_DATA.curses[s.specificCurseIdx].w / DON_DATA.wCurseTotal;
+          }
+        } else {
+          const effect = effects[s.effectIdx];
+          ef *= effect.w / W;
+          if (mode === 'don' && effect.hasCurse && s.specificCurseIdx !== null) {
+            curseFactor *= DON_DATA.curses[s.specificCurseIdx].w / DON_DATA.wCurseTotal;
           }
         }
       }
@@ -229,11 +234,16 @@
     function buildEffectOptions(groupIdx, currentEffectIdx) {
       if (isNaN(groupIdx) || groupIdx < 0) return '<option value="">— select effect —</option>';
       const groups = activeGroups();
-      let html = '';
-      groups[groupIdx].effects.forEach((e, i) => {
+      const effects = groups[groupIdx].effects;
+      let html = '<option value="">— select effect —</option>';
+      if (effects.length > 1) {
+        const sel = currentEffectIdx === -1 ? ' selected' : '';
+        html += `<option value="-1"${sel}>— Any —</option>`;
+      }
+      effects.forEach((e, i) => {
         const cursedTag = (mode === 'don' && e.hasCurse) ? ' ⚠' : '';
         const sel = i === currentEffectIdx ? ' selected' : '';
-        html += `<option value="${i}"${sel}>${e.name}${cursedTag}</option>`;
+        html += `<option value="${i}"${sel}>${e.name.replace(/\n/g, ' ')}${cursedTag}</option>`;
       });
       return html;
     }
@@ -253,12 +263,17 @@
       const effectSel = slotBlock.querySelector('.effect-select');
       const curseRow  = slotBlock.querySelector('.curse-row');
       const gIdx = parseInt(groupSel.value);
-      const eIdx = parseInt(effectSel.value);
       const groups = activeGroups();
-      const hasCurse = !isNaN(gIdx) && !isNaN(eIdx) &&
-                       groups[gIdx] && groups[gIdx].effects[eIdx] &&
-                       groups[gIdx].effects[eIdx].hasCurse;
-      curseRow.classList.toggle('visible', !!hasCurse);
+      let hasCurse = false;
+      if (!isNaN(gIdx) && groups[gIdx]) {
+        if (effectSel.value === '-1') {
+          hasCurse = groups[gIdx].effects.some(e => e.hasCurse);
+        } else {
+          const eIdx = parseInt(effectSel.value);
+          hasCurse = !isNaN(eIdx) && !!groups[gIdx].effects[eIdx]?.hasCurse;
+        }
+      }
+      curseRow.classList.toggle('visible', hasCurse);
       if (!hasCurse) {
         const curseDescEl = slotBlock.querySelector('.curse-desc');
         if (curseDescEl) curseDescEl.textContent = '';
@@ -267,8 +282,10 @@
 
     function updateEffectDesc(slotBlock) {
       const gIdx = parseInt(slotBlock.querySelector('.group-select').value);
-      const eIdx = parseInt(slotBlock.querySelector('.effect-select').value);
+      const eVal = slotBlock.querySelector('.effect-select').value;
       const descEl = slotBlock.querySelector('.effect-desc');
+      if (eVal === '-1' || eVal === '') { descEl.textContent = ''; return; }
+      const eIdx = parseInt(eVal);
       const groups = activeGroups();
       const effect = (!isNaN(gIdx) && !isNaN(eIdx)) ? groups[gIdx]?.effects[eIdx] : null;
       descEl.textContent = effect?.desc || '';
@@ -380,12 +397,13 @@
       const groups = activeGroups();
       const slots = [...slotsContainer.querySelectorAll('.slot-block')].map(block => {
         const gIdx = parseInt(block.querySelector('.group-select').value);
-        const eIdx = parseInt(block.querySelector('.effect-select').value);
+        const eVal = block.querySelector('.effect-select').value;
+        const eIdx = eVal === '-1' ? -1 : parseInt(eVal);
         const curseSel = block.querySelector('.curse-select');
         const specificCurseIdx = (mode === 'don' && curseSel && curseSel.value !== '')
           ? parseInt(curseSel.value) : null;
         return { groupIdx: gIdx, effectIdx: eIdx, specificCurseIdx };
-      }).filter(s => !isNaN(s.groupIdx) && !isNaN(s.effectIdx));
+      }).filter(s => !isNaN(s.groupIdx) && Number.isInteger(s.effectIdx));
 
       if (slots.length === 0) {
         resultEl.textContent = '';
