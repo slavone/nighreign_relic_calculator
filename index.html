@@ -162,9 +162,10 @@
 
       <section>
         <h3>Deep of Night: Curse Factor</h3>
-        <p>Cursed effects (⚠) are accompanied by a randomly drawn curse. When a specific curse is required, multiply by:</p>
-        <pre>w_curse / W_curse = 100 / 2400 = 1/24 ≈ 4.17%</pre>
-        <p>Selecting "Any curse" applies no penalty — only the effect roll matters.</p>
+        <p>Cursed effects (⚠) are accompanied by a randomly drawn curse from a pool of 24, each with equal weight. Curses are assumed to be drawn <strong>without replacement</strong> — i.e. the same curse cannot appear twice on one relic. This is an empirical assumption based on personal observation of in-game relics; it has not been confirmed from game code.</p>
+        <p>For m specific distinct curses selected across m cursed slots:</p>
+        <pre>1/24 × 1/23 × … × 1/(24−m+1)</pre>
+        <p>Selecting the same specific curse for two slots returns 0 (treated as impossible). Selecting "Any curse" applies no penalty.</p>
       </section>
 
       <section>
@@ -211,16 +212,17 @@
         ef *= groups[s.groupIdx].effects[s.effectIdx].w / W;
       }
 
-      // DON mode: multiply by (w_curse / wCurseTotal) for each specific curse selected
+      // DON mode: curses are drawn without replacement (empirical assumption — never observed
+      // duplicate curses on a single relic). For m specific distinct curses the factor is
+      // 1/(24) × 1/(23) × … × 1/(24−m+1). Duplicate curse selection returns 0.
       let curseFactor = 1;
       if (mode === 'don') {
-        for (const s of slots) {
-          const effect = groups[s.groupIdx].effects[s.effectIdx];
-          if (effect.hasCurse && s.specificCurseIdx !== null) {
-            const curse = DON_DATA.curses[s.specificCurseIdx];
-            curseFactor *= curse.w / DON_DATA.wCurseTotal;
-          }
-        }
+        const specificCurseIndices = slots
+          .filter(s => groups[s.groupIdx].effects[s.effectIdx].hasCurse && s.specificCurseIdx !== null)
+          .map(s => s.specificCurseIdx);
+        if (new Set(specificCurseIndices).size < specificCurseIndices.length) return 0;
+        const nCurses = DON_DATA.curses.length;
+        specificCurseIndices.forEach((_, i) => { curseFactor /= (nCurses - i); });
       }
 
       return ff * ef * curseFactor * (colorSelected ? 0.25 : 1);
