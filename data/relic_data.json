@@ -103,11 +103,13 @@
         },
         {
           "name": "Taking attacks improves attack power",
-          "w": 46
+          "w": 46,
+          "desc": "1.15× damage for 10s after taking a hit"
         },
         {
           "name": "Improved Initial Standard Attack",
-          "w": 46
+          "w": 46,
+          "desc": "1.15× first light attack damage"
         },
         {
           "name": "Improved Guard Counters",
@@ -116,15 +118,18 @@
         },
         {
           "name": "Improved Critical Hits",
-          "w": 46
+          "w": 46,
+          "desc": "1.18× critical hit damage"
         },
         {
           "name": "Attack power increased for each evergaol prisoner defeated",
-          "w": 46
+          "w": 46,
+          "desc": "1.05× damage per Evergaol boss defeated"
         },
         {
           "name": "Attack power increased for each Night Invader defeated",
-          "w": 46
+          "w": 46,
+          "desc": "1.07× damage per Night Invader defeated"
         },
         {
           "name": "Improved Attack Power with 3+ Daggers Equipped",

@@ -299,91 +299,106 @@
           "id": "7331000",
           "name": "Improved Axe Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Axe damage"
         },
         {
           "id": "7332400",
           "name": "Improved Bow Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.06× Bow damage"
         },
         {
           "id": "7332100",
           "name": "Improved Claw Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Claw damage"
         },
         {
           "id": "7330300",
           "name": "Improved Colossal Sword Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Colossal Sword damage"
         },
         {
           "id": "7332300",
           "name": "Improved Colossal Weapon Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Colossal Weapon damage"
         },
         {
           "id": "7040200",
           "name": "Improved Critical Hits",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.18× critical hit damage"
         },
         {
           "id": "7330500",
           "name": "Improved Curved Greatsword Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Curved Greatsword damage"
         },
         {
           "id": "7330400",
           "name": "Improved Curved Sword Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Curved Sword damage"
         },
         {
           "id": "7330000",
           "name": "Improved Dagger Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Dagger damage"
         },
         {
           "id": "7332000",
           "name": "Improved Fist Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Fist damage"
         },
         {
           "id": "7331400",
           "name": "Improved Flail Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Flail damage"
         },
         {
           "id": "7331300",
           "name": "Improved Great Hammer Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Great Hammer damage"
         },
         {
           "id": "7331700",
           "name": "Improved Great Spear Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Great Spear damage"
         },
         {
           "id": "7331100",
           "name": "Improved Greataxe Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Greataxe damage"
         },
         {
           "id": "7330200",
           "name": "Improved Greatsword Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Greatsword damage"
         },
         {
           "id": "7040100",
@@ -410,19 +425,22 @@
           "id": "7331800",
           "name": "Improved Halberd Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Halberd damage"
         },
         {
           "id": "7331200",
           "name": "Improved Hammer Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Hammer damage"
         },
         {
           "id": "7330900",
           "name": "Improved Heavy Thrusting Sword Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Heavy Thrusting Sword damage"
         },
         {
           "id": "6611300",
@@ -449,19 +467,22 @@
           "id": "7040000",
           "name": "Improved Initial Standard Attack",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.15× first light attack damage"
         },
         {
           "id": "7330600",
           "name": "Improved Katana Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Katana damage"
         },
         {
           "id": "7331900",
           "name": "Improved Reaper Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Reaper damage"
         },
         {
           "id": "6611200",
@@ -488,31 +509,36 @@
           "id": "7331500",
           "name": "Improved Spear Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Spear damage"
         },
         {
           "id": "7330100",
           "name": "Improved Straight Sword Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Straight Sword damage"
         },
         {
           "id": "7330800",
           "name": "Improved Thrusting Sword Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Thrusting Sword damage"
         },
         {
           "id": "7330700",
           "name": "Improved Twinblade Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Twinblade damage"
         },
         {
           "id": "7332200",
           "name": "Improved Whip Attack Power",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.09× Whip damage"
         },
         {
           "id": "7001702",

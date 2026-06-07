@@ -66,6 +66,13 @@ export const EFFECT_DESCRIPTIONS = {
   'Improved Affinity Attack Power +1': '1.08× magic/fire/lightning/holy damage',
   'Improved Affinity Attack Power +2': '1.1× magic/fire/lightning/holy damage',
 
+  // ── Other Attack ─────────────────────────────────────────────────────────
+  'Improved Initial Standard Attack':                     '1.15× first light attack damage',
+  'Improved Critical Hits':                               '1.18× critical hit damage',
+  'Taking attacks improves attack power':                 '1.15× damage for 10s after taking a hit',
+  'Attack power increased for each evergaol prisoner defeated': '1.05× damage per Evergaol boss defeated',
+  'Attack power increased for each Night Invader defeated':     '1.07× damage per Night Invader defeated',
+
   // ── Guard Counters ────────────────────────────────────────────────────────
   'Improved Guard Counters':    '1.17× guard counter damage',
   'Improved Guard Counters +1': '1.25× guard counter damage',
