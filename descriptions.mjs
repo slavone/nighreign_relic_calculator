@@ -2,91 +2,283 @@
 // "Nightreign Useful Info (Version 1.03.2) (+ DLC) - Relic Effects.csv"
 // "Nightreign Useful Info (Version 1.03.2) (+ DLC) - Deep Relic Effects.csv"
 //
-// Keyed by group name. Both regular and DON groups use this same map.
-// DON cursed tiers noted where the bonus differs from the regular tier.
+// Keyed by exact effect name (after \n → space normalization).
 
-export const DESCRIPTIONS = {
-  // ── Stats ───────────────────────────────────────────────────────────────
-  'Vigor':     '+20/+40/+60 Max HP',
-  'Mind':      '+5/+10/+15 Max FP',
-  'Endurance': '+2/+4/+6 Max Stamina',
-  'Poise':     'Reduces incoming poise damage by 0.95×/0.9×/0.85×',
+export const EFFECT_DESCRIPTIONS = {
+  // ── Vigor / Mind / Endurance ──────────────────────────────────────────────
+  'Vigor +1': '+20 Max HP',
+  'Vigor +2': '+40 Max HP',
+  'Vigor +3': '+60 Max HP',
+  'Mind +1':  '+5 Max FP',
+  'Mind +2':  '+10 Max FP',
+  'Mind +3':  '+15 Max FP',
+  'Endurance +1': '+2 Max Stamina',
+  'Endurance +2': '+4 Max Stamina',
+  'Endurance +3': '+6 Max Stamina',
 
-  // ── Art gauge ────────────────────────────────────────────────────────────
-  'Character Skill Cooldown Reduction': 'Reduces skill cooldown by 0.95×/0.925×/0.9×',
-  'Ultimate Art Auto Charge':           'Increases ultimate gauge gain by 1.05×/1.075×/1.1×',
-  'Critical hits fill more of the Art gauge':      '+5 to Ultimate Art Gauge on critical hits',
-  'Defeating enemies fills more of the Art gauge':  '+5 to Ultimate Art Gauge per enemy kill',
-  'Successful guarding fills more of the Art gauge':'+1 to Ultimate Art Gauge on successful block',
-  'Stamina Recovery upon Landing Attacks':          'Restores 2/3 stamina with continuous attacks',
-  'Critical Hit Boosts Stamina Recovery Speed':     'Increases stamina recovery by 10/s for 15 seconds',
+  // ── Poise ─────────────────────────────────────────────────────────────────
+  'Poise +1': '0.95× incoming poise damage',
+  'Poise +2': '0.9× incoming poise damage',
+  'Poise +3': '0.85× incoming poise damage',
 
-  // ── Regen ────────────────────────────────────────────────────────────────
-  'HP Restoration on Attack (by Weapon Type)':  'Restores 15 HP with continuous attacks',
-  'FP Restoration on Attack (by Weapon Type)':  'Restores 2 FP with continuous attacks',
-  'HP Restoration upon Thrusting Counterattack':'Restores [MaxHP × 0.025] HP on counterhits',
+  // ── Cooldown / Ultimate ───────────────────────────────────────────────────
+  'Character Skill Cooldown Reduction +1': '0.95× skill cooldown',
+  'Character Skill Cooldown Reduction +2': '0.925× skill cooldown',
+  'Character Skill Cooldown Reduction +3': '0.9× skill cooldown',
+  'Ultimate Art Auto Charge +1': '1.05× ultimate gauge gain',
+  'Ultimate Art Auto Charge +2': '1.075× ultimate gauge gain',
+  'Ultimate Art Auto Charge +3': '1.1× ultimate gauge gain',
+
+  // ── Physical Attack ───────────────────────────────────────────────────────
+  'Physical Attack Up':    '1.04× physical damage',
+  'Physical Attack Up +1': '1.05× physical damage',
+  'Physical Attack Up +2': '1.06× physical damage',
+  'Physical Attack Up +3': '1.105× physical damage',
+  'Physical Attack Up +4': '1.12× physical damage',
+
+  // ── Elemental Attack ─────────────────────────────────────────────────────
+  'Magic Attack Power Up':    '1.045× magic damage',
+  'Magic Attack Power Up +1': '1.055× magic damage',
+  'Magic Attack Power Up +2': '1.065× magic damage',
+  'Magic Attack Power Up +3': '1.105× magic damage',
+  'Magic Attack Power Up +4': '1.12× magic damage',
+
+  'Fire Attack Power Up':    '1.045× fire damage',
+  'Fire Attack Power Up +1': '1.055× fire damage',
+  'Fire Attack Power Up +2': '1.065× fire damage',
+  'Fire Attack Power Up +3': '1.105× fire damage',
+  'Fire Attack Power Up +4': '1.12× fire damage',
+
+  'Lightning Attack Power Up':    '1.045× lightning damage',
+  'Lightning Attack Power Up +1': '1.055× lightning damage',
+  'Lightning Attack Power Up +2': '1.065× lightning damage',
+  'Lightning Attack Power Up +3': '1.105× lightning damage',
+  'Lightning Attack Power Up +4': '1.12× lightning damage',
+
+  'Holy Attack Power Up':    '1.045× holy damage',
+  'Holy Attack Power Up +1': '1.055× holy damage',
+  'Holy Attack Power Up +2': '1.065× holy damage',
+  'Holy Attack Power Up +3': '1.105× holy damage',
+  'Holy Attack Power Up +4': '1.12× holy damage',
+
+  // ── Affinity Attack (DON) ─────────────────────────────────────────────────
+  'Improved Affinity Attack Power':    '1.05× magic/fire/lightning/holy damage',
+  'Improved Affinity Attack Power +1': '1.08× magic/fire/lightning/holy damage',
+  'Improved Affinity Attack Power +2': '1.1× magic/fire/lightning/holy damage',
+
+  // ── Guard Counters ────────────────────────────────────────────────────────
+  'Improved Guard Counters':    '1.17× guard counter damage',
+  'Improved Guard Counters +1': '1.25× guard counter damage',
+  'Improved Guard Counters +2': '1.29× guard counter damage',
+
+  // ── Grease ────────────────────────────────────────────────────────────────
+  'Physical attack power increases after using grease items':    '1.1× physical damage for 30s after using grease',
+  'Physical attack power increases after using grease items +1': '1.17× physical damage for 30s after using grease',
+  'Physical attack power increases after using grease items +2': '1.2× physical damage for 30s after using grease',
+
+  // ── Attack vs Status-Afflicted ────────────────────────────────────────────
+  'Attack power up when facing frostbite-afflicted enemy':    '1.1× damage vs frostbite-afflicted targets',
+  'Attack power up when facing frostbite-afflicted enemy +1': '1.16× damage vs frostbite-afflicted targets',
+  'Attack power up when facing frostbite-afflicted enemy +2': '1.2× damage vs frostbite-afflicted targets',
+
+  'Attack power up when facing poison-afflicted enemy':    '1.1× damage vs poison-afflicted targets',
+  'Attack power up when facing poison-afflicted enemy +1': '1.16× damage vs poison-afflicted targets',
+  'Attack power up when facing poison-afflicted enemy +2': '1.2× damage vs poison-afflicted targets',
+
+  'Attack power up when facing scarlet rot-afflicted enemy':    '1.1× damage vs rot-afflicted targets',
+  'Attack power up when facing scarlet rot-afflicted enemy +1': '1.16× damage vs rot-afflicted targets',
+  'Attack power up when facing scarlet rot-afflicted enemy +2': '1.2× damage vs rot-afflicted targets',
+
+  // ── Sorceries / Incantations (DON) ───────────────────────────────────────
+  'Improved Sorceries':    '1.05× sorcery damage',
+  'Improved Sorceries +1': '1.085× sorcery damage',
+  'Improved Sorceries +2': '1.1× sorcery damage',
+  'Improved Incantations':    '1.05× incantation damage',
+  'Improved Incantations +1': '1.085× incantation damage',
+  'Improved Incantations +2': '1.1× incantation damage',
+
+  // ── Sleep / Madness Vicinity (DON) ───────────────────────────────────────
+  'Sleep in Vicinity Improves Attack Power':    '1.12× damage after sleep procs nearby',
+  'Sleep in Vicinity Improves Attack Power +1': '1.22× damage after sleep procs nearby',
+  'Madness in Vicinity Improves Attack Power':    '1.12× damage after madness procs nearby',
+  'Madness in Vicinity Improves Attack Power +1': '1.22× damage after madness procs nearby',
+
+  // ── Reduced FP Consumption ────────────────────────────────────────────────
+  'Reduced FP Consumption':    '0.92× FP consumption',
+  'Reduced FP Consumption +1': '0.87× FP consumption',
+  'Reduced FP Consumption +2': '0.84× FP consumption',
+
+  // ── Element Damage Negation ───────────────────────────────────────────────
+  'Fire Damage Negation Up':      '+10% fire damage negation',
+  'Magic Damage Negation Up':     '+10% magic damage negation',
+  'Lightning Damage Negation Up': '+10% lightning damage negation',
+  'Holy Damage Negation Up':      '+10% holy damage negation',
+
+  'Improved Fire Damage Negation +1':      '+15% fire damage negation',
+  'Improved Fire Damage Negation +2':      '+16% fire damage negation',
+  'Improved Magic Damage Negation +1':     '+15% magic damage negation',
+  'Improved Magic Damage Negation +2':     '+16% magic damage negation',
+  'Improved Lightning Damage Negation +1': '+15% lightning damage negation',
+  'Improved Lightning Damage Negation +2': '+16% lightning damage negation',
+  'Improved Holy Damage Negation +1':      '+15% holy damage negation',
+  'Improved Holy Damage Negation +2':      '+16% holy damage negation',
+
+  // ── Physical Damage Negation (DON) ────────────────────────────────────────
+  'Improved Physical Damage Negation +1': '+10.5% physical damage negation',
+  'Improved Physical Damage Negation +2': '+12% physical damage negation',
+
+  // ── Affinity Damage Negation ──────────────────────────────────────────────
+  'Improved Affinity Damage Negation':    '+6% magic/fire/lightning/holy damage negation',
+  'Improved Affinity Damage Negation +1': '+10.5% magic/fire/lightning/holy damage negation',
+  'Improved Affinity Damage Negation +2': '+12% magic/fire/lightning/holy damage negation',
+
+  // ── Status Resistance ─────────────────────────────────────────────────────
+  'Improved Blood Loss Resistance':    '+75 blood loss resistance',
+  'Improved Blood Loss Resistance +1': '+110 blood loss resistance',
+  'Improved Death Blight Resistance':    '+75 death blight resistance',
+  'Improved Death Blight Resistance +1': '+110 death blight resistance',
+  'Improved Frost Resistance':    '+75 frost resistance',
+  'Improved Frost Resistance +1': '+110 frost resistance',
+  'Improved Madness Resistance':    '+75 madness resistance',
+  'Improved Madness Resistance +1': '+110 madness resistance',
+  'Improved Poison Resistance':    '+75 poison resistance',
+  'Improved Poison Resistance +1': '+110 poison resistance',
+  'Improved Rot Resistance':    '+75 rot resistance',
+  'Improved Rot Resistance +1': '+110 rot resistance',
+  'Improved Sleep Resistance':    '+75 sleep resistance',
+  'Improved Sleep Resistance +1': '+110 sleep resistance',
+
+  // ── Poise & Damage Negation on Hit ────────────────────────────────────────
+  'Improved Poise & Damage Negation When Knocked Back by Damage':
+    '20% damage negation and 0.8× poise damage taken for 20s after being hit',
+
+  // ── DON stat maximums ─────────────────────────────────────────────────────
+  'Increased Maximum HP':      '1.1× maximum HP',
+  'Increased Maximum FP':      '1.15× maximum FP',
+  'Increased Maximum Stamina': '1.12× maximum stamina',
+  'Improved Flask HP Restoration': '1.1× HP from flasks',
+
+  // ── Regen ─────────────────────────────────────────────────────────────────
+  'HP Restoration on Attack (by Weapon Type)':   'Restores 15 HP with continuous attacks',
+  'FP Restoration on Attack (by Weapon Type)':   'Restores 2 FP with continuous attacks',
+  'HP Restoration upon Thrusting Counterattack': 'Restores [MaxHP × 0.025] HP on counterhits',
   'HP restored when using medicinal boluses, etc.': 'Restores 50 HP on consumable use',
-  'Partial HP Restoration upon Post-Damage Attacks':'Replenishes HP on hit briefly after taking damage',
-  'Defeating Enemies Restores HP for Allies':   'Allies recover 20 HP on each enemy kill',
-  'Raised Stamina Recovery for Nearby Allies':  "Increases allies' stamina recovery speed by 4/s",
-  'Slowly Restore HP When HP Is Low':           'Restores HP/s for 50 seconds when HP is below 20%',
-  'Flask Also Heals Allies':                    'Heals allies for 50% of flask HP in a radius',
+  'Partial HP Restoration upon Post-Damage Attacks': 'Replenishes HP on hit briefly after taking damage',
+  'Defeating Enemies Restores HP for Allies':    'Allies recover 20 HP on each enemy kill',
+  'Raised Stamina Recovery for Nearby Allies':   "+4/s stamina recovery for nearby allies",
+  'Slowly Restore HP When HP Is Low':            'Restores HP/s for 50s when HP is below 20%',
+  'Flask Also Heals Allies':                     'Heals allies for 50% of flask HP in a radius',
 
-  // ── DON-exclusive stat effects ────────────────────────────────────────────
-  'Increased Maximum HP':      'Increases maximum HP by 1.1×',
-  'Increased Maximum FP':      'Increases maximum FP by 1.15×',
-  'Increased Maximum Stamina': 'Increases maximum stamina by 1.12×',
-  'Improved Flask HP Restoration': 'Increases HP from flasks by 1.1×',
-  'Reduced FP Consumption':    'Reduces FP consumption by 0.92×/0.87×/0.84×',
+  // ── Spell Schools (all 1.12×) ────────────────────────────────────────────
+  'Improved Stonedigger Sorcery':           '1.12× Stonedigger sorcery damage',
+  'Improved Carian Sword Sorcery':          '1.12× Carian Sword sorcery damage',
+  'Improved Glintblade Sorcery':            '1.12× Glintblade sorcery damage',
+  'Improved Invisibility Sorcery':          '1.12× Invisibility sorcery damage',
+  'Improved Crystalian sorcery':            '1.12× Crystalian sorcery damage',
+  'Improved Gravity Sorcery':              '1.12× Gravity sorcery damage',
+  'Improved Thorn Sorcery':                '1.12× Thorn sorcery damage',
+  'Improved Fundamentalist Incantations':  '1.12× Fundamentalist incantation damage',
+  'Improved Dragon Cult Incantations':     '1.12× Dragon Cult incantation damage',
+  "Improved Giants' Flame Incantations":   "1.12× Giants' Flame incantation damage",
+  'Improved Godslayer Incantations':       '1.12× Godslayer incantation damage',
+  'Improved Bestial Incantations':         '1.12× Bestial incantation damage',
+  'Improved Frenzied Flame Incantations':  '1.12× Frenzied Flame incantation damage',
+  'Improved Dragon Communion Incantations':'1.12× Dragon Communion incantation damage',
 
-  // ── Offensive ────────────────────────────────────────────────────────────
-  'Spell School':  'Increases damage of the specified spell school by 1.12×',
-  'Attack Power vs Poison / Rot Afflicted':   '1.1× damage vs poison/rot-afflicted targets',
-  'Attack Power vs Frostbite-Afflicted Enemy':'1.1× damage vs frostbite-afflicted targets',
-  'Improved Affinity Attack Power': 'Magic/fire/lightning/holy damage × 1.05/1.08/1.1',
-  'Status Vicinity Improves Attack Power':    '1.12×/1.22× damage after sleep/madness procs nearby',
-  'Improved Glintstone and Gravity Stone Damage':'Increases stone projectile damage by 1.15×',
-  'Improved Throwing Knife Damage': 'Increases throwing knife damage by 1.15×',
-  'Improved Throwing Pot Damage':   'Increases throwing pot damage by 1.15×',
-  'Dormant Power - Weapon Discovery':'Changes preferred weapon class, making it more likely to drop',
-  'Starting Armament Element / Status':"Changes starting weapon to deal elemental damage or inflict status",
-  'Starting Armament Skill':          "Changes starting weapon's skill",
+  // ── Single Weapon Type Attack Power (1.09×; 1.06× for bows) ─────────────
+  'Improved Dagger Attack Power':              '1.09× Dagger damage',
+  'Improved Straight Sword Attack Power':      '1.09× Straight Sword damage',
+  'Improved Greatsword Attack Power':          '1.09× Greatsword damage',
+  'Improved Colossal Sword Attack Power':      '1.09× Colossal Sword damage',
+  'Improved Curved Sword Attack Power':        '1.09× Curved Sword damage',
+  'Improved Curved Greatsword Attack Power':   '1.09× Curved Greatsword damage',
+  'Improved Katana Attack Power':              '1.09× Katana damage',
+  'Improved Twinblade Attack Power':           '1.09× Twinblade damage',
+  'Improved Thrusting Sword Attack Power':     '1.09× Thrusting Sword damage',
+  'Improved Heavy Thrusting Sword Attack Power':'1.09× Heavy Thrusting Sword damage',
+  'Improved Axe Attack Power':                 '1.09× Axe damage',
+  'Improved Greataxe Attack Power':            '1.09× Greataxe damage',
+  'Improved Hammer Attack Power':              '1.09× Hammer damage',
+  'Improved Great Hammer Attack Power':        '1.09× Great Hammer damage',
+  'Improved Flail Attack Power':               '1.09× Flail damage',
+  'Improved Spear Attack Power':               '1.09× Spear damage',
+  'Improved Great Spear Attack Power':         '1.09× Great Spear damage',
+  'Improved Halberd Attack Power':             '1.09× Halberd damage',
+  'Improved Reaper Attack Power':              '1.09× Reaper damage',
+  'Improved Fist Attack Power':                '1.09× Fist damage',
+  'Improved Claw Attack Power':                '1.09× Claw damage',
+  'Improved Whip Attack Power':                '1.09× Whip damage',
+  'Improved Colossal Weapon Attack Power':     '1.09× Colossal Weapon damage',
+  'Improved Bow Attack Power':                 '1.06× Bow damage',
 
-  // ── Defensive ─────────────────────────────────────────────────────────────
-  'Fire Damage Negation Up':      'Increases fire damage negation (+10%; DON cursed tiers: +15%/+16%)',
-  'Holy Damage Negation Up':      'Increases holy damage negation (+10%; DON cursed tiers: +15%/+16%)',
-  'Lightning Damage Negation Up': 'Increases lightning damage negation (+10%; DON cursed tiers: +15%/+16%)',
-  'Magic Damage Negation Up':     'Increases magic damage negation (+10%; DON cursed tiers: +15%/+16%)',
-  'Improved Affinity Damage Negation': 'Magic/fire/lightning/holy damage negation +6%/+10.5%/+12%',
-  'Improved Physical Damage Negation': 'Physical damage negation +10.5%/+12%',
-  'Improved Damage Negation at Low HP':'16% damage negation when HP is below 40%',
-  'Improved Poise & Damage Negation When Knocked Back':
-    '20% damage negation and 0.8× poise damage taken for 20 seconds',
-  'Draw enemy attention while guarding': 'Increases aggro while blocking (not guaranteed)',
+  // ── 3+ Weapon Type Attack Power ──────────────────────────────────────────
+  'Improved Attack Power with 3+ Daggers Equipped':              '1.2× damage with 3+ Daggers equipped',
+  'Improved Attack Power with 3+ Straight Swords Equipped':      '1.2× damage with 3+ Straight Swords equipped',
+  'Improved Attack Power with 3+ Greatswords Equipped':          '1.2× damage with 3+ Greatswords equipped',
+  'Improved Attack Power with 3+ Colossal Swords Equipped':      '1.2× damage with 3+ Colossal Swords equipped',
+  'Improved Attack Power with 3+ Curved Swords Equipped':        '1.2× damage with 3+ Curved Swords equipped',
+  'Improved Attack Power with 3+ Curved Greatswords Equipped':   '1.2× damage with 3+ Curved Greatswords equipped',
+  'Improved Attack Power with 3+ Katana Equipped':               '1.2× damage with 3+ Katanas equipped',
+  'Improved Attack Power with 3+ Twinblades Equipped':           '1.2× damage with 3+ Twinblades equipped',
+  'Improved Attack Power with 3+ Thrusting Swords Equipped':     '1.2× damage with 3+ Thrusting Swords equipped',
+  'Improved Attack Power with 3+ Heavy Thrusting Swords Equipped':'1.2× damage with 3+ Heavy Thrusting Swords equipped',
+  'Improved Attack Power with 3+ Axes Equipped':                 '1.2× damage with 3+ Axes equipped',
+  'Improved Attack Power with 3+ Greataxes Equipped':            '1.2× damage with 3+ Greataxes equipped',
+  'Improved Attack Power with 3+ Hammers Equipped':              '1.2× damage with 3+ Hammers equipped',
+  'Improved Attack Power with 3+ Great Hammers Equipped':        '1.2× damage with 3+ Great Hammers equipped',
+  'Improved Attack Power with 3+ Flails Equipped':               '1.2× damage with 3+ Flails equipped',
+  'Improved Attack Power with 3+ Spears Equipped':               '1.2× damage with 3+ Spears equipped',
+  'Improved Attack Power with 3+ Great Spears Equipped':         '1.2× damage with 3+ Great Spears equipped',
+  'Improved Attack Power with 3+ Halberds Equipped':             '1.2× damage with 3+ Halberds equipped',
+  'Improved Attack Power with 3+ Reapers Equipped':              '1.2× damage with 3+ Reapers equipped',
+  'Improved Attack Power with 3+ Fists Equipped':                '1.2× damage with 3+ Fists equipped',
+  'Improved Attack Power with 3+ Claws Equipped':                '1.2× damage with 3+ Claws equipped',
+  'Improved Attack Power with 3+ Whips Equipped':                '1.2× damage with 3+ Whips equipped',
+  'Improved Attack Power with 3+ Colossal Weapons Equipped':     '1.2× damage with 3+ Colossal Weapons equipped',
+  'Improved Attack Power with 3+ Bows Equipped':                 '1.1× damage with 3+ Bows equipped',
 
-  // Status resistance — regular +75; DON cursed tiers +110/+130
-  'Improved Blood Loss Resistance': 'Increases blood loss resistance (+75; DON cursed: +110/+130)',
-  'Improved Death Blight Resistance':'Increases death blight resistance (+75; DON cursed: +110/+130)',
-  'Improved Frost Resistance':       'Increases frost resistance (+75; DON cursed: +110/+130)',
-  'Improved Madness Resistance':     'Increases madness resistance (+75; DON cursed: +110/+130)',
-  'Improved Poison Resistance':      'Increases poison resistance (+75; DON cursed: +110/+130)',
-  'Improved Rot Resistance':         'Increases rot resistance (+75; DON cursed: +110/+130)',
-  'Improved Sleep Resistance':       'Increases sleep resistance (+75; DON cursed: +110/+130)',
+  // ── Consumable Damage ────────────────────────────────────────────────────
+  'Improved Glintstone and Gravity Stone Damage':    '1.15× stone projectile damage',
+  'Improved Glintstone and Gravity Stone Damage +1': '1.3× stone projectile damage',
+  'Improved Throwing Knife Damage':    '1.15× throwing knife damage',
+  'Improved Throwing Knife Damage +1': '1.3× throwing knife damage',
+  'Improved Throwing Pot Damage':    '1.15× throwing pot damage',
+  'Improved Throwing Pot Damage +1': '1.3× throwing pot damage',
 
   // ── Exploration ───────────────────────────────────────────────────────────
-  'Flask Also Heals Allies':                        'Heals allies for 50% of flask HP in a radius',
-  'Items confer effect to all nearby allies':        'Items used affect nearby allies too',
-  'Increased rune acquisition for self and allies':  '1.035× rune gain for self and allies',
-  'Critical Hits Earn Runes':                        'Gain 600 runes on critical hits',
-  'Treasure marked upon map':                        'Reveals hidden chest locations',
-  'Max FP increased for each Sorcerer\'s Rise unlocked': 'Max FP × 1.18 per Sorcerer\'s Rise unlocked',
-  'Rune discount for shop purchases while on expedition': '10%/20% discount at merchants',
-  'Max FP with 3+ Staves / Seals': '+50 Max FP when carrying 3+ staves or seals',
-  'Max HP with 3+ Shields':        '+200 Max HP when carrying 3+ shields',
-
-  // DON exploration
-  'Max HP per Great Church Boss':    'Max HP × 1.05 for each Great Church boss defeated',
-  'Runes & Discovery per Fort Boss': '+16 discovery, runes × 1.055 for each Fort boss defeated',
+  'Max HP per Great Church Boss':    '1.05× max HP for each Great Church boss defeated',
+  'Runes & Discovery per Fort Boss': '+16 discovery, 1.055× runes for each Fort boss defeated',
   'Arcane per Ruin Boss':            '+4 Arcane for each Ruin boss defeated',
-  'Max Stamina per Camp Boss':       'Max Stamina × 1.075 for each Camp boss defeated',
+  'Max Stamina per Camp Boss':       '1.075× max stamina for each Camp boss defeated',
+  'Max HP increased for each great enemy defeated at a Great Church.': '1.05× max HP per Great Church boss',
+  'Runes and Item Discovery increased for each great enemy defeated at a Fort': '+16 discovery, 1.055× runes per Fort boss',
+  'Arcane increased for each great enemy defeated at a Ruin': '+4 Arcane per Ruin boss',
+  'Max stamina increased for each great enemy defeated at a Great Encampment': '1.075× max stamina per Camp boss',
+};
+
+export const CURSE_DESCRIPTIONS = {
+  'All Resistances Down':                 '−80 all status resistances',
+  'Continuous HP Loss':                   '−2 HP/s',
+  'Lower Attack When Below Max HP':       '0.915× damage when HP below 85%',
+  'Near Death Reduces Max HP':            '0.75× max HP for 60s after being downed',
+  'Poison Buildup When Below Max HP':     '2 poison buildup per 0.22s when HP below 85%',
+  'Reduced Damage Negation After Evading': '−45% damage negation right after rolling',
+  'Reduced Damage Negation for Flask Usages': '−45% damage negation while using flasks',
+  'Reduced Dexterity and Faith':          '−3 Dexterity and Faith',
+  'Reduced Faith and Strength':           '−3 Faith and Strength',
+  'Reduced Flask HP Restoration':         '0.85× HP from flasks',
+  'Reduced Intelligence and Dexterity':   '−3 Intelligence and Dexterity',
+  'Reduced Rune Acquisition':             '0.9× rune gain',
+  'Reduced Strength and Intelligence':    '−3 Strength and Intelligence',
+  'Reduced Vigor and Arcane':             '−3 Vigor and Arcane (−60 HP)',
+  'Repeated Evasions Lower Damage Negation': '−23%/−35% damage negation for 15s on repeated rolls',
+  'Rot Buildup When Below Max HP':        '2 rot buildup per 0.24s when HP below 85%',
+  'Taking Damage Causes Blood Loss Buildup': 'Taking damage inflicts 44 blood loss buildup',
+  'Taking Damage Causes Death Buildup':   'Taking damage inflicts 32 death blight buildup',
+  'Taking Damage Causes Frost Buildup':   'Taking damage inflicts 44 frost buildup',
+  'Taking Damage Causes Madness Buildup': 'Taking damage inflicts 40 madness buildup',
+  'Taking Damage Causes Poison Buildup':  'Taking damage inflicts 52 poison buildup',
+  'Taking Damage Causes Rot Buildup':     'Taking damage inflicts 44 rot buildup',
+  'Taking Damage Causes Sleep Buildup':   'Taking damage inflicts 40 sleep buildup',
+  'Ultimate Art Charging Impaired':       '0.85× ultimate gauge gain',
 };

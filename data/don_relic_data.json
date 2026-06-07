@@ -50,10 +50,10 @@
           "id": "6060500",
           "name": "Arcane increased for each great enemy defeated at a Ruin",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+4 Arcane per Ruin boss"
         }
-      ],
-      "desc": "+4 Arcane for each Ruin boss defeated"
+      ]
     },
     {
       "groupName": "Attack Power",
@@ -62,19 +62,22 @@
           "id": "7001602",
           "name": "Fire Attack Power Up +2",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.065× fire damage"
         },
         {
           "id": "6001600",
           "name": "Fire Attack Power Up +3",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.105× fire damage"
         },
         {
           "id": "6001601",
           "name": "Fire Attack Power Up +4",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.12× fire damage"
         },
         {
           "id": "7150000",
@@ -86,181 +89,211 @@
           "id": "7001802",
           "name": "Holy Attack Power Up +2",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.065× holy damage"
         },
         {
           "id": "6001800",
           "name": "Holy Attack Power Up +3",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.105× holy damage"
         },
         {
           "id": "6001801",
           "name": "Holy Attack Power Up +4",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.12× holy damage"
         },
         {
           "id": "6610800",
           "name": "Improved Affinity Attack Power",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.05× magic/fire/lightning/holy damage"
         },
         {
           "id": "6610801",
           "name": "Improved Affinity Attack Power +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.08× magic/fire/lightning/holy damage"
         },
         {
           "id": "6610802",
           "name": "Improved Affinity Attack Power +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.1× magic/fire/lightning/holy damage"
         },
         {
           "id": "7081000",
           "name": "Improved Attack Power with 3+ Axes Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Axes equipped"
         },
         {
           "id": "7082400",
           "name": "Improved Attack Power with 3+ Bows Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.1× damage with 3+ Bows equipped"
         },
         {
           "id": "7082100",
           "name": "Improved Attack Power with 3+ Claws Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Claws equipped"
         },
         {
           "id": "7080300",
           "name": "Improved Attack Power with 3+ Colossal Swords Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Colossal Swords equipped"
         },
         {
           "id": "7082300",
           "name": "Improved Attack Power with 3+ Colossal Weapons Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Colossal Weapons equipped"
         },
         {
           "id": "7080500",
           "name": "Improved Attack Power with 3+ Curved Greatswords Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Curved Greatswords equipped"
         },
         {
           "id": "7080400",
           "name": "Improved Attack Power with 3+ Curved Swords Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Curved Swords equipped"
         },
         {
           "id": "7080000",
           "name": "Improved Attack Power with 3+ Daggers Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Daggers equipped"
         },
         {
           "id": "7082000",
           "name": "Improved Attack Power with 3+ Fists Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Fists equipped"
         },
         {
           "id": "7081400",
           "name": "Improved Attack Power with 3+ Flails Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Flails equipped"
         },
         {
           "id": "7081300",
           "name": "Improved Attack Power with 3+ Great Hammers Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Great Hammers equipped"
         },
         {
           "id": "7081700",
           "name": "Improved Attack Power with 3+ Great Spears Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Great Spears equipped"
         },
         {
           "id": "7081100",
           "name": "Improved Attack Power with 3+ Greataxes Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Greataxes equipped"
         },
         {
           "id": "7080200",
           "name": "Improved Attack Power with 3+ Greatswords Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Greatswords equipped"
         },
         {
           "id": "7081800",
           "name": "Improved Attack Power with 3+ Halberds Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Halberds equipped"
         },
         {
           "id": "7081200",
           "name": "Improved Attack Power with 3+ Hammers Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Hammers equipped"
         },
         {
           "id": "7080900",
           "name": "Improved Attack Power with 3+ Heavy Thrusting Swords Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Heavy Thrusting Swords equipped"
         },
         {
           "id": "7080600",
           "name": "Improved Attack Power with 3+ Katana Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Katanas equipped"
         },
         {
           "id": "7081900",
           "name": "Improved Attack Power with 3+ Reapers Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Reapers equipped"
         },
         {
           "id": "7081500",
           "name": "Improved Attack Power with 3+ Spears Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Spears equipped"
         },
         {
           "id": "7080100",
           "name": "Improved Attack Power with 3+ Straight Swords Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Straight Swords equipped"
         },
         {
           "id": "7080800",
           "name": "Improved Attack Power with 3+ Thrusting Swords Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Thrusting Swords equipped"
         },
         {
           "id": "7080700",
           "name": "Improved Attack Power with 3+ Twinblades Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Twinblades equipped"
         },
         {
           "id": "7082200",
           "name": "Improved Attack Power with 3+ Whips Equipped",
           "w": 10,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.2× damage with 3+ Whips equipped"
         },
         {
           "id": "7331000",
@@ -356,19 +389,22 @@
           "id": "7040100",
           "name": "Improved Guard Counters",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.17× guard counter damage"
         },
         {
           "id": "6040100",
           "name": "Improved Guard Counters +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.25× guard counter damage"
         },
         {
           "id": "6040101",
           "name": "Improved Guard Counters +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.29× guard counter damage"
         },
         {
           "id": "7331800",
@@ -392,19 +428,22 @@
           "id": "6611300",
           "name": "Improved Incantations",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.05× incantation damage"
         },
         {
           "id": "6611301",
           "name": "Improved Incantations +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.085× incantation damage"
         },
         {
           "id": "6611302",
           "name": "Improved Incantations +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.1× incantation damage"
         },
         {
           "id": "7040000",
@@ -428,19 +467,22 @@
           "id": "6611200",
           "name": "Improved Sorceries",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.05× sorcery damage"
         },
         {
           "id": "6611201",
           "name": "Improved Sorceries +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.085× sorcery damage"
         },
         {
           "id": "6611202",
           "name": "Improved Sorceries +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.1× sorcery damage"
         },
         {
           "id": "7331500",
@@ -476,97 +518,113 @@
           "id": "7001702",
           "name": "Lightning Attack Power Up +2",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.065× lightning damage"
         },
         {
           "id": "6001700",
           "name": "Lightning Attack Power Up +3",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.105× lightning damage"
         },
         {
           "id": "6001701",
           "name": "Lightning Attack Power Up +4",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.12× lightning damage"
         },
         {
           "id": "6600100",
           "name": "Madness in Vicinity Improves Attack Power",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× damage after madness procs nearby"
         },
         {
           "id": "6600101",
           "name": "Madness in Vicinity Improves Attack Power +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.22× damage after madness procs nearby"
         },
         {
           "id": "7001502",
           "name": "Magic Attack Power Up +2",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.065× magic damage"
         },
         {
           "id": "6001500",
           "name": "Magic Attack Power Up +3",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.105× magic damage"
         },
         {
           "id": "6001501",
           "name": "Magic Attack Power Up +4",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.12× magic damage"
         },
         {
           "id": "7030900",
           "name": "Physical attack power increases after using grease items",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.1× physical damage for 30s after using grease"
         },
         {
           "id": "6030900",
           "name": "Physical attack power increases after using grease items +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.17× physical damage for 30s after using grease"
         },
         {
           "id": "6030901",
           "name": "Physical attack power increases after using grease items +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.2× physical damage for 30s after using grease"
         },
         {
           "id": "7001402",
           "name": "Physical Attack Up +2",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.06× physical damage"
         },
         {
           "id": "6001400",
           "name": "Physical Attack Up +3",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.105× physical damage"
         },
         {
           "id": "6001401",
           "name": "Physical Attack Up +4",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.12× physical damage"
         },
         {
           "id": "6600000",
           "name": "Sleep in Vicinity Improves Attack Power",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× damage after sleep procs nearby"
         },
         {
           "id": "6600001",
           "name": "Sleep in Vicinity Improves Attack Power +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.22× damage after sleep procs nearby"
         }
       ]
     },
@@ -577,22 +635,24 @@
           "id": "7260400",
           "name": "Attack power up when facing frostbite-afflicted\nenemy",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.1× damage vs frostbite-afflicted targets"
         },
         {
           "id": "6260400",
           "name": "Attack power up when facing frostbite-afflicted enemy +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.16× damage vs frostbite-afflicted targets"
         },
         {
           "id": "6260401",
           "name": "Attack power up when facing frostbite-afflicted enemy +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.2× damage vs frostbite-afflicted targets"
         }
-      ],
-      "desc": "1.1× damage vs frostbite-afflicted targets"
+      ]
     },
     {
       "groupName": "Attack Power vs Poison / Rot Afflicted",
@@ -601,40 +661,45 @@
           "id": "7260000",
           "name": "Attack power up when facing poison-afflicted enemy",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.1× damage vs poison-afflicted targets"
         },
         {
           "id": "6260000",
           "name": "Attack power up when facing poison-afflicted enemy +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.16× damage vs poison-afflicted targets"
         },
         {
           "id": "6260001",
           "name": "Attack power up when facing poison-afflicted enemy +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.2× damage vs poison-afflicted targets"
         },
         {
           "id": "7260300",
           "name": "Attack power up when facing scarlet rot-afflicted\nenemy",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.1× damage vs rot-afflicted targets"
         },
         {
           "id": "6260300",
           "name": "Attack power up when facing scarlet rot-afflicted enemy +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.16× damage vs rot-afflicted targets"
         },
         {
           "id": "6260301",
           "name": "Attack power up when facing scarlet rot-afflicted enemy +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.2× damage vs rot-afflicted targets"
         }
-      ],
-      "desc": "1.1× damage vs poison/rot-afflicted targets"
+      ]
     },
     {
       "groupName": "Cerulean Crystal Tear in possession at start of expedition",
@@ -943,8 +1008,7 @@
           "w": 55,
           "hasCurse": true
         }
-      ],
-      "desc": "Increases stamina recovery by 10/s for 15 seconds"
+      ]
     },
     {
       "groupName": "Critical Hits Earn Runes",
@@ -955,8 +1019,7 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "Gain 600 runes on critical hits"
+      ]
     },
     {
       "groupName": "Critical hits fill more of the Art gauge",
@@ -973,8 +1036,7 @@
           "w": 269,
           "hasCurse": true
         }
-      ],
-      "desc": "+5 to Ultimate Art Gauge on critical hits"
+      ]
     },
     {
       "groupName": "Defeating enemies fills more of the Art gauge",
@@ -991,8 +1053,7 @@
           "w": 269,
           "hasCurse": true
         }
-      ],
-      "desc": "+5 to Ultimate Art Gauge per enemy kill"
+      ]
     },
     {
       "groupName": "Defeating Enemies Restores HP for Allies",
@@ -1003,8 +1064,7 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "Allies recover 20 HP on each enemy kill"
+      ]
     },
     {
       "groupName": "Dormant Power - Weapon Discovery",
@@ -1201,8 +1261,7 @@
           "w": 31,
           "hasCurse": false
         }
-      ],
-      "desc": "Changes preferred weapon class, making it more likely to drop"
+      ]
     },
     {
       "groupName": "Draw enemy attention while guarding",
@@ -1213,8 +1272,7 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "Increases aggro while blocking (not guaranteed)"
+      ]
     },
     {
       "groupName": "Fire Damage Negation Up",
@@ -1223,22 +1281,24 @@
           "id": "7002700",
           "name": "Fire Damage Negation Up",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+10% fire damage negation"
         },
         {
           "id": "6002700",
           "name": "Improved Fire Damage Negation +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+15% fire damage negation"
         },
         {
           "id": "6002701",
           "name": "Improved Fire Damage Negation +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+16% fire damage negation"
         }
-      ],
-      "desc": "Increases fire damage negation (+10%; DON cursed tiers: +15%/+16%)"
+      ]
     },
     {
       "groupName": "Flask Also Heals Allies",
@@ -1247,10 +1307,10 @@
           "id": "7010200",
           "name": "Flask Also Heals Allies",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "Heals allies for 50% of flask HP in a radius"
         }
-      ],
-      "desc": "Heals allies for 50% of flask HP in a radius"
+      ]
     },
     {
       "groupName": "FP Restoration on Attack (by Weapon Type)",
@@ -1399,8 +1459,7 @@
           "w": 10,
           "hasCurse": false
         }
-      ],
-      "desc": "Restores 2 FP with continuous attacks"
+      ]
     },
     {
       "groupName": "Holy Damage Negation Up",
@@ -1409,22 +1468,24 @@
           "id": "7002900",
           "name": "Holy Damage Negation Up",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+10% holy damage negation"
         },
         {
           "id": "6002900",
           "name": "Improved Holy Damage Negation +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+15% holy damage negation"
         },
         {
           "id": "6002901",
           "name": "Improved Holy Damage Negation +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+16% holy damage negation"
         }
-      ],
-      "desc": "Increases holy damage negation (+10%; DON cursed tiers: +15%/+16%)"
+      ]
     },
     {
       "groupName": "HP Restoration on Attack (by Weapon Type)",
@@ -1573,8 +1634,7 @@
           "w": 10,
           "hasCurse": false
         }
-      ],
-      "desc": "Restores 15 HP with continuous attacks"
+      ]
     },
     {
       "groupName": "HP Restoration upon Thrusting Counterattack",
@@ -1583,7 +1643,8 @@
           "id": "7160000",
           "name": "HP Restoration upon Thrusting Counterattack",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "Restores [MaxHP × 0.025] HP on counterhits"
         },
         {
           "id": "6160000",
@@ -1591,8 +1652,7 @@
           "w": 269,
           "hasCurse": true
         }
-      ],
-      "desc": "Restores [MaxHP × 0.025] HP on counterhits"
+      ]
     },
     {
       "groupName": "HP restored when using medicinal boluses, etc.",
@@ -1601,7 +1661,8 @@
           "id": "7030200",
           "name": "HP restored when using medicinal boluses, etc.",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "Restores 50 HP on consumable use"
         },
         {
           "id": "6030200",
@@ -1609,8 +1670,7 @@
           "w": 55,
           "hasCurse": true
         }
-      ],
-      "desc": "Restores 50 HP on consumable use"
+      ]
     },
     {
       "groupName": "Improved Affinity Damage Negation",
@@ -1619,22 +1679,24 @@
           "id": "6611100",
           "name": "Improved Affinity Damage Negation",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+6% magic/fire/lightning/holy damage negation"
         },
         {
           "id": "6611101",
           "name": "Improved Affinity Damage Negation +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+10.5% magic/fire/lightning/holy damage negation"
         },
         {
           "id": "6611102",
           "name": "Improved Affinity Damage Negation +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+12% magic/fire/lightning/holy damage negation"
         }
-      ],
-      "desc": "Magic/fire/lightning/holy damage negation +6%/+10.5%/+12%"
+      ]
     },
     {
       "groupName": "Improved Blood Loss Resistance",
@@ -1643,16 +1705,17 @@
           "id": "7003100",
           "name": "Improved Blood Loss Resistance",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+75 blood loss resistance"
         },
         {
           "id": "6003100",
           "name": "Improved Blood Loss Resistance +1",
           "w": 69,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+110 blood loss resistance"
         }
-      ],
-      "desc": "Increases blood loss resistance (+75; DON cursed: +110/+130)"
+      ]
     },
     {
       "groupName": "Improved Damage Negation at Low HP",
@@ -1663,8 +1726,7 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "16% damage negation when HP is below 40%"
+      ]
     },
     {
       "groupName": "Improved Death Blight Resistance",
@@ -1673,16 +1735,17 @@
           "id": "7003300",
           "name": "Improved Death Blight Resistance",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+75 death blight resistance"
         },
         {
           "id": "6003300",
           "name": "Improved Death Blight Resistance +1",
           "w": 69,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+110 death blight resistance"
         }
-      ],
-      "desc": "Increases death blight resistance (+75; DON cursed: +110/+130)"
+      ]
     },
     {
       "groupName": "Improved Flask HP Restoration",
@@ -1691,10 +1754,10 @@
           "id": "6611400",
           "name": "Improved Flask HP Restoration",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.1× HP from flasks"
         }
-      ],
-      "desc": "Increases HP from flasks by 1.1×"
+      ]
     },
     {
       "groupName": "Improved Frost Resistance",
@@ -1703,16 +1766,17 @@
           "id": "7003500",
           "name": "Improved Frost Resistance",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+75 frost resistance"
         },
         {
           "id": "6003500",
           "name": "Improved Frost Resistance +1",
           "w": 69,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+110 frost resistance"
         }
-      ],
-      "desc": "Increases frost resistance (+75; DON cursed: +110/+130)"
+      ]
     },
     {
       "groupName": "Improved Glintstone and Gravity Stone Damage",
@@ -1721,16 +1785,17 @@
           "id": "7040500",
           "name": "Improved Glintstone and Gravity Stone Damage",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.15× stone projectile damage"
         },
         {
           "id": "6040500",
           "name": "Improved Glintstone and Gravity Stone Damage +1",
           "w": 28,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.3× stone projectile damage"
         }
-      ],
-      "desc": "Increases stone projectile damage by 1.15×"
+      ]
     },
     {
       "groupName": "Improved Lightning Damage Negation",
@@ -1739,19 +1804,22 @@
           "id": "6002800",
           "name": "Improved Lightning Damage Negation +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+15% lightning damage negation"
         },
         {
           "id": "6002801",
           "name": "Improved Lightning Damage Negation +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+16% lightning damage negation"
         },
         {
           "id": "7002800",
           "name": "Lightning Damage Negation Up",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+10% lightning damage negation"
         }
       ]
     },
@@ -1762,16 +1830,17 @@
           "id": "7003600",
           "name": "Improved Madness Resistance",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+75 madness resistance"
         },
         {
           "id": "6003600",
           "name": "Improved Madness Resistance +1",
           "w": 69,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+110 madness resistance"
         }
-      ],
-      "desc": "Increases madness resistance (+75; DON cursed: +110/+130)"
+      ]
     },
     {
       "groupName": "Improved Magic Damage Negation",
@@ -1780,19 +1849,22 @@
           "id": "6002600",
           "name": "Improved Magic Damage Negation +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+15% magic damage negation"
         },
         {
           "id": "6002601",
           "name": "Improved Magic Damage Negation +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+16% magic damage negation"
         },
         {
           "id": "7002600",
           "name": "Magic Damage Negation Up",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+10% magic damage negation"
         }
       ]
     },
@@ -1814,16 +1886,17 @@
           "id": "6611001",
           "name": "Improved Physical Damage Negation +1",
           "w": 269,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+10.5% physical damage negation"
         },
         {
           "id": "6611002",
           "name": "Improved Physical Damage Negation +2",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+12% physical damage negation"
         }
-      ],
-      "desc": "Physical damage negation +10.5%/+12%"
+      ]
     },
     {
       "groupName": "Improved Poise & Damage Negation When Knocked Back",
@@ -1832,10 +1905,10 @@
           "id": "7240000",
           "name": "Improved Poise & Damage Negation When Knocked Back\nby Damage",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "20% damage negation and 0.8× poise damage taken for 20s after being hit"
         }
-      ],
-      "desc": "20% damage negation and 0.8× poise damage taken for 20 seconds"
+      ]
     },
     {
       "groupName": "Improved Poison Resistance",
@@ -1844,16 +1917,17 @@
           "id": "7003000",
           "name": "Improved Poison Resistance",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+75 poison resistance"
         },
         {
           "id": "6003000",
           "name": "Improved Poison Resistance +1",
           "w": 69,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+110 poison resistance"
         }
-      ],
-      "desc": "Increases poison resistance (+75; DON cursed: +110/+130)"
+      ]
     },
     {
       "groupName": "Improved Rot Resistance",
@@ -1862,16 +1936,17 @@
           "id": "7003400",
           "name": "Improved Rot Resistance",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+75 rot resistance"
         },
         {
           "id": "6003400",
           "name": "Improved Rot Resistance +1",
           "w": 69,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+110 rot resistance"
         }
-      ],
-      "desc": "Increases rot resistance (+75; DON cursed: +110/+130)"
+      ]
     },
     {
       "groupName": "Improved Sleep Resistance",
@@ -1880,16 +1955,17 @@
           "id": "7003200",
           "name": "Improved Sleep Resistance",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+75 sleep resistance"
         },
         {
           "id": "6003200",
           "name": "Improved Sleep Resistance +1",
           "w": 69,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "+110 sleep resistance"
         }
-      ],
-      "desc": "Increases sleep resistance (+75; DON cursed: +110/+130)"
+      ]
     },
     {
       "groupName": "Improved Throwing Knife Damage",
@@ -1898,16 +1974,17 @@
           "id": "7040400",
           "name": "Improved Throwing Knife Damage",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.15× throwing knife damage"
         },
         {
           "id": "6040400",
           "name": "Improved Throwing Knife Damage +1",
           "w": 28,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.3× throwing knife damage"
         }
-      ],
-      "desc": "Increases throwing knife damage by 1.15×"
+      ]
     },
     {
       "groupName": "Improved Throwing Pot Damage",
@@ -1916,16 +1993,17 @@
           "id": "7040300",
           "name": "Improved Throwing Pot Damage",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.15× throwing pot damage"
         },
         {
           "id": "6040300",
           "name": "Improved Throwing Pot Damage +1",
           "w": 28,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.3× throwing pot damage"
         }
-      ],
-      "desc": "Increases throwing pot damage by 1.15×"
+      ]
     },
     {
       "groupName": "Increased Maximum FP",
@@ -1934,10 +2012,10 @@
           "id": "6610500",
           "name": "Increased Maximum FP",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.15× maximum FP"
         }
-      ],
-      "desc": "Increases maximum FP by 1.15×"
+      ]
     },
     {
       "groupName": "Increased Maximum HP",
@@ -1946,10 +2024,10 @@
           "id": "6610400",
           "name": "Increased Maximum HP",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.1× maximum HP"
         }
-      ],
-      "desc": "Increases maximum HP by 1.1×"
+      ]
     },
     {
       "groupName": "Increased Maximum Stamina",
@@ -1958,10 +2036,10 @@
           "id": "6610600",
           "name": "Increased Maximum Stamina",
           "w": 130,
-          "hasCurse": true
+          "hasCurse": true,
+          "desc": "1.12× maximum stamina"
         }
-      ],
-      "desc": "Increases maximum stamina by 1.12×"
+      ]
     },
     {
       "groupName": "Increased rune acquisition for self and allies",
@@ -1972,8 +2050,7 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "1.035× rune gain for self and allies"
+      ]
     },
     {
       "groupName": "Items confer effect to all nearby allies",
@@ -1984,8 +2061,7 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "Items used affect nearby allies too"
+      ]
     },
     {
       "groupName": "Max FP with 3+ Staves / Seals",
@@ -2002,8 +2078,7 @@
           "w": 10,
           "hasCurse": false
         }
-      ],
-      "desc": "+50 Max FP when carrying 3+ staves or seals"
+      ]
     },
     {
       "groupName": "Max HP per Great Church Boss",
@@ -2012,10 +2087,10 @@
           "id": "6060300",
           "name": "Max HP increased for each great enemy defeated at a Great Church.",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.05× max HP per Great Church boss"
         }
-      ],
-      "desc": "Max HP × 1.05 for each Great Church boss defeated"
+      ]
     },
     {
       "groupName": "Max HP with 3+ Shields",
@@ -2038,8 +2113,7 @@
           "w": 10,
           "hasCurse": false
         }
-      ],
-      "desc": "+200 Max HP when carrying 3+ shields"
+      ]
     },
     {
       "groupName": "Max Stamina per Camp Boss",
@@ -2048,10 +2122,10 @@
           "id": "6060600",
           "name": "Max stamina increased for each great enemy defeated at a Great Encampment",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.075× max stamina per Camp boss"
         }
-      ],
-      "desc": "Max Stamina × 1.075 for each Camp boss defeated"
+      ]
     },
     {
       "groupName": "Partial HP Restoration upon Post-Damage Attacks",
@@ -2060,7 +2134,8 @@
           "id": "7005600",
           "name": "Partial HP Restoration upon Post-Damage Attacks",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "Replenishes HP on hit briefly after taking damage"
         },
         {
           "id": "6005600",
@@ -2074,8 +2149,7 @@
           "w": 130,
           "hasCurse": true
         }
-      ],
-      "desc": "Replenishes HP on hit briefly after taking damage"
+      ]
     },
     {
       "groupName": "Poise",
@@ -2084,10 +2158,10 @@
           "id": "7001002",
           "name": "Poise +3",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "0.85× incoming poise damage"
         }
-      ],
-      "desc": "Reduces incoming poise damage by 0.95×/0.9×/0.85×"
+      ]
     },
     {
       "groupName": "Raised stamina recovery for nearby allies, but not for self",
@@ -2107,10 +2181,10 @@
           "id": "6610700",
           "name": "Reduced FP Consumption",
           "w": 69,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "0.92× FP consumption"
         }
-      ],
-      "desc": "Reduces FP consumption by 0.92×/0.87×/0.84×"
+      ]
     },
     {
       "groupName": "Rune discount for shop purchases while on expedition",
@@ -2121,8 +2195,7 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "10%/20% discount at merchants"
+      ]
     },
     {
       "groupName": "Runes & Discovery per Fort Boss",
@@ -2131,10 +2204,10 @@
           "id": "6060400",
           "name": "Runes and Item Discovery increased for each great enemy defeated at a Fort",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+16 discovery, 1.055× runes per Fort boss"
         }
-      ],
-      "desc": "+16 discovery, runes × 1.055 for each Fort boss defeated"
+      ]
     },
     {
       "groupName": "Slowly restore HP for self and nearby allies when HP is low",
@@ -2165,88 +2238,101 @@
           "id": "7044400",
           "name": "Improved Bestial Incantations",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Bestial incantation damage"
         },
         {
           "id": "7043300",
           "name": "Improved Carian Sword Sorcery",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Carian Sword sorcery damage"
         },
         {
           "id": "7043600",
           "name": "Improved Crystalian sorcery",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Crystalian sorcery damage"
         },
         {
           "id": "7044600",
           "name": "Improved Dragon Communion Incantations",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Dragon Communion incantation damage"
         },
         {
           "id": "7044100",
           "name": "Improved Dragon Cult Incantations",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Dragon Cult incantation damage"
         },
         {
           "id": "7044500",
           "name": "Improved Frenzied Flame Incantations",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Frenzied Flame incantation damage"
         },
         {
           "id": "7044000",
           "name": "Improved Fundamentalist Incantations",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Fundamentalist incantation damage"
         },
         {
           "id": "7044200",
           "name": "Improved Giants' Flame Incantations",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Giants' Flame incantation damage"
         },
         {
           "id": "7043400",
           "name": "Improved Glintblade Sorcery",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Glintblade sorcery damage"
         },
         {
           "id": "7044300",
           "name": "Improved Godslayer Incantations",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Godslayer incantation damage"
         },
         {
           "id": "7043700",
           "name": "Improved Gravity Sorcery",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Gravity sorcery damage"
         },
         {
           "id": "7043500",
           "name": "Improved Invisibility Sorcery",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Invisibility sorcery damage"
         },
         {
           "id": "7043200",
           "name": "Improved Stonedigger Sorcery",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Stonedigger sorcery damage"
         },
         {
           "id": "7043800",
           "name": "Improved Thorn Sorcery",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.12× Thorn sorcery damage"
         }
-      ],
-      "desc": "Increases damage of the specified spell school by 1.12×"
+      ]
     },
     {
       "groupName": "Stamina Recovery upon Landing Attacks",
@@ -2257,8 +2343,7 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "Restores 2/3 stamina with continuous attacks"
+      ]
     },
     {
       "groupName": "Stonesword Key in possession at start of expedition",
@@ -2286,8 +2371,7 @@
           "w": 269,
           "hasCurse": true
         }
-      ],
-      "desc": "+1 to Ultimate Art Gauge on successful block"
+      ]
     },
     {
       "groupName": "Treasure marked upon map",
@@ -2298,106 +2382,129 @@
           "w": 55,
           "hasCurse": false
         }
-      ],
-      "desc": "Reveals hidden chest locations"
+      ]
     }
   ],
   "curses": [
     {
       "name": "All Resistances Down",
-      "w": 100
+      "w": 100,
+      "desc": "−80 all status resistances"
     },
     {
       "name": "Continuous HP Loss",
-      "w": 100
+      "w": 100,
+      "desc": "−2 HP/s"
     },
     {
       "name": "Lower Attack When Below Max HP",
-      "w": 100
+      "w": 100,
+      "desc": "0.915× damage when HP below 85%"
     },
     {
       "name": "Near Death Reduces Max HP",
-      "w": 100
+      "w": 100,
+      "desc": "0.75× max HP for 60s after being downed"
     },
     {
       "name": "Poison Buildup When Below Max HP",
-      "w": 100
+      "w": 100,
+      "desc": "2 poison buildup per 0.22s when HP below 85%"
     },
     {
       "name": "Reduced Damage Negation After Evading",
-      "w": 100
+      "w": 100,
+      "desc": "−45% damage negation right after rolling"
     },
     {
       "name": "Reduced Damage Negation for Flask Usages",
-      "w": 100
+      "w": 100,
+      "desc": "−45% damage negation while using flasks"
     },
     {
       "name": "Reduced Dexterity and Faith",
-      "w": 100
+      "w": 100,
+      "desc": "−3 Dexterity and Faith"
     },
     {
       "name": "Reduced Faith and Strength",
-      "w": 100
+      "w": 100,
+      "desc": "−3 Faith and Strength"
     },
     {
       "name": "Reduced Flask HP Restoration",
-      "w": 100
+      "w": 100,
+      "desc": "0.85× HP from flasks"
     },
     {
       "name": "Reduced Intelligence and Dexterity",
-      "w": 100
+      "w": 100,
+      "desc": "−3 Intelligence and Dexterity"
     },
     {
       "name": "Reduced Rune Acquisition",
-      "w": 100
+      "w": 100,
+      "desc": "0.9× rune gain"
     },
     {
       "name": "Reduced Strength and Intelligence",
-      "w": 100
+      "w": 100,
+      "desc": "−3 Strength and Intelligence"
     },
     {
       "name": "Reduced Vigor and Arcane",
-      "w": 100
+      "w": 100,
+      "desc": "−3 Vigor and Arcane (−60 HP)"
     },
     {
       "name": "Repeated Evasions Lower Damage Negation",
-      "w": 100
+      "w": 100,
+      "desc": "−23%/−35% damage negation for 15s on repeated rolls"
     },
     {
       "name": "Rot Buildup When Below Max HP",
-      "w": 100
+      "w": 100,
+      "desc": "2 rot buildup per 0.24s when HP below 85%"
     },
     {
       "name": "Taking Damage Causes Blood Loss Buildup",
-      "w": 100
+      "w": 100,
+      "desc": "Taking damage inflicts 44 blood loss buildup"
     },
     {
       "name": "Taking Damage Causes Death Buildup",
-      "w": 100
+      "w": 100,
+      "desc": "Taking damage inflicts 32 death blight buildup"
     },
     {
       "name": "Taking Damage Causes Frost Buildup",
-      "w": 100
+      "w": 100,
+      "desc": "Taking damage inflicts 44 frost buildup"
     },
     {
       "name": "Taking Damage Causes Madness Buildup",
-      "w": 100
+      "w": 100,
+      "desc": "Taking damage inflicts 40 madness buildup"
     },
     {
       "name": "Taking Damage Causes Poison Buildup",
-      "w": 100
+      "w": 100,
+      "desc": "Taking damage inflicts 52 poison buildup"
     },
     {
       "name": "Taking Damage Causes Rot Buildup",
-      "w": 100
+      "w": 100,
+      "desc": "Taking damage inflicts 44 rot buildup"
     },
     {
       "name": "Taking Damage Causes Sleep Buildup",
-      "w": 100
+      "w": 100,
+      "desc": "Taking damage inflicts 40 sleep buildup"
     },
     {
       "name": "Ultimate Art Charging Impaired",
-      "w": 100
+      "w": 100,
+      "desc": "0.85× ultimate gauge gain"
     }
   ]
 }

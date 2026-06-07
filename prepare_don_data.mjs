@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { DESCRIPTIONS } from './descriptions.mjs';
+import { EFFECT_DESCRIPTIONS, CURSE_DESCRIPTIONS } from './descriptions.mjs';
 
 function unescapeHtml(str) {
   return str.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
@@ -92,7 +92,9 @@ const addEffect = (eid, w, fromTable2000) => {
   if (!groupMap[compatId]) groupMap[compatId] = [];
   // Avoid duplicates (an effect could theoretically appear in both tables)
   if (!groupMap[compatId].find(e => e.id === eid)) {
-    groupMap[compatId].push({ id: eid, name: unescapeHtml(name), w, hasCurse });
+    const eName = unescapeHtml(name);
+    const desc = EFFECT_DESCRIPTIONS[eName.replace(/\n/g, ' ')] || '';
+    groupMap[compatId].push({ id: eid, name: eName, w, hasCurse, ...(desc && { desc }) });
   }
 };
 
@@ -131,14 +133,17 @@ const groups = Object.entries(groupMap)
     const derived = (effects[0]?.name ?? '').replace(/ \+\d+$/, '').replace(/\n/g, ' ');
     const rawGroupName = NAME_OVERRIDES[cid] ?? derived;
     const groupName = unescapeHtml(rawGroupName);
-    const desc = DESCRIPTIONS[groupName] || '';
-    return { compatId: cid, groupName, effects, ...(desc && { desc }) };
+    return { compatId: cid, groupName, effects };
   })
   .sort((a, b) => a.groupName.localeCompare(b.groupName));
 
 // Build curse list from table 3000000
 const curses = Object.entries(cursePureWeights)
-  .map(([eid, w]) => ({ name: unescapeHtml(names[eid] || '(unknown)'), w }))
+  .map(([eid, w]) => {
+    const name = unescapeHtml(names[eid] || '(unknown)');
+    const desc = CURSE_DESCRIPTIONS[name] || '';
+    return { name, w, ...(desc && { desc }) };
+  })
   .filter(c => c.name !== '(unknown)')
   .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -157,7 +162,7 @@ console.log(`Curses: ${curses.length}`);
 const output = {
   wTotal,
   wCurseTotal,
-  groups: groups.map(({ groupName, effects, desc }) => ({ groupName, effects, ...(desc && { desc }) })),
+  groups: groups.map(({ groupName, effects }) => ({ groupName, effects })),
   curses,
 };
 

@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { DESCRIPTIONS } from './descriptions.mjs';
+import { EFFECT_DESCRIPTIONS } from './descriptions.mjs';
 
 const NAME_OVERRIDES = {
   100:     'Attack Power',
@@ -49,18 +49,18 @@ const raw = JSON.parse(readFileSync('data/relic_groups.json', 'utf8'));
 
 const clean = raw
   .map(g => {
-    const effects = g.effects.map(e => ({
-      name: unescapeHtml(e.name),
-      w: weights[e.id] ?? 0,
-    }));
+    const effects = g.effects.map(e => {
+      const name = unescapeHtml(e.name);
+      const desc = EFFECT_DESCRIPTIONS[name.replace(/\n/g, ' ')] || '';
+      return { name, w: weights[e.id] ?? 0, ...(desc && { desc }) };
+    });
 
     if (g.compatibilityId === 900) {
       effects.sort((a, b) => charSortKey(a.name) - charSortKey(b.name));
     }
 
     const groupName = unescapeHtml(NAME_OVERRIDES[g.compatibilityId] ?? g.groupName);
-    const desc = DESCRIPTIONS[groupName] || '';
-    return { groupName, effects, ...(desc && { desc }) };
+    return { groupName, effects };
   })
   .sort((a, b) => a.groupName.localeCompare(b.groupName));
 
