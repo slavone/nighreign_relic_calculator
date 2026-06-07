@@ -22,13 +22,28 @@ function unescapeHtml(str) {
   return str.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
 }
 
+const CHAR_ORDER = ['Wylder','Guardian','Ironeye','Duchess','Raider','Revenant','Recluse','Executor','Scholar','Undertaker'];
+
+function charSortKey(effectName) {
+  const m = effectName.match(/^\[([^\]]+)\]/);
+  if (!m) return CHAR_ORDER.length; // non-character effects sort last
+  const idx = CHAR_ORDER.indexOf(m[1]);
+  return idx === -1 ? CHAR_ORDER.length - 1 : idx;
+}
+
 const raw = JSON.parse(readFileSync('data/relic_groups.json', 'utf8'));
 
 const clean = raw
-  .map(g => ({
-    groupName: unescapeHtml(NAME_OVERRIDES[g.compatibilityId] ?? g.groupName),
-    effects: g.effects.map(e => unescapeHtml(e.name)),
-  }))
+  .map(g => {
+    const effects = g.effects.map(e => unescapeHtml(e.name));
+    if (g.compatibilityId === 900) {
+      effects.sort((a, b) => charSortKey(a) - charSortKey(b));
+    }
+    return {
+      groupName: unescapeHtml(NAME_OVERRIDES[g.compatibilityId] ?? g.groupName),
+      effects,
+    };
+  })
   .sort((a, b) => a.groupName.localeCompare(b.groupName));
 
 writeFileSync('data/relic_data.json', JSON.stringify(clean, null, 2));
