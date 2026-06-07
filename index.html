@@ -38,7 +38,7 @@
     #result { margin-top: 1.5rem; font-size: 1.4rem; color: #f0c060; min-height: 2rem; }
     #result.impossible { color: #f06060; font-size: 1rem; }
     .note { font-size: 0.75rem; color: #666; margin-top: 0.4rem; }
-    .group-desc { font-size: 0.73rem; color: #666; margin: 0.05rem 0 0.45rem 0; font-style: italic; line-height: 1.4; }
+    .group-desc { font-size: 0.75rem; color: #888; margin: 0.1rem 0 0.35rem 0; line-height: 1.4; }
     details#methodology { margin-top: 2.5rem; border: 1px solid #333; border-radius: 6px; }
     details#methodology summary { padding: 0.7rem 1rem; cursor: pointer; font-size: 0.85rem; color: #777; user-select: none; list-style: none; }
     details#methodology summary::before { content: '▶ '; font-size: 0.7rem; }
@@ -341,7 +341,7 @@
       }
       const descEl = document.createElement('p');
       descEl.className = 'group-desc';
-      block.append(slotRow, curseRow, descEl);
+      block.append(slotRow, descEl, curseRow);
       slotsContainer.appendChild(block);
       updateAddBtn();
     }
