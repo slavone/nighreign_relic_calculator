@@ -1,0 +1,4880 @@
+[
+  {
+    "compatibilityId": 100,
+    "groupName": "Physical Attack Up",
+    "effects": [
+      {
+        "id": 7001400,
+        "name": "Physical Attack Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001401,
+        "name": "Physical Attack Up +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001402,
+        "name": "Physical Attack Up +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001500,
+        "name": "Magic Attack Power Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001501,
+        "name": "Magic Attack Power Up +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001502,
+        "name": "Magic Attack Power Up +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001600,
+        "name": "Fire Attack Power Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001601,
+        "name": "Fire Attack Power Up +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001602,
+        "name": "Fire Attack Power Up +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001700,
+        "name": "Lightning Attack Power Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001701,
+        "name": "Lightning Attack Power Up +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001702,
+        "name": "Lightning Attack Power Up +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001800,
+        "name": "Holy Attack Power Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001801,
+        "name": "Holy Attack Power Up +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001802,
+        "name": "Holy Attack Power Up +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7030900,
+        "name": "Physical attack power increases after using grease items",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7032200,
+        "name": "Taking attacks improves attack power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7040000,
+        "name": "Improved Initial Standard Attack",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7040100,
+        "name": "Improved Guard Counters",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7040200,
+        "name": "Improved Critical Hits",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7060000,
+        "name": "Attack power increased for each evergaol prisoner defeated",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7060200,
+        "name": "Attack power increased for each Night Invader defeated",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080000,
+        "name": "Improved Attack Power with 3+ Daggers Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080100,
+        "name": "Improved Attack Power with 3+ Straight Swords Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080200,
+        "name": "Improved Attack Power with 3+ Greatswords Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080300,
+        "name": "Improved Attack Power with 3+ Colossal Swords Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080400,
+        "name": "Improved Attack Power with 3+ Curved Swords Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080500,
+        "name": "Improved Attack Power with 3+ Curved Greatswords Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080600,
+        "name": "Improved Attack Power with 3+ Katana Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080700,
+        "name": "Improved Attack Power with 3+ Twinblades Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080800,
+        "name": "Improved Attack Power with 3+ Thrusting Swords Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7080900,
+        "name": "Improved Attack Power with 3+ Heavy Thrusting Swords Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081000,
+        "name": "Improved Attack Power with 3+ Axes Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081100,
+        "name": "Improved Attack Power with 3+ Greataxes Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081200,
+        "name": "Improved Attack Power with 3+ Hammers Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081300,
+        "name": "Improved Attack Power with 3+ Great Hammers Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081400,
+        "name": "Improved Attack Power with 3+ Flails Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081500,
+        "name": "Improved Attack Power with 3+ Spears Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081700,
+        "name": "Improved Attack Power with 3+ Great Spears Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081800,
+        "name": "Improved Attack Power with 3+ Halberds Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7081900,
+        "name": "Improved Attack Power with 3+ Reapers Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7082000,
+        "name": "Improved Attack Power with 3+ Fists Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7082100,
+        "name": "Improved Attack Power with 3+ Claws Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7082200,
+        "name": "Improved Attack Power with 3+ Whips Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7082300,
+        "name": "Improved Attack Power with 3+ Colossal Weapons Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7082400,
+        "name": "Improved Attack Power with 3+ Bows Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7150000,
+        "name": "Guard counter is given a boost based on current HP",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330000,
+        "name": "Improved Dagger Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330100,
+        "name": "Improved Straight Sword Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330200,
+        "name": "Improved Greatsword Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330300,
+        "name": "Improved Colossal Sword Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330400,
+        "name": "Improved Curved Sword Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330500,
+        "name": "Improved Curved Greatsword Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330600,
+        "name": "Improved Katana Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330700,
+        "name": "Improved Twinblade Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330800,
+        "name": "Improved Thrusting Sword Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7330900,
+        "name": "Improved Heavy Thrusting Sword Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331000,
+        "name": "Improved Axe Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331100,
+        "name": "Improved Greataxe Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331200,
+        "name": "Improved Hammer Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331300,
+        "name": "Improved Great Hammer Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331400,
+        "name": "Improved Flail Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331500,
+        "name": "Improved Spear Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331700,
+        "name": "Improved Great Spear Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331800,
+        "name": "Improved Halberd Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7331900,
+        "name": "Improved Reaper Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7332000,
+        "name": "Improved Fist Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7332100,
+        "name": "Improved Claw Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7332200,
+        "name": "Improved Whip Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7332300,
+        "name": "Improved Colossal Weapon Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7332400,
+        "name": "Improved Bow Attack Power",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 200,
+    "groupName": "Starting armament",
+    "effects": [
+      {
+        "id": 7120000,
+        "name": "Starting armament deals magic damage",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7120100,
+        "name": "Starting armament deals fire damage",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7120200,
+        "name": "Starting armament deals lightning damage",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7120300,
+        "name": "Starting armament deals holy damage",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7120400,
+        "name": "Starting armament inflicts frost",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7120500,
+        "name": "Starting armament inflicts poison",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7120600,
+        "name": "Starting armament inflicts blood loss",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 300,
+    "groupName": "Changes compatible armament's",
+    "effects": [
+      {
+        "id": 7122700,
+        "name": "Changes compatible armament's skill to Glintblade\nPhalanx at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7122800,
+        "name": "Changes compatible armament's skill to Gravitas at\nstart of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Raider",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7122900,
+        "name": "Changes compatible armament's skill to Flaming\nStrike at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7123000,
+        "name": "Changes compatible armament's skill to\nEruption at start of expedition",
+        "chars": [
+          "Wylder",
+          "Raider"
+        ]
+      },
+      {
+        "id": 7123100,
+        "name": "Changes compatible armament's skill to Thunderbolt\nat start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7123200,
+        "name": "Changes compatible armament's skill to Lightning\nSlash at start of expedition",
+        "chars": [
+          "Wylder",
+          "Duchess",
+          "Raider",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7123300,
+        "name": "Changes compatible armament's skill to Sacred Blade\nat start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7123400,
+        "name": "Changes compatible armament's skill to Prayerful\nStrike at start of expedition",
+        "chars": [
+          "Raider"
+        ]
+      },
+      {
+        "id": 7123500,
+        "name": "Changes compatible armament's skill to Poisonous\nMist at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7123600,
+        "name": "Changes compatible armament's skill to Poison Moth\nFlight at start of expedition",
+        "chars": [
+          "Duchess",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7123700,
+        "name": "Changes compatible armament's skill to Blood Blade\nat start of expedition",
+        "chars": [
+          "Duchess",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7123800,
+        "name": "Changes compatible armament's skill to Seppuku at\nstart of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7123900,
+        "name": "Changes compatible armament's skill to Chilling Mist\nat start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7124000,
+        "name": "Changes compatible armament's skill to Hoarfrost\nStomp at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7124100,
+        "name": "Changes compatible armament's skill to White\nShadow's Lure at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7124300,
+        "name": "Changes compatible armament's skill to Endure at\nstart of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7124400,
+        "name": "Changes compatible armament's skill to Quickstep at\nstart of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7124500,
+        "name": "Changes compatible armament's skill to Storm Stomp\nat start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7124600,
+        "name": "Changes compatible armament's skill to Determination\nat start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7124700,
+        "name": "Changes compatible armament's skill to Rain of\nArrows at start of expedition",
+        "chars": [
+          "Ironeye"
+        ]
+      },
+      {
+        "id": 7360600,
+        "name": "Changes compatible armament's sorcery to Magic\nGlintblade at start of expedition",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 7360900,
+        "name": "Changes compatible armament's sorcery to Carian\nGreatsword at start of expedition",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 7361200,
+        "name": "Changes compatible armament's sorcery to Night\nShard at start of expedition",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 7361300,
+        "name": "Changes compatible armament's sorcery to Magma\nShot at start of expedition",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 7362100,
+        "name": "Changes compatible armament's sorcery to Briars of\nPunishment at start of expedition",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 7370300,
+        "name": "Changes compatible armament's incantation to\nWrath of Gold at start of expedition",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 7370400,
+        "name": "Changes compatible armament's incantation to\nLightning Spear at start of expedition",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 7370600,
+        "name": "Changes compatible armament's incantation to\nO, Flame! at start of expedition",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 7370900,
+        "name": "Changes compatible armament's incantation to\nBeast Claw at start of expedition",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 7371500,
+        "name": "Changes compatible armament's incantation to\nDragonfire at start of expedition",
+        "chars": [
+          "Revenant"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 800,
+    "groupName": "Improved",
+    "effects": [
+      {
+        "id": 7043200,
+        "name": "Improved Stonedigger Sorcery",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7043300,
+        "name": "Improved Carian Sword Sorcery",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7043400,
+        "name": "Improved Glintblade Sorcery",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7043500,
+        "name": "Improved Invisibility Sorcery",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7043600,
+        "name": "Improved Crystalian sorcery",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7043700,
+        "name": "Improved Gravity Sorcery",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7043800,
+        "name": "Improved Thorn Sorcery",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7044000,
+        "name": "Improved Fundamentalist Incantations",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7044100,
+        "name": "Improved Dragon Cult Incantations",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7044200,
+        "name": "Improved Giants' Flame Incantations",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7044300,
+        "name": "Improved Godslayer Incantations",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7044400,
+        "name": "Improved Bestial Incantations",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7044500,
+        "name": "Improved Frenzied Flame Incantations",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7044600,
+        "name": "Improved Dragon Communion Incantations",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 900,
+    "groupName": "[Wylder] Improved Mind, Reduced Vigor",
+    "effects": [
+      {
+        "id": 6640000,
+        "name": "[Wylder] Improved Mind, Reduced Vigor",
+        "chars": [
+          "Wylder"
+        ]
+      },
+      {
+        "id": 6640100,
+        "name": "[Wylder] Improved Intelligence and Faith, Reduced Strength and Dexterity",
+        "chars": [
+          "Wylder"
+        ]
+      },
+      {
+        "id": 6641000,
+        "name": "[Guardian] Improved Strength and Dexterity, Reduced Vigor",
+        "chars": [
+          "Guardian"
+        ]
+      },
+      {
+        "id": 6641100,
+        "name": "[Guardian] Improved Mind and Faith, Reduced Vigor",
+        "chars": [
+          "Guardian"
+        ]
+      },
+      {
+        "id": 6642000,
+        "name": "[Ironeye] Improved Arcane, Reduced Dexterity",
+        "chars": [
+          "Ironeye"
+        ]
+      },
+      {
+        "id": 6642100,
+        "name": "[Ironeye] Improved Vigor and Strength, Reduced Dexterity",
+        "chars": [
+          "Ironeye"
+        ]
+      },
+      {
+        "id": 6643000,
+        "name": "[Duchess] Improved Vigor and Strength, Reduced Mind",
+        "chars": [
+          "Duchess"
+        ]
+      },
+      {
+        "id": 6643100,
+        "name": "[Duchess] Improved Mind and Faith, Reduced Intelligence",
+        "chars": [
+          "Duchess"
+        ]
+      },
+      {
+        "id": 6644000,
+        "name": "[Raider] Improved Mind and Intelligence, Reduced Vigor and Endurance",
+        "chars": [
+          "Raider"
+        ]
+      },
+      {
+        "id": 6644100,
+        "name": "[Raider] Improved Arcane, Reduced Vigor",
+        "chars": [
+          "Raider"
+        ]
+      },
+      {
+        "id": 6645000,
+        "name": "[Revenant] Improved Vigor and Endurance, Reduced Mind",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 6645100,
+        "name": "[Revenant] Improved Strength, Reduced Faith",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 6646000,
+        "name": "[Recluse] Improved Vigor, Endurance, and Dexterity, Reduced Intelligence and Faith",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 6646100,
+        "name": "[Recluse] Improved Intelligence and Faith, Reduced Mind",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 6647000,
+        "name": "[Executor] Improved Vigor and Endurance, Reduced Arcane",
+        "chars": [
+          "Executor"
+        ]
+      },
+      {
+        "id": 6647100,
+        "name": "[Executor] Improved Dexterity and Arcane, Reduced Vigor",
+        "chars": [
+          "Executor"
+        ]
+      },
+      {
+        "id": 6647200,
+        "name": "[Scholar] Improved Mind, Reduced Vigor",
+        "chars": []
+      },
+      {
+        "id": 6647300,
+        "name": "[Scholar] Improved Endurance and Dexterity, Reduced Intelligence and Arcane",
+        "chars": []
+      },
+      {
+        "id": 6647400,
+        "name": "[Undertaker] Improved Dexterity, Reduced Vigor and Faith",
+        "chars": []
+      },
+      {
+        "id": 6647500,
+        "name": "[Undertaker] Improved Mind and Faith, Reduced Strength",
+        "chars": []
+      },
+      {
+        "id": 7010500,
+        "name": "[Wylder] Art activation spreads fire in area",
+        "chars": [
+          "Wylder"
+        ]
+      },
+      {
+        "id": 7010700,
+        "name": "[Duchess] Successive dagger attack reprises event upon\nnearby enemies",
+        "chars": [
+          "Duchess"
+        ]
+      },
+      {
+        "id": 7010900,
+        "name": "[Revenant] Expend own HP to fully heal nearby allies\nwhen activating Art",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 7011000,
+        "name": "[Guardian] Increased duration for Character Skill",
+        "chars": [
+          "Guardian"
+        ]
+      },
+      {
+        "id": 7011200,
+        "name": "[Revenant] Trigger ghostflame explosion during\nUltimate Art activation",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 7011600,
+        "name": "[Guardian] Creates whirlwind when charging halberd\nattacks",
+        "chars": [
+          "Guardian"
+        ]
+      },
+      {
+        "id": 7011700,
+        "name": "[Executor] Roaring restores HP while Art is active",
+        "chars": [
+          "Executor"
+        ]
+      },
+      {
+        "id": 7012000,
+        "name": "[Guardian] Slowly restores nearby allies' HP\nwhile Art is active",
+        "chars": [
+          "Guardian"
+        ]
+      },
+      {
+        "id": 7020000,
+        "name": "[Wylder] Standard attacks enhanced with fiery\nfollow-ups when using Character Skill (greatsword only)",
+        "chars": [
+          "Wylder"
+        ]
+      },
+      {
+        "id": 7030000,
+        "name": "Improved Poise Near Totem Stela",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7031200,
+        "name": "[Revenant] Strengthens family and allies when Ultimate Art is activated",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 7031300,
+        "name": "[Raider] Damage taken while using Character Skill\nimproves attack power and stamina",
+        "chars": [
+          "Raider"
+        ]
+      },
+      {
+        "id": 7031800,
+        "name": "[Duchess] Become difficult to spot and silence\nfootsteps after landing critical from behind",
+        "chars": [
+          "Duchess"
+        ]
+      },
+      {
+        "id": 7032400,
+        "name": "[Wylder] Art gauge greatly filled when ability is\nactivated",
+        "chars": [
+          "Wylder"
+        ]
+      },
+      {
+        "id": 7032700,
+        "name": "[Duchess] Defeating enemies while Art is active ups\nattack power",
+        "chars": [
+          "Duchess"
+        ]
+      },
+      {
+        "id": 7032800,
+        "name": "[Recluse] Collecting affinity residue activates\nTerra Magica",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 7032900,
+        "name": "[Recluse] Suffer blood loss and increase attack\npower upon Art activation",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 7033200,
+        "name": "[Wylder] +1 additional Character Skill use",
+        "chars": [
+          "Wylder"
+        ]
+      },
+      {
+        "id": 7033400,
+        "name": "[Guardian] Successful guards send out shockwaves while\nability is active",
+        "chars": [
+          "Guardian"
+        ]
+      },
+      {
+        "id": 7034100,
+        "name": "[Recluse] Activating Ultimate Art raises Max HP",
+        "chars": [
+          "Recluse"
+        ]
+      },
+      {
+        "id": 7034400,
+        "name": "[Executor] Character Skill Boosts Attack but Attacking Drains HP",
+        "chars": [
+          "Executor"
+        ]
+      },
+      {
+        "id": 7034500,
+        "name": "[Executor] While Character Skill is active,\nunlocking use of cursed sword restores HP",
+        "chars": [
+          "Executor"
+        ]
+      },
+      {
+        "id": 7034600,
+        "name": "[Ironeye] Art Charge Activation Adds Poison Effect",
+        "chars": [
+          "Ironeye"
+        ]
+      },
+      {
+        "id": 7034700,
+        "name": "[Ironeye] Boosts thrusting counterattacks after executing Art",
+        "chars": [
+          "Ironeye"
+        ]
+      },
+      {
+        "id": 7036200,
+        "name": "[Scholar] Prevent slowing of Character Skill progress",
+        "chars": []
+      },
+      {
+        "id": 7036300,
+        "name": "[Scholar] Allies targeted by Character Skill gain boosted attack",
+        "chars": []
+      },
+      {
+        "id": 7036400,
+        "name": "[Scholar] Continuous damage inflicted on targets threaded by Ultimate Art",
+        "chars": []
+      },
+      {
+        "id": 7036500,
+        "name": "[Scholar] Earn runes for each additional specimen acquired with Character Skill",
+        "chars": []
+      },
+      {
+        "id": 7036800,
+        "name": "[Undertaker] Activating Ultimate Art increases attack power",
+        "chars": []
+      },
+      {
+        "id": 7036900,
+        "name": "[Undertaker] Attack power increased by landing the final blow of a chain attack",
+        "chars": []
+      },
+      {
+        "id": 7037000,
+        "name": "[Undertaker] Physical attacks boosted while assist effect from incantation is active for self",
+        "chars": []
+      },
+      {
+        "id": 7037300,
+        "name": "[Undertaker] Contact with allies restores their HP while Ultimate Art is activated",
+        "chars": []
+      },
+      {
+        "id": 7090300,
+        "name": "Defeating enemies near Totem Stela restores HP",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7220000,
+        "name": "[Revenant] Power up while fighting alongside family",
+        "chars": [
+          "Revenant"
+        ]
+      },
+      {
+        "id": 7270100,
+        "name": "[Ironeye] +1 additional Character Skill use",
+        "chars": [
+          "Ironeye"
+        ]
+      },
+      {
+        "id": 7280000,
+        "name": "[Ironeye] Extends duration of weak point",
+        "chars": [
+          "Ironeye"
+        ]
+      },
+      {
+        "id": 7290000,
+        "name": "[Duchess] Improved Character Skill Attack Power",
+        "chars": [
+          "Duchess"
+        ]
+      },
+      {
+        "id": 7310000,
+        "name": "[Raider] Duration of Ultimate Art extended",
+        "chars": [
+          "Raider"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 6630000,
+    "groupName": "Dormant Power Helps Discover",
+    "effects": [
+      {
+        "id": 6630000,
+        "name": "Dormant Power Helps Discover Daggers",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630100,
+        "name": "Dormant Power Helps Discover Straight Swords",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630200,
+        "name": "Dormant Power Helps Discover Greatswords",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630300,
+        "name": "Dormant Power Helps Discover Colossal Swords",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630400,
+        "name": "Dormant Power Helps Discover Curved Swords",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630500,
+        "name": "Dormant Power Helps Discover Curved Greatswords",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630600,
+        "name": "Dormant Power Helps Discover Katana",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630700,
+        "name": "Dormant Power Helps Discover Twinblades",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630800,
+        "name": "Dormant Power Helps Discover Thrusting Swords",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6630900,
+        "name": "Dormant Power Helps Discover Heavy Thrusting Swords",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631000,
+        "name": "Dormant Power Helps Discover Axes",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631100,
+        "name": "Dormant Power Helps Discover Greataxes",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631200,
+        "name": "Dormant Power Helps Discover Hammers",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631300,
+        "name": "Dormant Power Helps Discover Great Hammers",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631400,
+        "name": "Dormant Power Helps Discover Flails",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631500,
+        "name": "Dormant Power Helps Discover Spears",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631600,
+        "name": "Dormant Power Helps Discover Great Spears",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631700,
+        "name": "Dormant Power Helps Discover Halberds",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631800,
+        "name": "Dormant Power Helps Discover Reapers",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6631900,
+        "name": "Dormant Power Helps Discover Fists",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632000,
+        "name": "Dormant Power Helps Discover Claws",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632100,
+        "name": "Dormant Power Helps Discover Whips",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632200,
+        "name": "Dormant Power Helps Discover Colossal Weapons",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632300,
+        "name": "Dormant Power Helps Discover Bows",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632400,
+        "name": "Dormant Power Helps Discover Greatbows",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632500,
+        "name": "Dormant Power Helps Discover Crossbows",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632600,
+        "name": "Dormant Power Helps Discover Ballistas",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632700,
+        "name": "Dormant Power Helps Discover Small Shields",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632800,
+        "name": "Dormant Power Helps Discover Medium Shields",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6632900,
+        "name": "Dormant Power Helps Discover Greatshields",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6633000,
+        "name": "Dormant Power Helps Discover Staves",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6633100,
+        "name": "Dormant Power Helps Discover Sacred Seals",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 6633200,
+        "name": "Dormant Power Helps Discover Torches",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000000,
+    "groupName": "Vigor",
+    "effects": [
+      {
+        "id": 7000000,
+        "name": "Vigor +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000001,
+        "name": "Vigor +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000002,
+        "name": "Vigor +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000100,
+    "groupName": "Mind",
+    "effects": [
+      {
+        "id": 7000100,
+        "name": "Mind +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000101,
+        "name": "Mind +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000102,
+        "name": "Mind +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000200,
+    "groupName": "Endurance",
+    "effects": [
+      {
+        "id": 7000200,
+        "name": "Endurance +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000201,
+        "name": "Endurance +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000202,
+        "name": "Endurance +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000300,
+    "groupName": "Strength",
+    "effects": [
+      {
+        "id": 7000300,
+        "name": "Strength +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000301,
+        "name": "Strength +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000302,
+        "name": "Strength +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000400,
+    "groupName": "Dexterity",
+    "effects": [
+      {
+        "id": 7000400,
+        "name": "Dexterity +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000401,
+        "name": "Dexterity +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000402,
+        "name": "Dexterity +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000500,
+    "groupName": "Intelligence",
+    "effects": [
+      {
+        "id": 7000500,
+        "name": "Intelligence +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000501,
+        "name": "Intelligence +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000502,
+        "name": "Intelligence +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000600,
+    "groupName": "Faith",
+    "effects": [
+      {
+        "id": 7000600,
+        "name": "Faith +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000601,
+        "name": "Faith +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000602,
+        "name": "Faith +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000700,
+    "groupName": "Arcane",
+    "effects": [
+      {
+        "id": 7000700,
+        "name": "Arcane +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000701,
+        "name": "Arcane +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000702,
+        "name": "Arcane +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000800,
+    "groupName": "Character Skill Cooldown Reduction",
+    "effects": [
+      {
+        "id": 7000800,
+        "name": "Character Skill Cooldown Reduction +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000801,
+        "name": "Character Skill Cooldown Reduction +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000802,
+        "name": "Character Skill Cooldown Reduction +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7000900,
+    "groupName": "Ultimate Art Auto Charge",
+    "effects": [
+      {
+        "id": 7000900,
+        "name": "Ultimate Art Auto Charge +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000901,
+        "name": "Ultimate Art Auto Charge +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7000902,
+        "name": "Ultimate Art Auto Charge +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7001000,
+    "groupName": "Poise",
+    "effects": [
+      {
+        "id": 7001000,
+        "name": "Poise +1",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001001,
+        "name": "Poise +2",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7001002,
+        "name": "Poise +3",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7002600,
+    "groupName": "Magic Damage Negation Up",
+    "effects": [
+      {
+        "id": 7002600,
+        "name": "Magic Damage Negation Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7002700,
+    "groupName": "Fire Damage Negation Up",
+    "effects": [
+      {
+        "id": 7002700,
+        "name": "Fire Damage Negation Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7002800,
+    "groupName": "Lightning Damage Negation Up",
+    "effects": [
+      {
+        "id": 7002800,
+        "name": "Lightning Damage Negation Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7002900,
+    "groupName": "Holy Damage Negation Up",
+    "effects": [
+      {
+        "id": 7002900,
+        "name": "Holy Damage Negation Up",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7003000,
+    "groupName": "Improved Poison Resistance",
+    "effects": [
+      {
+        "id": 7003000,
+        "name": "Improved Poison Resistance",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7003100,
+    "groupName": "Improved Blood Loss Resistance",
+    "effects": [
+      {
+        "id": 7003100,
+        "name": "Improved Blood Loss Resistance",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7003200,
+    "groupName": "Improved Sleep Resistance",
+    "effects": [
+      {
+        "id": 7003200,
+        "name": "Improved Sleep Resistance",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7003300,
+    "groupName": "Improved Death Blight Resistance",
+    "effects": [
+      {
+        "id": 7003300,
+        "name": "Improved Death Blight Resistance",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7003400,
+    "groupName": "Improved Rot Resistance",
+    "effects": [
+      {
+        "id": 7003400,
+        "name": "Improved Rot Resistance",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7003500,
+    "groupName": "Improved Frost Resistance",
+    "effects": [
+      {
+        "id": 7003500,
+        "name": "Improved Frost Resistance",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7003600,
+    "groupName": "Improved Madness Resistance",
+    "effects": [
+      {
+        "id": 7003600,
+        "name": "Improved Madness Resistance",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7005600,
+    "groupName": "Partial HP Restoration upon Post-Damage Attacks",
+    "effects": [
+      {
+        "id": 7005600,
+        "name": "Partial HP Restoration upon Post-Damage Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7010200,
+    "groupName": "Flask Also Heals Allies",
+    "effects": [
+      {
+        "id": 7010200,
+        "name": "Flask Also Heals Allies",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7012200,
+    "groupName": "Slowly restore HP for self and nearby allies when HP\nis low",
+    "effects": [
+      {
+        "id": 7012200,
+        "name": "Slowly restore HP for self and nearby allies when HP\nis low",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7012300,
+    "groupName": "Improved Damage Negation at Low HP",
+    "effects": [
+      {
+        "id": 7012300,
+        "name": "Improved Damage Negation at Low HP",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7030200,
+    "groupName": "HP restored when using medicinal boluses, etc.",
+    "effects": [
+      {
+        "id": 7030200,
+        "name": "HP restored when using medicinal boluses, etc.",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7030600,
+    "groupName": "Successful guarding fills more of the Art gauge",
+    "effects": [
+      {
+        "id": 7030600,
+        "name": "Successful guarding fills more of the Art gauge",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7030700,
+    "groupName": "Draw enemy attention while guarding",
+    "effects": [
+      {
+        "id": 7030700,
+        "name": "Draw enemy attention while guarding",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7030800,
+    "groupName": "Critical hits fill more of the Art gauge",
+    "effects": [
+      {
+        "id": 7030800,
+        "name": "Critical hits fill more of the Art gauge",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7031900,
+    "groupName": "Critical Hits Earn Runes",
+    "effects": [
+      {
+        "id": 7031900,
+        "name": "Critical Hits Earn Runes",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7035100,
+    "groupName": "Critical Hit Boosts Stamina Recovery Speed",
+    "effects": [
+      {
+        "id": 7035100,
+        "name": "Critical Hit Boosts Stamina Recovery Speed",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7040300,
+    "groupName": "Improved Throwing Pot Damage",
+    "effects": [
+      {
+        "id": 7040300,
+        "name": "Improved Throwing Pot Damage",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7040400,
+    "groupName": "Improved Throwing Knife Damage",
+    "effects": [
+      {
+        "id": 7040400,
+        "name": "Improved Throwing Knife Damage",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7040500,
+    "groupName": "Improved Glintstone and Gravity Stone Damage",
+    "effects": [
+      {
+        "id": 7040500,
+        "name": "Improved Glintstone and Gravity Stone Damage",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7050000,
+    "groupName": "Raised stamina recovery for nearby allies, but not\nfor self",
+    "effects": [
+      {
+        "id": 7050000,
+        "name": "Raised stamina recovery for nearby allies, but not\nfor self",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7050100,
+    "groupName": "Items confer effect to all nearby allies",
+    "effects": [
+      {
+        "id": 7050100,
+        "name": "Items confer effect to all nearby allies",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7060100,
+    "groupName": "Max FP increased for each Sorcerer's Rise unlocked",
+    "effects": [
+      {
+        "id": 7060100,
+        "name": "Max FP increased for each Sorcerer's Rise unlocked",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7070000,
+    "groupName": "Treasure marked upon map",
+    "effects": [
+      {
+        "id": 7070000,
+        "name": "Treasure marked upon map",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7082500,
+    "groupName": "Max FP Up with 3+ S",
+    "effects": [
+      {
+        "id": 7082500,
+        "name": "Max FP Up with 3+ Staves Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7082600,
+        "name": "Max FP Up with 3+ Sacred Seals Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7082700,
+    "groupName": "Max HP Up with 3",
+    "effects": [
+      {
+        "id": 7082700,
+        "name": "Max HP Up with 3+ Small Shields Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7082800,
+        "name": "Max HP Up with 3+ Medium Shields Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7082900,
+        "name": "Max HP Up with 3+ Greatshields Equipped",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7090000,
+    "groupName": "Defeating enemies fills more of the Art gauge",
+    "effects": [
+      {
+        "id": 7090000,
+        "name": "Defeating enemies fills more of the Art gauge",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7090100,
+    "groupName": "Defeating enemies restores HP for allies but not for\nself",
+    "effects": [
+      {
+        "id": 7090100,
+        "name": "Defeating enemies restores HP for allies but not for\nself",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7100100,
+    "groupName": "Stamina Recovery upon Landing Attacks",
+    "effects": [
+      {
+        "id": 7100100,
+        "name": "Stamina Recovery upon Landing Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7110000,
+    "groupName": "Increased rune acquisition for self and allies",
+    "effects": [
+      {
+        "id": 7110000,
+        "name": "Increased rune acquisition for self and allies",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7120900,
+    "groupName": "Stonesword Key in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7120900,
+        "name": "Stonesword Key in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121000,
+    "groupName": "Small Pouch in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7121000,
+        "name": "Small Pouch in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121100,
+    "groupName": "Fire Pots in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7121100,
+        "name": "Fire Pots in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121200,
+    "groupName": "Magic Pots in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7121200,
+        "name": "Magic Pots in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121300,
+    "groupName": "Lightning Pots in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7121300,
+        "name": "Lightning Pots in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121400,
+    "groupName": "Holy Water Pots in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7121400,
+        "name": "Holy Water Pots in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121500,
+    "groupName": "Poisonbone Darts in possession at start of\nexpedition",
+    "effects": [
+      {
+        "id": 7121500,
+        "name": "Poisonbone Darts in possession at start of\nexpedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121600,
+    "groupName": "Crystal Darts in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7121600,
+        "name": "Crystal Darts in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121700,
+    "groupName": "Throwing Daggers in possession at start of\nexpedition",
+    "effects": [
+      {
+        "id": 7121700,
+        "name": "Throwing Daggers in possession at start of\nexpedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121800,
+    "groupName": "Glintstone Scraps in possession at start of\nexpedition",
+    "effects": [
+      {
+        "id": 7121800,
+        "name": "Glintstone Scraps in possession at start of\nexpedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7121900,
+    "groupName": "Gravity Stone Chunks in possession at start of\nexpedition",
+    "effects": [
+      {
+        "id": 7121900,
+        "name": "Gravity Stone Chunks in possession at start of\nexpedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7122000,
+    "groupName": "Bewitching Branches in possession at start of\nexpedition",
+    "effects": [
+      {
+        "id": 7122000,
+        "name": "Bewitching Branches in possession at start of\nexpedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7122100,
+    "groupName": "Wraith Calling Bell in possession at start of\nexpedition",
+    "effects": [
+      {
+        "id": 7122100,
+        "name": "Wraith Calling Bell in possession at start of\nexpedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7122200,
+    "groupName": "Fire Grease in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7122200,
+        "name": "Fire Grease in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7122300,
+    "groupName": "Magic Grease in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7122300,
+        "name": "Magic Grease in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7122400,
+    "groupName": "Lightning Grease in possession at start of\nexpedition",
+    "effects": [
+      {
+        "id": 7122400,
+        "name": "Lightning Grease in possession at start of\nexpedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7122500,
+    "groupName": "Holy Grease in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7122500,
+        "name": "Holy Grease in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7122600,
+    "groupName": "Shield Grease in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7122600,
+        "name": "Shield Grease in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7126000,
+    "groupName": "Starlight Shards in possession at start of expedition",
+    "effects": [
+      {
+        "id": 7126000,
+        "name": "Starlight Shards in possession at start of expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7160000,
+    "groupName": "HP Restoration upon Thrusting Counterattack",
+    "effects": [
+      {
+        "id": 7160000,
+        "name": "HP Restoration upon Thrusting Counterattack",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7230000,
+    "groupName": "Rune discount for shop purchases while on expedition",
+    "effects": [
+      {
+        "id": 7230000,
+        "name": "Rune discount for shop purchases while on expedition",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7240000,
+    "groupName": "Improved Poise &amp; Damage Negation When Knocked Back\nby Damage",
+    "effects": [
+      {
+        "id": 7240000,
+        "name": "Improved Poise &amp; Damage Negation When Knocked Back\nby Damage",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7260300,
+    "groupName": "Attack power up when facing",
+    "effects": [
+      {
+        "id": 7260000,
+        "name": "Attack power up when facing poison-afflicted enemy",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7260300,
+        "name": "Attack power up when facing scarlet rot-afflicted\nenemy",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7260400,
+    "groupName": "Attack power up when facing frostbite-afflicted\nenemy",
+    "effects": [
+      {
+        "id": 7260400,
+        "name": "Attack power up when facing frostbite-afflicted\nenemy",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7340000,
+    "groupName": "HP Restoration upon",
+    "effects": [
+      {
+        "id": 7340000,
+        "name": "HP Restoration upon Dagger Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340100,
+        "name": "HP Restoration upon Straight Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340200,
+        "name": "HP Restoration upon Greatsword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340300,
+        "name": "HP Restoration upon Colossal Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340400,
+        "name": "HP Restoration upon Curved Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340500,
+        "name": "HP Restoration upon Curved Greatsword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340600,
+        "name": "HP Restoration upon Katana Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340700,
+        "name": "HP Restoration upon Twinblade Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340800,
+        "name": "HP Restoration upon Thrusting Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7340900,
+        "name": "HP Restoration upon Heavy Thrusting Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341000,
+        "name": "HP Restoration upon Axe Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341100,
+        "name": "HP Restoration upon Greataxe Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341200,
+        "name": "HP Restoration upon Hammer Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341300,
+        "name": "HP Restoration upon Great Hammer Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341400,
+        "name": "HP Restoration upon Flail Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341500,
+        "name": "HP Restoration upon Spear Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341700,
+        "name": "HP Restoration upon Great Spear Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341800,
+        "name": "HP Restoration upon Halberd Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7341900,
+        "name": "HP Restoration upon Reaper Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7342000,
+        "name": "HP Restoration upon Fist Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7342100,
+        "name": "HP Restoration upon Claw Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7342200,
+        "name": "HP Restoration upon Whip Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7342300,
+        "name": "HP Restoration upon Colossal Weapon Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7342400,
+        "name": "HP Restoration upon Bow Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  },
+  {
+    "compatibilityId": 7350000,
+    "groupName": "FP Restoration upon",
+    "effects": [
+      {
+        "id": 7350000,
+        "name": "FP Restoration upon Dagger Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350100,
+        "name": "FP Restoration upon Straight Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350200,
+        "name": "FP Restoration upon Greatsword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350300,
+        "name": "FP Restoration upon Colossal Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350400,
+        "name": "FP Restoration upon Curved Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350500,
+        "name": "FP Restoration upon Curved Greatsword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350600,
+        "name": "FP Restoration upon Katana Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350700,
+        "name": "FP Restoration upon Twinblade Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350800,
+        "name": "FP Restoration upon Thrusting Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7350900,
+        "name": "FP Restoration upon Heavy Thrusting Sword Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351000,
+        "name": "FP Restoration upon Axe Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351100,
+        "name": "FP Restoration upon Greataxe Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351200,
+        "name": "FP Restoration upon Hammer Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351300,
+        "name": "FP Restoration upon Great Hammer Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351400,
+        "name": "FP Restoration upon Flail Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351500,
+        "name": "FP Restoration upon Spear Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351700,
+        "name": "FP Restoration upon Great Spear Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351800,
+        "name": "FP Restoration upon Halberd Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7351900,
+        "name": "FP Restoration upon Reaper Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7352000,
+        "name": "FP Restoration upon Fist Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7352100,
+        "name": "FP Restoration upon Claw Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7352200,
+        "name": "FP Restoration upon Whip Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7352300,
+        "name": "FP Restoration upon Colossal Weapon Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      },
+      {
+        "id": 7352400,
+        "name": "FP Restoration upon Bow Attacks",
+        "chars": [
+          "Wylder",
+          "Guardian",
+          "Ironeye",
+          "Duchess",
+          "Raider",
+          "Revenant",
+          "Recluse",
+          "Executor"
+        ]
+      }
+    ]
+  }
+]
