@@ -206,7 +206,10 @@
       }
 
       const p = calculateProbability(GROUPS, getQuality(), getColorSelected(), slots);
-      resultEl.textContent = 'Probability: ' + (p * 100).toFixed(4) + '%';
+      const pct = p * 100;
+      const pctStr = pct >= 0.00005 ? pct.toFixed(4) + '%' : pct.toExponential(2) + '%';
+      const oneIn = '1 in ' + Math.round(1 / p).toLocaleString();
+      resultEl.textContent = 'Probability: ' + pctStr + ' (' + oneIn + ')';
       resultEl.className = '';
     }
 
