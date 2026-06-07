@@ -52,7 +52,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "+4 Arcane for each Ruin boss defeated"
     },
     {
       "groupName": "Attack Power",
@@ -590,7 +591,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "1.1× damage vs frostbite-afflicted targets"
     },
     {
       "groupName": "Attack Power vs Poison / Rot Afflicted",
@@ -631,7 +633,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "1.1× damage vs poison/rot-afflicted targets"
     },
     {
       "groupName": "Cerulean Crystal Tear in possession at start of expedition",
@@ -940,7 +943,8 @@
           "w": 55,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases stamina recovery by 10/s for 15 seconds"
     },
     {
       "groupName": "Critical Hits Earn Runes",
@@ -951,7 +955,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Gain 600 runes on critical hits"
     },
     {
       "groupName": "Critical hits fill more of the Art gauge",
@@ -968,7 +973,8 @@
           "w": 269,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "+5 to Ultimate Art Gauge on critical hits"
     },
     {
       "groupName": "Defeating enemies fills more of the Art gauge",
@@ -985,7 +991,8 @@
           "w": 269,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "+5 to Ultimate Art Gauge per enemy kill"
     },
     {
       "groupName": "Defeating Enemies Restores HP for Allies",
@@ -996,7 +1003,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Allies recover 20 HP on each enemy kill"
     },
     {
       "groupName": "Dormant Power - Weapon Discovery",
@@ -1193,7 +1201,8 @@
           "w": 31,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Changes preferred weapon class, making it more likely to drop"
     },
     {
       "groupName": "Draw enemy attention while guarding",
@@ -1204,7 +1213,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Increases aggro while blocking (not guaranteed)"
     },
     {
       "groupName": "Fire Damage Negation Up",
@@ -1227,7 +1237,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases fire damage negation (+10%; DON cursed tiers: +15%/+16%)"
     },
     {
       "groupName": "Flask Also Heals Allies",
@@ -1238,7 +1249,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Heals allies for 50% of flask HP in a radius"
     },
     {
       "groupName": "FP Restoration on Attack (by Weapon Type)",
@@ -1387,7 +1399,8 @@
           "w": 10,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Restores 2 FP with continuous attacks"
     },
     {
       "groupName": "Holy Damage Negation Up",
@@ -1410,7 +1423,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases holy damage negation (+10%; DON cursed tiers: +15%/+16%)"
     },
     {
       "groupName": "HP Restoration on Attack (by Weapon Type)",
@@ -1559,7 +1573,8 @@
           "w": 10,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Restores 15 HP with continuous attacks"
     },
     {
       "groupName": "HP Restoration upon Thrusting Counterattack",
@@ -1576,7 +1591,8 @@
           "w": 269,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Restores [MaxHP × 0.025] HP on counterhits"
     },
     {
       "groupName": "HP restored when using medicinal boluses, etc.",
@@ -1593,7 +1609,8 @@
           "w": 55,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Restores 50 HP on consumable use"
     },
     {
       "groupName": "Improved Affinity Damage Negation",
@@ -1616,7 +1633,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Magic/fire/lightning/holy damage negation +6%/+10.5%/+12%"
     },
     {
       "groupName": "Improved Blood Loss Resistance",
@@ -1633,7 +1651,8 @@
           "w": 69,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases blood loss resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Damage Negation at Low HP",
@@ -1644,7 +1663,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "16% damage negation when HP is below 40%"
     },
     {
       "groupName": "Improved Death Blight Resistance",
@@ -1661,7 +1681,8 @@
           "w": 69,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases death blight resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Flask HP Restoration",
@@ -1672,7 +1693,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Increases HP from flasks by 1.1×"
     },
     {
       "groupName": "Improved Frost Resistance",
@@ -1689,7 +1711,8 @@
           "w": 69,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases frost resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Glintstone and Gravity Stone Damage",
@@ -1706,7 +1729,8 @@
           "w": 28,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases stone projectile damage by 1.15×"
     },
     {
       "groupName": "Improved Lightning Damage Negation",
@@ -1746,7 +1770,8 @@
           "w": 69,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases madness resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Magic Damage Negation",
@@ -1797,7 +1822,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Physical damage negation +10.5%/+12%"
     },
     {
       "groupName": "Improved Poise & Damage Negation When Knocked Back",
@@ -1808,7 +1834,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "20% damage negation and 0.8× poise damage taken for 20 seconds"
     },
     {
       "groupName": "Improved Poison Resistance",
@@ -1825,7 +1852,8 @@
           "w": 69,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases poison resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Rot Resistance",
@@ -1842,7 +1870,8 @@
           "w": 69,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases rot resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Sleep Resistance",
@@ -1859,7 +1888,8 @@
           "w": 69,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases sleep resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Throwing Knife Damage",
@@ -1876,7 +1906,8 @@
           "w": 28,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases throwing knife damage by 1.15×"
     },
     {
       "groupName": "Improved Throwing Pot Damage",
@@ -1893,7 +1924,8 @@
           "w": 28,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases throwing pot damage by 1.15×"
     },
     {
       "groupName": "Increased Maximum FP",
@@ -1904,7 +1936,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases maximum FP by 1.15×"
     },
     {
       "groupName": "Increased Maximum HP",
@@ -1915,7 +1948,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases maximum HP by 1.1×"
     },
     {
       "groupName": "Increased Maximum Stamina",
@@ -1926,7 +1960,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Increases maximum stamina by 1.12×"
     },
     {
       "groupName": "Increased rune acquisition for self and allies",
@@ -1937,7 +1972,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "1.035× rune gain for self and allies"
     },
     {
       "groupName": "Items confer effect to all nearby allies",
@@ -1948,7 +1984,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Items used affect nearby allies too"
     },
     {
       "groupName": "Max FP with 3+ Staves / Seals",
@@ -1965,7 +2002,8 @@
           "w": 10,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "+50 Max FP when carrying 3+ staves or seals"
     },
     {
       "groupName": "Max HP per Great Church Boss",
@@ -1976,7 +2014,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Max HP × 1.05 for each Great Church boss defeated"
     },
     {
       "groupName": "Max HP with 3+ Shields",
@@ -1999,7 +2038,8 @@
           "w": 10,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "+200 Max HP when carrying 3+ shields"
     },
     {
       "groupName": "Max Stamina per Camp Boss",
@@ -2010,7 +2050,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Max Stamina × 1.075 for each Camp boss defeated"
     },
     {
       "groupName": "Partial HP Restoration upon Post-Damage Attacks",
@@ -2033,7 +2074,8 @@
           "w": 130,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "Replenishes HP on hit briefly after taking damage"
     },
     {
       "groupName": "Poise",
@@ -2044,7 +2086,8 @@
           "w": 69,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Reduces incoming poise damage by 0.95×/0.9×/0.85×"
     },
     {
       "groupName": "Raised stamina recovery for nearby allies, but not for self",
@@ -2066,7 +2109,8 @@
           "w": 69,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Reduces FP consumption by 0.92×/0.87×/0.84×"
     },
     {
       "groupName": "Rune discount for shop purchases while on expedition",
@@ -2077,7 +2121,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "10%/20% discount at merchants"
     },
     {
       "groupName": "Runes & Discovery per Fort Boss",
@@ -2088,7 +2133,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "+16 discovery, runes × 1.055 for each Fort boss defeated"
     },
     {
       "groupName": "Slowly restore HP for self and nearby allies when HP is low",
@@ -2199,7 +2245,8 @@
           "w": 28,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Increases damage of the specified spell school by 1.12×"
     },
     {
       "groupName": "Stamina Recovery upon Landing Attacks",
@@ -2210,7 +2257,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Restores 2/3 stamina with continuous attacks"
     },
     {
       "groupName": "Stonesword Key in possession at start of expedition",
@@ -2238,7 +2286,8 @@
           "w": 269,
           "hasCurse": true
         }
-      ]
+      ],
+      "desc": "+1 to Ultimate Art Gauge on successful block"
     },
     {
       "groupName": "Treasure marked upon map",
@@ -2249,7 +2298,8 @@
           "w": 55,
           "hasCurse": false
         }
-      ]
+      ],
+      "desc": "Reveals hidden chest locations"
     }
   ],
   "curses": [

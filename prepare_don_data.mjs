@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
+import { DESCRIPTIONS } from './descriptions.mjs';
 
 function unescapeHtml(str) {
   return str.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
@@ -129,7 +130,9 @@ const groups = Object.entries(groupMap)
     const cid = parseInt(compatId);
     const derived = (effects[0]?.name ?? '').replace(/ \+\d+$/, '').replace(/\n/g, ' ');
     const rawGroupName = NAME_OVERRIDES[cid] ?? derived;
-    return { compatId: cid, groupName: unescapeHtml(rawGroupName), effects };
+    const groupName = unescapeHtml(rawGroupName);
+    const desc = DESCRIPTIONS[groupName] || '';
+    return { compatId: cid, groupName, effects, ...(desc && { desc }) };
   })
   .sort((a, b) => a.groupName.localeCompare(b.groupName));
 
@@ -154,7 +157,7 @@ console.log(`Curses: ${curses.length}`);
 const output = {
   wTotal,
   wCurseTotal,
-  groups: groups.map(({ groupName, effects }) => ({ groupName, effects })),
+  groups: groups.map(({ groupName, effects, desc }) => ({ groupName, effects, ...(desc && { desc }) })),
   curses,
 };
 

@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
+import { DESCRIPTIONS } from './descriptions.mjs';
 
 const NAME_OVERRIDES = {
   100:     'Attack Power',
@@ -57,10 +58,9 @@ const clean = raw
       effects.sort((a, b) => charSortKey(a.name) - charSortKey(b.name));
     }
 
-    return {
-      groupName: unescapeHtml(NAME_OVERRIDES[g.compatibilityId] ?? g.groupName),
-      effects,
-    };
+    const groupName = unescapeHtml(NAME_OVERRIDES[g.compatibilityId] ?? g.groupName);
+    const desc = DESCRIPTIONS[groupName] || '';
+    return { groupName, effects, ...(desc && { desc }) };
   })
   .sort((a, b) => a.groupName.localeCompare(b.groupName));
 

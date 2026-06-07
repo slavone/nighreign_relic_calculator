@@ -327,7 +327,8 @@
           "name": "Attack power up when facing scarlet rot-afflicted\nenemy",
           "w": 46
         }
-      ]
+      ],
+      "desc": "1.1× damage vs poison/rot-afflicted targets"
     },
     {
       "groupName": "Bewitching Branches in possession at start of\nexpedition",
@@ -510,7 +511,8 @@
           "name": "Character Skill Cooldown Reduction +3",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Reduces skill cooldown by 0.95×/0.925×/0.9×"
     },
     {
       "groupName": "Critical Hit Boosts Stamina Recovery Speed",
@@ -519,7 +521,8 @@
           "name": "Critical Hit Boosts Stamina Recovery Speed",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Increases stamina recovery by 10/s for 15 seconds"
     },
     {
       "groupName": "Critical Hits Earn Runes",
@@ -528,7 +531,8 @@
           "name": "Critical Hits Earn Runes",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Gain 600 runes on critical hits"
     },
     {
       "groupName": "Critical hits fill more of the Art gauge",
@@ -537,7 +541,8 @@
           "name": "Critical hits fill more of the Art gauge",
           "w": 46
         }
-      ]
+      ],
+      "desc": "+5 to Ultimate Art Gauge on critical hits"
     },
     {
       "groupName": "Crystal Darts in possession at start of expedition",
@@ -555,7 +560,8 @@
           "name": "Defeating enemies fills more of the Art gauge",
           "w": 46
         }
-      ]
+      ],
+      "desc": "+5 to Ultimate Art Gauge per enemy kill"
     },
     {
       "groupName": "Defeating Enemies Restores HP for Allies",
@@ -564,7 +570,8 @@
           "name": "Defeating enemies restores HP for allies but not for\nself",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Allies recover 20 HP on each enemy kill"
     },
     {
       "groupName": "Dexterity",
@@ -714,7 +721,8 @@
           "name": "Dormant Power Helps Discover Sacred Seals",
           "w": 4
         }
-      ]
+      ],
+      "desc": "Changes preferred weapon class, making it more likely to drop"
     },
     {
       "groupName": "Draw enemy attention while guarding",
@@ -723,7 +731,8 @@
           "name": "Draw enemy attention while guarding",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Increases aggro while blocking (not guaranteed)"
     },
     {
       "groupName": "Endurance",
@@ -740,7 +749,8 @@
           "name": "Endurance +3",
           "w": 52
         }
-      ]
+      ],
+      "desc": "+2/+4/+6 Max Stamina"
     },
     {
       "groupName": "Faith",
@@ -766,7 +776,8 @@
           "name": "Fire Damage Negation Up",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases fire damage negation (+10%; DON cursed tiers: +15%/+16%)"
     },
     {
       "groupName": "Fire Grease in possession at start of expedition",
@@ -793,7 +804,8 @@
           "name": "Flask Also Heals Allies",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Heals allies for 50% of flask HP in a radius"
     },
     {
       "groupName": "FP Restoration on Attack (by Weapon Type)",
@@ -894,7 +906,8 @@
           "name": "FP Restoration upon Bow Attacks",
           "w": 9
         }
-      ]
+      ],
+      "desc": "Restores 2 FP with continuous attacks"
     },
     {
       "groupName": "Glintstone Scraps in possession at start of\nexpedition",
@@ -921,7 +934,8 @@
           "name": "Holy Damage Negation Up",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases holy damage negation (+10%; DON cursed tiers: +15%/+16%)"
     },
     {
       "groupName": "Holy Grease in possession at start of expedition",
@@ -1040,7 +1054,8 @@
           "name": "HP Restoration upon Bow Attacks",
           "w": 9
         }
-      ]
+      ],
+      "desc": "Restores 15 HP with continuous attacks"
     },
     {
       "groupName": "HP Restoration upon Thrusting Counterattack",
@@ -1049,7 +1064,8 @@
           "name": "HP Restoration upon Thrusting Counterattack",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Restores [MaxHP × 0.025] HP on counterhits"
     },
     {
       "groupName": "HP restored when using medicinal boluses, etc.",
@@ -1058,7 +1074,8 @@
           "name": "HP restored when using medicinal boluses, etc.",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Restores 50 HP on consumable use"
     },
     {
       "groupName": "Improved Blood Loss Resistance",
@@ -1067,7 +1084,8 @@
           "name": "Improved Blood Loss Resistance",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases blood loss resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Damage Negation at Low HP",
@@ -1076,7 +1094,8 @@
           "name": "Improved Damage Negation at Low HP",
           "w": 46
         }
-      ]
+      ],
+      "desc": "16% damage negation when HP is below 40%"
     },
     {
       "groupName": "Improved Death Blight Resistance",
@@ -1085,7 +1104,8 @@
           "name": "Improved Death Blight Resistance",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases death blight resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Frost Resistance",
@@ -1094,7 +1114,8 @@
           "name": "Improved Frost Resistance",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases frost resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Glintstone and Gravity Stone Damage",
@@ -1103,7 +1124,8 @@
           "name": "Improved Glintstone and Gravity Stone Damage",
           "w": 39
         }
-      ]
+      ],
+      "desc": "Increases stone projectile damage by 1.15×"
     },
     {
       "groupName": "Improved Madness Resistance",
@@ -1112,7 +1134,8 @@
           "name": "Improved Madness Resistance",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases madness resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Poise & Damage Negation When Knocked Back",
@@ -1121,7 +1144,8 @@
           "name": "Improved Poise & Damage Negation When Knocked Back\nby Damage",
           "w": 46
         }
-      ]
+      ],
+      "desc": "20% damage negation and 0.8× poise damage taken for 20 seconds"
     },
     {
       "groupName": "Improved Poison Resistance",
@@ -1130,7 +1154,8 @@
           "name": "Improved Poison Resistance",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases poison resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Rot Resistance",
@@ -1139,7 +1164,8 @@
           "name": "Improved Rot Resistance",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases rot resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Sleep Resistance",
@@ -1148,7 +1174,8 @@
           "name": "Improved Sleep Resistance",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases sleep resistance (+75; DON cursed: +110/+130)"
     },
     {
       "groupName": "Improved Throwing Knife Damage",
@@ -1157,7 +1184,8 @@
           "name": "Improved Throwing Knife Damage",
           "w": 39
         }
-      ]
+      ],
+      "desc": "Increases throwing knife damage by 1.15×"
     },
     {
       "groupName": "Improved Throwing Pot Damage",
@@ -1166,7 +1194,8 @@
           "name": "Improved Throwing Pot Damage",
           "w": 39
         }
-      ]
+      ],
+      "desc": "Increases throwing pot damage by 1.15×"
     },
     {
       "groupName": "Increased rune acquisition for self and allies",
@@ -1175,7 +1204,8 @@
           "name": "Increased rune acquisition for self and allies",
           "w": 46
         }
-      ]
+      ],
+      "desc": "1.035× rune gain for self and allies"
     },
     {
       "groupName": "Intelligence",
@@ -1201,7 +1231,8 @@
           "name": "Items confer effect to all nearby allies",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Items used affect nearby allies too"
     },
     {
       "groupName": "Lightning Damage Negation Up",
@@ -1210,7 +1241,8 @@
           "name": "Lightning Damage Negation Up",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases lightning damage negation (+10%; DON cursed tiers: +15%/+16%)"
     },
     {
       "groupName": "Lightning Grease in possession at start of\nexpedition",
@@ -1237,7 +1269,8 @@
           "name": "Magic Damage Negation Up",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases magic damage negation (+10%; DON cursed tiers: +15%/+16%)"
     },
     {
       "groupName": "Magic Grease in possession at start of expedition",
@@ -1264,7 +1297,8 @@
           "name": "Max FP increased for each Sorcerer's Rise unlocked",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Max FP × 1.18 per Sorcerer's Rise unlocked"
     },
     {
       "groupName": "Max FP with 3+ Staves / Seals",
@@ -1277,7 +1311,8 @@
           "name": "Max FP Up with 3+ Sacred Seals Equipped",
           "w": 9
         }
-      ]
+      ],
+      "desc": "+50 Max FP when carrying 3+ staves or seals"
     },
     {
       "groupName": "Max HP with 3+ Shields",
@@ -1294,7 +1329,8 @@
           "name": "Max HP Up with 3+ Greatshields Equipped",
           "w": 9
         }
-      ]
+      ],
+      "desc": "+200 Max HP when carrying 3+ shields"
     },
     {
       "groupName": "Mind",
@@ -1311,7 +1347,8 @@
           "name": "Mind +3",
           "w": 52
         }
-      ]
+      ],
+      "desc": "+5/+10/+15 Max FP"
     },
     {
       "groupName": "Partial HP Restoration upon Post-Damage Attacks",
@@ -1320,7 +1357,8 @@
           "name": "Partial HP Restoration upon Post-Damage Attacks",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Replenishes HP on hit briefly after taking damage"
     },
     {
       "groupName": "Poise",
@@ -1337,7 +1375,8 @@
           "name": "Poise +3",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Reduces incoming poise damage by 0.95×/0.9×/0.85×"
     },
     {
       "groupName": "Poisonbone Darts in possession at start of\nexpedition",
@@ -1355,7 +1394,8 @@
           "name": "Raised stamina recovery for nearby allies, but not\nfor self",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Increases allies' stamina recovery speed by 4/s"
     },
     {
       "groupName": "Rune discount for shop purchases while on expedition",
@@ -1364,7 +1404,8 @@
           "name": "Rune discount for shop purchases while on expedition",
           "w": 46
         }
-      ]
+      ],
+      "desc": "10%/20% discount at merchants"
     },
     {
       "groupName": "Shield Grease in possession at start of expedition",
@@ -1382,7 +1423,8 @@
           "name": "Slowly restore HP for self and nearby allies when HP\nis low",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Restores HP/s for 50 seconds when HP is below 20%"
     },
     {
       "groupName": "Small Pouch in possession at start of expedition",
@@ -1452,7 +1494,8 @@
           "name": "Improved Dragon Communion Incantations",
           "w": 39
         }
-      ]
+      ],
+      "desc": "Increases damage of the specified spell school by 1.12×"
     },
     {
       "groupName": "Stamina Recovery upon Landing Attacks",
@@ -1461,7 +1504,8 @@
           "name": "Stamina Recovery upon Landing Attacks",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Restores 2/3 stamina with continuous attacks"
     },
     {
       "groupName": "Starlight Shards in possession at start of expedition",
@@ -1503,7 +1547,8 @@
           "name": "Starting armament inflicts blood loss",
           "w": 30
         }
-      ]
+      ],
+      "desc": "Changes starting weapon to deal elemental damage or inflict status"
     },
     {
       "groupName": "Starting Armament Skill",
@@ -1628,7 +1673,8 @@
           "name": "Changes compatible armament's incantation to\nDragonfire at start of expedition",
           "w": 20
         }
-      ]
+      ],
+      "desc": "Changes starting weapon's skill"
     },
     {
       "groupName": "Stonesword Key in possession at start of expedition",
@@ -1663,7 +1709,8 @@
           "name": "Successful guarding fills more of the Art gauge",
           "w": 46
         }
-      ]
+      ],
+      "desc": "+1 to Ultimate Art Gauge on successful block"
     },
     {
       "groupName": "Throwing Daggers in possession at start of\nexpedition",
@@ -1681,7 +1728,8 @@
           "name": "Treasure marked upon map",
           "w": 46
         }
-      ]
+      ],
+      "desc": "Reveals hidden chest locations"
     },
     {
       "groupName": "Ultimate Art Auto Charge",
@@ -1698,7 +1746,8 @@
           "name": "Ultimate Art Auto Charge +3",
           "w": 47
         }
-      ]
+      ],
+      "desc": "Increases ultimate gauge gain by 1.05×/1.075×/1.1×"
     },
     {
       "groupName": "Vigor",
@@ -1715,7 +1764,8 @@
           "name": "Vigor +3",
           "w": 52
         }
-      ]
+      ],
+      "desc": "+20/+40/+60 Max HP"
     },
     {
       "groupName": "Wraith Calling Bell in possession at start of\nexpedition",
