@@ -253,7 +253,8 @@
         },
         {
           "name": "Guard counter is given a boost based on current HP",
-          "w": 46
+          "w": 46,
+          "desc": "Adds HP÷20 flat damage to guard counters"
         },
         {
           "name": "Improved Dagger Attack Power",

@@ -74,6 +74,7 @@ export const EFFECT_DESCRIPTIONS = {
   'Attack power increased for each Night Invader defeated':     '1.07× damage per Night Invader defeated',
 
   // ── Guard Counters ────────────────────────────────────────────────────────
+  'Guard counter is given a boost based on current HP': 'Adds HP÷20 flat damage to guard counters',
   'Improved Guard Counters':    '1.17× guard counter damage',
   'Improved Guard Counters +1': '1.25× guard counter damage',
   'Improved Guard Counters +2': '1.29× guard counter damage',

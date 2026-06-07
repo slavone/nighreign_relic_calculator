@@ -83,7 +83,8 @@
           "id": "7150000",
           "name": "Guard counter is given a boost based on current HP",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "Adds HP÷20 flat damage to guard counters"
         },
         {
           "id": "7001802",
