@@ -57,7 +57,9 @@ for (let i = 1; i < tableLines.length; i++) {
   const cols = row.split(',');
   const tableId = parseInt(cols[0]);
   const effectId = parseInt(cols[3]);
-  if ((tableId === 100 || tableId === 110) && !isNaN(effectId) && effectId > 0) {
+  const weight = parseInt(cols[4]);
+  // weight=-65536 means effective weight 0 (not rollable) — these appear in the table but are excluded
+  if ((tableId === 100 || tableId === 110) && !isNaN(effectId) && effectId > 0 && weight !== -65536) {
     rollablePool.add(effectId);
   }
 }

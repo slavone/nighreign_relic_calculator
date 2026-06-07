@@ -105,26 +105,6 @@
   {
     "groupName": "Character Ability",
     "effects": [
-      "[Wylder] Improved Mind, Reduced Vigor",
-      "[Wylder] Improved Intelligence and Faith, Reduced Strength and Dexterity",
-      "[Guardian] Improved Strength and Dexterity, Reduced Vigor",
-      "[Guardian] Improved Mind and Faith, Reduced Vigor",
-      "[Ironeye] Improved Arcane, Reduced Dexterity",
-      "[Ironeye] Improved Vigor and Strength, Reduced Dexterity",
-      "[Duchess] Improved Vigor and Strength, Reduced Mind",
-      "[Duchess] Improved Mind and Faith, Reduced Intelligence",
-      "[Raider] Improved Mind and Intelligence, Reduced Vigor and Endurance",
-      "[Raider] Improved Arcane, Reduced Vigor",
-      "[Revenant] Improved Vigor and Endurance, Reduced Mind",
-      "[Revenant] Improved Strength, Reduced Faith",
-      "[Recluse] Improved Vigor, Endurance, and Dexterity, Reduced Intelligence and Faith",
-      "[Recluse] Improved Intelligence and Faith, Reduced Mind",
-      "[Executor] Improved Vigor and Endurance, Reduced Arcane",
-      "[Executor] Improved Dexterity and Arcane, Reduced Vigor",
-      "[Scholar] Improved Mind, Reduced Vigor",
-      "[Scholar] Improved Endurance and Dexterity, Reduced Intelligence and Arcane",
-      "[Undertaker] Improved Dexterity, Reduced Vigor and Faith",
-      "[Undertaker] Improved Mind and Faith, Reduced Strength",
       "[Wylder] Art activation spreads fire in area",
       "[Duchess] Successive dagger attack reprises event upon\nnearby enemies",
       "[Revenant] Expend own HP to fully heal nearby allies\nwhen activating Art",
@@ -251,8 +231,7 @@
       "Dormant Power Helps Discover Medium Shields",
       "Dormant Power Helps Discover Greatshields",
       "Dormant Power Helps Discover Staves",
-      "Dormant Power Helps Discover Sacred Seals",
-      "Dormant Power Helps Discover Torches"
+      "Dormant Power Helps Discover Sacred Seals"
     ]
   },
   {
