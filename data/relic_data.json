@@ -1,5 +1,6 @@
 {
   "wTotal": 10046,
+  "wTotalPreDLC": 9294,
   "groups": [
     {
       "groupName": "Arcane",
@@ -529,35 +530,43 @@
         },
         {
           "name": "[Scholar] Prevent slowing of Character Skill progress",
-          "w": 53
+          "w": 53,
+          "dlc": true
         },
         {
           "name": "[Scholar] Allies targeted by Character Skill gain boosted attack",
-          "w": 53
+          "w": 53,
+          "dlc": true
         },
         {
           "name": "[Scholar] Continuous damage inflicted on targets threaded by Ultimate Art",
-          "w": 53
+          "w": 53,
+          "dlc": true
         },
         {
           "name": "[Scholar] Earn runes for each additional specimen acquired with Character Skill",
-          "w": 53
+          "w": 53,
+          "dlc": true
         },
         {
           "name": "[Undertaker] Activating Ultimate Art increases attack power",
-          "w": 53
+          "w": 53,
+          "dlc": true
         },
         {
           "name": "[Undertaker] Attack power increased by landing the final blow of a chain attack",
-          "w": 53
+          "w": 53,
+          "dlc": true
         },
         {
           "name": "[Undertaker] Physical attacks boosted while assist effect from incantation is active for self",
-          "w": 53
+          "w": 53,
+          "dlc": true
         },
         {
           "name": "[Undertaker] Contact with allies restores their HP while Ultimate Art is activated",
-          "w": 53
+          "w": 53,
+          "dlc": true
         },
         {
           "name": "Improved Poise Near Totem Stela",
@@ -665,131 +674,163 @@
       "effects": [
         {
           "name": "Dormant Power Helps Discover Daggers",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Straight Swords",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Greatswords",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Colossal Swords",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Curved Swords",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Curved Greatswords",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Katana",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Twinblades",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Thrusting Swords",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Heavy Thrusting Swords",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Axes",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Greataxes",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Hammers",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Great Hammers",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Flails",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Spears",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Great Spears",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Halberds",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Reapers",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Fists",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Claws",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Whips",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Colossal Weapons",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Bows",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Greatbows",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Crossbows",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Ballistas",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Small Shields",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Medium Shields",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Greatshields",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Staves",
-          "w": 4
+          "w": 4,
+          "dlc": true
         },
         {
           "name": "Dormant Power Helps Discover Sacred Seals",
-          "w": 4
+          "w": 4,
+          "dlc": true
         }
       ]
     },
@@ -1709,43 +1750,53 @@
         },
         {
           "name": "Changes compatible armament's sorcery to Magic\nGlintblade at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's sorcery to Carian\nGreatsword at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's sorcery to Night\nShard at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's sorcery to Magma\nShot at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's sorcery to Briars of\nPunishment at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's incantation to\nWrath of Gold at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's incantation to\nLightning Spear at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's incantation to\nO, Flame! at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's incantation to\nBeast Claw at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         },
         {
           "name": "Changes compatible armament's incantation to\nDragonfire at start of expedition",
-          "w": 20
+          "w": 20,
+          "dlc": true
         }
       ]
     },

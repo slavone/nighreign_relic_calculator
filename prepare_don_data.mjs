@@ -35,6 +35,12 @@ function charSortKey(name) {
   return idx === -1 ? CHAR_ORDER.length - 1 : idx;
 }
 
+// DLC-only effect IDs — not rollable in pre-DLC Deep of Night relics.
+const DLC_EFFECT_IDS = new Set([
+  6623200,  // Greenspill Crystal Tear (DLC XML only)
+  ...Array.from({ length: 33 }, (_, i) => 6630000 + i * 100), // Dormant Power
+]);
+
 // Manual name corrections for effects with wrong or missing names in the XML
 const EFFECT_NAME_OVERRIDES = {
   '6001400': 'Physical Attack Up +3',  // XML says "+4" but weight pattern matches +3 tier
@@ -94,7 +100,8 @@ const addEffect = (eid, w, fromTable2000) => {
   if (!groupMap[compatId].find(e => e.id === eid)) {
     const eName = unescapeHtml(name);
     const desc = EFFECT_DESCRIPTIONS[eName.replace(/\n/g, ' ')] || '';
-    groupMap[compatId].push({ id: eid, name: eName, w, hasCurse, ...(desc && { desc }) });
+    const dlc = DLC_EFFECT_IDS.has(Number(eid));
+    groupMap[compatId].push({ id: eid, name: eName, w, hasCurse, ...(desc && { desc }), ...(dlc && { dlc: true }) });
   }
 };
 
@@ -153,14 +160,20 @@ const wTotal = Object.values(weights2000).reduce((s, w) => s + w, 0)
              + Object.values(weights2100).reduce((s, w) => s + w, 0);
 const wCurseTotal = Object.values(cursePureWeights).reduce((s, w) => s + w, 0);
 
-const namedCount = Object.values(groupMap).flat().length;
-const cursedCount = Object.values(groupMap).flat().filter(e => e.hasCurse).length;
+const allEffects = Object.values(groupMap).flat();
+const dlcWeight = allEffects.filter(e => e.dlc).reduce((s, e) => s + e.w, 0);
+const wTotalPreDLC = wTotal - dlcWeight;
+
+const namedCount = allEffects.length;
+const cursedCount = allEffects.filter(e => e.hasCurse).length;
 console.log(`Named effects: ${namedCount} in ${groups.length} groups`);
 console.log(`Cursed: ${cursedCount}, Uncursed: ${namedCount - cursedCount}`);
 console.log(`Curses: ${curses.length}`);
+console.log(`DLC effects: ${allEffects.filter(e => e.dlc).length}, DLC weight: ${dlcWeight}`);
 
 const output = {
   wTotal,
+  wTotalPreDLC,
   wCurseTotal,
   groups: groups.map(({ groupName, effects }) => ({ groupName, effects })),
   curses,

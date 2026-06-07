@@ -1,5 +1,6 @@
 {
   "wTotal": 19961,
+  "wTotalPreDLC": 18941,
   "wCurseTotal": 2400,
   "groups": [
     {
@@ -789,7 +790,8 @@
           "id": "6623200",
           "name": "Greenspill Crystal Tear in possession at start of expedition",
           "w": 28,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6623100",
@@ -1100,193 +1102,225 @@
           "id": "6631000",
           "name": "Dormant Power Helps Discover Axes",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632600",
           "name": "Dormant Power Helps Discover Ballistas",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632300",
           "name": "Dormant Power Helps Discover Bows",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632000",
           "name": "Dormant Power Helps Discover Claws",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630300",
           "name": "Dormant Power Helps Discover Colossal Swords",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632200",
           "name": "Dormant Power Helps Discover Colossal Weapons",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632500",
           "name": "Dormant Power Helps Discover Crossbows",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630500",
           "name": "Dormant Power Helps Discover Curved Greatswords",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630400",
           "name": "Dormant Power Helps Discover Curved Swords",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630000",
           "name": "Dormant Power Helps Discover Daggers",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631900",
           "name": "Dormant Power Helps Discover Fists",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631400",
           "name": "Dormant Power Helps Discover Flails",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631300",
           "name": "Dormant Power Helps Discover Great Hammers",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631600",
           "name": "Dormant Power Helps Discover Great Spears",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631100",
           "name": "Dormant Power Helps Discover Greataxes",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632400",
           "name": "Dormant Power Helps Discover Greatbows",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632900",
           "name": "Dormant Power Helps Discover Greatshields",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630200",
           "name": "Dormant Power Helps Discover Greatswords",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631700",
           "name": "Dormant Power Helps Discover Halberds",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631200",
           "name": "Dormant Power Helps Discover Hammers",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630900",
           "name": "Dormant Power Helps Discover Heavy Thrusting Swords",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630600",
           "name": "Dormant Power Helps Discover Katana",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632800",
           "name": "Dormant Power Helps Discover Medium Shields",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631800",
           "name": "Dormant Power Helps Discover Reapers",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6633100",
           "name": "Dormant Power Helps Discover Sacred Seals",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632700",
           "name": "Dormant Power Helps Discover Small Shields",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6631500",
           "name": "Dormant Power Helps Discover Spears",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6633000",
           "name": "Dormant Power Helps Discover Staves",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630100",
           "name": "Dormant Power Helps Discover Straight Swords",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630800",
           "name": "Dormant Power Helps Discover Thrusting Swords",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6630700",
           "name": "Dormant Power Helps Discover Twinblades",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         },
         {
           "id": "6632100",
           "name": "Dormant Power Helps Discover Whips",
           "w": 31,
-          "hasCurse": false
+          "hasCurse": false,
+          "dlc": true
         }
       ]
     },

@@ -32,6 +32,17 @@ function charSortKey(effectName) {
   return idx === -1 ? CHAR_ORDER.length - 1 : idx;
 }
 
+// DLC-only effect IDs — not rollable in pre-DLC relics.
+// Scholar/Undertaker abilities and armament sorcery/incantation overrides are DLC XML-only.
+// Dormant Power effects (6630000–6633100) exist in the base XML but were added to the pool in DLC.
+const DLC_EFFECT_IDS = new Set([
+  7036200, 7036300, 7036400, 7036500,  // Scholar abilities
+  7036800, 7036900, 7037000, 7037300,  // Undertaker abilities
+  7360600, 7360900, 7361200, 7361300, 7362100,  // Starting armament sorceries
+  7370300, 7370400, 7370600, 7370900, 7371500,  // Starting armament incantations
+  ...Array.from({ length: 33 }, (_, i) => 6630000 + i * 100), // Dormant Power
+]);
+
 // Use table 110 — all effects confirmed rollable regardless of quality.
 // Table 100 had fewer effects but the significance of the split is unknown; table 110 is the full pool.
 const tableLines = readFileSync('data/AttachEffectTableParam.csv', 'utf8').split('\n');
@@ -52,7 +63,8 @@ const clean = raw
     const effects = g.effects.map(e => {
       const name = unescapeHtml(e.name);
       const desc = EFFECT_DESCRIPTIONS[name.replace(/\n/g, ' ')] || '';
-      return { name, w: weights[e.id] ?? 0, ...(desc && { desc }) };
+      const dlc = DLC_EFFECT_IDS.has(Number(e.id));
+      return { name, w: weights[e.id] ?? 0, ...(desc && { desc }), ...(dlc && { dlc: true }) };
     });
 
     if (g.compatibilityId === 900) {
@@ -68,7 +80,10 @@ const clean = raw
 // 5 unnamed effects exist with combined weight 216).
 const wTotal = 10046;
 
-const output = { wTotal, groups: clean };
+const dlcWeight = clean.flatMap(g => g.effects).filter(e => e.dlc).reduce((s, e) => s + e.w, 0);
+const wTotalPreDLC = wTotal - dlcWeight;
+
+const output = { wTotal, wTotalPreDLC, groups: clean };
 writeFileSync('data/relic_data.json', JSON.stringify(output, null, 2));
 console.log(`Wrote ${clean.length} groups, ${clean.reduce((s, g) => s + g.effects.length, 0)} effects`);
 console.log(`wTotal=${wTotal}`);
