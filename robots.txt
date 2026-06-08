@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://slavone.github.io/nighreign_relic_calculator/sitemap.xml
