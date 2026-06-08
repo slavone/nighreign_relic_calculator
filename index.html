@@ -79,6 +79,10 @@
     .meth-body table { width: 100%; border-collapse: collapse; margin: 0.35rem 0 0.5rem; font-size: 0.8rem; }
     .meth-body th, .meth-body td { text-align: left; padding: 0.3rem 0.5rem; border: 1px solid #333; vertical-align: top; }
     .meth-body th { background: #222; color: #bbb; font-weight: 600; }
+    #color-checkboxes { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin-top: 0.3rem; }
+    #color-checkboxes label { display: flex; align-items: center; gap: 0.25rem; font-size: 0.85rem; color: #ccc; cursor: pointer; font-weight: normal; }
+    #color-checkboxes label:hover { color: #f0c060; }
+    #color-checkboxes input[type="checkbox"] { accent-color: #f0c060; cursor: pointer; }
     .slot { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.3rem; flex-wrap: wrap; }
     .slot select { flex: 1; min-width: 180px; }
     .remove-btn { background: none; border: 1px solid #555; color: #aaa; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
@@ -134,13 +138,12 @@
     </label>
     <label>
       Color
-      <select id="color">
-        <option value="">Any</option>
-        <option value="blue">Blue</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="red">Red</option>
-      </select>
+      <div id="color-checkboxes">
+        <label><input type="checkbox" value="blue"> Blue</label>
+        <label><input type="checkbox" value="yellow"> Yellow</label>
+        <label><input type="checkbox" value="green"> Green</label>
+        <label><input type="checkbox" value="red"> Red</label>
+      </div>
     </label>
   </div>
 
@@ -258,7 +261,7 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
       return preDLC ? src.wTotalPreDLC : src.wTotal;
     }
 
-    function calculateProbabilityV2(quality, colorSelected) {
+    function calculateProbabilityV2(quality, colorFactor) {
       const K = quality;
       const pool = getDesiredPool();
       const m = pool.length;
@@ -306,7 +309,7 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
         // P = perm(K, m) × ef(all m groups, W) × curseFactor
         const cf = curseFactor(pool);
         if (cf === 0) return 0;
-        return perm(K, m) * efGroupExclusion(items(pool), W) * cf * (colorSelected ? 0.25 : 1);
+        return perm(K, m) * efGroupExclusion(items(pool), W) * cf * colorFactor;
       }
 
       // More groups than slots: sum over all K-sized subsets.
@@ -327,10 +330,10 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
         if (cf === 0) continue;
         efSum += efGroupExclusion(items(subset), W) * cf;
       }
-      return perm(K, K) * efSum * (colorSelected ? 0.25 : 1);
+      return perm(K, K) * efSum * colorFactor;
     }
 
-    function calculateProbabilityV1(quality, colorSelected, slots) {
+    function calculateProbabilityV1(quality, colorFactor, slots) {
       const K = quality;
       const n = slots.length;
       if (n === 0 || n > K) return 0;
@@ -364,19 +367,21 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
         const nCurses = DON_DATA.curses.length;
         specificCurseIndices.forEach((_, i) => { curseFactor /= (nCurses - i); });
       }
-      return ff * ef * curseFactor * (colorSelected ? 0.25 : 1);
+      return ff * ef * curseFactor * colorFactor;
     }
 
     // --- UI ---
     const qualitySelect  = document.getElementById('quality');
-    const colorSelect    = document.getElementById('color');
     const resultEl       = document.getElementById('result');
     const dataNote       = document.getElementById('data-note');
     const slotsContainer = document.getElementById('slots-container');
     const addSlotBtn     = document.getElementById('add-slot');
 
-    function getQuality()      { return parseInt(qualitySelect.value); }
-    function getColorSelected(){ return colorSelect.value !== ''; }
+    function getQuality()    { return parseInt(qualitySelect.value); }
+    function getColorFactor() {
+      const n = document.querySelectorAll('#color-checkboxes input:checked').length;
+      return n === 0 ? 1 : n / 4;
+    }
 
     // --- V1 slot UI functions ---
     function getSelectedGroupIndices() {
@@ -689,7 +694,7 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
             return;
           }
         }
-        const p = calculateProbabilityV1(K, getColorSelected(), slots);
+        const p = calculateProbabilityV1(K, getColorFactor(), slots);
         const pct = p * 100;
         const pctStr = pct >= 0.00005 ? pct.toFixed(4) + '%' : pct.toExponential(2) + '%';
         const oneIn = '1 in ' + Math.round(1 / p).toLocaleString();
@@ -701,7 +706,7 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
       // v2 pool mode
       const pool = getDesiredPool();
       if (pool.length === 0) { resultEl.textContent = ''; resultEl.className = ''; return; }
-      const p = calculateProbabilityV2(K, getColorSelected());
+      const p = calculateProbabilityV2(K, getColorFactor());
       if (p === 0) {
         resultEl.textContent = 'Impossible combination';
         resultEl.className = 'impossible';
@@ -798,7 +803,8 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
       }
       updateResult();
     });
-    colorSelect.addEventListener('change', updateResult);
+    document.querySelectorAll('#color-checkboxes input').forEach(cb =>
+      cb.addEventListener('change', updateResult));
     addSlotBtn.addEventListener('click', addSlot);
 
     // Calc mode toggle
