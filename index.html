@@ -836,5 +836,16 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
     updatePoolSummary();
     updateResult();
   </script>
+  <!-- Cloudflare Web Analytics (production only) -->
+  <script>
+    if (location.hostname === 'slavone.github.io') {
+      var s = document.createElement('script');
+      s.defer = true;
+      s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+      s.setAttribute('data-cf-beacon', '{"token": "c48c5dab6bbf44a7a6d0698e8223b544"}');
+      document.head.appendChild(s);
+    }
+  </script>
+  <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
