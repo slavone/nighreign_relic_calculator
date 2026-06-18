@@ -1,4 +1,4 @@
-const SUPPORTED_LANGS = ['jp'];
+const SUPPORTED_LANGS = ['jp', 'kr'];
 
 const I18N = {
   locale: 'en',

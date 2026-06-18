@@ -118,6 +118,7 @@
     <select id="lang-select" style="background:#2a2a2a;color:#aaa;border:1px solid #444;padding:0.25rem 0.5rem;font-size:0.8rem;border-radius:4px;cursor:pointer">
       <option value="en">EN</option>
       <option value="jp">日本語</option>
+      <option value="kr">한국어</option>
     </select>
   </div>
 
@@ -869,7 +870,7 @@ ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el =>
         el.placeholder = I18N.t(el.dataset.i18nPlaceholder, el.placeholder));
       document.getElementById('lang-select').value = I18N.locale;
-      document.documentElement.lang = I18N.locale === 'jp' ? 'ja' : 'en';
+      document.documentElement.lang = I18N.locale === 'jp' ? 'ja' : I18N.locale === 'kr' ? 'ko' : 'en';
       buildPoolUI();
       buildCurseFilterUI();
       updateCurseFilterVisibility();
