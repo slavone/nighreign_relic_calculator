@@ -26,18 +26,24 @@ Game version: **v1.03.2 + DLC1**
 
 ## Probability Formula
 
-For a relic with K available slots selecting n specific effects:
+**Regular pool** — each relic slot draws from its own tier table, so a quality-K relic
+uses K differently-weighted tables:
+
+```
+P = colorFactor × efSlots(tiers[0..K−1], desired effects)
+```
+
+- Slot _i_ draws from tier _i_: tier 0 = table 110 (W=10046), tier 1 = table 210 (W=10058), tier 2 = table 310 (W=10059).
+- `efSlots` sums over which slot each desired effect lands in (using that slot's per-tier weight); unselected slots are free; a used group is removed from later slots; slots are processed tier-ascending.
+- Delicate (1 slot) is exact; the change matters most for high-tier effects on Grand relics.
+
+**Deep of Night pool** (unchanged, single-pool model):
 
 ```
 P = K×(K−1)×…×(K−n+1) × ∏(w_i / W) × (0.25 if specific color) × ∏(1/24 per specific curse)
 ```
 
-Where:
-- `w_i` = weight of effect i in the pool
-- `W` = total weight of all effects in the pool
-- Regular pool: table 110, W = 10046
-- DON pool: tables 2000000 + 2100000, W = 19961
-- Curse pool: table 3000000, 24 curses each with equal weight, W = 2400
+- DON pool: tables 2000000 + 2100000, W = 19961. Curse pool: table 3000000, 24 curses, W = 2400.
 
 ## Regenerating Data
 

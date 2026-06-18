@@ -224,12 +224,13 @@
       <section>
         <h3 data-i18n="meth_h3_formula">Probability Formula</h3>
         <p data-i18n-html="meth_formula_p1">Select any effects you want across any groups to build a <em>desired pool</em>. For a relic with <em>K</em> effect slots, the calculator computes the probability that all K drawn effects come from your pool.</p>
-        <p data-i18n="meth_formula_p2">If the pool spans <em>m</em> groups (m ≥ K), the probability is:</p>
-        <pre>P = K! × Σ_{K-subsets S} ef(S, W) × curseFactor(S) × (color?)</pre>
-        <p data-i18n-html="meth_formula_p3">The sum runs over all C(m, K) ways to pick K groups from the pool. For each K-group subset S, <code>ef(S, W)</code> accounts for group exclusion — once a group is drawn its weight is removed from the pool. Each group's contribution weight equals the sum of its selected effect weights. The ef formula averages over all K! draw orderings:</p>
-        <pre>ef([], W) = 1
-ef([s, …], W) = (1/K) × Σᵢ (wᵢ/W) × ef(rest, W − groupW(Gᵢ))</pre>
-        <p data-i18n="meth_formula_p4">Selecting all effects in a group maximises that group's contribution weight. Multiply the final result by 0.25 if a specific relic color is required.</p>
+        <p data-i18n-html="meth_formula_p2"><strong>Regular pool</strong> — each relic slot draws from its own tier table: slot 1 from table 110, slot 2 from 210, slot 3 from 310 (Delicate uses tier 1 only; Polished tiers 1–2; Grand tiers 1–3). The same effect has a different weight per tier — weak effects are commonest in tier 1, strong effects in tier 3.</p>
+        <pre>P = colorFactor × efSlots(tiers[0..K−1], desired effects)</pre>
+        <p data-i18n-html="meth_formula_p3"><code>efSlots</code> sums over which slot each desired effect lands in (using that slot's weight) and treats unselected slots as free; a used group's weight is removed from later slots. Slots are processed in tier-ascending order:</p>
+        <pre>efSlots([], D) = (D empty) ? 1 : 0
+efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desired d in slot t]
+                   + ((W_t − freeGW_t) / W_t) · efSlots(rest, D)     [slot t free, if slots remain]</pre>
+        <p data-i18n-html="meth_formula_p4">Delicate results are exact. Multiply by 0.25 if a specific relic color is required. <strong>Deep of Night</strong> relics use a single-pool model (no tiers): P = K! × Σ over K-group subsets of ef(S, W) × curseFactor.</p>
       </section>
 
       <section>
