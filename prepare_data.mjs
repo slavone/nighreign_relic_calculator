@@ -43,17 +43,20 @@ const DLC_EFFECT_IDS = new Set([
   ...Array.from({ length: 33 }, (_, i) => 6630000 + i * 100), // Dormant Power
 ]);
 
-// Use table 110 — all effects confirmed rollable regardless of quality.
-// Table 100 had fewer effects but the significance of the split is unknown; table 110 is the full pool.
+// Per-slot tier tables: 110 (slot 0), 210 (slot 1), 310 (slot 2).
+// A quality-K relic draws slot i from tier i. Decode is chanceWeight & 0xFFFF (0 = disabled).
+const TIER_TABLES = [110, 210, 310];
 const tableLines = readFileSync('data/AttachEffectTableParam.csv', 'utf8').split('\n');
-const weights = {};
+const weights = {}; // effectId -> [w110, w210, w310]
 for (let i = 1; i < tableLines.length; i++) {
   const cols = tableLines[i].trim().split(',');
   const tableId = parseInt(cols[0]);
   const effectId = parseInt(cols[3]);
-  const w = parseInt(cols[4]) + 65536;
-  if (tableId !== 110 || w <= 0 || isNaN(effectId)) continue;
-  weights[effectId] = w;
+  const tierIdx = TIER_TABLES.indexOf(tableId);
+  if (tierIdx === -1 || isNaN(effectId)) continue;
+  const w = parseInt(cols[4]) & 0xFFFF; // 0 = disabled
+  if (w <= 0) continue;
+  (weights[effectId] ||= [0, 0, 0])[tierIdx] = w;
 }
 
 const raw = JSON.parse(readFileSync('data/relic_groups.json', 'utf8'));
@@ -64,7 +67,8 @@ const clean = raw
       const name = unescapeHtml(e.name);
       const desc = EFFECT_DESCRIPTIONS[name.replace(/\n/g, ' ')] || '';
       const dlc = DLC_EFFECT_IDS.has(Number(e.id));
-      return { name, w: weights[e.id] ?? 0, ...(desc && { desc }), ...(dlc && { dlc: true }) };
+      const ws = weights[e.id] ?? [0, 0, 0];
+      return { name, ws, ...(desc && { desc }), ...(dlc && { dlc: true }) };
     });
 
     if (g.compatibilityId === 900) {
@@ -72,19 +76,20 @@ const clean = raw
     }
 
     const groupName = unescapeHtml(NAME_OVERRIDES[g.compatibilityId] ?? g.groupName);
-    const groupW = effects.reduce((s, e) => s + e.w, 0);
-    return { groupName, groupW, effects };
+    const groupWs = [0, 1, 2].map(t => effects.reduce((s, e) => s + e.ws[t], 0));
+    return { groupName, groupWs, effects };
   })
   .sort((a, b) => a.groupName.localeCompare(b.groupName));
 
-// True total weight for table 110 (slightly higher than sum of named effects because
-// 5 unnamed effects exist with combined weight 216).
-const wTotal = 10046;
+// True per-tier totals for tables 110/210/310 — slightly higher than the sum of named
+// effects because 5 unnamed effects exist (combined weight 216 in tier 0).
+const wTotals = [10046, 10058, 10059];
 
-const dlcWeight = clean.flatMap(g => g.effects).filter(e => e.dlc).reduce((s, e) => s + e.w, 0);
-const wTotalPreDLC = wTotal - dlcWeight;
+const dlcWeights = [0, 1, 2].map(t =>
+  clean.flatMap(g => g.effects).filter(e => e.dlc).reduce((s, e) => s + e.ws[t], 0));
+const wTotalsPreDLC = wTotals.map((w, t) => w - dlcWeights[t]);
 
-const output = { wTotal, wTotalPreDLC, groups: clean };
+const output = { wTotals, wTotalsPreDLC, groups: clean };
 writeFileSync('data/relic_data.json', JSON.stringify(output, null, 2));
 console.log(`Wrote ${clean.length} groups, ${clean.reduce((s, g) => s + g.effects.length, 0)} effects`);
-console.log(`wTotal=${wTotal}`);
+console.log(`wTotals=${wTotals}, wTotalsPreDLC=${wTotalsPreDLC}`);
