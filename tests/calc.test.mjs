@@ -26,6 +26,27 @@ function calculateProbability(W, quality, colorSelected, slots) {
   return ff * ef * (colorSelected ? 0.25 : 1);
 }
 
+// Per-slot tier recursion (regular pool). Mirrors index.html exactly.
+function efSlots(groups, Ws, tiers, D, used) {
+  if (tiers.length === 0) return D.length === 0 ? 1 : 0;
+  const t = tiers[0], rest = tiers.slice(1);
+  let Wt = Ws[t];
+  for (const gid of used) Wt -= groups[gid].groupWs[t];
+  let total = 0;
+  for (let i = 0; i < D.length; i++) {
+    const d = D[i];
+    if (used.has(d.gid)) continue;
+    const u = new Set(used); u.add(d.gid);
+    total += (d.ws[t] / Wt) * efSlots(groups, Ws, rest, D.filter((_, j) => j !== i), u);
+  }
+  if (rest.length >= D.length) {
+    let freeGW = 0; const seen = new Set();
+    for (const d of D) if (!used.has(d.gid) && !seen.has(d.gid)) { seen.add(d.gid); freeGW += d.groupWs[t]; }
+    total += ((Wt - freeGW) / Wt) * efSlots(groups, Ws, rest, D, used);
+  }
+  return total;
+}
+
 // --- Test harness ---
 let passed = 0, failed = 0;
 function test(label, actual, expected, tolerance = 1e-12) {
@@ -114,6 +135,63 @@ test('same group twice = 0',
 test('no slots = 0',
   calculateProbability(W, 3, false, []),
   0);
+
+// --- efSlots() : per-slot tier model (regular pool) ---
+console.log('\n--- efSlots() ---');
+
+// Reference data: gid 0 = Vigor (+1/+2/+3), gid 1 & 2 = identical-tier flat stats.
+const TG = [
+  { groupWs: [156, 191, 225], effects: [ {ws:[52,47,41]}, {ws:[52,72,92]}, {ws:[52,72,92]} ] },
+  { groupWs: [156, 156, 156], effects: [ {ws:[52,52,52]} ] },
+  { groupWs: [156, 156, 156], effects: [ {ws:[52,52,52]} ] },
+];
+const TWs = [10046, 10058, 10059];
+const tItem = (gid, ei) => ({ ws: TG[gid].effects[ei].ws, groupWs: TG[gid].groupWs, gid });
+const tiersFor = K => Array.from({ length: K }, (_, i) => i);
+
+// Vigor+3 on Grand (1 desired, 2 free): closed form using all three tier weights.
+const v3grand = 52/10046
+  + (10046-156)/10046 * ( 72/10058
+  + (10058-191)/10058 * ( 92/10059 ) );
+test('efSlots Vigor+3 Grand (per-slot tiers)',
+  efSlots(TG, TWs, tiersFor(3), [tItem(0, 2)], new Set()),
+  v3grand, 1e-12);
+
+// Delicate (K=1) is exact = w0/W0 (tier 0 = table 110, no free slot).
+test('efSlots Vigor+3 Delicate = 52/10046',
+  efSlots(TG, TWs, tiersFor(1), [tItem(0, 2)], new Set()),
+  52/10046, 1e-12);
+
+// Weak effect on Grand goes BELOW the old 3*w/W model.
+const v1grand = 52/10046
+  + (10046-156)/10046 * ( 47/10058
+  + (10058-191)/10058 * ( 41/10059 ) );
+test('efSlots Vigor+1 Grand (weak, below old model)',
+  efSlots(TG, TWs, tiersFor(3), [tItem(0, 0)], new Set()),
+  v1grand, 1e-12);
+
+// Identical-tier flat stat on Grand: still applies group exclusion, so < 3*52/W.
+const flatGrand = 52/10046
+  + (10046-156)/10046 * ( 52/10058
+  + (10058-156)/10058 * ( 52/10059 ) );
+test('efSlots identical-tier flat-stat Grand',
+  efSlots(TG, TWs, tiersFor(3), [tItem(1, 0)], new Set()),
+  flatGrand, 1e-12);
+
+// Two flat stats on Grand (n=2, K=3): one free slot.
+test('efSlots two flat-stats Grand (n=2,K=3)',
+  efSlots(TG, TWs, tiersFor(3), [tItem(1, 0), tItem(2, 0)], new Set()),
+  0.000160476969, 1e-9);
+
+// Two flat stats on Polished (n=2, K=2): no free slot, n=K.
+test('efSlots two flat-stats Polished (n=2,K=2)',
+  efSlots(TG, TWs, tiersFor(2), [tItem(1, 0), tItem(2, 0)], new Set()),
+  0.000054365150, 1e-9);
+
+// n > K returns 0 (more desired than slots).
+test('efSlots n=2 on Delicate (K=1) = 0',
+  efSlots(TG, TWs, tiersFor(1), [tItem(1, 0), tItem(2, 0)], new Set()),
+  0, 1e-15);
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 if (failed > 0) process.exit(1);
