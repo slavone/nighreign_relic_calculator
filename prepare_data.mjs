@@ -68,7 +68,7 @@ const clean = raw
       const desc = EFFECT_DESCRIPTIONS[name.replace(/\n/g, ' ')] || '';
       const dlc = DLC_EFFECT_IDS.has(Number(e.id));
       const ws = weights[e.id] ?? [0, 0, 0];
-      return { name, ws, ...(desc && { desc }), ...(dlc && { dlc: true }) };
+      return { id: e.id, name, ws, ...(desc && { desc }), ...(dlc && { dlc: true }) };
     });
 
     if (g.compatibilityId === 900) {
