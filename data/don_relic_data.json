@@ -886,146 +886,218 @@
         {
           "id": "6500000",
           "name": "[Wylder] Character Skill inflicts Blood Loss",
-          "w": 200,
+          "w": 160,
+          "wPre": 200,
           "hasCurse": false
         },
         {
           "id": "6640000",
           "name": "[Wylder] Improved Mind, Reduced Vigor",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6640100",
           "name": "[Wylder] Improved Intelligence and Faith, Reduced Strength and Dexterity",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6500100",
           "name": "[Guardian] Character Skill Boosts Damage Negation of Nearby Allies",
-          "w": 200,
+          "w": 160,
+          "wPre": 200,
           "hasCurse": false
         },
         {
           "id": "6641000",
           "name": "[Guardian] Improved Strength and Dexterity, Reduced Vigor",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6641100",
           "name": "[Guardian] Improved Mind and Faith, Reduced Vigor",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6500200",
           "name": "[Ironeye] Character Skill Inflicts Heavy Poison Damage on Poisoned Enemies",
-          "w": 200,
+          "w": 160,
+          "wPre": 200,
           "hasCurse": false
         },
         {
           "id": "6642000",
           "name": "[Ironeye] Improved Arcane, Reduced Dexterity",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6642100",
           "name": "[Ironeye] Improved Vigor and Strength, Reduced Dexterity",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6500300",
           "name": "[Duchess] Use Character Skill for Brief Invulnerability",
-          "w": 200,
+          "w": 160,
+          "wPre": 200,
           "hasCurse": false
         },
         {
           "id": "6643000",
           "name": "[Duchess] Improved Vigor and Strength, Reduced Mind",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6643100",
           "name": "[Duchess] Improved Mind and Faith, Reduced Intelligence",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6500400",
           "name": "[Raider] Hit With Character Skill to Reduce Enemy Attack Power",
-          "w": 200,
+          "w": 160,
+          "wPre": 200,
           "hasCurse": false
         },
         {
           "id": "6644000",
           "name": "[Raider] Improved Mind and Intelligence, Reduced Vigor and Endurance",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6644100",
           "name": "[Raider] Improved Arcane, Reduced Vigor",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6500500",
           "name": "[Revenant] Increased Max FP upon Ability Activation",
-          "w": 200,
+          "w": 160,
+          "wPre": 200,
           "hasCurse": false
         },
         {
           "id": "6645000",
           "name": "[Revenant] Improved Vigor and Endurance, Reduced Mind",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6645100",
           "name": "[Revenant] Improved Strength, Reduced Faith",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6500600",
           "name": "[Recluse] Collect Affinity Residues to Negate Affinity",
-          "w": 200,
+          "w": 160,
+          "wPre": 200,
           "hasCurse": false
         },
         {
           "id": "6646000",
           "name": "[Recluse] Improved Vigor, Endurance, and Dexterity, Reduced Intelligence and Faith",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6646100",
           "name": "[Recluse] Improved Intelligence and Faith, Reduced Mind",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6500700",
           "name": "[Executor] Slowly Restore HP upon Ability Activation",
-          "w": 200,
+          "w": 160,
+          "wPre": 200,
           "hasCurse": false
         },
         {
           "id": "6647000",
           "name": "[Executor] Improved Vigor and Endurance, Reduced Arcane",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
         },
         {
           "id": "6647100",
           "name": "[Executor] Improved Dexterity and Arcane, Reduced Vigor",
-          "w": 50,
+          "w": 40,
+          "wPre": 50,
           "hasCurse": false
+        },
+        {
+          "id": "6500800",
+          "name": "[Scholar] Reduced FP consumption when using Character Skill on self",
+          "w": 160,
+          "wPre": 0,
+          "hasCurse": false,
+          "dlc": true
+        },
+        {
+          "id": "6647200",
+          "name": "[Scholar] Improved Mind, Reduced Vigor",
+          "w": 40,
+          "wPre": 0,
+          "hasCurse": false,
+          "dlc": true
+        },
+        {
+          "id": "6647300",
+          "name": "[Scholar] Improved Endurance and Dexterity, Reduced Intelligence and Arcane",
+          "w": 40,
+          "wPre": 0,
+          "hasCurse": false,
+          "dlc": true
+        },
+        {
+          "id": "6500900",
+          "name": "[Undertaker] Executing Art readies Character Skill",
+          "w": 160,
+          "wPre": 0,
+          "hasCurse": false,
+          "dlc": true
+        },
+        {
+          "id": "6647400",
+          "name": "[Undertaker] Improved Dexterity, Reduced Vigor and Faith",
+          "w": 40,
+          "wPre": 0,
+          "hasCurse": false,
+          "dlc": true
+        },
+        {
+          "id": "6647500",
+          "name": "[Undertaker] Improved Mind and Faith, Reduced Strength",
+          "w": 40,
+          "wPre": 0,
+          "hasCurse": false,
+          "dlc": true
         }
       ]
     },

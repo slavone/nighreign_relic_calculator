@@ -70,6 +70,12 @@ for (let i = 1; i < csvLines.length; i++) {
 const tableLines = readFileSync('data/AttachEffectTableParam.csv', 'utf8').split('\n');
 const weights2000 = {}, weights2100 = {}, cursePureWeights = {};
 
+// Character-ability weights live only in table 2200000, which packs two weights per entry:
+//   high 16 bits = DLC-active weight, low 16 bits = pre-DLC weight (see the compat-900 pass below).
+// Only the 30 character-ability entries carry a positive raw value; every other entry is
+// negative (standard encoding) and duplicates the corresponding table-2100000 weight.
+const weights2200raw = {};
+
 // Also track regular pool for hasCurse detection
 const regularPool = new Set();
 
@@ -77,7 +83,9 @@ for (let i = 1; i < tableLines.length; i++) {
   const cols = tableLines[i].trim().split(',');
   const tid = parseInt(cols[0]);
   const eid = cols[3];
-  const w = parseInt(cols[4]) + 65536;
+  const raw = parseInt(cols[4]);
+  if (tid === 2200000 && raw > 0) weights2200raw[eid] = raw;
+  const w = raw + 65536;
   if (w <= 0 || isNaN(parseInt(eid))) continue;
   if (tid === 110) regularPool.add(eid);
   if (tid === 2000000) weights2000[eid] = w;
@@ -93,6 +101,7 @@ const addEffect = (eid, w, fromTable2000) => {
   if (!name) return;
   const p = effectParams[eid];
   if (!p || p.isDebuff) return;
+  if (p.compatId === 900) return; // character abilities are weighted in table 2200000 (handled below)
   const hasCurse = fromTable2000 || (!regularPool.has(eid) && / \+\d+$/.test(name));
   const compatId = p.compatId;
   if (!groupMap[compatId]) groupMap[compatId] = [];
@@ -107,6 +116,30 @@ const addEffect = (eid, w, fromTable2000) => {
 
 for (const [eid, w] of Object.entries(weights2000)) addEffect(eid, w, true);
 for (const [eid, w] of Object.entries(weights2100)) addEffect(eid, w, false);
+
+// Character abilities (compat 900): weighted only in table 2200000, which packs two weights
+// per entry. High 16 bits = DLC-active weight (skill 160 / stat 40, all 10 characters incl.
+// Scholar & Undertaker); low 16 bits = pre-DLC weight (skill 200 / stat 50 for the base 8;
+// 0 for the DLC-only Scholar & Undertaker). Both encode the same 2400 total, redistributed
+// across 8 vs 10 characters. `w` holds the DLC weight; `wPre` the pre-DLC weight; effects with
+// wPre === 0 are DLC-only characters (flagged dlc so pre-DLC mode drops them).
+const CHAR_ABILITY_COMPAT = 900;
+for (const [eid, raw] of Object.entries(weights2200raw)) {
+  const wDlc = (raw >> 16) & 0xFFFF;
+  if (wDlc <= 0) continue;
+  const wPre = raw & 0xFFFF;
+  const name = names[eid];
+  if (!name) continue;
+  const p = effectParams[eid];
+  if (!p || p.isDebuff || p.compatId !== CHAR_ABILITY_COMPAT) continue;
+  const eName = unescapeHtml(name);
+  const desc = EFFECT_DESCRIPTIONS[eName.replace(/\n/g, ' ')] || '';
+  const dlc = wPre === 0; // Scholar / Undertaker: absent from the pre-DLC pool
+  (groupMap[CHAR_ABILITY_COMPAT] ||= []).push({
+    id: eid, name: eName, w: wDlc, wPre, hasCurse: false,
+    ...(desc && { desc }), ...(dlc && { dlc: true }),
+  });
+}
 
 // Sort effects within groups
 for (const [compatId, effects] of Object.entries(groupMap)) {
@@ -162,7 +195,10 @@ const wTotal = Object.values(weights2000).reduce((s, w) => s + w, 0)
 const wCurseTotal = Object.values(cursePureWeights).reduce((s, w) => s + w, 0);
 
 const allEffects = Object.values(groupMap).flat();
-const dlcWeight = allEffects.filter(e => e.dlc).reduce((s, e) => s + e.w, 0);
+// Character abilities (identified by `wPre`) are excluded from the subtraction: they contribute
+// the same 2400 total to both pools (wTotal counts the base 8 at their pre-DLC weights; the
+// DLC-only Scholar/Undertaker contribute 0 pre-DLC), so removing them would double-count.
+const dlcWeight = allEffects.filter(e => e.dlc && e.wPre === undefined).reduce((s, e) => s + e.w, 0);
 const wTotalPreDLC = wTotal - dlcWeight;
 
 const namedCount = allEffects.length;
