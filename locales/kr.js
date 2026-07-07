@@ -1491,8 +1491,17 @@ window.__LOCALE_KR__ = {
     "[Scholar] Earn runes for each additional specimen acquired with Character Skill": {
       "name": "[학자]스킬의 표본이 늘 때마다 룬 획득"
     },
+    "[Scholar] Improved Endurance and Dexterity, Reduced Intelligence and Arcane": {
+      "name": "[학자]지구력/기량 상승, 지력/신비 저하"
+    },
+    "[Scholar] Improved Mind, Reduced Vigor": {
+      "name": "[학자]정신력 상승, 생명력 저하"
+    },
     "[Scholar] Prevent slowing of Character Skill progress": {
       "name": "[학자]스킬 진척률 저하를 억제"
+    },
+    "[Scholar] Reduced FP consumption when using Character Skill on self": {
+      "name": "[학자]자신에게 스킬 사용 시 FP 소비 경감"
     },
     "[Undertaker] Activating Ultimate Art increases attack power": {
       "name": "[장의사]아츠 발동 시 공격력 상승"
@@ -1502,6 +1511,15 @@ window.__LOCALE_KR__ = {
     },
     "[Undertaker] Contact with allies restores their HP while Ultimate Art is activated": {
       "name": "[장의사]아츠 발동 시 닿은 아군의 HP 회복"
+    },
+    "[Undertaker] Executing Art readies Character Skill": {
+      "name": "[장의사]아츠 발동 후 스킬 재사용 가능"
+    },
+    "[Undertaker] Improved Dexterity, Reduced Vigor and Faith": {
+      "name": "[장의사]기량 상승, 생명력/신앙 저하"
+    },
+    "[Undertaker] Improved Mind and Faith, Reduced Strength": {
+      "name": "[장의사]정신력/신앙 상승, 근력 저하"
     },
     "[Undertaker] Physical attacks boosted while assist effect from incantation is active for self": {
       "name": "[장의사]기도 사용으로 자신에게 보조 효과 발생 시 물리 공격력 상승"

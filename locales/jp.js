@@ -1074,8 +1074,17 @@ window.__LOCALE_JP__ = {
     "[Scholar] Earn runes for each additional specimen acquired with Character Skill": {
       "name": "【学者】スキルによる標本が増える度、ルーンを取得"
     },
+    "[Scholar] Improved Endurance and Dexterity, Reduced Intelligence and Arcane": {
+      "name": "【学者】持久力／技量上昇、知力／神秘低下"
+    },
+    "[Scholar] Improved Mind, Reduced Vigor": {
+      "name": "【学者】精神力上昇、生命力低下"
+    },
     "[Scholar] Prevent slowing of Character Skill progress": {
       "name": "【学者】スキルの進捗率の低下を抑制"
+    },
+    "[Scholar] Reduced FP consumption when using Character Skill on self": {
+      "name": "【学者】スキルを自身に使用時、ＦＰ消費軽減"
     },
     "[Undertaker] Activating Ultimate Art increases attack power": {
       "name": "【葬儀屋】アーツ発動時、攻撃力上昇"
@@ -1085,6 +1094,15 @@ window.__LOCALE_JP__ = {
     },
     "[Undertaker] Contact with allies restores their HP while Ultimate Art is activated": {
       "name": "【葬儀屋】アーツ発動時、触れた味方のHP回復"
+    },
+    "[Undertaker] Executing Art readies Character Skill": {
+      "name": "【葬儀屋】アーツ発動後、スキル再使用可能"
+    },
+    "[Undertaker] Improved Dexterity, Reduced Vigor and Faith": {
+      "name": "【葬儀屋】技量上昇、生命力／信仰低下"
+    },
+    "[Undertaker] Improved Mind and Faith, Reduced Strength": {
+      "name": "【葬儀屋】精神力／信仰上昇、筋力低下"
     },
     "[Undertaker] Physical attacks boosted while assist effect from incantation is active for self": {
       "name": "【葬儀屋】祈祷で自身に補助効果発生時、物理攻撃力上昇"
