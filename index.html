@@ -554,14 +554,20 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
       const eachSuffix = c.count > 1 ? ' ' + I18N.t('build_each_label', 'each') : '';
       const ownName = I18N.effectName(c.name);
-      const breakdown = c.factors.map(f => `${factorLabel(f, ownName)} ${fmtMul(f.value)}`).join(' × ');
       const nestedRows = (c.nestedWithUniversal || []).map(n => {
         const nCountSuffix = n.count > 1 ? ` ×${n.count}` : '';
         return `<div class="build-axis-nested"><span>${I18N.effectName(n.name)}${nCountSuffix} <em>(${n.condition})</em></span><span>${fmtMul(n.combined)}</span></div>`;
       }).join('');
+      // With nothing else selected on the relevant axis/category, `factors`
+      // is just the effect's own value — showing a "combined" breakdown line
+      // in that case would just repeat the line above verbatim. Only render
+      // it once there's an actual baseline it's combining with.
+      const combinedRow = c.factors.length > 1
+        ? `<div class="build-conditional-combined">${c.factors.map(f => `${factorLabel(f, ownName)} ${fmtMul(f.value)}`).join(' × ')} = ${fmtMul(c.combined)}</div>`
+        : '';
       return `<div class="build-conditional-item">
         <div>${ownName}${countSuffix} — ${fmtMul(c.value)}${eachSuffix} <em>(${c.condition})</em></div>
-        <div class="build-conditional-combined">${breakdown} = ${fmtMul(c.combined)}</div>
+        ${combinedRow}
         ${nestedRows}
       </div>`;
     }

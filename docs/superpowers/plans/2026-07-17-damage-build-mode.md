@@ -1753,3 +1753,24 @@ permanent regression tests in `tests/build.test.mjs` (one general
 stat-isolation case, one for the conditional-resource-entry factor leak).
 3 live-DOM assertions plus 39/39 in the updated `tests/build.test.mjs`
 and 1455/1455 in `tests/effect_multipliers.test.mjs`, all passed.
+
+### Post-plan addendum: Task 18 — suppress the redundant "combined" line when there's no baseline
+
+User-caught clutter: a conditional entry with nothing else selected on its
+axis/category (e.g. "Attack power up when facing poison-afflicted enemy"
+with no other Physical/universal baseline active) rendered its combined
+breakdown line as a verbatim repeat of the line above it — `factors` in
+that case is just the effect's own "self" factor, so `breakdown = value`
+and `combined = value`, producing two identical-looking lines.
+
+`renderConditionalRow` now only emits the `.build-conditional-combined`
+line when `c.factors.length > 1` (i.e. there's a real baseline/category
+factor beyond the effect's own value). Verified against the user's exact
+URL: the poison-afflicted and Madness-in-Vicinity rows (both isolated,
+nothing to combine with) now show no combined line at all, while a
+control case (Katana bonus + a real Physical baseline) still shows its
+breakdown correctly. computeBuildTotals itself is unchanged — this was a
+pure rendering fix. 8 live-DOM assertions across two scenarios, all
+passed; no regression in the existing 39/39 `tests/build.test.mjs` suite
+(the calc engine's `factors` output was already correct — only its
+unconditional rendering was the bug).
