@@ -107,14 +107,13 @@
     .add-effect-btn:disabled { opacity: 0.4; cursor: default; }
     .build-summary-section { border: 1px solid #444; border-radius: 6px; padding: 0.8rem; margin-top: 1rem; }
     .build-summary-title { font-weight: 600; color: #f0c060; margin-bottom: 0.5rem; }
-    .build-summary-caption { font-size: 0.78rem; color: #999; font-style: italic; margin: -0.3rem 0 0.5rem; }
     .build-axis-row { display: flex; justify-content: space-between; padding: 0.15rem 0; font-size: 0.9rem; }
     .build-subgroup { margin-top: 0.6rem; padding-left: 0.6rem; border-left: 2px solid #444; }
     .build-subgroup-title { font-weight: 600; color: #ccc; font-size: 0.85rem; margin-bottom: 0.2rem; }
     .build-conditional-item { padding: 0.3rem 0; font-size: 0.85rem; border-top: 1px solid #333; }
     .build-conditional-combined { color: #f0c060; font-size: 0.8rem; }
+    .build-other-desc { color: #999; font-size: 0.8rem; }
     .build-axis-nested { display: flex; justify-content: space-between; padding: 0.1rem 0 0.1rem 1rem; font-size: 0.78rem; color: #d0a840; }
-    .build-other-list { font-size: 0.8rem; color: #999; margin-top: 0.5rem; }
     .share-btn { background: none; border: 1px dashed #555; color: #aaa; padding: 0.4rem 0.9rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
     .share-btn:hover { border-color: #f0c060; color: #f0c060; }
     #share-status { font-size: 0.8rem; color: #8ac07a; }
@@ -609,15 +608,21 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
 
     function renderBuildOtherList(other) {
       if (other.length === 0) return '';
-      // Show each effect's actual description (already available in the
-      // embedded data — same text shown everywhere else in the app) instead
-      // of a bare name, so a flat/flavor effect like "All Resistances Down"
-      // reads as "All Resistances Down — −80 all status resistances" rather
-      // than leaving the user to guess what it does.
+      // Same box style as a regular conditional-effect item (renderConditionalRow)
+      // — name line + a secondary detail line — so flat/flavor effects (no clean
+      // multiplier) read consistently with the rest of the summary instead of
+      // dropping into a plain bullet list. The detail line shows the effect's
+      // actual description (same text shown everywhere else in the app) so
+      // "All Resistances Down" reads as "−80 all status resistances" instead of
+      // leaving the user to guess what it does.
       const items = other.map(o => {
+        const countSuffix = o.count > 1 ? ` ×${o.count}` : '';
         const desc = I18N.effectDesc(o.name, o.desc);
-        const descSuffix = desc ? ` — ${desc}` : '';
-        return `<li>${I18N.effectName(o.name)}${o.count > 1 ? ` ×${o.count}` : ''}${descSuffix}</li>`;
+        const descRow = desc ? `<div class="build-other-desc">${desc}</div>` : '';
+        return `<div class="build-conditional-item">
+        <div>${I18N.effectName(o.name)}${countSuffix}</div>
+        ${descRow}
+      </div>`;
       }).join('');
       // Labeled the same way as Attack Power's Sorcery/Weapons/etc. subgroups so
       // it's clear WHY these entries show no ×value: they're flat or flavor
@@ -625,7 +630,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       // not a rendering inconsistency with the numeric resource rows above them.
       return `<div class="build-subgroup">
         <div class="build-subgroup-title">${I18N.t('build_other_unclassified_label', 'No Computed Multiplier')}</div>
-        <ul class="build-other-list">${items}</ul>
+        ${items}
       </div>`;
     }
 
@@ -654,28 +659,21 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       </div>`;
 
       // Resource/Recovery and the flat unmapped-effect list are merged into a
-      // single "Other Effects" block. Each resource stat still gets its own
-      // labeled row (never blended into one "Combined" number) — FP
-      // consumption, cooldown, ultimate gauge, max HP/FP/stamina, and flask
-      // healing are different units and multiplying them together would be
-      // meaningless.
+      // single "Other Effects" block. Each resource stat is its own flat row,
+      // exactly like Physical/Magic axis rows under Attack Power — no extra
+      // grouping wrapper — since FP consumption, cooldown, ultimate gauge,
+      // max HP/FP/stamina, and flask healing are different units and must
+      // never be blended into one number.
       const resourceStatRows = Object.entries(r.resourceBaseline)
         .filter(([, v]) => Math.abs(v - 1) > 1e-9)
         .map(([stat, v]) => `<div class="build-axis-row"><span>${BUILD_RESOURCE_STAT_LABELS[stat]()}</span><span>${fmtMul(v)}</span></div>`)
         .join('');
       const resourceActionsHtml = renderBuildSubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.resource.status);
-      const resourceBody = resourceStatRows
-        ? `<div class="build-subgroup">
-        <div class="build-subgroup-title">${I18N.t('build_resource_label', 'Resource Stats')}</div>
-        ${resourceStatRows}
-      </div>${resourceActionsHtml}`
-        : resourceActionsHtml;
       const otherListHtml = renderBuildOtherList(r.other);
-      const otherBody = resourceBody + otherListHtml;
+      const otherBody = resourceStatRows + resourceActionsHtml + otherListHtml;
       const otherHtml = otherBody
         ? `<div class="build-summary-section">
         <div class="build-summary-title">${I18N.t('build_other_title', 'Other Effects')}</div>
-        <div class="build-summary-caption">${I18N.t('build_other_caption', "Effects that don't combine into the Attack Power / Damage Negation totals above.")}</div>
         ${otherBody}
       </div>`
         : '';

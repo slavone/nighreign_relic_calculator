@@ -1873,3 +1873,30 @@ plus two new permanent regression tests (one in
 `tests/effect_multipliers.test.mjs` for the mapping, one in
 `tests/build.test.mjs` for the `desc` passthrough) — 20/40/1466 across
 the three test suites, all passed.
+
+### Post-plan addendum: Task 22 — reverted the caption and Resource grouping; unified curse styling
+
+Immediate user follow-up on Task 21's own additions — three corrections:
+
+1. Removed the "Effects that don't combine into..." caption sentence
+   entirely (and its now-dead `build_other_caption` i18n key / CSS class).
+2. Un-nested the "Resource Stats" subgroup wrapper added in Task 21 —
+   resource stat rows (FP Consumption, Max HP, etc.) are flat rows
+   directly under "Other Effects" again, exactly like Physical/Magic
+   axis rows sit directly under Attack Power with no umbrella label.
+   Removed the now-dead `build_resource_label` i18n key.
+3. Unmapped/flat effects ("All Resistances Down", "Continuous HP Loss")
+   previously rendered as a plain `<ul><li>` bullet list, visually
+   inconsistent with every other effect in the summary. `renderBuildOtherList`
+   now reuses the same `.build-conditional-item` box structure as
+   `renderConditionalRow` (name line + a secondary detail line) — new
+   `.build-other-desc` CSS class holds the description in a muted color
+   distinct from the gold `.build-conditional-combined` class, since it's
+   informational text, not a computed multiplier.
+
+Verified against the same user URL with a fresh `jsdom` instance: caption
+gone, FP Consumption/Max HP render as flat rows with no "Resource Stats"
+wrapper, and the two flat curses render as `.build-conditional-item`
+boxes with their description in `.build-other-desc`. 7 live-DOM
+assertions, no regression in the existing 20/40/1466 test suites (this
+was a pure rendering change — computeBuildTotals untouched).
