@@ -1804,3 +1804,29 @@ other-related renders no "Other Effects" section at all. 7 live-DOM
 assertions across both scenarios, plus 20/39/1455 unchanged across the
 three existing test suites (as expected, since the calc engine wasn't
 touched).
+
+### Post-plan addendum: Task 20 — sub-labels inside the merged "Other Effects" block
+
+User follow-up on Task 19's merge, with a real URL exposing the problem:
+the merged block silently mixed two visual formats with no explanation —
+numeric rows with a `×value` (FP Consumption, Max HP — mapped in
+`effect_multipliers.mjs`) sitting directly above a plain bullet list with
+no numbers at all (flat/flavor effects like "All Resistances Down",
+"Continuous HP Loss" — genuinely unmapped, since they're flat stat
+changes with no clean multiplier). Without any heading, it read as an
+inconsistent bug rather than two intentionally different categories.
+
+Added two sub-labels using the same `.build-subgroup`/`.build-subgroup-title`
+pattern already used for Attack Power's Sorcery/Weapons/Actions
+subgroups: "Resource" above the numeric stat rows + any resource Actions
+subgroup, and "No Computed Multiplier" above the flat unclassified list —
+new i18n keys `build_resource_label` / `build_other_unclassified_label`
+(JP: リソース / 倍率計算不可, KR: 자원 / 배율 계산 불가). `renderBuildOtherList`
+now wraps its own `<ul>` in a labeled subgroup instead of a bare list.
+computeBuildTotals is unchanged — purely a rendering clarity fix.
+
+Verified against the user's exact URL with a fresh `jsdom` instance: the
+Other Effects section now shows "Resource" above the FP Consumption/Max
+HP rows and "No Computed Multiplier" above the three flat-effect bullets,
+in that order. 4 live-DOM assertions, no regression in the existing
+20/39/1455 test suites.

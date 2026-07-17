@@ -609,7 +609,14 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     function renderBuildOtherList(other) {
       if (other.length === 0) return '';
       const items = other.map(o => `<li>${I18N.effectName(o.name)}${o.count > 1 ? ` ×${o.count}` : ''}</li>`).join('');
-      return `<ul class="build-other-list">${items}</ul>`;
+      // Labeled the same way as Attack Power's Sorcery/Weapons/etc. subgroups so
+      // it's clear WHY these entries show no ×value: they're flat or flavor
+      // effects (flat stat bonuses, resistances, DoT) with no clean multiplier,
+      // not a rendering inconsistency with the numeric resource rows above them.
+      return `<div class="build-subgroup">
+        <div class="build-subgroup-title">${I18N.t('build_other_unclassified_label', 'No Computed Multiplier')}</div>
+        <ul class="build-other-list">${items}</ul>
+      </div>`;
     }
 
     function renderBuildSummary() {
@@ -646,8 +653,13 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         .filter(([, v]) => Math.abs(v - 1) > 1e-9)
         .map(([stat, v]) => `<div class="build-axis-row"><span>${BUILD_RESOURCE_STAT_LABELS[stat]()}</span><span>${fmtMul(v)}</span></div>`)
         .join('');
+      const resourceActionsHtml = renderBuildSubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.resource.status);
       const resourceBody = resourceStatRows
-        + renderBuildSubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.resource.status);
+        ? `<div class="build-subgroup">
+        <div class="build-subgroup-title">${I18N.t('build_resource_label', 'Resource')}</div>
+        ${resourceStatRows}
+      </div>${resourceActionsHtml}`
+        : resourceActionsHtml;
       const otherListHtml = renderBuildOtherList(r.other);
       const otherBody = resourceBody + otherListHtml;
       const otherHtml = otherBody
