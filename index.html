@@ -799,14 +799,45 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         row.append(groupSel, effectSel, removeBtn);
         block.append(row);
 
+        // Not every DON effect carries a curse — only ones flagged hasCurse in
+        // the game data do. So the curse picker lives per effect slot and is
+        // only shown once that slot's chosen effect actually has one, mirroring
+        // how Exact Effects mode's updateCurseRow() decides per slot (never
+        // per relic — a Grand relic can have 0, 1, 2, or 3 cursed effects).
+        let curseRow = null, curseSel = null;
+        if (allowCurse) {
+          curseRow = document.createElement('div');
+          curseRow.className = 'curse-row';
+          const curseLabel = document.createElement('span');
+          curseLabel.className = 'curse-label';
+          curseLabel.textContent = I18N.t('curse_label', 'Curse:');
+          curseSel = document.createElement('select');
+          curseSel.className = 'curse-select';
+          curseSel.innerHTML = buildCurseOptionsFor(NaN);
+          curseSel.addEventListener('change', updateResult);
+          curseRow.append(curseLabel, curseSel);
+          block.append(curseRow);
+        }
+
+        function updateCurseRowVisibility() {
+          if (!allowCurse) return;
+          const gIdx = parseInt(groupSel.value);
+          const eIdx = parseInt(effectSel.value);
+          const effect = (!isNaN(gIdx) && !isNaN(eIdx)) ? groups[gIdx]?.effects[eIdx] : null;
+          const hasCurse = !!effect?.hasCurse;
+          curseRow.classList.toggle('visible', hasCurse);
+          if (!hasCurse) curseSel.value = '';
+        }
+
         groupSel.addEventListener('change', () => {
           const gIdx = parseInt(groupSel.value);
           effectSel.innerHTML = buildEffectOptionsForGroups(groups, gIdx, NaN);
           if (!isNaN(gIdx)) effectSel.selectedIndex = 0;
           refreshGroupDropdowns();
+          updateCurseRowVisibility();
           updateResult();
         });
-        effectSel.addEventListener('change', updateResult);
+        effectSel.addEventListener('change', () => { updateCurseRowVisibility(); updateResult(); });
         removeBtn.addEventListener('click', () => {
           block.remove();
           refreshGroupDropdowns();
@@ -820,23 +851,6 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
 
       addBtn.addEventListener('click', addRow);
       panel.append(titleEl, slotsEl, addBtn);
-
-      // Every DON relic carries exactly one curse — this lives on the panel
-      // itself, not per effect slot, so it must NOT go inside addRow().
-      if (allowCurse) {
-        const curseRow = document.createElement('div');
-        curseRow.className = 'curse-row visible';
-        const curseLabel = document.createElement('span');
-        curseLabel.className = 'curse-label';
-        curseLabel.textContent = I18N.t('curse_label', 'Curse:');
-        const curseSel = document.createElement('select');
-        curseSel.className = 'curse-select';
-        curseSel.innerHTML = buildCurseOptionsFor(NaN);
-        curseSel.addEventListener('change', updateResult);
-        curseRow.append(curseLabel, curseSel);
-        panel.append(curseRow);
-      }
-
       updateAddBtnState();
       return panel;
     }
@@ -860,9 +874,9 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     // curses) and returns the flat list computeBuildTotals() expects.
     function getBuildEffects() {
       const effects = [];
-      // Curses live once per relic panel (`.relic-panel`), not per effect slot
-      // — iterate panels, not a flat list of slot-blocks, so each DON relic's
-      // single curse is only read once regardless of how many effect rows it has.
+      // Curses are per effect slot, not per relic — only a slot whose selected
+      // effect actually has hasCurse gets a visible curse-select (see addRow()
+      // in createRelicPanel), so a relic can carry 0 to 3 curses.
       function collectFromPanels(container, pool, includeCurse) {
         const groups = activeBuildPreDLCGroups(pool);
         container.querySelectorAll('.relic-panel').forEach(panel => {
@@ -872,15 +886,15 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
             if (isNaN(gIdx) || isNaN(eIdx)) return;
             const effect = groups[gIdx]?.effects[eIdx];
             if (effect) effects.push({ name: effect.name, mul: effect.mul });
-          });
-          if (includeCurse) {
-            const curseSel = panel.querySelector('.curse-select');
-            const cIdx = parseInt(curseSel?.value);
-            if (!isNaN(cIdx)) {
-              const curse = DON_DATA.curses[cIdx];
-              if (curse) effects.push({ name: curse.name, mul: curse.mul });
+            if (includeCurse) {
+              const curseSel = block.querySelector('.curse-select');
+              const cIdx = parseInt(curseSel?.value);
+              if (!isNaN(cIdx)) {
+                const curse = DON_DATA.curses[cIdx];
+                if (curse) effects.push({ name: curse.name, mul: curse.mul });
+              }
             }
-          }
+          });
         });
       }
       collectFromPanels(document.getElementById('build-regular-relics'), DATA, false);
@@ -1267,17 +1281,20 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           [...container.querySelectorAll('.relic-panel')].forEach((panel, pIdx) => {
             const relicNum = pIdx + 1;
             [...panel.querySelectorAll('.slot-block')].forEach((block, sIdx) => {
+              const slotNum = sIdx + 1;
               const gIdx = parseInt(block.querySelector('.group-select').value);
               const eIdx = parseInt(block.querySelector('.effect-select').value);
-              if (isNaN(gIdx) || isNaN(eIdx)) return;
-              const key = buildEffectKeyFor(groups, gIdx, eIdx);
-              if (key != null) sp.set(`${prefix}${relicNum}s${sIdx + 1}`, key);
+              if (!isNaN(gIdx) && !isNaN(eIdx)) {
+                const key = buildEffectKeyFor(groups, gIdx, eIdx);
+                if (key != null) sp.set(`${prefix}${relicNum}s${slotNum}`, key);
+              }
+              // Curses are per slot (not every DON effect carries one).
+              const curseSel = block.querySelector('.curse-select');
+              if (curseSel && curseSel.value !== '') {
+                const cIdx = parseInt(curseSel.value);
+                if (DON_DATA.curses[cIdx]) sp.set(`${prefix}${relicNum}c${slotNum}`, DON_DATA.curses[cIdx].name);
+              }
             });
-            const curseSel = panel.querySelector('.curse-select');
-            if (curseSel && curseSel.value !== '') {
-              const cIdx = parseInt(curseSel.value);
-              if (DON_DATA.curses[cIdx]) sp.set(`${prefix}${relicNum}c`, DON_DATA.curses[cIdx].name);
-            }
           });
         }
         encodePanel(document.getElementById('build-regular-relics'), 'r', DATA);
@@ -1336,13 +1353,13 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           regular: [1, 2, 3].map(r => [1, 2, 3].map(s => params.get(`r${r}s${s}`))),
           don: [1, 2, 3].map(r => ({
             slots: [1, 2, 3].map(s => params.get(`d${r}s${s}`)),
-            curse: params.get(`d${r}c`),
+            curses: [1, 2, 3].map(s => params.get(`d${r}c${s}`)),
           })),
         },
       };
     }
 
-    function applyRestoredBuildPanel(panel, pool, slotKeys, curseKey) {
+    function applyRestoredBuildPanel(panel, pool, slotKeys, curseKeys) {
       const groups = activeBuildPreDLCGroups(pool);
       const maxIdx = slotKeys.reduce((m, k, i) => k != null ? i + 1 : m, 0);
       const addBtn = panel.querySelector('.add-effect-btn');
@@ -1357,6 +1374,21 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         const effectSel = block.querySelector('.effect-select');
         groupSel.value = found.groupIdx;
         effectSel.innerHTML = buildEffectOptionsForGroups(groups, found.groupIdx, found.effectIdx);
+
+        // Mirrors addRow()'s updateCurseRowVisibility(), done externally since
+        // that closure isn't exposed — only a slot whose restored effect
+        // actually has hasCurse gets its curse-row shown and populated.
+        const curseRow = block.querySelector('.curse-row');
+        if (curseRow) {
+          const effect = groups[found.groupIdx].effects[found.effectIdx];
+          const hasCurse = !!effect.hasCurse;
+          curseRow.classList.toggle('visible', hasCurse);
+          if (hasCurse && curseKeys && curseKeys[i] != null) {
+            const curseSel = block.querySelector('.curse-select');
+            const cIdx = DON_DATA.curses.findIndex(c => c.name === curseKeys[i]);
+            if (cIdx !== -1) curseSel.value = cIdx;
+          }
+        }
       });
       // Re-exclude now-used groups from every row's dropdown (addBtn.click() only
       // knew about rows that existed at click-time, before values were set above).
@@ -1366,13 +1398,6 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         const cur = parseInt(groupSel.value);
         groupSel.innerHTML = buildOptionsForGroups(groups, usedIndices, cur);
       });
-      if (curseKey != null) {
-        const curseSel = panel.querySelector('.curse-select');
-        if (curseSel) {
-          const cIdx = DON_DATA.curses.findIndex(c => c.name === curseKey);
-          if (cIdx !== -1) curseSel.value = cIdx;
-        }
-      }
     }
 
     function applyRestoredSelections(restored) {
@@ -1424,7 +1449,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         if (restored.build.donIncluded) {
           const donPanels = [...document.getElementById('build-don-relics').querySelectorAll('.relic-panel')];
           restored.build.don.forEach((r, i) => {
-            if (donPanels[i]) applyRestoredBuildPanel(donPanels[i], DON_DATA, r.slots, r.curse);
+            if (donPanels[i]) applyRestoredBuildPanel(donPanels[i], DON_DATA, r.slots, r.curses);
           });
         }
       }

@@ -1547,3 +1547,36 @@ correctly → reloading that exact URL restores identical selections →
 unchecking "include DON relics" removes their contribution and sets
 `buildDon=0`. 26/26 assertions passed, plus a 13-assertion regression pass
 confirming v1/v2 mode and runtime mode-switching were unaffected.
+
+---
+
+### Post-plan addendum: Task 12 — curses are per effect slot, not per relic
+
+Both the spec (Scope section) and Task 6 asserted "every DON relic carries
+exactly one curse" and built one curse dropdown per relic panel. This was
+wrong — user-caught. The game data already encodes the truth via each
+effect's `hasCurse` flag (used correctly by Exact Effects mode's
+`updateCurseRow()`, which this feature should have mirrored from the start):
+not every DON effect carries a curse, and a relic can end up with 0, 1, 2,
+or 3 curses depending on which of its up to 3 effects happen to be
+curse-bearing ones.
+
+Fix: moved the curse dropdown from the panel level into `addRow()` itself —
+each effect slot gets its own `.curse-row`, hidden by default and toggled
+visible only when that slot's currently-selected effect has `hasCurse` (via
+a new `updateCurseRowVisibility()` closure, wired to both the group-select
+and effect-select `change` handlers). `getBuildEffects()` now reads curses
+per slot-block instead of once per panel. The URL scheme changed from one
+`d{relic}c` param to per-slot `d{relic}c{slot}` (matching the `r{}s{}` /
+`d{}s{}` effect-key convention, and matching Exact Effects mode's existing
+per-slot `slot{n}c` scheme this should have followed originally).
+
+Verified with a fresh `jsdom` instance against the actual served app: two
+effect slots on one DON relic, one cursed / one not — only the cursed
+slot's curse-row becomes visible; the URL keys the chosen curse to the
+correct slot (`d1c1`, not a bare `d1c`) and never leaks a curse param for
+the non-cursed slot; round-tripping that URL restores the exact same
+per-slot curse-row visibility and selection. 21 assertions across two test
+files, plus a 14-assertion full-scenario regression pass (v1/v2/v3 together,
+including the "Bestial Incantations has no curse" negative case) — all
+passed.

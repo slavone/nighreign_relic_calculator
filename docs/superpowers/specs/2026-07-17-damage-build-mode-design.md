@@ -23,8 +23,12 @@ damage-negation, and resource multipliers.
 - Each panel: up to 3 effect pickers (Grand quality's max), reusing the
   existing group→effect cascading selector. No quality/color fields — this
   mode has no probability to compute.
-- Each DON panel additionally gets one optional curse dropdown (every DON
-  relic carries exactly one curse in-game).
+- Each DON effect slot gets its own optional curse dropdown, shown only when
+  that slot's selected effect actually carries a curse (per the game data's
+  `hasCurse` flag — not every DON effect does, and a relic can carry zero,
+  one, or up to three curses depending on which effects it rolled). This
+  mirrors how Exact Effects mode already decides curse visibility per slot,
+  never per relic — an assumption this spec initially got wrong.
 - Live-updating summary block, computed purely from the selected effects.
 
 ### Non-goals (this iteration)
