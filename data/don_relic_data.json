@@ -3798,6 +3798,7 @@
   ],
   "curses": [
     {
+      "id": "6850200",
       "name": "All Resistances Down",
       "w": 100,
       "desc": "−80 all status resistances",
@@ -3808,6 +3809,7 @@
       }
     },
     {
+      "id": "6850500",
       "name": "Continuous HP Loss",
       "w": 100,
       "desc": "−2 HP/s",
@@ -3818,6 +3820,7 @@
       }
     },
     {
+      "id": "6851200",
       "name": "Lower Attack When Below Max HP",
       "w": 100,
       "desc": "0.915× damage when HP below 85%",
@@ -3833,6 +3836,7 @@
       }
     },
     {
+      "id": "6851700",
       "name": "Near Death Reduces Max HP",
       "w": 100,
       "desc": "0.75× max HP for 60s after being downed",
@@ -3846,6 +3850,7 @@
       }
     },
     {
+      "id": "6851300",
       "name": "Poison Buildup When Below Max HP",
       "w": 100,
       "desc": "2 poison buildup per 0.22s when HP below 85%",
@@ -3857,6 +3862,7 @@
       }
     },
     {
+      "id": "6850700",
       "name": "Reduced Damage Negation After Evading",
       "w": 100,
       "desc": "−45% damage negation right after rolling",
@@ -3872,6 +3878,7 @@
       }
     },
     {
+      "id": "6850900",
       "name": "Reduced Damage Negation for Flask Usages",
       "w": 100,
       "desc": "−45% damage negation while using flasks",
@@ -3887,6 +3894,7 @@
       }
     },
     {
+      "id": "6830100",
       "name": "Reduced Dexterity and Faith",
       "w": 100,
       "desc": "−3 Dexterity and Faith",
@@ -3897,6 +3905,7 @@
       }
     },
     {
+      "id": "6830300",
       "name": "Reduced Faith and Strength",
       "w": 100,
       "desc": "−3 Faith and Strength",
@@ -3907,6 +3916,7 @@
       }
     },
     {
+      "id": "6840100",
       "name": "Reduced Flask HP Restoration",
       "w": 100,
       "desc": "0.85× HP from flasks",
@@ -3918,6 +3928,7 @@
       }
     },
     {
+      "id": "6830200",
       "name": "Reduced Intelligence and Dexterity",
       "w": 100,
       "desc": "−3 Intelligence and Dexterity",
@@ -3928,6 +3939,7 @@
       }
     },
     {
+      "id": "6840000",
       "name": "Reduced Rune Acquisition",
       "w": 100,
       "desc": "0.9× rune gain",
@@ -3939,6 +3951,7 @@
       }
     },
     {
+      "id": "6830000",
       "name": "Reduced Strength and Intelligence",
       "w": 100,
       "desc": "−3 Strength and Intelligence",
@@ -3949,16 +3962,19 @@
       }
     },
     {
+      "id": "6830400",
       "name": "Reduced Vigor and Arcane",
       "w": 100,
       "desc": "−3 Vigor and Arcane (−60 HP)"
     },
     {
+      "id": "6850800",
       "name": "Repeated Evasions Lower Damage Negation",
       "w": 100,
       "desc": "−23%/−35% damage negation for 15s on repeated rolls"
     },
     {
+      "id": "6851400",
       "name": "Rot Buildup When Below Max HP",
       "w": 100,
       "desc": "2 rot buildup per 0.24s when HP below 85%",
@@ -3970,6 +3986,7 @@
       }
     },
     {
+      "id": "6820300",
       "name": "Taking Damage Causes Blood Loss Buildup",
       "w": 100,
       "desc": "Taking damage inflicts 44 blood loss buildup",
@@ -3980,6 +3997,7 @@
       }
     },
     {
+      "id": "6820600",
       "name": "Taking Damage Causes Death Buildup",
       "w": 100,
       "desc": "Taking damage inflicts 32 death blight buildup",
@@ -3990,6 +4008,7 @@
       }
     },
     {
+      "id": "6820200",
       "name": "Taking Damage Causes Frost Buildup",
       "w": 100,
       "desc": "Taking damage inflicts 44 frost buildup",
@@ -4000,6 +4019,7 @@
       }
     },
     {
+      "id": "6820400",
       "name": "Taking Damage Causes Madness Buildup",
       "w": 100,
       "desc": "Taking damage inflicts 40 madness buildup",
@@ -4010,6 +4030,7 @@
       }
     },
     {
+      "id": "6820000",
       "name": "Taking Damage Causes Poison Buildup",
       "w": 100,
       "desc": "Taking damage inflicts 52 poison buildup",
@@ -4020,6 +4041,7 @@
       }
     },
     {
+      "id": "6820100",
       "name": "Taking Damage Causes Rot Buildup",
       "w": 100,
       "desc": "Taking damage inflicts 44 rot buildup",
@@ -4030,6 +4052,7 @@
       }
     },
     {
+      "id": "6820500",
       "name": "Taking Damage Causes Sleep Buildup",
       "w": 100,
       "desc": "Taking damage inflicts 40 sleep buildup",
@@ -4040,6 +4063,7 @@
       }
     },
     {
+      "id": "6840200",
       "name": "Ultimate Art Charging Impaired",
       "w": 100,
       "desc": "0.85× ultimate gauge gain",

@@ -2002,3 +2002,33 @@ list; the v1/v2 curse *filter* (a different, unrelated dropdown) still
 shows "Any curse" untouched. 6 live-DOM assertions across two test files,
 no regression in the existing 20/47/1777 test suites (calc engine
 untouched — this was UI-only).
+
+### Post-plan addendum: Task 26 — curses encoded by stable id, not name, in share links
+
+User-caught inconsistency: regular/DON relic effects have always used
+their stable game-data `id` in share-link URLs (`effectKeyFor`/
+`findEffectByKey`), but curses used their English name text instead —
+the one exception to an otherwise-consistent scheme, across all three
+modes (v1's `slot{n}c`, v2's `curse` filter param, v3's `d{relic}c{slot}`).
+
+Curses actually have a stable id available — table 3000000's effect id,
+already read into `eid` inside `prepare_don_data.mjs`'s curse-building
+loop, just never attached to the curse object the way regular effects'
+`id` field already is. Added `id: eid` there, regenerated
+`data/don_relic_data.json`, re-embedded. `findCurseIndexByName` became
+`findCurseIndexById` (matches by id, with a name-match fallback so any
+share link generated before this change — including the exact style of
+URL the user had been pasting all session — still restores correctly).
+All three encode sites (`sp.append('curse', ...)`, `sp.set('slot'+n+'c',
+...)`, `sp.set(\`${prefix}${relicNum}c${slotNum}\`, ...)`) now write
+`.id` instead of `.name`.
+
+Verified with a fresh `jsdom` instance across all three modes: a v3 URL
+built from the user's exact old-style (name-based) params still resolves
+its curses correctly (backward-compat fallback), and the freshly
+regenerated share link for the same build now encodes curses as numeric
+ids; round-tripping that new-style URL restores correctly; v1's
+`slot1c` and v2's curse-filter `curse` params both now emit numeric ids
+too. 8 live-DOM assertions, plus two new permanent regression checks in
+`tests/effect_multipliers.test.mjs` (every curse has an id; ids are
+unique) — 20/47/1779 across the three test suites, all passed.

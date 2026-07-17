@@ -181,5 +181,12 @@ const donCurse = donData.curses.find(c => c.name === 'Reduced Damage Negation Af
 check('regenerated data/don_relic_data.json curse list has the current group field',
   donCurse && JSON.stringify(donCurse.mul) === JSON.stringify(EFFECT_MULTIPLIERS['Reduced Damage Negation After Evading']));
 
+// User-caught gap: curses were the only relic-effect list encoded by name in
+// share-link URLs (regular/DON effects always used their stable game-data
+// id) — this locks in that every curse carries an id, and that ids are
+// unique, so a future data regeneration can't silently drop this again.
+check('every curse in data/don_relic_data.json has an id', donData.curses.every(c => c.id !== undefined));
+check('curse ids are unique', new Set(donData.curses.map(c => c.id)).size === donData.curses.length);
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);

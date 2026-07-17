@@ -187,7 +187,7 @@ const curses = Object.entries(cursePureWeights)
     const name = unescapeHtml(names[eid] || '(unknown)');
     const desc = CURSE_DESCRIPTIONS[name] || '';
     const mul = EFFECT_MULTIPLIERS[name];
-    return { name, w, ...(desc && { desc }), ...(mul && { mul }) };
+    return { id: eid, name, w, ...(desc && { desc }), ...(mul && { mul }) };
   })
   .filter(c => c.name !== '(unknown)')
   .sort((a, b) => a.name.localeCompare(b.name));
