@@ -53,6 +53,7 @@ window.__LOCALE_KR__ = {
     "filter_groups": "그룹 필터…",
     "select_group_placeholder": "— 그룹 선택 —",
     "select_effect_placeholder": "— 효과 선택 —",
+    "select_curse_placeholder": "— 저주 선택 —",
     "remove": "제거",
     "curse_label": "저주:",
     "select_all": "전체 선택",

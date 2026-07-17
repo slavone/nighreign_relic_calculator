@@ -1969,3 +1969,36 @@ As a side confirmation, the same run also showed a real duplicate
 relics) correctly merging into one `×2` entry, nested under all five
 elemental Damage Negation baselines. 8 live-DOM assertions, no regression
 in the existing 20/47/1777 test suites (pure rendering simplification).
+
+### Post-plan addendum: Task 25 — curse-dropdown fixes (v3 only)
+
+Two related user requests about the per-slot curse `<select>` in Effect
+Multipliers mode:
+
+1. Remove "Any curse" from the v3 dropdown — it's a leftover from the
+   v1/v2 probability-filter curse dropdown (`buildCurseOptions`, unrelated
+   and untouched) where "any" is a meaningful filter state. In build mode
+   you're recording the ONE specific curse actually on your relic, so
+   "any" never made sense. `buildCurseOptionsFor` (the v3-only builder)
+   now uses a neutral "— select curse —" placeholder, matching the
+   existing group/effect placeholder style. New `select_curse_placeholder`
+   i18n key (JP/KR included).
+2. Prevent picking the same curse twice on one relic (a real relic can
+   only carry each curse once). `buildCurseOptionsFor` gained a
+   `usedIndices` parameter (mirroring `buildOptionsForGroups`'s existing
+   group-exclusion pattern) that hides curses already chosen on a sibling
+   slot of the same panel, unless it's that slot's own current value.
+   `createRelicPanel` gained `usedCurseIndices()` / `refreshCurseDropdowns()`
+   helpers, wired into the curse-select's own `change` handler, the
+   group/effect visibility-recompute path (so switching to a non-cursed
+   effect frees the curse back up), and the remove-row handler (so
+   deleting a slot frees its curse for the remaining slots).
+
+Verified with a fresh `jsdom` instance: the v3 dropdown no longer offers
+"Any curse" (shows the new placeholder instead); picking a curse on one
+slot removes it from a sibling slot's options on the same relic; removing
+the slot that held a curse releases it back into the sibling's option
+list; the v1/v2 curse *filter* (a different, unrelated dropdown) still
+shows "Any curse" untouched. 6 live-DOM assertions across two test files,
+no regression in the existing 20/47/1777 test suites (calc engine
+untouched — this was UI-only).

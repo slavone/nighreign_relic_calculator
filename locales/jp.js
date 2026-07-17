@@ -53,6 +53,7 @@ window.__LOCALE_JP__ = {
     "filter_groups": "グループでフィルタ…",
     "select_group_placeholder": "— グループを選択 —",
     "select_effect_placeholder": "— エフェクトを選択 —",
+    "select_curse_placeholder": "— 呪いを選択 —",
     "remove": "削除",
     "curse_label": "呪い：",
     "select_all": "全選択",

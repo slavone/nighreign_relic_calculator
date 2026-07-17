@@ -944,9 +944,16 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       return html;
     }
 
-    function buildCurseOptionsFor(currentCurseIdx) {
-      let html = `<option value="">${I18N.t('curse_any', 'Any curse')}</option>`;
+    function buildCurseOptionsFor(usedIndices, currentCurseIdx) {
+      // "Any curse" (used by the v1/v2 probability filter) doesn't make sense
+      // here — this mode picks the ONE specific curse actually on the relic,
+      // not a filter over which curses would be acceptable. A relic can only
+      // carry each curse once, so curses already chosen on a sibling slot of
+      // the SAME relic are excluded, mirroring how group-select already
+      // excludes groups used by sibling slots.
+      let html = `<option value="">${I18N.t('select_curse_placeholder', '— select curse —')}</option>`;
       DON_DATA.curses.forEach((c, i) => {
+        if (usedIndices.has(i) && i !== currentCurseIdx) return;
         const sel = i === currentCurseIdx ? ' selected' : '';
         html += `<option value="${i}"${sel}>${I18N.effectName(c.name)}</option>`;
       });
@@ -996,6 +1003,10 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         return new Set([...slotsEl.querySelectorAll('.group-select')]
           .map(s => parseInt(s.value)).filter(v => !isNaN(v)));
       }
+      function usedCurseIndices() {
+        return new Set([...slotsEl.querySelectorAll('.curse-select')]
+          .map(s => parseInt(s.value)).filter(v => !isNaN(v)));
+      }
       function updateAddBtnState() {
         addBtn.disabled = slotsEl.querySelectorAll('.slot-block').length >= 3;
       }
@@ -1005,6 +1016,13 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           const groupSel = block.querySelector('.group-select');
           const cur = parseInt(groupSel.value);
           groupSel.innerHTML = buildOptionsForGroups(groups, usedGroupIndices(), cur);
+        });
+      }
+      function refreshCurseDropdowns() {
+        if (!allowCurse) return;
+        slotsEl.querySelectorAll('.curse-select').forEach(sel => {
+          const cur = parseInt(sel.value);
+          sel.innerHTML = buildCurseOptionsFor(usedCurseIndices(), cur);
         });
       }
 
@@ -1041,8 +1059,8 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           curseLabel.textContent = I18N.t('curse_label', 'Curse:');
           curseSel = document.createElement('select');
           curseSel.className = 'curse-select';
-          curseSel.innerHTML = buildCurseOptionsFor(NaN);
-          curseSel.addEventListener('change', updateResult);
+          curseSel.innerHTML = buildCurseOptionsFor(usedCurseIndices(), NaN);
+          curseSel.addEventListener('change', () => { refreshCurseDropdowns(); updateResult(); });
           curseRow.append(curseLabel, curseSel);
           block.append(curseRow);
         }
@@ -1055,6 +1073,9 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           const hasCurse = !!effect?.hasCurse;
           curseRow.classList.toggle('visible', hasCurse);
           if (!hasCurse) curseSel.value = '';
+          // A slot losing its curse (effect switched to a non-cursed one, or
+          // hidden) must release that curse back for sibling slots to pick.
+          refreshCurseDropdowns();
         }
 
         groupSel.addEventListener('change', () => {
@@ -1069,6 +1090,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         removeBtn.addEventListener('click', () => {
           block.remove();
           refreshGroupDropdowns();
+          refreshCurseDropdowns();
           updateAddBtnState();
           updateResult();
         });
