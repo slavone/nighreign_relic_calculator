@@ -49,7 +49,7 @@ P = K×(K−1)×…×(K−n+1) × ∏(w_i / W) × (0.25 if specific color) × �
 
 A third mode, independent of the probability calculator: enter the actual
 effects on up to 6 equipped relics (3 Regular + 3 Deep of Night, DON
-toggleable off) and see the combined Damage / Damage Negation / Resource
+toggleable off) and see the combined Attack Power / Damage Negation / Resource
 multipliers.
 
 Effects are classified as **baseline** (always-on, folds into a running

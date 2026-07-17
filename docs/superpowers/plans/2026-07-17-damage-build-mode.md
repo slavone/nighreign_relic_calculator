@@ -1701,3 +1701,55 @@ appearing inside another row's nested reference rather than its own row)
 and was fixed in the test, not the product — the underlying HTML was
 already correct. 7 live-DOM assertions plus 34/34 in the updated
 `tests/build.test.mjs`, all passed.
+
+---
+
+### Post-plan addendum: Task 16 — "Damage" section renamed to "Attack Power"
+
+User request: the game consistently calls this stat "Attack Power" (e.g.
+every effect name is "X Attack Power Up") — the summary's "Damage" section
+title should match. Updated `build_damage_title`'s English fallback and the
+JP/KR translations (攻撃力 / 공격력, matching how "Attack Power" is already
+translated throughout the rest of the app's effect names) — plus the
+in-app methodology note and README prose. "Damage Negation" was left
+unchanged since that phrase matches real in-game effect names (e.g. "Fire
+Damage Negation Up"). Internal identifiers (`build_damage_title` i18n key,
+`damageBaseline`/`dmgTree` JS variable names) are unchanged since they're
+implementation detail. Verified across EN/JP/KR with a live jsdom instance
+that clicking into the mode renders the new title and the old "Damage"
+string is gone in all three languages.
+
+### Post-plan addendum: Task 17 — Resource/Recovery no longer blends unrelated stats
+
+User-caught, real design flaw: a build with only "Reduced FP Consumption"
+selected showed "Resource / Recovery: Combined ×0.92" — a bare, unlabeled
+number. Worse, the underlying model was wrong even when several resource
+effects were selected together: FP consumption, skill cooldown, ultimate
+gauge gain, max HP/FP/stamina, and flask healing are genuinely different
+units, and multiplying them into one blended "Combined" figure produces a
+meaningless number (a 0.92× FP-consumption reduction times a 1.1× max-HP
+bonus isn't any real quantity).
+
+Fix mirrors how Damage/Negation are already split per elemental axis:
+`effect_multipliers.mjs` gained a required `stat` field
+(`'cooldown' | 'ultimateCharge' | 'fpConsumption' | 'maxHP' | 'maxFP' |
+'maxStamina' | 'flaskHeal'`) on every resource-bucket entry, validated by
+the schema test. `computeBuildTotals`'s `resourceBaseline` changed from a
+single scalar to an object keyed by stat (exactly like `damageBaseline`/
+`negationBaseline` are keyed by axis); the one resource conditional entry
+("Near Death Reduces Max HP") now only folds in its own stat's baseline
+as a factor, never an unrelated one. The UI renders one labeled row per
+active stat (e.g. "FP Consumption ×0.92") instead of a single anonymous
+"Combined" line; the now-dead `build_resource_combined` i18n key was
+removed and seven new per-stat labels added (JP/KR included).
+
+Required re-running `prepare_data.mjs` / `prepare_don_data.mjs` and the
+embed step (the lesson from Task 14's addendum applied correctly this
+time — verified the `stat` field actually reached `index.html`'s embedded
+data before testing further). Verified against the user's exact URL with
+a fresh `jsdom` instance: Resource / Recovery now shows "FP Consumption
+×0.92" with no bare "Combined" label anywhere in the summary. Added two
+permanent regression tests in `tests/build.test.mjs` (one general
+stat-isolation case, one for the conditional-resource-entry factor leak).
+3 live-DOM assertions plus 39/39 in the updated `tests/build.test.mjs`
+and 1455/1455 in `tests/effect_multipliers.test.mjs`, all passed.

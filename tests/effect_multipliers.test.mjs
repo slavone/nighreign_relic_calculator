@@ -15,6 +15,7 @@ const VALID_BUCKETS = new Set(['damage', 'negation', 'resource']);
 const VALID_AXES = new Set(['physical', 'magic', 'fire', 'lightning', 'holy', 'universal']);
 const VALID_CATEGORIES = new Set(['sorcery', 'incantation']);
 const VALID_GROUPS = new Set(['weapon', 'hitType', 'status']);
+const VALID_STATS = new Set(['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal']);
 
 const entries = Object.entries(EFFECT_MULTIPLIERS);
 check('at least 80 entries present', entries.length >= 80);
@@ -35,6 +36,12 @@ for (const [name, m] of entries) {
     (m.axes || []).forEach(a => check(`${name}: axis "${a}" is valid`, VALID_AXES.has(a)));
   } else {
     check(`${name}: resource bucket has no axes`, m.axes === undefined);
+    // Resource covers several genuinely different units (FP consumption,
+    // cooldown, ultimate gauge, max HP/FP/stamina, flask healing) that must
+    // never be multiplied together — every resource entry needs a stat tag
+    // so the UI can keep them in separate rows.
+    check(`${name}: resource entry has a stat`, m.stat !== undefined);
+    check(`${name}: stat is valid`, VALID_STATS.has(m.stat));
   }
   if (m.category !== undefined) {
     check(`${name}: category is valid`, VALID_CATEGORIES.has(m.category));

@@ -1848,6 +1848,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "cooldown",
             "value": 0.95
           }
         },
@@ -1863,6 +1864,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "cooldown",
             "value": 0.925
           }
         },
@@ -1878,6 +1880,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "cooldown",
             "value": 0.9
           }
         }
@@ -4740,6 +4743,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "ultimateCharge",
             "value": 1.05
           }
         },
@@ -4755,6 +4759,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "ultimateCharge",
             "value": 1.075
           }
         },
@@ -4770,6 +4775,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "ultimateCharge",
             "value": 1.1
           }
         }

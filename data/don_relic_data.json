@@ -2830,6 +2830,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "flaskHeal",
             "value": 1.1
           }
         }
@@ -3241,6 +3242,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "maxFP",
             "value": 1.15
           }
         }
@@ -3259,6 +3261,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "maxHP",
             "value": 1.1
           }
         }
@@ -3277,6 +3280,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "maxStamina",
             "value": 1.12
           }
         }
@@ -3437,6 +3441,7 @@
           "mul": {
             "tier": "baseline",
             "bucket": "resource",
+            "stat": "fpConsumption",
             "value": 0.92
           }
         }
@@ -3813,6 +3818,7 @@
       "mul": {
         "tier": "conditional",
         "bucket": "resource",
+        "stat": "maxHP",
         "group": "status",
         "value": 0.75,
         "condition": "60s after being downed"
@@ -3870,6 +3876,7 @@
       "mul": {
         "tier": "baseline",
         "bucket": "resource",
+        "stat": "flaskHeal",
         "value": 0.85
       }
     },
@@ -3945,6 +3952,7 @@
       "mul": {
         "tier": "baseline",
         "bucket": "resource",
+        "stat": "ultimateCharge",
         "value": 0.85
       }
     }

@@ -2,12 +2,17 @@
 // in index.html, per this project's existing test convention (see calc.test.mjs).
 
 const AXES = ['physical', 'magic', 'fire', 'lightning', 'holy', 'universal'];
+// Resource stats are genuinely different units (FP consumption, cooldown,
+// ultimate gauge, max HP/FP/stamina, flask healing) — they must never be
+// multiplied together, so each gets its own baseline slot, exactly like
+// damage/negation get one per element instead of one blended number.
+const RESOURCE_STATS = ['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal'];
 
 function computeBuildTotals(effects) {
   const damageBaseline = Object.fromEntries(AXES.map(a => [a, 1]));
   const negationBaseline = Object.fromEntries(AXES.map(a => [a, 1]));
   const categoryBaseline = { sorcery: 1, incantation: 1 };
-  let resourceBaseline = 1;
+  const resourceBaseline = Object.fromEntries(RESOURCE_STATS.map(s => [s, 1]));
   // Grouped by name: the same specific effect selected on multiple relics
   // genuinely stacks (e.g. 3 relics all with "Improved Carian Sword
   // Sorcery" all apply together whenever you cast one) — so duplicates
@@ -31,7 +36,7 @@ function computeBuildTotals(effects) {
       continue;
     }
     if (m.bucket === 'resource') {
-      resourceBaseline *= m.value;
+      resourceBaseline[m.stat] *= m.value;
     } else if (m.bucket === 'negation') {
       for (const axis of m.axes) negationBaseline[axis] *= (1 - m.value);
     } else {
@@ -49,7 +54,7 @@ function computeBuildTotals(effects) {
   function combinedFor(c) {
     const factors = [];
     if (c.bucket === 'resource') {
-      if (resourceBaseline !== 1) factors.push({ kind: 'resource', value: resourceBaseline });
+      if (resourceBaseline[c.stat] !== 1) factors.push({ kind: 'resource', key: c.stat, value: resourceBaseline[c.stat] });
       factors.push({ kind: 'self', value: Math.pow(c.value, c.count) });
     } else if (c.bucket === 'negation') {
       if (negationBaseline.universal !== 1) factors.push({ kind: 'axis', key: 'universal', value: negationBaseline.universal });
@@ -276,6 +281,39 @@ function test(label, actual, expected, tolerance = 1e-9) {
     carianRow.nestedWithUniversal[0].combined, carianRow.combined * 0.915);
   const curseRow = r.conditionalTree.damage.status.find(c => c.name === 'Lower Attack When Below Max HP');
   test('the curse itself does not nest under itself (empty array)', curseRow.nestedWithUniversal.length, 0);
+}
+
+// User-reported bug: Resource/Recovery used to blend every resource stat
+// into one "Combined" number, which was meaningless (FP consumption and
+// max HP are different units — multiplying them together produces
+// nonsense) and, worse, showed a bare unlabeled number when only one stat
+// was selected ("Combined ×0.92" — combined with what?). Each stat must
+// now get its own labeled row, and unrelated stats must not interfere.
+{
+  const fpConsumption = { tier: 'baseline', bucket: 'resource', stat: 'fpConsumption', value: 0.92 };
+  const r = computeBuildTotals([{ name: 'Reduced FP Consumption', mul: fpConsumption }]);
+  test('fpConsumption baseline reflects the selected effect', r.resourceBaseline.fpConsumption, 0.92);
+  test('unrelated resource stats stay untouched', r.resourceBaseline.maxHP, 1);
+  test('unrelated resource stats stay untouched (cooldown)', r.resourceBaseline.cooldown, 1);
+}
+
+// A conditional resource entry (Near Death Reduces Max HP, stat: maxHP)
+// must only fold in the maxHP baseline as its factor, never fpConsumption
+// or any other stat's baseline — different resource stats must never mix.
+{
+  const maxHPUp = { tier: 'baseline', bucket: 'resource', stat: 'maxHP', value: 1.1 };
+  const fpConsumption = { tier: 'baseline', bucket: 'resource', stat: 'fpConsumption', value: 0.92 };
+  const nearDeath = { tier: 'conditional', bucket: 'resource', stat: 'maxHP', group: 'status', value: 0.75, condition: '60s after being downed' };
+  const r = computeBuildTotals([
+    { name: 'Increased Maximum HP', mul: maxHPUp },
+    { name: 'Reduced FP Consumption', mul: fpConsumption },
+    { name: 'Near Death Reduces Max HP', mul: nearDeath },
+  ]);
+  const nearDeathRow = r.conditionalTree.resource.status[0];
+  test('Near Death row combined = maxHP baseline × its own value (not fpConsumption)',
+    nearDeathRow.combined, 1.1 * 0.75);
+  test('Near Death row has exactly 2 factors (maxHP baseline + self, no fpConsumption leak)',
+    nearDeathRow.factors.length, 2);
 }
 
 // Unmapped effects fall into `other`, never silently multiplied.

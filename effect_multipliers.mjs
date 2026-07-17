@@ -13,6 +13,12 @@
 //            nested summary tree: 'weapon' (single-weapon/throwable-specific), 'hitType'
 //            (crit/guard-counter/initial-attack), or 'status' (timing windows, vs-enemy-
 //            status, curses — everything else transient/state-dependent).
+// stat:      resource bucket only, REQUIRED for baseline entries. Resource covers several
+//            genuinely different units (FP consumption, skill cooldown, ultimate gauge gain,
+//            max HP/FP/stamina, flask healing) that must never be multiplied together — a
+//            0.92x FP-consumption reduction and a 1.1x max-HP bonus aren't the same quantity.
+//            One of: 'cooldown' | 'ultimateCharge' | 'fpConsumption' | 'maxHP' | 'maxFP' |
+//            'maxStamina' | 'flaskHeal'.
 // value:     multiplier (e.g. 1.09) for damage/resource. Fractional negation amount
 //            (e.g. 0.10, or negative for a curse that *removes* negation) for negation —
 //            combined via ∏(1 − v), never a straight product.
@@ -27,24 +33,24 @@
 
 export const EFFECT_MULTIPLIERS = {
   // ── Resource / Recovery (baseline) ────────────────────────────────────────
-  'Character Skill Cooldown Reduction +1': { tier: 'baseline', bucket: 'resource', value: 0.95 },
-  'Character Skill Cooldown Reduction +2': { tier: 'baseline', bucket: 'resource', value: 0.925 },
-  'Character Skill Cooldown Reduction +3': { tier: 'baseline', bucket: 'resource', value: 0.9 },
-  'Ultimate Art Auto Charge +1': { tier: 'baseline', bucket: 'resource', value: 1.05 },
-  'Ultimate Art Auto Charge +2': { tier: 'baseline', bucket: 'resource', value: 1.075 },
-  'Ultimate Art Auto Charge +3': { tier: 'baseline', bucket: 'resource', value: 1.1 },
-  'Reduced FP Consumption': { tier: 'baseline', bucket: 'resource', value: 0.92 },
-  'Reduced FP Consumption +1': { tier: 'baseline', bucket: 'resource', value: 0.87 },
-  'Reduced FP Consumption +2': { tier: 'baseline', bucket: 'resource', value: 0.84 },
-  'Increased Maximum HP': { tier: 'baseline', bucket: 'resource', value: 1.1 },
-  'Increased Maximum FP': { tier: 'baseline', bucket: 'resource', value: 1.15 },
-  'Increased Maximum Stamina': { tier: 'baseline', bucket: 'resource', value: 1.12 },
-  'Improved Flask HP Restoration': { tier: 'baseline', bucket: 'resource', value: 1.1 },
+  'Character Skill Cooldown Reduction +1': { tier: 'baseline', bucket: 'resource', stat: 'cooldown', value: 0.95 },
+  'Character Skill Cooldown Reduction +2': { tier: 'baseline', bucket: 'resource', stat: 'cooldown', value: 0.925 },
+  'Character Skill Cooldown Reduction +3': { tier: 'baseline', bucket: 'resource', stat: 'cooldown', value: 0.9 },
+  'Ultimate Art Auto Charge +1': { tier: 'baseline', bucket: 'resource', stat: 'ultimateCharge', value: 1.05 },
+  'Ultimate Art Auto Charge +2': { tier: 'baseline', bucket: 'resource', stat: 'ultimateCharge', value: 1.075 },
+  'Ultimate Art Auto Charge +3': { tier: 'baseline', bucket: 'resource', stat: 'ultimateCharge', value: 1.1 },
+  'Reduced FP Consumption': { tier: 'baseline', bucket: 'resource', stat: 'fpConsumption', value: 0.92 },
+  'Reduced FP Consumption +1': { tier: 'baseline', bucket: 'resource', stat: 'fpConsumption', value: 0.87 },
+  'Reduced FP Consumption +2': { tier: 'baseline', bucket: 'resource', stat: 'fpConsumption', value: 0.84 },
+  'Increased Maximum HP': { tier: 'baseline', bucket: 'resource', stat: 'maxHP', value: 1.1 },
+  'Increased Maximum FP': { tier: 'baseline', bucket: 'resource', stat: 'maxFP', value: 1.15 },
+  'Increased Maximum Stamina': { tier: 'baseline', bucket: 'resource', stat: 'maxStamina', value: 1.12 },
+  'Improved Flask HP Restoration': { tier: 'baseline', bucket: 'resource', stat: 'flaskHeal', value: 1.1 },
   // DON curses that are fixed-rate (no transient trigger) go in Resource baseline too.
-  'Reduced Flask HP Restoration': { tier: 'baseline', bucket: 'resource', value: 0.85 },
-  'Ultimate Art Charging Impaired': { tier: 'baseline', bucket: 'resource', value: 0.85 },
+  'Reduced Flask HP Restoration': { tier: 'baseline', bucket: 'resource', stat: 'flaskHeal', value: 0.85 },
+  'Ultimate Art Charging Impaired': { tier: 'baseline', bucket: 'resource', stat: 'ultimateCharge', value: 0.85 },
   // DON curse — temporary state after being downed, not fixed-rate.
-  'Near Death Reduces Max HP': { tier: 'conditional', bucket: 'resource', group: 'status', value: 0.75, condition: '60s after being downed' },
+  'Near Death Reduces Max HP': { tier: 'conditional', bucket: 'resource', stat: 'maxHP', group: 'status', value: 0.75, condition: '60s after being downed' },
 
   // ── Elemental Attack Up (baseline damage) ─────────────────────────────────
   'Physical Attack Up': { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.04 },
