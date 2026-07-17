@@ -344,6 +344,55 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       return total;
     }
 
+    // Damage Build mode — pure calc engine. Kept in sync with tests/build.test.mjs.
+    const BUILD_AXES = ['physical', 'magic', 'fire', 'lightning', 'holy', 'universal'];
+
+    function computeBuildTotals(effects) {
+      const damageBaseline = Object.fromEntries(BUILD_AXES.map(a => [a, 1]));
+      const negationBaseline = Object.fromEntries(BUILD_AXES.map(a => [a, 1]));
+      const categoryBaseline = { sorcery: 1, incantation: 1 };
+      let resourceBaseline = 1;
+      const conditional = [];
+      const other = [];
+
+      for (const effect of effects) {
+        const m = effect.mul;
+        if (!m) { other.push({ name: effect.name }); continue; }
+        if (m.tier === 'conditional') { conditional.push({ name: effect.name, ...m }); continue; }
+        if (m.bucket === 'resource') {
+          resourceBaseline *= m.value;
+        } else if (m.bucket === 'negation') {
+          for (const axis of m.axes) negationBaseline[axis] *= (1 - m.value);
+        } else {
+          for (const axis of (m.axes || [])) damageBaseline[axis] *= m.value;
+          if (m.category) categoryBaseline[m.category] *= m.value;
+        }
+      }
+
+      // Universal always applies on top of a conditional entry's own specific axis
+      // (Universal bonuses, by definition, apply regardless of damage type) — so it's
+      // folded in unconditionally, skipping a second multiply if the entry's own axis
+      // literally is "universal" (avoids squaring it).
+      function combinedFor(c) {
+        if (c.bucket === 'resource') return resourceBaseline * c.value;
+        if (c.bucket === 'negation') {
+          let combined = negationBaseline.universal;
+          for (const axis of c.axes) if (axis !== 'universal') combined *= negationBaseline[axis];
+          return combined * (1 - c.value);
+        }
+        let combined = damageBaseline.universal;
+        for (const axis of c.axes) if (axis !== 'universal') combined *= damageBaseline[axis];
+        if (c.category) combined *= categoryBaseline[c.category];
+        return combined * c.value;
+      }
+
+      return {
+        damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
+        conditional: conditional.map(c => ({ ...c, combined: combinedFor(c) })),
+        other,
+      };
+    }
+
     function calculateProbabilityV2(quality, colorFactor) {
       const K = quality;
       const pool = getDesiredPool();
