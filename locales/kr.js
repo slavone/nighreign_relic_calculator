@@ -26,7 +26,7 @@ window.__LOCALE_KR__ = {
     "build_each_label": "각각",
     "build_group_weapon": "무기 특화",
     "build_group_hit_type": "특정 타격",
-    "build_group_status": "상황 의존 효과",
+    "build_group_status": "행동",
     "build_conditional_title": "조건부 효과",
     "build_other_title": "기타 효과",
     "build_damage_title": "공격력",

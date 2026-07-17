@@ -26,7 +26,7 @@ window.__LOCALE_JP__ = {
     "build_each_label": "それぞれ",
     "build_group_weapon": "武器固有",
     "build_group_hit_type": "特定の攻撃",
-    "build_group_status": "状況依存効果",
+    "build_group_status": "行動",
     "build_conditional_title": "条件付き効果",
     "build_other_title": "その他の効果",
     "build_damage_title": "攻撃力",
