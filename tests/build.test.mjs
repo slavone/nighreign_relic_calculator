@@ -248,23 +248,40 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('evasion curse has 1 factor (self only — universal baseline untouched)', curseRow.factors.length, 1);
 }
 
-// A Universal baseline (e.g. the 3+-weapon-equipped bonus) must fold into a
-// conditional entry's combined figure even though the entry's own axis is
-// Physical, not Universal — Universal applies to all damage by definition.
-// Katana nests under conditionalTree.damage.weapon (its group).
+// User-reported gap: "3+ weapon type equipped" only actually applies with
+// 3+ of that type in your loadout — it is NOT an always-on baseline, so it
+// must show up as its own conditional entry with that condition text
+// visible (same as the single-weapon variant), not silently folded into an
+// unlabeled "Universal" baseline number with no indication of where it
+// came from. It still applies to all damage types by definition, so it
+// still folds into every active axis/other conditional via the same
+// universal-only nesting machinery as any other universal-axis conditional
+// (e.g. the frostbite curse) — it just does so as a conditional now.
 {
   const physicalUp1 = { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.05 };
-  const katana3plus = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.2 };
+  const katana3plus = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.2, condition: '3+ Katana Equipped' };
   const katanaSingle = { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.09, condition: 'Katana hits only' };
   const r = computeBuildTotals([
     { name: 'Physical Attack Up +1', mul: physicalUp1 },
     { name: 'Improved Attack Power with 3+ Katana Equipped', mul: katana3plus },
     { name: 'Improved Katana Attack Power', mul: katanaSingle },
   ]);
-  test('universal baseline', r.damageBaseline.universal, 1.2);
-  const katanaRow = r.conditionalTree.damage.weapon[0];
-  test('katana nests under damage.weapon', !!katanaRow, true);
-  test('katana combined = physical * universal * katana', katanaRow.combined, 1.05 * 1.2 * 1.09);
+  test('no more always-on universal baseline from this effect', r.damageBaseline.universal, 1);
+  const weaponRows = r.conditionalTree.damage.weapon;
+  const katana3Row = weaponRows.find(c => c.name === 'Improved Attack Power with 3+ Katana Equipped');
+  const katanaSingleRow = weaponRows.find(c => c.name === 'Improved Katana Attack Power');
+  test('3+ Katana bonus nests under damage.weapon as a conditional', !!katana3Row, true);
+  test('3+ Katana condition text is preserved for display', katana3Row.condition, '3+ Katana Equipped');
+  test('3+ Katana combined is its own self value (no other universal baseline active)', katana3Row.combined, 1.2);
+  // The Physical baseline row itself must show a nested "combined with 3+
+  // Katana" figure, since that's the only place a universal-axis conditional's
+  // effect on a SPECIFIC element becomes visible.
+  test('Physical baseline nests the 3+ Katana bonus (universal-only nesting)',
+    r.damageAxisNested.physical.find(n => n.name === 'Improved Attack Power with 3+ Katana Equipped').combined,
+    1.05 * 1.2);
+  test('single-weapon Katana bonus nests with the 3+ Katana bonus too',
+    katanaSingleRow.nestedWithUniversal.find(n => n.name === 'Improved Attack Power with 3+ Katana Equipped').combined,
+    (1.05 * 1.09) * 1.2);
 }
 
 // User-reported bug: the same conditional effect selected on 4 different
@@ -354,12 +371,15 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('the curse itself does not nest under itself (empty array)', curseRow.nestedWithUniversal.length, 0);
 }
 
-// User-reported bug: with an ACTIVE universal baseline (e.g. from a real
-// "3+ weapon type equipped" effect) present, nesting one conditional entry
-// under another universal-only conditional (e.g. a school-specific
-// incantation bonus nested with a frostbite curse) squared the universal
-// baseline instead of applying it once — because entry.combined and
-// u.combined each independently already include that shared factor.
+// User-reported bug: with an ACTIVE universal baseline present (no current
+// real effect sets one — every real universal-axis effect is conditional,
+// see the 3+-weapon-equipped test above — but the engine still supports the
+// tier generically, so this uses a synthetic stand-in), nesting one
+// conditional entry under another universal-only conditional (e.g. a
+// school-specific incantation bonus nested with a frostbite curse) squared
+// the universal baseline instead of applying it once — because
+// entry.combined and u.combined each independently already include that
+// shared factor.
 {
   const fireUp = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
   const universalBaseline = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.2 };
@@ -367,7 +387,7 @@ function test(label, actual, expected, tolerance = 1e-9) {
   const frostbite = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs frostbite-afflicted enemies' };
   const r = computeBuildTotals([
     { name: 'Fire Attack Power Up +4', mul: fireUp },
-    { name: 'Improved Attack Power with 3+ Daggers Equipped', mul: universalBaseline },
+    { name: 'Hypothetical Universal Baseline Buff', mul: universalBaseline },
     { name: "Improved Giants' Flame Incantations", mul: giantsFlame },
     { name: 'Attack power up when facing frostbite-afflicted enemy', mul: frostbite },
   ]);

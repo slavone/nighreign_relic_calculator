@@ -127,8 +127,10 @@ const katanaSingle = EFFECT_MULTIPLIERS['Improved Katana Attack Power'];
 check('single-weapon Katana bonus is conditional', katanaSingle && katanaSingle.tier === 'conditional' && katanaSingle.value === 1.09);
 
 const katana3plus = EFFECT_MULTIPLIERS['Improved Attack Power with 3+ Katana Equipped'];
-check('3+ Katana bonus is baseline universal', katana3plus &&
-  katana3plus.tier === 'baseline' && katana3plus.axes.includes('universal') && katana3plus.value === 1.2);
+check('3+ Katana bonus is a universal conditional, not an always-on baseline', katana3plus &&
+  katana3plus.tier === 'conditional' && katana3plus.axes.includes('universal') &&
+  katana3plus.group === 'weapon' && katana3plus.value === 1.2 &&
+  katana3plus.condition === '3+ Katana Equipped');
 
 const evasionCurse = EFFECT_MULTIPLIERS['Reduced Damage Negation After Evading'];
 check('evasion curse is negative negation, conditional', evasionCurse &&

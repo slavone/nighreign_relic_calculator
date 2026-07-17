@@ -292,7 +292,8 @@ export const EFFECT_MULTIPLIERS = {
   'Arcane +3': { tier: 'flat', pools: [{ pool: 'arcane', value: 3 }] },
 };
 
-// ── Weapon-type Attack Power (single-weapon = conditional; 3+ equipped = baseline universal) ──
+// ── Weapon-type Attack Power (both variants are conditional: single-weapon requires that
+// weapon's hits, 3+ equipped requires 3+ of that type in your loadout) ──
 // Generated from a lookup table rather than hand-duplicated per weapon: the "3+ Equipped"
 // group name keeps "Katana" singular in the key even though every other weapon type is
 // pluralized there (matches the exact names in data/relic_groups.json).
@@ -331,6 +332,7 @@ for (const w of WEAPON_TYPES) {
     condition: `${w.single} hits only`,
   };
   EFFECT_MULTIPLIERS[`Improved Attack Power with 3+ ${w.plural} Equipped`] = {
-    tier: 'baseline', bucket: 'damage', axes: ['universal'], value: groupValue,
+    tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: groupValue,
+    condition: `3+ ${w.plural} Equipped`,
   };
 }

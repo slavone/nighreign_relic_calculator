@@ -485,12 +485,14 @@
           ],
           "desc": "1.2× damage with 3+ Daggers equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Daggers Equipped"
           }
         },
         {
@@ -503,12 +505,14 @@
           ],
           "desc": "1.2× damage with 3+ Straight Swords equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Straight Swords Equipped"
           }
         },
         {
@@ -521,12 +525,14 @@
           ],
           "desc": "1.2× damage with 3+ Greatswords equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Greatswords Equipped"
           }
         },
         {
@@ -539,12 +545,14 @@
           ],
           "desc": "1.2× damage with 3+ Colossal Swords equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Colossal Swords Equipped"
           }
         },
         {
@@ -557,12 +565,14 @@
           ],
           "desc": "1.2× damage with 3+ Curved Swords equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Curved Swords Equipped"
           }
         },
         {
@@ -575,12 +585,14 @@
           ],
           "desc": "1.2× damage with 3+ Curved Greatswords equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Curved Greatswords Equipped"
           }
         },
         {
@@ -593,12 +605,14 @@
           ],
           "desc": "1.2× damage with 3+ Katanas equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Katana Equipped"
           }
         },
         {
@@ -611,12 +625,14 @@
           ],
           "desc": "1.2× damage with 3+ Twinblades equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Twinblades Equipped"
           }
         },
         {
@@ -629,12 +645,14 @@
           ],
           "desc": "1.2× damage with 3+ Thrusting Swords equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Thrusting Swords Equipped"
           }
         },
         {
@@ -647,12 +665,14 @@
           ],
           "desc": "1.2× damage with 3+ Heavy Thrusting Swords equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Heavy Thrusting Swords Equipped"
           }
         },
         {
@@ -665,12 +685,14 @@
           ],
           "desc": "1.2× damage with 3+ Axes equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Axes Equipped"
           }
         },
         {
@@ -683,12 +705,14 @@
           ],
           "desc": "1.2× damage with 3+ Greataxes equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Greataxes Equipped"
           }
         },
         {
@@ -701,12 +725,14 @@
           ],
           "desc": "1.2× damage with 3+ Hammers equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Hammers Equipped"
           }
         },
         {
@@ -719,12 +745,14 @@
           ],
           "desc": "1.2× damage with 3+ Great Hammers equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Great Hammers Equipped"
           }
         },
         {
@@ -737,12 +765,14 @@
           ],
           "desc": "1.2× damage with 3+ Flails equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Flails Equipped"
           }
         },
         {
@@ -755,12 +785,14 @@
           ],
           "desc": "1.2× damage with 3+ Spears equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Spears Equipped"
           }
         },
         {
@@ -773,12 +805,14 @@
           ],
           "desc": "1.2× damage with 3+ Great Spears equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Great Spears Equipped"
           }
         },
         {
@@ -791,12 +825,14 @@
           ],
           "desc": "1.2× damage with 3+ Halberds equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Halberds Equipped"
           }
         },
         {
@@ -809,12 +845,14 @@
           ],
           "desc": "1.2× damage with 3+ Reapers equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Reapers Equipped"
           }
         },
         {
@@ -827,12 +865,14 @@
           ],
           "desc": "1.2× damage with 3+ Fists equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Fists Equipped"
           }
         },
         {
@@ -845,12 +885,14 @@
           ],
           "desc": "1.2× damage with 3+ Claws equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Claws Equipped"
           }
         },
         {
@@ -863,12 +905,14 @@
           ],
           "desc": "1.2× damage with 3+ Whips equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Whips Equipped"
           }
         },
         {
@@ -881,12 +925,14 @@
           ],
           "desc": "1.2× damage with 3+ Colossal Weapons equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.2
+            "group": "weapon",
+            "value": 1.2,
+            "condition": "3+ Colossal Weapons Equipped"
           }
         },
         {
@@ -899,12 +945,14 @@
           ],
           "desc": "1.1× damage with 3+ Bows equipped",
           "mul": {
-            "tier": "baseline",
+            "tier": "conditional",
             "bucket": "damage",
             "axes": [
               "universal"
             ],
-            "value": 1.1
+            "group": "weapon",
+            "value": 1.1,
+            "condition": "3+ Bows Equipped"
           }
         },
         {

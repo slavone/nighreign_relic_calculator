@@ -2161,3 +2161,73 @@ design conversation itself remains open ("lets think") — this addendum
 covers only the confirmed math bug it surfaced, not a resolution to the
 sizing/labeling question. 4 live-DOM assertions, 2 new permanent
 regression tests, 20/54/2346 across the three test suites.
+
+### Post-plan addendum: Task 30 — resolved the Universal-display design
+question by reclassifying the "3+ weapon type equipped" bonus as
+conditional, and renamed "Universal" to "All Damage"
+
+Resumed the "lets think" design conversation from Task 29. Two options
+were sketched (fold Universal directly into each element like Affinity,
+vs. keep it a separate row with a "combined with X" nested line under
+each element) and the user picked the second, then added a decisive
+correction: the ACTUAL problem wasn't display layout, it was
+classification. "Improved Attack Power with 3+ [Weapon Type] Equipped"
+was the ONLY entry in `effect_multipliers.mjs` using `tier: 'baseline',
+axes: ['universal']` — every other universal-axis entry (frostbite,
+guard counters, sleep procs, etc.) was already `tier: 'conditional'` with
+a `condition` string. Being silently folded into an always-on baseline
+made the effect's real trigger requirement (3+ of that weapon type
+actually equipped) invisible, and gave it no name/condition label
+anywhere in the UI — that's what "unclear where this multiplier comes
+from" and "make sure it's specified that this only works with that
+condition" were actually pointing at.
+
+Fix: reclassified all 23 weapon-type "3+ Equipped" entries in
+`effect_multipliers.mjs` from `{ tier: 'baseline', bucket: 'damage',
+axes: ['universal'], value }` to `{ tier: 'conditional', bucket:
+'damage', axes: ['universal'], group: 'weapon', value, condition: '3+
+${plural} Equipped' }` — matching the single-weapon variant's shape one
+group over. No `computeBuildTotals` engine changes were needed: the
+universal-only conditional nesting machinery (`nestUniversalOnly` /
+`damageAxisNested`, `attachUniversalNesting` / `nestedWithUniversal`,
+both exercised and fixed in Task 29) already does exactly what's wanted
+for a conditional universal-axis entry — nest it under every active
+elemental baseline row AND under every other conditional entry, each
+time showing the full multiplication chain. The entry just needed to
+actually BE conditional to enter that path instead of being silently
+pre-multiplied into `damageBaseline.universal` with no visible name or
+condition. Also renamed the `build_axis_universal` label from "Universal"
+to "All Damage" (jp: 全ダメージ, kr: 전체 피해) per the user's request —
+though with this reclassification, no current effect populates that
+baseline slot anymore, so the row itself won't currently render; the
+rename is future-proofing for if a genuinely always-on universal-damage
+effect is ever added.
+
+Regenerated `data/relic_data.json` and `data/don_relic_data.json` via
+`prepare_data.mjs`/`prepare_don_data.mjs` (confirmed via diff: only the
+23 weapon-group entries changed, `tier`/`group`/`condition` fields only)
+and re-embedded `DATA`/`DON_DATA` into `index.html`. Updated
+`tests/effect_multipliers.test.mjs`'s katana-3+ check to assert
+`conditional`/`group: 'weapon'`/`condition` instead of `baseline`.
+Rewrote the corresponding `tests/build.test.mjs` block (previously a
+synthetic `tier: 'baseline'` mock) to use the real new classification,
+adding assertions for: no more always-on universal baseline from this
+effect, the condition text survives into the conditional-tree row, the
+row's own `combined` is just its self-value (no baseline to fold in), the
+Physical baseline row nests a "combined with 3+ Katana" line, and the
+single-weapon Katana entry's `nestedWithUniversal` also picks it up.
+Relabeled Task 29's synthetic double-counting regression test (which used
+a hand-rolled `tier: 'baseline'` universal mock representing "a real 3+
+weapon type equipped effect") to stop implying that's still real —
+renamed the mock effect to "Hypothetical Universal Baseline Buff" and
+clarified in the comment that the engine still supports the tier
+generically even though no current real effect uses it. Verified live
+with a fresh `jsdom` instance reconstructing Fire Attack Power Up +4 +
+Improved Attack Power with 3+ Daggers Equipped: the Fire baseline row now
+renders a nested "Improved Attack Power with 3+ Daggers Equipped (3+
+Daggers Equipped) → ×1.344" line, and the Weapons subgroup shows
+"Improved Attack Power with 3+ Daggers Equipped — ×1.2 (3+ Daggers
+Equipped)" — both the isolated multiplier and its trigger condition are
+now visible, and it correctly combines into the real per-element total
+via the existing nesting display. 20/57/2394 across the three test
+suites, all passing.

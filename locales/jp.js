@@ -18,7 +18,7 @@ window.__LOCALE_JP__ = {
     "build_axis_fire": "炎",
     "build_axis_lightning": "雷",
     "build_axis_holy": "聖",
-    "build_axis_universal": "全般",
+    "build_axis_universal": "全ダメージ",
     "build_category_sorcery": "魔術",
     "build_category_incantation": "祈祷",
     "build_none_selected": "まだ効果が選択されていません",

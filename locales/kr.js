@@ -18,7 +18,7 @@ window.__LOCALE_KR__ = {
     "build_axis_fire": "화염",
     "build_axis_lightning": "번개",
     "build_axis_holy": "신성",
-    "build_axis_universal": "전체",
+    "build_axis_universal": "전체 피해",
     "build_category_sorcery": "마법",
     "build_category_incantation": "기도",
     "build_none_selected": "아직 선택된 효과가 없습니다",
