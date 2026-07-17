@@ -7,9 +7,21 @@
 //            'flat'       — an ADDITIVE (not multiplicative) effect: a flat stat delta or
 //                           buildup-infliction amount. Duplicates on multiple relics
 //                           literally SUM (two copies of −80 resistances = −160), unlike
-//                           every other tier which combines by multiplication. Only
-//                           `value` and `template` apply; bucket/axes/category/group/stat
-//                           are all irrelevant for this tier.
+//                           every other tier which combines by multiplication. Has ONE of
+//                           two shapes:
+//                             { value, template }        — merged by matching effect NAME
+//                                                          (the normal case: only this exact
+//                                                          effect ever contributes here).
+//                             { pools: [{pool, value}] } — merged by POOL KEY instead of
+//                                                          name, for the rare case where
+//                                                          multiple DIFFERENT named effects
+//                                                          feed the same running total (e.g.
+//                                                          both "Vigor +1" and the curse
+//                                                          "Reduced Vigor and Arcane" affect
+//                                                          the same underlying Vigor stat).
+//                                                          One entry can list 2+ parts if it
+//                                                          touches multiple stats at once.
+//                           bucket/axes/category/group/stat are all irrelevant for this tier.
 // bucket:    'damage' | 'negation' | 'resource' — baseline/conditional only.
 // axes:      damage/negation only — one or more of physical/magic/fire/lightning/holy/universal.
 // category:  optional — 'sorcery' | 'incantation'. Layers on top of whichever axis the
@@ -182,20 +194,31 @@ export const EFFECT_MULTIPLIERS = {
   'Reduced Damage Negation After Evading': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'Right after evading' },
   'Reduced Damage Negation for Flask Usages': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'While using flasks' },
   'Improved Damage Negation at Low HP': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: 0.16, condition: 'While HP is below 40%' },
+  // Two-stage curse (−23% then escalating to −35% on repeated rolls within
+  // 15s) — tracked at its worst-case (escalated) value, same "Actions"
+  // treatment as every other timing-window negation curse above.
+  'Repeated Evasions Lower Damage Negation': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.35, condition: '15s after repeated evasions (escalates from −23% to −35%)' },
 
   // ── Flat/additive DON curses ──────────────────────────────────────────────
   // Duplicates SUM (see `flat` tier note above), not multiply — two copies of
   // "All Resistances Down" really do mean −160, not −80 squared or ×2 tagged
-  // onto the original number. Curses with more than one distinct number in
-  // their description (Reduced Vigor and Arcane: −3 stats AND −60 HP;
-  // Repeated Evasions Lower Damage Negation: −23%/−35% two-stage) are
-  // intentionally left unmapped rather than guessing which number to combine.
+  // onto the original number.
   'All Resistances Down': { tier: 'flat', value: -80, template: '{v} all status resistances' },
   'Continuous HP Loss': { tier: 'flat', value: -2, template: '{v} HP/s' },
-  'Reduced Dexterity and Faith': { tier: 'flat', value: -3, template: '{v} Dexterity and Faith' },
-  'Reduced Faith and Strength': { tier: 'flat', value: -3, template: '{v} Faith and Strength' },
-  'Reduced Intelligence and Dexterity': { tier: 'flat', value: -3, template: '{v} Intelligence and Dexterity' },
-  'Reduced Strength and Intelligence': { tier: 'flat', value: -3, template: '{v} Strength and Intelligence' },
+  // Dual-stat curses feed the SAME pools as the matching "X +N" relic effects
+  // below (e.g. this curse's Dexterity part merges with any "Dexterity +N"
+  // picked elsewhere) — see the `pools` shape note at the top of this file.
+  'Reduced Dexterity and Faith': { tier: 'flat', pools: [{ pool: 'dexterity', value: -3 }, { pool: 'faith', value: -3 }] },
+  'Reduced Faith and Strength': { tier: 'flat', pools: [{ pool: 'faith', value: -3 }, { pool: 'strength', value: -3 }] },
+  'Reduced Intelligence and Dexterity': { tier: 'flat', pools: [{ pool: 'intelligence', value: -3 }, { pool: 'dexterity', value: -3 }] },
+  'Reduced Strength and Intelligence': { tier: 'flat', pools: [{ pool: 'strength', value: -3 }, { pool: 'intelligence', value: -3 }] },
+  // The "vigor" pool is tracked in derived Max HP terms (matching "Vigor +1"
+  // = +20 Max HP below, a fixed 20-per-point conversion straight from the
+  // source spreadsheet) — so this curse's −3 Vigor contributes −60 to that
+  // SAME pool, exactly the "(−60 HP)" the spreadsheet already spells out;
+  // it's not an independent second number, just the same delta in HP units.
+  // "arcane" has no such conversion, so it stays in raw stat points.
+  'Reduced Vigor and Arcane': { tier: 'flat', pools: [{ pool: 'vigor', value: -60 }, { pool: 'arcane', value: -3 }] },
   'Taking Damage Causes Blood Loss Buildup': { tier: 'flat', value: 44, template: 'Taking damage inflicts {v} blood loss buildup' },
   'Taking Damage Causes Death Buildup': { tier: 'flat', value: 32, template: 'Taking damage inflicts {v} death blight buildup' },
   'Taking Damage Causes Frost Buildup': { tier: 'flat', value: 44, template: 'Taking damage inflicts {v} frost buildup' },
@@ -205,6 +228,68 @@ export const EFFECT_MULTIPLIERS = {
   'Taking Damage Causes Sleep Buildup': { tier: 'flat', value: 40, template: 'Taking damage inflicts {v} sleep buildup' },
   'Poison Buildup When Below Max HP': { tier: 'flat', value: 2, template: '{v} poison buildup per 0.22s', condition: 'While HP is below 85%' },
   'Rot Buildup When Below Max HP': { tier: 'flat', value: 2, template: '{v} rot buildup per 0.24s', condition: 'While HP is below 85%' },
+
+  // ── Status resistances (baseline, flat/additive — confirmed "Stackable: Yes"
+  // in the source spreadsheet). These are always positive gains (no curse
+  // reduces a specific named resistance the way "All Resistances Down" does
+  // as its own separate effect), so the '+' is baked into the template —
+  // unlike the buildup-infliction curses above, whose original descriptions
+  // never show a sign. ────────────────────────────────────────────────────
+  'Improved Blood Loss Resistance': { tier: 'flat', value: 75, template: '+{v} blood loss resistance' },
+  'Improved Blood Loss Resistance +1': { tier: 'flat', value: 110, template: '+{v} blood loss resistance' },
+  'Improved Death Blight Resistance': { tier: 'flat', value: 75, template: '+{v} death blight resistance' },
+  'Improved Death Blight Resistance +1': { tier: 'flat', value: 110, template: '+{v} death blight resistance' },
+  'Improved Frost Resistance': { tier: 'flat', value: 75, template: '+{v} frost resistance' },
+  'Improved Frost Resistance +1': { tier: 'flat', value: 110, template: '+{v} frost resistance' },
+  'Improved Madness Resistance': { tier: 'flat', value: 75, template: '+{v} madness resistance' },
+  'Improved Madness Resistance +1': { tier: 'flat', value: 110, template: '+{v} madness resistance' },
+  'Improved Poison Resistance': { tier: 'flat', value: 75, template: '+{v} poison resistance' },
+  'Improved Poison Resistance +1': { tier: 'flat', value: 110, template: '+{v} poison resistance' },
+  'Improved Rot Resistance': { tier: 'flat', value: 75, template: '+{v} rot resistance' },
+  'Improved Rot Resistance +1': { tier: 'flat', value: 110, template: '+{v} rot resistance' },
+  'Improved Sleep Resistance': { tier: 'flat', value: 75, template: '+{v} sleep resistance' },
+  'Improved Sleep Resistance +1': { tier: 'flat', value: 110, template: '+{v} sleep resistance' },
+
+  // ── Poise (baseline, multiplicative — confirmed "Stackable: Yes") ─────────
+  'Poise +1': { tier: 'baseline', bucket: 'resource', stat: 'poiseDamageTaken', value: 0.95 },
+  'Poise +2': { tier: 'baseline', bucket: 'resource', stat: 'poiseDamageTaken', value: 0.9 },
+  'Poise +3': { tier: 'baseline', bucket: 'resource', stat: 'poiseDamageTaken', value: 0.85 },
+
+  // ── Rune gain (baseline, multiplicative — confirmed "Stackable: Yes",
+  // shares the runeGain resource slot with the "Reduced Rune Acquisition"
+  // curse above) ────────────────────────────────────────────────────────────
+  'Increased rune acquisition for self and allies': { tier: 'baseline', bucket: 'resource', stat: 'runeGain', value: 1.035 },
+
+  // ── Base stat points (flat/additive, pool-based — confirmed "Stackable:
+  // Yes"). Vigor/Mind/Endurance have a clean HP/FP/Stamina conversion in the
+  // source spreadsheet, so those pools are tracked in derived-resource terms;
+  // Strength/Dexterity/Intelligence/Faith/Arcane have no such conversion
+  // (their effects are indirect — damage scaling, poise, equip load, etc.),
+  // so those pools are tracked as raw stat points instead. ───────────────────
+  'Vigor +1': { tier: 'flat', pools: [{ pool: 'vigor', value: 20 }] },
+  'Vigor +2': { tier: 'flat', pools: [{ pool: 'vigor', value: 40 }] },
+  'Vigor +3': { tier: 'flat', pools: [{ pool: 'vigor', value: 60 }] },
+  'Mind +1': { tier: 'flat', pools: [{ pool: 'mind', value: 5 }] },
+  'Mind +2': { tier: 'flat', pools: [{ pool: 'mind', value: 10 }] },
+  'Mind +3': { tier: 'flat', pools: [{ pool: 'mind', value: 15 }] },
+  'Endurance +1': { tier: 'flat', pools: [{ pool: 'endurance', value: 2 }] },
+  'Endurance +2': { tier: 'flat', pools: [{ pool: 'endurance', value: 4 }] },
+  'Endurance +3': { tier: 'flat', pools: [{ pool: 'endurance', value: 6 }] },
+  'Strength +1': { tier: 'flat', pools: [{ pool: 'strength', value: 1 }] },
+  'Strength +2': { tier: 'flat', pools: [{ pool: 'strength', value: 2 }] },
+  'Strength +3': { tier: 'flat', pools: [{ pool: 'strength', value: 3 }] },
+  'Dexterity +1': { tier: 'flat', pools: [{ pool: 'dexterity', value: 1 }] },
+  'Dexterity +2': { tier: 'flat', pools: [{ pool: 'dexterity', value: 2 }] },
+  'Dexterity +3': { tier: 'flat', pools: [{ pool: 'dexterity', value: 3 }] },
+  'Intelligence +1': { tier: 'flat', pools: [{ pool: 'intelligence', value: 1 }] },
+  'Intelligence +2': { tier: 'flat', pools: [{ pool: 'intelligence', value: 2 }] },
+  'Intelligence +3': { tier: 'flat', pools: [{ pool: 'intelligence', value: 3 }] },
+  'Faith +1': { tier: 'flat', pools: [{ pool: 'faith', value: 1 }] },
+  'Faith +2': { tier: 'flat', pools: [{ pool: 'faith', value: 2 }] },
+  'Faith +3': { tier: 'flat', pools: [{ pool: 'faith', value: 3 }] },
+  'Arcane +1': { tier: 'flat', pools: [{ pool: 'arcane', value: 1 }] },
+  'Arcane +2': { tier: 'flat', pools: [{ pool: 'arcane', value: 2 }] },
+  'Arcane +3': { tier: 'flat', pools: [{ pool: 'arcane', value: 3 }] },
 };
 
 // ── Weapon-type Attack Power (single-weapon = conditional; 3+ equipped = baseline universal) ──

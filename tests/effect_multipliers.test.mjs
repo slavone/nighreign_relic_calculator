@@ -15,29 +15,47 @@ const VALID_BUCKETS = new Set(['damage', 'negation', 'resource']);
 const VALID_AXES = new Set(['physical', 'magic', 'fire', 'lightning', 'holy', 'universal']);
 const VALID_CATEGORIES = new Set(['sorcery', 'incantation']);
 const VALID_GROUPS = new Set(['weapon', 'hitType', 'status']);
-const VALID_STATS = new Set(['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal', 'runeGain']);
+const VALID_STATS = new Set(['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal', 'runeGain', 'poiseDamageTaken']);
+const VALID_POOLS = new Set(['vigor', 'mind', 'endurance', 'strength', 'dexterity', 'intelligence', 'faith', 'arcane']);
 
 const entries = Object.entries(EFFECT_MULTIPLIERS);
 check('at least 80 entries present', entries.length >= 80);
 
 for (const [name, m] of entries) {
   check(`${name}: tier is valid`, VALID_TIERS.has(m.tier));
-  check(`${name}: value is a finite number`, typeof m.value === 'number' && Number.isFinite(m.value));
 
   if (m.tier === 'flat') {
     // Additive tier — duplicates SUM, not multiply. No bucket/axes/category/
-    // group/stat concept applies; only a template for regenerating the
-    // description after combining duplicates' values.
+    // group/stat concept applies. Has ONE of two shapes: {value, template}
+    // (merged by effect NAME) or {pools: [...]} (merged by POOL KEY, for the
+    // rare case where multiple different named effects feed one running
+    // total, e.g. "Vigor +1" and the "Reduced Vigor and Arcane" curse).
     check(`${name}: flat entry has no bucket`, m.bucket === undefined);
     check(`${name}: flat entry has no axes`, m.axes === undefined);
     check(`${name}: flat entry has no category`, m.category === undefined);
     check(`${name}: flat entry has no group`, m.group === undefined);
     check(`${name}: flat entry has no stat`, m.stat === undefined);
-    check(`${name}: flat entry has a template string`, typeof m.template === 'string' && m.template.includes('{v}'));
     check(`${name}: flat entry's condition, if present, is a non-empty string`,
       m.condition === undefined || (typeof m.condition === 'string' && m.condition.length > 0));
+    if (m.pools !== undefined) {
+      check(`${name}: pool-based flat entry has no top-level value`, m.value === undefined);
+      check(`${name}: pool-based flat entry has no top-level template`, m.template === undefined);
+      check(`${name}: pools is a non-empty array`, Array.isArray(m.pools) && m.pools.length > 0);
+      m.pools.forEach((p, i) => {
+        check(`${name}: pools[${i}].pool is valid`, VALID_POOLS.has(p.pool));
+        check(`${name}: pools[${i}].value is a finite number`, typeof p.value === 'number' && Number.isFinite(p.value));
+        check(`${name}: pools[${i}] has no template (pools use a fixed per-pool template)`, p.template === undefined);
+      });
+      const poolKeys = m.pools.map(p => p.pool);
+      check(`${name}: pools don't repeat the same pool key twice`, new Set(poolKeys).size === poolKeys.length);
+    } else {
+      check(`${name}: name-based flat entry has a finite value`, typeof m.value === 'number' && Number.isFinite(m.value));
+      check(`${name}: flat entry has a template string`, typeof m.template === 'string' && m.template.includes('{v}'));
+    }
     continue;
   }
+
+  check(`${name}: value is a finite number`, typeof m.value === 'number' && Number.isFinite(m.value));
 
   check(`${name}: bucket is valid`, VALID_BUCKETS.has(m.bucket));
   check(`${name}: flat-only template is absent`, m.template === undefined);
@@ -150,9 +168,40 @@ const bloodLossBuildup = EFFECT_MULTIPLIERS['Taking Damage Causes Blood Loss Bui
 check('Taking Damage Causes Blood Loss Buildup is flat, +44', bloodLossBuildup &&
   bloodLossBuildup.tier === 'flat' && bloodLossBuildup.value === 44);
 
-check('multi-number curses (Reduced Vigor and Arcane, Repeated Evasions...) are intentionally left unmapped',
-  EFFECT_MULTIPLIERS['Reduced Vigor and Arcane'] === undefined &&
-  EFFECT_MULTIPLIERS['Repeated Evasions Lower Damage Negation'] === undefined);
+// Both multi-number curses were later given a proper representation instead
+// of being left unmapped: Reduced Vigor and Arcane decomposes into two pool
+// contributions (vigor: -60 in derived HP terms, arcane: -3 raw points);
+// Repeated Evasions Lower Damage Negation became a conditional negation
+// Action tracked at its worst-case (escalated) value.
+const reducedVigorArcane = EFFECT_MULTIPLIERS['Reduced Vigor and Arcane'];
+check('Reduced Vigor and Arcane is pool-based flat with vigor(-60) and arcane(-3)', reducedVigorArcane &&
+  reducedVigorArcane.tier === 'flat' && Array.isArray(reducedVigorArcane.pools) &&
+  reducedVigorArcane.pools.some(p => p.pool === 'vigor' && p.value === -60) &&
+  reducedVigorArcane.pools.some(p => p.pool === 'arcane' && p.value === -3));
+
+const repeatedEvasions = EFFECT_MULTIPLIERS['Repeated Evasions Lower Damage Negation'];
+check('Repeated Evasions Lower Damage Negation is a conditional negation Action', repeatedEvasions &&
+  repeatedEvasions.tier === 'conditional' && repeatedEvasions.bucket === 'negation' &&
+  repeatedEvasions.group === 'status' && repeatedEvasions.value === -0.35);
+
+// Vigor +1 and the curse's vigor part share the SAME pool key, tracked in
+// the same derived-HP unit (20 HP per Vigor point) — this is the whole point
+// of the pools mechanism: two differently-named effects feeding one total.
+const vigorUp1 = EFFECT_MULTIPLIERS['Vigor +1'];
+check('Vigor +1 is pool-based flat in the vigor pool, matching the +20 HP conversion', vigorUp1 &&
+  vigorUp1.tier === 'flat' && vigorUp1.pools[0].pool === 'vigor' && vigorUp1.pools[0].value === 20);
+
+const poise1 = EFFECT_MULTIPLIERS['Poise +1'];
+check('Poise +1 is a baseline resource multiplier (poiseDamageTaken)', poise1 &&
+  poise1.tier === 'baseline' && poise1.bucket === 'resource' && poise1.stat === 'poiseDamageTaken' && poise1.value === 0.95);
+
+const increasedRuneAcquisition = EFFECT_MULTIPLIERS['Increased rune acquisition for self and allies'];
+check('Increased rune acquisition shares the runeGain resource slot', increasedRuneAcquisition &&
+  increasedRuneAcquisition.tier === 'baseline' && increasedRuneAcquisition.bucket === 'resource' && increasedRuneAcquisition.stat === 'runeGain' && increasedRuneAcquisition.value === 1.035);
+
+const bloodLossResistance = EFFECT_MULTIPLIERS['Improved Blood Loss Resistance'];
+check('Improved Blood Loss Resistance is flat, +75', bloodLossResistance &&
+  bloodLossResistance.tier === 'flat' && bloodLossResistance.value === 75);
 
 // Guards against the exact mistake that slipped through once already: editing
 // effect_multipliers.mjs without re-running prepare_data.mjs/prepare_don_data.mjs

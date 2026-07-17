@@ -2774,14 +2774,24 @@
           "name": "Improved Blood Loss Resistance",
           "w": 69,
           "hasCurse": false,
-          "desc": "+75 blood loss resistance"
+          "desc": "+75 blood loss resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 75,
+            "template": "+{v} blood loss resistance"
+          }
         },
         {
           "id": "6003100",
           "name": "Improved Blood Loss Resistance +1",
           "w": 69,
           "hasCurse": true,
-          "desc": "+110 blood loss resistance"
+          "desc": "+110 blood loss resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 110,
+            "template": "+{v} blood loss resistance"
+          }
         }
       ]
     },
@@ -2817,14 +2827,24 @@
           "name": "Improved Death Blight Resistance",
           "w": 69,
           "hasCurse": false,
-          "desc": "+75 death blight resistance"
+          "desc": "+75 death blight resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 75,
+            "template": "+{v} death blight resistance"
+          }
         },
         {
           "id": "6003300",
           "name": "Improved Death Blight Resistance +1",
           "w": 69,
           "hasCurse": true,
-          "desc": "+110 death blight resistance"
+          "desc": "+110 death blight resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 110,
+            "template": "+{v} death blight resistance"
+          }
         }
       ]
     },
@@ -2856,14 +2876,24 @@
           "name": "Improved Frost Resistance",
           "w": 69,
           "hasCurse": false,
-          "desc": "+75 frost resistance"
+          "desc": "+75 frost resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 75,
+            "template": "+{v} frost resistance"
+          }
         },
         {
           "id": "6003500",
           "name": "Improved Frost Resistance +1",
           "w": 69,
           "hasCurse": true,
-          "desc": "+110 frost resistance"
+          "desc": "+110 frost resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 110,
+            "template": "+{v} frost resistance"
+          }
         }
       ]
     },
@@ -2967,14 +2997,24 @@
           "name": "Improved Madness Resistance",
           "w": 69,
           "hasCurse": false,
-          "desc": "+75 madness resistance"
+          "desc": "+75 madness resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 75,
+            "template": "+{v} madness resistance"
+          }
         },
         {
           "id": "6003600",
           "name": "Improved Madness Resistance +1",
           "w": 69,
           "hasCurse": true,
-          "desc": "+110 madness resistance"
+          "desc": "+110 madness resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 110,
+            "template": "+{v} madness resistance"
+          }
         }
       ]
     },
@@ -3109,14 +3149,24 @@
           "name": "Improved Poison Resistance",
           "w": 69,
           "hasCurse": false,
-          "desc": "+75 poison resistance"
+          "desc": "+75 poison resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 75,
+            "template": "+{v} poison resistance"
+          }
         },
         {
           "id": "6003000",
           "name": "Improved Poison Resistance +1",
           "w": 69,
           "hasCurse": true,
-          "desc": "+110 poison resistance"
+          "desc": "+110 poison resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 110,
+            "template": "+{v} poison resistance"
+          }
         }
       ]
     },
@@ -3129,14 +3179,24 @@
           "name": "Improved Rot Resistance",
           "w": 69,
           "hasCurse": false,
-          "desc": "+75 rot resistance"
+          "desc": "+75 rot resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 75,
+            "template": "+{v} rot resistance"
+          }
         },
         {
           "id": "6003400",
           "name": "Improved Rot Resistance +1",
           "w": 69,
           "hasCurse": true,
-          "desc": "+110 rot resistance"
+          "desc": "+110 rot resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 110,
+            "template": "+{v} rot resistance"
+          }
         }
       ]
     },
@@ -3149,14 +3209,24 @@
           "name": "Improved Sleep Resistance",
           "w": 69,
           "hasCurse": false,
-          "desc": "+75 sleep resistance"
+          "desc": "+75 sleep resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 75,
+            "template": "+{v} sleep resistance"
+          }
         },
         {
           "id": "6003200",
           "name": "Improved Sleep Resistance +1",
           "w": 69,
           "hasCurse": true,
-          "desc": "+110 sleep resistance"
+          "desc": "+110 sleep resistance",
+          "mul": {
+            "tier": "flat",
+            "value": 110,
+            "template": "+{v} sleep resistance"
+          }
         }
       ]
     },
@@ -3305,7 +3375,14 @@
           "id": "7110000",
           "name": "Increased rune acquisition for self and allies",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "1.035× rune gain for self and allies",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "runeGain",
+            "value": 1.035
+          }
         }
       ]
     },
@@ -3423,7 +3500,13 @@
           "name": "Poise +3",
           "w": 69,
           "hasCurse": false,
-          "desc": "0.85× incoming poise damage"
+          "desc": "0.85× incoming poise damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "poiseDamageTaken",
+            "value": 0.85
+          }
         }
       ]
     },
@@ -3900,8 +3983,16 @@
       "desc": "−3 Dexterity and Faith",
       "mul": {
         "tier": "flat",
-        "value": -3,
-        "template": "{v} Dexterity and Faith"
+        "pools": [
+          {
+            "pool": "dexterity",
+            "value": -3
+          },
+          {
+            "pool": "faith",
+            "value": -3
+          }
+        ]
       }
     },
     {
@@ -3911,8 +4002,16 @@
       "desc": "−3 Faith and Strength",
       "mul": {
         "tier": "flat",
-        "value": -3,
-        "template": "{v} Faith and Strength"
+        "pools": [
+          {
+            "pool": "faith",
+            "value": -3
+          },
+          {
+            "pool": "strength",
+            "value": -3
+          }
+        ]
       }
     },
     {
@@ -3934,8 +4033,16 @@
       "desc": "−3 Intelligence and Dexterity",
       "mul": {
         "tier": "flat",
-        "value": -3,
-        "template": "{v} Intelligence and Dexterity"
+        "pools": [
+          {
+            "pool": "intelligence",
+            "value": -3
+          },
+          {
+            "pool": "dexterity",
+            "value": -3
+          }
+        ]
       }
     },
     {
@@ -3957,21 +4064,52 @@
       "desc": "−3 Strength and Intelligence",
       "mul": {
         "tier": "flat",
-        "value": -3,
-        "template": "{v} Strength and Intelligence"
+        "pools": [
+          {
+            "pool": "strength",
+            "value": -3
+          },
+          {
+            "pool": "intelligence",
+            "value": -3
+          }
+        ]
       }
     },
     {
       "id": "6830400",
       "name": "Reduced Vigor and Arcane",
       "w": 100,
-      "desc": "−3 Vigor and Arcane (−60 HP)"
+      "desc": "−3 Vigor and Arcane (−60 HP)",
+      "mul": {
+        "tier": "flat",
+        "pools": [
+          {
+            "pool": "vigor",
+            "value": -60
+          },
+          {
+            "pool": "arcane",
+            "value": -3
+          }
+        ]
+      }
     },
     {
       "id": "6850800",
       "name": "Repeated Evasions Lower Damage Negation",
       "w": 100,
-      "desc": "−23%/−35% damage negation for 15s on repeated rolls"
+      "desc": "−23%/−35% damage negation for 15s on repeated rolls",
+      "mul": {
+        "tier": "conditional",
+        "bucket": "negation",
+        "axes": [
+          "universal"
+        ],
+        "group": "status",
+        "value": -0.35,
+        "condition": "15s after repeated evasions (escalates from −23% to −35%)"
+      }
     },
     {
       "id": "6851400",

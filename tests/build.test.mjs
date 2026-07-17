@@ -6,7 +6,22 @@ const AXES = ['physical', 'magic', 'fire', 'lightning', 'holy', 'universal'];
 // ultimate gauge, max HP/FP/stamina, flask healing) — they must never be
 // multiplied together, so each gets its own baseline slot, exactly like
 // damage/negation get one per element instead of one blended number.
-const RESOURCE_STATS = ['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal', 'runeGain'];
+const RESOURCE_STATS = ['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal', 'runeGain', 'poiseDamageTaken'];
+// Pool-based flat entries merge by POOL KEY (not effect name) — the same
+// underlying stat can be fed by multiple differently-named effects (e.g.
+// both "Vigor +1" and the curse "Reduced Vigor and Arcane" affect the same
+// Vigor total). Values can go either direction (a curse can push a pool
+// negative), so formatting always shows an explicit sign, unlike the
+// fixed-sign templates used by name-grouped flat entries.
+const FLAT_POOL_TEMPLATES = {
+  vigor: '{v} Max HP', mind: '{v} Max FP', endurance: '{v} Max Stamina',
+  strength: '{v} Strength', dexterity: '{v} Dexterity', intelligence: '{v} Intelligence',
+  faith: '{v} Faith', arcane: '{v} Arcane',
+};
+// Display labels (e.g. "Vigor") are a UI/rendering concern, not part of this
+// pure calc function — computeBuildTotals hands back the raw `pool` key and
+// the renderer (index.html) resolves it through i18n, matching how every
+// other translated string in the output stays untranslated until render.
 
 function computeBuildTotals(effects) {
   const damageBaseline = Object.fromEntries(AXES.map(a => [a, 1]));
@@ -25,6 +40,10 @@ function computeBuildTotals(effects) {
   // their value directly rather than combining via count + a power, unlike
   // every other tier.
   const flatByName = new Map();
+  // Pool-based flat entries (see FLAT_POOL_TEMPLATES above) merge by pool key
+  // instead of effect name — one relic-effect selection can feed 2+ pools at
+  // once (e.g. "Reduced Vigor and Arcane" touches both vigor and arcane).
+  const flatByPool = new Map();
 
   for (const effect of effects) {
     const m = effect.mul;
@@ -35,6 +54,14 @@ function computeBuildTotals(effects) {
       continue;
     }
     if (m.tier === 'flat') {
+      if (m.pools) {
+        for (const part of m.pools) {
+          const existing = flatByPool.get(part.pool);
+          if (existing) { existing.value += part.value; existing.count++; }
+          else flatByPool.set(part.pool, { pool: part.pool, value: part.value, count: 1 });
+        }
+        continue;
+      }
       const existing = flatByName.get(effect.name);
       if (existing) { existing.value += m.value; existing.count++; }
       else flatByName.set(effect.name, { name: effect.name, value: m.value, template: m.template, condition: m.condition, count: 1 });
@@ -143,10 +170,21 @@ function computeBuildTotals(effects) {
   // resistances" — the real combined effect — not the original −80 with a
   // count tag bolted on.
   function formatFlatValue(v) { return v < 0 ? '−' + Math.abs(v) : String(v); }
-  const flat = [...flatByName.values()].map(f => ({
+  const flatFromNames = [...flatByName.values()].map(f => ({
     ...f,
     desc: f.template.replace('{v}', formatFlatValue(f.value)),
   }));
+  // Pool totals can land on either side of zero (a curse can push a stat
+  // negative even after gains), so they always show an explicit sign —
+  // unlike name-grouped templates, which each already bake in a fixed sign
+  // convention matching their own source description.
+  function formatFlatPoolValue(v) { return (v < 0 ? '−' : '+') + Math.abs(v); }
+  const flatFromPools = [...flatByPool.values()].map(p => ({
+    pool: p.pool,
+    desc: FLAT_POOL_TEMPLATES[p.pool].replace('{v}', formatFlatPoolValue(p.value)),
+    count: p.count,
+  }));
+  const flat = [...flatFromNames, ...flatFromPools];
 
   return {
     damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
@@ -392,6 +430,37 @@ function test(label, actual, expected, tolerance = 1e-9) {
     { name: 'Continuous HP Loss', mul: continuousHpLoss },
   ]);
   test('two distinct flat effects stay as two separate entries', r.flat.length, 2);
+}
+
+// User-requested: two DIFFERENTLY-NAMED effects that touch the same base
+// stat (Vigor +1 relic effect, and the curse "Reduced Vigor and Arcane")
+// must combine into ONE pool total, not sit as two separate unrelated rows.
+{
+  const vigorUp1 = { tier: 'flat', pools: [{ pool: 'vigor', value: 20 }] };
+  const reducedVigorArcane = { tier: 'flat', pools: [{ pool: 'vigor', value: -60 }, { pool: 'arcane', value: -3 }] };
+  const r = computeBuildTotals([
+    { name: 'Vigor +1', mul: vigorUp1 },
+    { name: 'Reduced Vigor and Arcane', mul: reducedVigorArcane },
+  ]);
+  const vigorRow = r.flat.find(f => f.pool === 'vigor');
+  const arcaneRow = r.flat.find(f => f.pool === 'arcane');
+  test('exactly one vigor-pool row (merged across 2 differently-named sources)', r.flat.filter(f => f.pool === 'vigor').length, 1);
+  test('vigor pool sums +20 and -60 to -40', vigorRow.desc, '−40 Max HP');
+  test('arcane pool only touched by the curse, stays -3', arcaneRow.desc, '−3 Arcane');
+}
+
+// A pool total that ends up positive shows an explicit "+" (unlike
+// name-grouped flat entries, whose sign is baked into their own template).
+{
+  const vigorUp1 = { tier: 'flat', pools: [{ pool: 'vigor', value: 20 }] };
+  const vigorUp2 = { tier: 'flat', pools: [{ pool: 'vigor', value: 40 }] };
+  const r = computeBuildTotals([
+    { name: 'Vigor +1', mul: vigorUp1 },
+    { name: 'Vigor +2', mul: vigorUp2 },
+  ]);
+  const vigorRow = r.flat.find(f => f.pool === 'vigor');
+  test('two vigor sources merge into one row with count 2', vigorRow.count, 2);
+  test('positive pool total shows an explicit +', vigorRow.desc, '+60 Max HP');
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

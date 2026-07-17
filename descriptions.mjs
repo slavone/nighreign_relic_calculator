@@ -16,10 +16,30 @@ export const EFFECT_DESCRIPTIONS = {
   'Endurance +2': '+4 Max Stamina',
   'Endurance +3': '+6 Max Stamina',
 
+  // ── Strength / Dexterity / Intelligence / Faith / Arcane ────────────────────
+  'Strength +1': '+1 Strength',
+  'Strength +2': '+2 Strength',
+  'Strength +3': '+3 Strength',
+  'Dexterity +1': '+1 Dexterity',
+  'Dexterity +2': '+2 Dexterity',
+  'Dexterity +3': '+3 Dexterity',
+  'Intelligence +1': '+1 Intelligence',
+  'Intelligence +2': '+2 Intelligence',
+  'Intelligence +3': '+3 Intelligence',
+  'Faith +1': '+1 Faith',
+  'Faith +2': '+2 Faith',
+  'Faith +3': '+3 Faith',
+  'Arcane +1': '+1 Arcane',
+  'Arcane +2': '+2 Arcane',
+  'Arcane +3': '+3 Arcane',
+
   // ── Poise ─────────────────────────────────────────────────────────────────
   'Poise +1': '0.95× incoming poise damage',
   'Poise +2': '0.9× incoming poise damage',
   'Poise +3': '0.85× incoming poise damage',
+
+  // ── Runes ─────────────────────────────────────────────────────────────────
+  'Increased rune acquisition for self and allies': '1.035× rune gain for self and allies',
 
   // ── Cooldown / Ultimate ───────────────────────────────────────────────────
   'Character Skill Cooldown Reduction +1': '0.95× skill cooldown',

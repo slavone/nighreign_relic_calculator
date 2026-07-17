@@ -2049,3 +2049,71 @@ effect ever shows the marker (sanity check, since regular effects have no
 curse concept at all). 5 live-DOM assertions, no regression in the
 existing 20/47/1779 test suites (no data pipeline changes needed for
 this one).
+
+### Post-plan addendum: Task 28 — audited "No Computed Multiplier" before renaming to "Non Stackable"
+
+User request: rename the bucket to "Non Stackable" *and verify everything
+in it actually is*. Rather than rename blind, used the source spreadsheet's
+unused "Stackable with self?" column (flagged in project memory as an
+open item since the original Issue #1 data audit) as ground truth, cross-
+referencing all ~317 currently-unmapped effect names against it.
+
+Found real problems: several confirmed-stackable, clean-numeric effects
+were sitting in the bucket, which would have made "Non Stackable" a false
+claim if renamed as-is — Vigor/Mind/Endurance +1/2/3 (clean HP/FP/Stamina
+conversions already in `descriptions.mjs`), the 7-status × 2-tier
+resistance family (+75/+110, confirmed "Yes"), Poise +1/2/3 (a genuine
+0.95/0.9/0.85 multiplier), and "Increased rune acquisition for self and
+allies" (1.035× rune gain, just missing a resource-stat slot). Also found
+two multi-value curses (Reduced Vigor and Arcane: two different numbers;
+Repeated Evasions Lower Damage Negation: two-stage %) that were previously
+left unmapped as "too complex" — asked the user how to handle these rather
+than guess; they wanted them actually computed, not exception-listed.
+
+Two rounds of `AskUserQuestion` resolved the judgment calls: (1) Poise
+gets real tracking, reversing the original design spec's explicit
+poise-tracking non-goal — added `poiseDamageTaken` as a new multiplicative
+resource stat, same pattern as `fpConsumption`/`cooldown`/etc. (2) The raw
+base stats (Strength/Dexterity/Intelligence/Faith/Arcane) should sum with
+themselves as plain point totals — user pointed out there's no reason they
+can't, since the `flat` tier doesn't require an HP-style unit conversion,
+just a number and a template.
+
+This required a genuine data-model extension: the existing `flat` tier
+only merged duplicates of the exact same effect NAME. But "Vigor +1" (a
+relic effect) and "Reduced Vigor and Arcane" (a curse) both need to feed
+the SAME running Vigor total despite having different names — merging by
+name can't express that. Added a second `flat` shape,
+`{ pools: [{pool, value}, ...] }`, merged by POOL KEY instead of name; one
+entry can list 2+ parts (Reduced Vigor and Arcane touches both `vigor` and
+`arcane`). `computeBuildTotals` gained a parallel `flatByPool` accumulator
+alongside the existing `flatByName` one. Display labels for pools moved
+into the renderer (`BUILD_FLAT_POOL_LABELS`, i18n-wrapped) rather than
+`computeBuildTotals` itself, preserving the existing convention that the
+calc engine never touches I18N — caught and fixed mid-implementation when
+the pool label was accidentally being double-translated.
+
+Vigor/Mind/Endurance pools are tracked in their derived resource units
+(Max HP/FP/Stamina, matching the spreadsheet's own conversion — "Reduced
+Vigor and Arcane"'s −3 Vigor contributes −60 to the SAME pool as "Vigor
++1"'s +20, both in HP terms); Strength/Dexterity/Intelligence/Faith/Arcane
+have no such conversion in the source data, so those pools track raw stat
+points instead. The 4 existing dual-stat-drain curses (Reduced Dexterity
+and Faith, etc.) were converted from single combined-template flat entries
+to 2-part pool entries for the same cross-name-merging reason. "Repeated
+Evasions Lower Damage Negation" became a proper conditional negation
+Action (tracked at its escalated −35% worst case, per the user's explicit
+request to treat it like every other timing-window negation curse).
+
+Verified with fresh `jsdom` instances: the bucket now reads "Non
+Stackable" (EN/JP/KR); the two effects from the user's original URL
+(guard-based damage boost, guard-aggro effect — both confirmed
+non-stackable) correctly remain in it; "Vigor +1" + "Reduced Vigor and
+Arcane" picked together merge into one row showing "−40 Max HP" (the real
+combined value, not two disconnected numbers); Poise +1 now shows as a
+proper "Poise Damage Taken ×0.95" resource row instead of sitting
+unmapped. 17 live-DOM assertions across three scenarios plus full JP/KR
+translation checks, plus two new permanent regression tests in
+`tests/effect_multipliers.test.mjs` and 5 new ones in
+`tests/build.test.mjs` covering the pool-merge mechanism specifically —
+20/52/2346 across the three test suites, all passed.
