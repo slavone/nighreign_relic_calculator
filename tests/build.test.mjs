@@ -8,13 +8,28 @@ function computeBuildTotals(effects) {
   const negationBaseline = Object.fromEntries(AXES.map(a => [a, 1]));
   const categoryBaseline = { sorcery: 1, incantation: 1 };
   let resourceBaseline = 1;
-  const conditional = [];
-  const other = [];
+  // Grouped by name: the same specific effect selected on multiple relics
+  // genuinely stacks (e.g. 3 relics all with "Improved Carian Sword
+  // Sorcery" all apply together whenever you cast one) — so duplicates
+  // combine into a single row with a count, not N identical-looking rows
+  // that each silently ignore their siblings.
+  const conditionalByName = new Map();
+  const otherByName = new Map();
 
   for (const effect of effects) {
     const m = effect.mul;
-    if (!m) { other.push({ name: effect.name }); continue; }
-    if (m.tier === 'conditional') { conditional.push({ name: effect.name, ...m }); continue; }
+    if (!m) {
+      const existing = otherByName.get(effect.name);
+      if (existing) existing.count++;
+      else otherByName.set(effect.name, { name: effect.name, count: 1 });
+      continue;
+    }
+    if (m.tier === 'conditional') {
+      const existing = conditionalByName.get(effect.name);
+      if (existing) existing.count++;
+      else conditionalByName.set(effect.name, { name: effect.name, ...m, count: 1 });
+      continue;
+    }
     if (m.bucket === 'resource') {
       resourceBaseline *= m.value;
     } else if (m.bucket === 'negation') {
@@ -28,24 +43,26 @@ function computeBuildTotals(effects) {
   // Universal always applies on top of a conditional entry's own specific axis
   // (Universal bonuses, by definition, apply regardless of damage type) — so it's
   // folded in unconditionally, skipping a second multiply if the entry's own axis
-  // literally is "universal" (avoids squaring it).
+  // literally is "universal" (avoids squaring it). `count` copies of the same
+  // effect apply `count` times (∏(1-v) per copy for negation, value^count
+  // otherwise — identical copies make these equivalent to a power).
   function combinedFor(c) {
-    if (c.bucket === 'resource') return resourceBaseline * c.value;
+    if (c.bucket === 'resource') return resourceBaseline * Math.pow(c.value, c.count);
     if (c.bucket === 'negation') {
       let combined = negationBaseline.universal;
       for (const axis of c.axes) if (axis !== 'universal') combined *= negationBaseline[axis];
-      return combined * (1 - c.value);
+      return combined * Math.pow(1 - c.value, c.count);
     }
     let combined = damageBaseline.universal;
     for (const axis of c.axes) if (axis !== 'universal') combined *= damageBaseline[axis];
     if (c.category) combined *= categoryBaseline[c.category];
-    return combined * c.value;
+    return combined * Math.pow(c.value, c.count);
   }
 
   return {
     damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
-    conditional: conditional.map(c => ({ ...c, combined: combinedFor(c) })),
-    other,
+    conditional: [...conditionalByName.values()].map(c => ({ ...c, combined: combinedFor(c) })),
+    other: [...otherByName.values()],
   };
 }
 
@@ -105,6 +122,30 @@ function test(label, actual, expected, tolerance = 1e-9) {
   ]);
   test('universal baseline', r.damageBaseline.universal, 1.2);
   test('katana combined = physical * universal * katana', r.conditional[0].combined, 1.05 * 1.2 * 1.09);
+}
+
+// User-reported bug: the same conditional effect selected on 4 different
+// relics (e.g. Improved Carian Sword Sorcery on 3 regular relics + 1 DON
+// relic slot) must collapse into ONE conditional row with count=4, whose
+// combined figure reflects all 4 copies stacking (magic baseline × sorcery
+// category baseline × 1.12^4) — not 4 separate rows each silently showing
+// only a single copy's contribution.
+{
+  const magicUp = { tier: 'baseline', bucket: 'damage', axes: ['magic'], value: 1.12 };
+  const carianSword = { tier: 'conditional', bucket: 'damage', axes: ['magic'], category: 'sorcery', value: 1.12, condition: 'Casting Carian Sword sorceries only' };
+  const r = computeBuildTotals([
+    { name: 'Magic Attack Power Up +4', mul: magicUp },
+    { name: 'Magic Attack Power Up +4', mul: magicUp },
+    { name: 'Improved Carian Sword Sorcery', mul: carianSword },
+    { name: 'Improved Carian Sword Sorcery', mul: carianSword },
+    { name: 'Improved Carian Sword Sorcery', mul: carianSword },
+    { name: 'Improved Carian Sword Sorcery', mul: carianSword },
+  ]);
+  test('4 duplicate conditional effects collapse into 1 row', r.conditional.length, 1);
+  test('collapsed row carries count=4', r.conditional[0].count, 4);
+  test('magic baseline reflects both baseline copies', r.damageBaseline.magic, 1.12 * 1.12);
+  test('combined reflects magic baseline × 1.12^4 (sorcery category untouched by baseline)',
+    r.conditional[0].combined, (1.12 * 1.12) * Math.pow(1.12, 4));
 }
 
 // Duplicate effects (two relics rolling the same baseline effect) multiply twice.

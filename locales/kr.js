@@ -23,6 +23,7 @@ window.__LOCALE_KR__ = {
     "build_category_incantation": "기도",
     "build_none_selected": "아직 선택된 효과가 없습니다",
     "build_combined_label": "합계",
+    "build_each_label": "각각",
     "build_conditional_title": "조건부 효과",
     "build_other_title": "기타 효과",
     "build_damage_title": "데미지",

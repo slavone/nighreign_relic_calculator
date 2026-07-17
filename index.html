@@ -378,13 +378,28 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       const negationBaseline = Object.fromEntries(BUILD_AXES.map(a => [a, 1]));
       const categoryBaseline = { sorcery: 1, incantation: 1 };
       let resourceBaseline = 1;
-      const conditional = [];
-      const other = [];
+      // Grouped by name: the same specific effect selected on multiple relics
+      // genuinely stacks (e.g. 3 relics all with "Improved Carian Sword
+      // Sorcery" all apply together whenever you cast one) — so duplicates
+      // combine into a single row with a count, not N identical-looking rows
+      // that each silently ignore their siblings.
+      const conditionalByName = new Map();
+      const otherByName = new Map();
 
       for (const effect of effects) {
         const m = effect.mul;
-        if (!m) { other.push({ name: effect.name }); continue; }
-        if (m.tier === 'conditional') { conditional.push({ name: effect.name, ...m }); continue; }
+        if (!m) {
+          const existing = otherByName.get(effect.name);
+          if (existing) existing.count++;
+          else otherByName.set(effect.name, { name: effect.name, count: 1 });
+          continue;
+        }
+        if (m.tier === 'conditional') {
+          const existing = conditionalByName.get(effect.name);
+          if (existing) existing.count++;
+          else conditionalByName.set(effect.name, { name: effect.name, ...m, count: 1 });
+          continue;
+        }
         if (m.bucket === 'resource') {
           resourceBaseline *= m.value;
         } else if (m.bucket === 'negation') {
@@ -398,24 +413,26 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       // Universal always applies on top of a conditional entry's own specific axis
       // (Universal bonuses, by definition, apply regardless of damage type) — so it's
       // folded in unconditionally, skipping a second multiply if the entry's own axis
-      // literally is "universal" (avoids squaring it).
+      // literally is "universal" (avoids squaring it). `count` copies of the same
+      // effect apply `count` times (∏(1-v) per copy for negation, value^count
+      // otherwise — identical copies make these equivalent to a power).
       function combinedFor(c) {
-        if (c.bucket === 'resource') return resourceBaseline * c.value;
+        if (c.bucket === 'resource') return resourceBaseline * Math.pow(c.value, c.count);
         if (c.bucket === 'negation') {
           let combined = negationBaseline.universal;
           for (const axis of c.axes) if (axis !== 'universal') combined *= negationBaseline[axis];
-          return combined * (1 - c.value);
+          return combined * Math.pow(1 - c.value, c.count);
         }
         let combined = damageBaseline.universal;
         for (const axis of c.axes) if (axis !== 'universal') combined *= damageBaseline[axis];
         if (c.category) combined *= categoryBaseline[c.category];
-        return combined * c.value;
+        return combined * Math.pow(c.value, c.count);
       }
 
       return {
         damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
-        conditional: conditional.map(c => ({ ...c, combined: combinedFor(c) })),
-        other,
+        conditional: [...conditionalByName.values()].map(c => ({ ...c, combined: combinedFor(c) })),
+        other: [...otherByName.values()],
       };
     }
 
@@ -450,8 +467,10 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       const items = conditional.map(c => {
         const axisLabel = (c.axes || []).map(a => BUILD_AXIS_LABELS[a]()).join(' + ');
         const categoryLabel = c.category ? ' + ' + BUILD_CATEGORY_LABELS[c.category]() : '';
+        const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
+        const eachSuffix = c.count > 1 ? ' ' + I18N.t('build_each_label', 'each') : '';
         return `<div class="build-conditional-item">
-          <div>${I18N.effectName(c.name)} — ${fmtMul(c.value)} <em>(${c.condition})</em></div>
+          <div>${I18N.effectName(c.name)}${countSuffix} — ${fmtMul(c.value)}${eachSuffix} <em>(${c.condition})</em></div>
           <div class="build-conditional-combined">${I18N.t('build_combined_label', 'Combined')}: ${axisLabel}${categoryLabel} → ${fmtMul(c.combined)}</div>
         </div>`;
       }).join('');
@@ -463,7 +482,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
 
     function renderBuildOther(other) {
       if (other.length === 0) return '';
-      const items = other.map(o => `<li>${I18N.effectName(o.name)}</li>`).join('');
+      const items = other.map(o => `<li>${I18N.effectName(o.name)}${o.count > 1 ? ` ×${o.count}` : ''}</li>`).join('');
       return `<div class="build-summary-section">
         <div class="build-summary-title">${I18N.t('build_other_title', 'Other Effects')}</div>
         <ul class="build-other-list">${items}</ul>

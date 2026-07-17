@@ -23,6 +23,7 @@ window.__LOCALE_JP__ = {
     "build_category_incantation": "祈祷",
     "build_none_selected": "まだ効果が選択されていません",
     "build_combined_label": "合計",
+    "build_each_label": "それぞれ",
     "build_conditional_title": "条件付き効果",
     "build_other_title": "その他の効果",
     "build_damage_title": "ダメージ",

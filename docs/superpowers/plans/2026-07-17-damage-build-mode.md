@@ -1580,3 +1580,33 @@ per-slot curse-row visibility and selection. 21 assertions across two test
 files, plus a 14-assertion full-scenario regression pass (v1/v2/v3 together,
 including the "Bestial Incantations has no curse" negative case) — all
 passed.
+
+---
+
+### Post-plan addendum: Task 13 — duplicate conditional effects weren't combined
+
+User-caught: selecting the same conditional effect on multiple relics (their
+example: "Improved Carian Sword Sorcery" on 3 regular relics + 1 DON relic
+slot) produced 4 separate, identical-looking rows in Conditional Effects,
+each computing its "combined" figure against only the shared baseline —
+silently ignoring its 3 siblings. In-game all 4 copies would actually stack
+(baseline × 1.12⁴ when casting a Carian Sword spell with all 4 relics
+equipped), so 4 uncombined rows showing the same understated number was
+both confusing and wrong.
+
+Fix: `computeBuildTotals` now groups conditional (and flat/"other") entries
+by exact effect name into a `Map` instead of a flat array, tracking a
+`count`. `combinedFor` raises the duplicate's own value to `count` (or
+`(1 − v)` to `count` for negation, since identical repeated factors reduce
+to a power) before folding in the baseline/category/universal terms. The
+UI (`renderBuildConditional` / `renderBuildOther`) shows a `×N` suffix and
+"each" qualifier when count > 1, added `build_each_label` i18n key.
+Mutually-exclusive effects (e.g. Katana vs Greatsword single-weapon bonuses)
+are unaffected — they group by name, so different names never merge.
+
+Verified against the user's exact reported URL with a fresh `jsdom`
+instance: Conditional Effects now shows exactly one "Improved Carian Sword
+Sorcery ×4 — ×1.12 each" row with combined `×1.974` (= 1.12² baseline ×
+1.12⁴), matching hand-computed expectations. Also added a permanent
+regression test (`tests/build.test.mjs`) reproducing this scenario. 5
+live-DOM assertions plus 18/18 in the updated unit test file, all passed.
