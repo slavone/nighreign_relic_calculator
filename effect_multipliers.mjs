@@ -4,7 +4,13 @@
 //            'conditional'— real value, but requires a specific weapon/school/hit-type
 //                           or a transient trigger/state. Shown as its own line with a
 //                           "combined with baseline" figure, never silently summed.
-// bucket:    'damage' | 'negation' | 'resource'
+//            'flat'       — an ADDITIVE (not multiplicative) effect: a flat stat delta or
+//                           buildup-infliction amount. Duplicates on multiple relics
+//                           literally SUM (two copies of −80 resistances = −160), unlike
+//                           every other tier which combines by multiplication. Only
+//                           `value` and `template` apply; bucket/axes/category/group/stat
+//                           are all irrelevant for this tier.
+// bucket:    'damage' | 'negation' | 'resource' — baseline/conditional only.
 // axes:      damage/negation only — one or more of physical/magic/fire/lightning/holy/universal.
 // category:  optional — 'sorcery' | 'incantation'. Layers on top of whichever axis the
 //            spell actually deals; general "Improved Sorceries/Incantations" entries have
@@ -15,14 +21,23 @@
 //            status, curses — everything else transient/state-dependent).
 // stat:      resource bucket only, REQUIRED for baseline entries. Resource covers several
 //            genuinely different units (FP consumption, skill cooldown, ultimate gauge gain,
-//            max HP/FP/stamina, flask healing) that must never be multiplied together — a
-//            0.92x FP-consumption reduction and a 1.1x max-HP bonus aren't the same quantity.
-//            One of: 'cooldown' | 'ultimateCharge' | 'fpConsumption' | 'maxHP' | 'maxFP' |
-//            'maxStamina' | 'flaskHeal'.
-// value:     multiplier (e.g. 1.09) for damage/resource. Fractional negation amount
-//            (e.g. 0.10, or negative for a curse that *removes* negation) for negation —
-//            combined via ∏(1 − v), never a straight product.
+//            max HP/FP/stamina, flask healing, rune gain) that must never be multiplied
+//            together — a 0.92x FP-consumption reduction and a 1.1x max-HP bonus aren't the
+//            same quantity. One of: 'cooldown' | 'ultimateCharge' | 'fpConsumption' |
+//            'maxHP' | 'maxFP' | 'maxStamina' | 'flaskHeal' | 'runeGain'.
+// value:     multiplier (e.g. 1.09) for damage/resource baseline/conditional. Fractional
+//            negation amount (e.g. 0.10, or negative for a curse that *removes* negation)
+//            for negation — combined via ∏(1 − v), never a straight product. For `flat`
+//            tier: the signed numeric delta itself (e.g. −80, or 44 for a buildup amount).
+// template:  flat tier only — the effect's description with `{v}` standing in for the
+//            (possibly summed-across-duplicates) numeric value, so the UI can regenerate
+//            an accurate description after combining. Formatted with a literal '−' for
+//            negative values, matching how descriptions.mjs already writes them (never a
+//            bare ASCII '-').
 // condition: required when tier is 'conditional'; human-readable trigger description.
+//            Optional on `flat` entries purely as informational display text (e.g. an
+//            HP-gated buildup curse) — it does NOT affect how duplicates merge, since
+//            flat entries always sum regardless of any trigger condition.
 //
 // Effect names not present here are treated as Flat/Other by the build-mode UI — that's
 // the safe default for anything not classified (flat stat bonuses, resistances, flavor
@@ -49,6 +64,7 @@ export const EFFECT_MULTIPLIERS = {
   // DON curses that are fixed-rate (no transient trigger) go in Resource baseline too.
   'Reduced Flask HP Restoration': { tier: 'baseline', bucket: 'resource', stat: 'flaskHeal', value: 0.85 },
   'Ultimate Art Charging Impaired': { tier: 'baseline', bucket: 'resource', stat: 'ultimateCharge', value: 0.85 },
+  'Reduced Rune Acquisition': { tier: 'baseline', bucket: 'resource', stat: 'runeGain', value: 0.9 },
   // DON curse — temporary state after being downed, not fixed-rate.
   'Near Death Reduces Max HP': { tier: 'conditional', bucket: 'resource', stat: 'maxHP', group: 'status', value: 0.75, condition: '60s after being downed' },
 
@@ -166,6 +182,29 @@ export const EFFECT_MULTIPLIERS = {
   'Reduced Damage Negation After Evading': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'Right after evading' },
   'Reduced Damage Negation for Flask Usages': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'While using flasks' },
   'Improved Damage Negation at Low HP': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: 0.16, condition: 'While HP is below 40%' },
+
+  // ── Flat/additive DON curses ──────────────────────────────────────────────
+  // Duplicates SUM (see `flat` tier note above), not multiply — two copies of
+  // "All Resistances Down" really do mean −160, not −80 squared or ×2 tagged
+  // onto the original number. Curses with more than one distinct number in
+  // their description (Reduced Vigor and Arcane: −3 stats AND −60 HP;
+  // Repeated Evasions Lower Damage Negation: −23%/−35% two-stage) are
+  // intentionally left unmapped rather than guessing which number to combine.
+  'All Resistances Down': { tier: 'flat', value: -80, template: '{v} all status resistances' },
+  'Continuous HP Loss': { tier: 'flat', value: -2, template: '{v} HP/s' },
+  'Reduced Dexterity and Faith': { tier: 'flat', value: -3, template: '{v} Dexterity and Faith' },
+  'Reduced Faith and Strength': { tier: 'flat', value: -3, template: '{v} Faith and Strength' },
+  'Reduced Intelligence and Dexterity': { tier: 'flat', value: -3, template: '{v} Intelligence and Dexterity' },
+  'Reduced Strength and Intelligence': { tier: 'flat', value: -3, template: '{v} Strength and Intelligence' },
+  'Taking Damage Causes Blood Loss Buildup': { tier: 'flat', value: 44, template: 'Taking damage inflicts {v} blood loss buildup' },
+  'Taking Damage Causes Death Buildup': { tier: 'flat', value: 32, template: 'Taking damage inflicts {v} death blight buildup' },
+  'Taking Damage Causes Frost Buildup': { tier: 'flat', value: 44, template: 'Taking damage inflicts {v} frost buildup' },
+  'Taking Damage Causes Madness Buildup': { tier: 'flat', value: 40, template: 'Taking damage inflicts {v} madness buildup' },
+  'Taking Damage Causes Poison Buildup': { tier: 'flat', value: 52, template: 'Taking damage inflicts {v} poison buildup' },
+  'Taking Damage Causes Rot Buildup': { tier: 'flat', value: 44, template: 'Taking damage inflicts {v} rot buildup' },
+  'Taking Damage Causes Sleep Buildup': { tier: 'flat', value: 40, template: 'Taking damage inflicts {v} sleep buildup' },
+  'Poison Buildup When Below Max HP': { tier: 'flat', value: 2, template: '{v} poison buildup per 0.22s', condition: 'While HP is below 85%' },
+  'Rot Buildup When Below Max HP': { tier: 'flat', value: 2, template: '{v} rot buildup per 0.24s', condition: 'While HP is below 85%' },
 };
 
 // ── Weapon-type Attack Power (single-weapon = conditional; 3+ equipped = baseline universal) ──

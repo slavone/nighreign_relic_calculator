@@ -1900,3 +1900,50 @@ wrapper, and the two flat curses render as `.build-conditional-item`
 boxes with their description in `.build-other-desc`. 7 live-DOM
 assertions, no regression in the existing 20/40/1466 test suites (this
 was a pure rendering change — computeBuildTotals untouched).
+
+### Post-plan addendum: Task 23 — a new `flat` (additive) tier for stackable curses
+
+Same URL, one more round: the user asked what should happen when the same
+flat/unmapped curse (e.g. "All Resistances Down") sits on two different
+relics at once — since these genuinely SUM in-game (two copies of −80
+resistances = −160), not multiply like every other tier in this system.
+Asked to clarify scope before building (recompute the real combined value
+vs. just presentational grouping); user chose "compute and show the real
+combined value."
+
+Added a new `tier: 'flat'` to `effect_multipliers.mjs` — additive, not
+multiplicative. Each entry has `value` (the signed numeric delta) and
+`template` (the description with `{v}` standing in for the — possibly
+summed — value). `computeBuildTotals` gained a `flatByName` map that sums
+`value` across duplicates (unlike every other merge path, which combines
+via count + a power/product) and regenerates the description from the
+template using the summed total. Mapped 13 curses this way: the two from
+the reported scenario (All Resistances Down, Continuous HP Loss), 4
+stat-drain curses (Reduced Dexterity/Faith/Intelligence/Strength pairs),
+7 "Taking Damage Causes X Buildup" curses, and 2 HP-gated buildup curses
+(Poison/Rot Buildup When Below Max HP, kept their `condition` as
+informational-only display text — it doesn't affect merging). Two curses
+with more than one distinct number in their description (Reduced Vigor
+and Arcane: −3 stats AND −60 HP; Repeated Evasions Lower Damage
+Negation: two-stage −23%/−35%) were intentionally left unmapped rather
+than guessing which number to combine.
+
+Also caught in the same pass: "Reduced Rune Acquisition" (0.9× rune gain)
+is a genuine percentage multiplier, not a flat effect — it was only
+unmapped because no resource-stat slot existed for rune gain yet. Added
+a `runeGain` slot to the existing multiplicative resource-stat system
+(alongside cooldown/FP/max-HP/etc.) rather than the new additive one,
+since it's the right fit.
+
+New `renderBuildFlatList` renders merged flat entries in their own "Flat
+Effects" subgroup (JP: 固定効果, KR: 고정 효과), same `.build-conditional-item`
+box style as everything else, showing the `×N` count and the recomputed
+description. Verified with two scenarios against a fresh `jsdom` instance:
+the same curse on 2 different DON relics shows "All Resistances Down ×2
+— −160 all status resistances" (the real combined value); the original
+full user URL (each flat curse used only once) still shows the unchanged
+per-copy value with no stray `×2`, and Improved Damage Negation at Low HP
+remains correctly nested in Damage Negation. 9 live-DOM assertions across
+both scenarios, plus 47/1777 in the two updated unit test suites
+(including new tests for cross-name isolation and positive-value
+formatting), all passed.

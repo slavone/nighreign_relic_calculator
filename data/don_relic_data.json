@@ -3800,12 +3800,22 @@
     {
       "name": "All Resistances Down",
       "w": 100,
-      "desc": "−80 all status resistances"
+      "desc": "−80 all status resistances",
+      "mul": {
+        "tier": "flat",
+        "value": -80,
+        "template": "{v} all status resistances"
+      }
     },
     {
       "name": "Continuous HP Loss",
       "w": 100,
-      "desc": "−2 HP/s"
+      "desc": "−2 HP/s",
+      "mul": {
+        "tier": "flat",
+        "value": -2,
+        "template": "{v} HP/s"
+      }
     },
     {
       "name": "Lower Attack When Below Max HP",
@@ -3838,7 +3848,13 @@
     {
       "name": "Poison Buildup When Below Max HP",
       "w": 100,
-      "desc": "2 poison buildup per 0.22s when HP below 85%"
+      "desc": "2 poison buildup per 0.22s when HP below 85%",
+      "mul": {
+        "tier": "flat",
+        "value": 2,
+        "template": "{v} poison buildup per 0.22s",
+        "condition": "While HP is below 85%"
+      }
     },
     {
       "name": "Reduced Damage Negation After Evading",
@@ -3873,12 +3889,22 @@
     {
       "name": "Reduced Dexterity and Faith",
       "w": 100,
-      "desc": "−3 Dexterity and Faith"
+      "desc": "−3 Dexterity and Faith",
+      "mul": {
+        "tier": "flat",
+        "value": -3,
+        "template": "{v} Dexterity and Faith"
+      }
     },
     {
       "name": "Reduced Faith and Strength",
       "w": 100,
-      "desc": "−3 Faith and Strength"
+      "desc": "−3 Faith and Strength",
+      "mul": {
+        "tier": "flat",
+        "value": -3,
+        "template": "{v} Faith and Strength"
+      }
     },
     {
       "name": "Reduced Flask HP Restoration",
@@ -3894,17 +3920,33 @@
     {
       "name": "Reduced Intelligence and Dexterity",
       "w": 100,
-      "desc": "−3 Intelligence and Dexterity"
+      "desc": "−3 Intelligence and Dexterity",
+      "mul": {
+        "tier": "flat",
+        "value": -3,
+        "template": "{v} Intelligence and Dexterity"
+      }
     },
     {
       "name": "Reduced Rune Acquisition",
       "w": 100,
-      "desc": "0.9× rune gain"
+      "desc": "0.9× rune gain",
+      "mul": {
+        "tier": "baseline",
+        "bucket": "resource",
+        "stat": "runeGain",
+        "value": 0.9
+      }
     },
     {
       "name": "Reduced Strength and Intelligence",
       "w": 100,
-      "desc": "−3 Strength and Intelligence"
+      "desc": "−3 Strength and Intelligence",
+      "mul": {
+        "tier": "flat",
+        "value": -3,
+        "template": "{v} Strength and Intelligence"
+      }
     },
     {
       "name": "Reduced Vigor and Arcane",
@@ -3919,42 +3961,83 @@
     {
       "name": "Rot Buildup When Below Max HP",
       "w": 100,
-      "desc": "2 rot buildup per 0.24s when HP below 85%"
+      "desc": "2 rot buildup per 0.24s when HP below 85%",
+      "mul": {
+        "tier": "flat",
+        "value": 2,
+        "template": "{v} rot buildup per 0.24s",
+        "condition": "While HP is below 85%"
+      }
     },
     {
       "name": "Taking Damage Causes Blood Loss Buildup",
       "w": 100,
-      "desc": "Taking damage inflicts 44 blood loss buildup"
+      "desc": "Taking damage inflicts 44 blood loss buildup",
+      "mul": {
+        "tier": "flat",
+        "value": 44,
+        "template": "Taking damage inflicts {v} blood loss buildup"
+      }
     },
     {
       "name": "Taking Damage Causes Death Buildup",
       "w": 100,
-      "desc": "Taking damage inflicts 32 death blight buildup"
+      "desc": "Taking damage inflicts 32 death blight buildup",
+      "mul": {
+        "tier": "flat",
+        "value": 32,
+        "template": "Taking damage inflicts {v} death blight buildup"
+      }
     },
     {
       "name": "Taking Damage Causes Frost Buildup",
       "w": 100,
-      "desc": "Taking damage inflicts 44 frost buildup"
+      "desc": "Taking damage inflicts 44 frost buildup",
+      "mul": {
+        "tier": "flat",
+        "value": 44,
+        "template": "Taking damage inflicts {v} frost buildup"
+      }
     },
     {
       "name": "Taking Damage Causes Madness Buildup",
       "w": 100,
-      "desc": "Taking damage inflicts 40 madness buildup"
+      "desc": "Taking damage inflicts 40 madness buildup",
+      "mul": {
+        "tier": "flat",
+        "value": 40,
+        "template": "Taking damage inflicts {v} madness buildup"
+      }
     },
     {
       "name": "Taking Damage Causes Poison Buildup",
       "w": 100,
-      "desc": "Taking damage inflicts 52 poison buildup"
+      "desc": "Taking damage inflicts 52 poison buildup",
+      "mul": {
+        "tier": "flat",
+        "value": 52,
+        "template": "Taking damage inflicts {v} poison buildup"
+      }
     },
     {
       "name": "Taking Damage Causes Rot Buildup",
       "w": 100,
-      "desc": "Taking damage inflicts 44 rot buildup"
+      "desc": "Taking damage inflicts 44 rot buildup",
+      "mul": {
+        "tier": "flat",
+        "value": 44,
+        "template": "Taking damage inflicts {v} rot buildup"
+      }
     },
     {
       "name": "Taking Damage Causes Sleep Buildup",
       "w": 100,
-      "desc": "Taking damage inflicts 40 sleep buildup"
+      "desc": "Taking damage inflicts 40 sleep buildup",
+      "mul": {
+        "tier": "flat",
+        "value": 40,
+        "template": "Taking damage inflicts {v} sleep buildup"
+      }
     },
     {
       "name": "Ultimate Art Charging Impaired",

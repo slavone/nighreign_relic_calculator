@@ -6,7 +6,7 @@ const AXES = ['physical', 'magic', 'fire', 'lightning', 'holy', 'universal'];
 // ultimate gauge, max HP/FP/stamina, flask healing) — they must never be
 // multiplied together, so each gets its own baseline slot, exactly like
 // damage/negation get one per element instead of one blended number.
-const RESOURCE_STATS = ['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal'];
+const RESOURCE_STATS = ['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal', 'runeGain'];
 
 function computeBuildTotals(effects) {
   const damageBaseline = Object.fromEntries(AXES.map(a => [a, 1]));
@@ -20,6 +20,11 @@ function computeBuildTotals(effects) {
   // that each silently ignore their siblings.
   const conditionalByName = new Map();
   const otherByName = new Map();
+  // Flat effects are ADDITIVE, not multiplicative — two copies of "All
+  // Resistances Down" (−80 each) really do mean −160, so duplicates sum
+  // their value directly rather than combining via count + a power, unlike
+  // every other tier.
+  const flatByName = new Map();
 
   for (const effect of effects) {
     const m = effect.mul;
@@ -27,6 +32,12 @@ function computeBuildTotals(effects) {
       const existing = otherByName.get(effect.name);
       if (existing) existing.count++;
       else otherByName.set(effect.name, { name: effect.name, desc: effect.desc, count: 1 });
+      continue;
+    }
+    if (m.tier === 'flat') {
+      const existing = flatByName.get(effect.name);
+      if (existing) { existing.value += m.value; existing.count++; }
+      else flatByName.set(effect.name, { name: effect.name, value: m.value, template: m.template, condition: m.condition, count: 1 });
       continue;
     }
     if (m.tier === 'conditional') {
@@ -126,9 +137,20 @@ function computeBuildTotals(effects) {
     conditionalTree.damage[group] = conditionalTree.damage[group].map(attachUniversalNesting);
   }
 
+  // Flat entries: description is regenerated from the template using the
+  // SUMMED value across duplicates (not the original per-copy number), so
+  // two relics with "All Resistances Down" show "−160 all status
+  // resistances" — the real combined effect — not the original −80 with a
+  // count tag bolted on.
+  function formatFlatValue(v) { return v < 0 ? '−' + Math.abs(v) : String(v); }
+  const flat = [...flatByName.values()].map(f => ({
+    ...f,
+    desc: f.template.replace('{v}', formatFlatValue(f.value)),
+  }));
+
   return {
     damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
-    conditionalTree, damageAxisNested, negationAxisNested,
+    conditionalTree, damageAxisNested, negationAxisNested, flat,
     other: [...otherByName.values()],
   };
 }
@@ -326,11 +348,50 @@ function test(label, actual, expected, tolerance = 1e-9) {
 
 // User-caught gap: unmapped effects showed a bare name with no explanation
 // of what they do. `desc` must survive into the `other` entry so the UI can
-// render it — e.g. "All Resistances Down — −80 all status resistances"
-// instead of leaving the user to guess.
+// render it — e.g. "Reduced Vigor and Arcane — −3 Vigor and Arcane (−60 HP)"
+// instead of leaving the user to guess. (This effect is intentionally left
+// unmapped since it has two distinct numbers in one description.)
 {
-  const r = computeBuildTotals([{ name: 'All Resistances Down', desc: '−80 all status resistances' }]);
-  test('unmapped effect carries its desc through to `other`', r.other[0].desc, '−80 all status resistances');
+  const r = computeBuildTotals([{ name: 'Reduced Vigor and Arcane', desc: '−3 Vigor and Arcane (−60 HP)' }]);
+  test('unmapped effect carries its desc through to `other`', r.other[0].desc, '−3 Vigor and Arcane (−60 HP)');
+}
+
+// User-requested: flat/additive effects (a curse selected on 2 different
+// relics) must SUM their value, not just tag on a ×2 next to the original
+// per-copy number — two copies of "All Resistances Down" (−80 each) really
+// do mean −160.
+{
+  const allResistancesDown = { tier: 'flat', value: -80, template: '{v} all status resistances' };
+  const r = computeBuildTotals([
+    { name: 'All Resistances Down', mul: allResistancesDown },
+    { name: 'All Resistances Down', mul: allResistancesDown },
+  ]);
+  test('exactly one merged flat entry', r.flat.length, 1);
+  test('flat value sums across duplicates (-80 + -80 = -160)', r.flat[0].value, -160);
+  test('flat entry carries a count of 2', r.flat[0].count, 2);
+  test('regenerated desc uses the SUMMED value, not the original per-copy number',
+    r.flat[0].desc, '−160 all status resistances');
+}
+
+// A single (non-duplicated) flat effect still regenerates correctly, and a
+// positive-value flat effect (buildup infliction, no minus sign) formats
+// without a spurious "+".
+{
+  const bloodLoss = { tier: 'flat', value: 44, template: 'Taking damage inflicts {v} blood loss buildup' };
+  const r = computeBuildTotals([{ name: 'Taking Damage Causes Blood Loss Buildup', mul: bloodLoss }]);
+  test('single flat effect keeps its original value', r.flat[0].value, 44);
+  test('positive flat value has no leading +', r.flat[0].desc, 'Taking damage inflicts 44 blood loss buildup');
+}
+
+// Different-name flat effects must never merge with each other.
+{
+  const allResistancesDown = { tier: 'flat', value: -80, template: '{v} all status resistances' };
+  const continuousHpLoss = { tier: 'flat', value: -2, template: '{v} HP/s' };
+  const r = computeBuildTotals([
+    { name: 'All Resistances Down', mul: allResistancesDown },
+    { name: 'Continuous HP Loss', mul: continuousHpLoss },
+  ]);
+  test('two distinct flat effects stay as two separate entries', r.flat.length, 2);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

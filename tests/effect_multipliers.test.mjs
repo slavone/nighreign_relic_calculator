@@ -10,20 +10,37 @@ function check(label, ok) {
   else { failed++; console.error('  FAIL ' + label); }
 }
 
-const VALID_TIERS = new Set(['baseline', 'conditional']);
+const VALID_TIERS = new Set(['baseline', 'conditional', 'flat']);
 const VALID_BUCKETS = new Set(['damage', 'negation', 'resource']);
 const VALID_AXES = new Set(['physical', 'magic', 'fire', 'lightning', 'holy', 'universal']);
 const VALID_CATEGORIES = new Set(['sorcery', 'incantation']);
 const VALID_GROUPS = new Set(['weapon', 'hitType', 'status']);
-const VALID_STATS = new Set(['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal']);
+const VALID_STATS = new Set(['cooldown', 'ultimateCharge', 'fpConsumption', 'maxHP', 'maxFP', 'maxStamina', 'flaskHeal', 'runeGain']);
 
 const entries = Object.entries(EFFECT_MULTIPLIERS);
 check('at least 80 entries present', entries.length >= 80);
 
 for (const [name, m] of entries) {
   check(`${name}: tier is valid`, VALID_TIERS.has(m.tier));
-  check(`${name}: bucket is valid`, VALID_BUCKETS.has(m.bucket));
   check(`${name}: value is a finite number`, typeof m.value === 'number' && Number.isFinite(m.value));
+
+  if (m.tier === 'flat') {
+    // Additive tier — duplicates SUM, not multiply. No bucket/axes/category/
+    // group/stat concept applies; only a template for regenerating the
+    // description after combining duplicates' values.
+    check(`${name}: flat entry has no bucket`, m.bucket === undefined);
+    check(`${name}: flat entry has no axes`, m.axes === undefined);
+    check(`${name}: flat entry has no category`, m.category === undefined);
+    check(`${name}: flat entry has no group`, m.group === undefined);
+    check(`${name}: flat entry has no stat`, m.stat === undefined);
+    check(`${name}: flat entry has a template string`, typeof m.template === 'string' && m.template.includes('{v}'));
+    check(`${name}: flat entry's condition, if present, is a non-empty string`,
+      m.condition === undefined || (typeof m.condition === 'string' && m.condition.length > 0));
+    continue;
+  }
+
+  check(`${name}: bucket is valid`, VALID_BUCKETS.has(m.bucket));
+  check(`${name}: flat-only template is absent`, m.template === undefined);
   if (m.bucket === 'negation') {
     // Negation has no category concept — always axis-based.
     check(`${name}: axes is a non-empty array`, Array.isArray(m.axes) && m.axes.length > 0);
@@ -37,9 +54,9 @@ for (const [name, m] of entries) {
   } else {
     check(`${name}: resource bucket has no axes`, m.axes === undefined);
     // Resource covers several genuinely different units (FP consumption,
-    // cooldown, ultimate gauge, max HP/FP/stamina, flask healing) that must
-    // never be multiplied together — every resource entry needs a stat tag
-    // so the UI can keep them in separate rows.
+    // cooldown, ultimate gauge, max HP/FP/stamina, flask healing, rune gain)
+    // that must never be multiplied together — every resource entry needs a
+    // stat tag so the UI can keep them in separate rows.
     check(`${name}: resource entry has a stat`, m.stat !== undefined);
     check(`${name}: stat is valid`, VALID_STATS.has(m.stat));
   }
@@ -107,6 +124,35 @@ const lowHpNegation = EFFECT_MULTIPLIERS['Improved Damage Negation at Low HP'];
 check('Improved Damage Negation at Low HP is mapped as a conditional negation', lowHpNegation &&
   lowHpNegation.tier === 'conditional' && lowHpNegation.bucket === 'negation' &&
   lowHpNegation.group === 'status' && lowHpNegation.value === 0.16);
+
+// User-caught gap: "Reduced Rune Acquisition" (0.9x rune gain) is a real
+// percentage multiplier, not a flat effect — it was only unmapped because
+// no 'runeGain' resource-stat slot existed yet.
+const runeAcquisition = EFFECT_MULTIPLIERS['Reduced Rune Acquisition'];
+check('Reduced Rune Acquisition is a resource baseline multiplier, not flat', runeAcquisition &&
+  runeAcquisition.tier === 'baseline' && runeAcquisition.bucket === 'resource' &&
+  runeAcquisition.stat === 'runeGain' && runeAcquisition.value === 0.9);
+
+// User-requested: flat/additive curses stack by SUMMING their value across
+// duplicates, not multiplying — spot-check the two curses from the reported
+// scenario plus one buildup-infliction curse for shape variety.
+const allResistancesDown = EFFECT_MULTIPLIERS['All Resistances Down'];
+check('All Resistances Down is flat, -80, with a {v} template', allResistancesDown &&
+  allResistancesDown.tier === 'flat' && allResistancesDown.value === -80 &&
+  allResistancesDown.template === '{v} all status resistances');
+
+const continuousHpLoss = EFFECT_MULTIPLIERS['Continuous HP Loss'];
+check('Continuous HP Loss is flat, -2, with a {v} template', continuousHpLoss &&
+  continuousHpLoss.tier === 'flat' && continuousHpLoss.value === -2 &&
+  continuousHpLoss.template === '{v} HP/s');
+
+const bloodLossBuildup = EFFECT_MULTIPLIERS['Taking Damage Causes Blood Loss Buildup'];
+check('Taking Damage Causes Blood Loss Buildup is flat, +44', bloodLossBuildup &&
+  bloodLossBuildup.tier === 'flat' && bloodLossBuildup.value === 44);
+
+check('multi-number curses (Reduced Vigor and Arcane, Repeated Evasions...) are intentionally left unmapped',
+  EFFECT_MULTIPLIERS['Reduced Vigor and Arcane'] === undefined &&
+  EFFECT_MULTIPLIERS['Repeated Evasions Lower Damage Negation'] === undefined);
 
 // Guards against the exact mistake that slipped through once already: editing
 // effect_multipliers.mjs without re-running prepare_data.mjs/prepare_don_data.mjs
