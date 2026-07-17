@@ -2032,3 +2032,20 @@ ids; round-tripping that new-style URL restores correctly; v1's
 too. 8 live-DOM assertions, plus two new permanent regression checks in
 `tests/effect_multipliers.test.mjs` (every curse has an id; ids are
 unique) — 20/47/1779 across the three test suites, all passed.
+
+### Post-plan addendum: Task 27 — cursed-effect ⚠ marker in v3's effect dropdown
+
+Small parity fix: v1 (Exact Effects) and v2 (Multiple Choice) both mark a
+cursed DON effect with a `⚠` suffix in its dropdown option/checkbox label
+(`e.hasCurse ? ' ⚠' : ''`), but v3's `buildEffectOptionsForGroups` never
+did. Added the identical marker — since regular-pool effects never carry
+`hasCurse` at all, no `mode === 'don'` guard is needed (unlike v1/v2's
+version of this check, which is redundant for the same reason but kept
+as-is since it wasn't part of this fix).
+
+Verified with a fresh `jsdom` instance: a cursed DON effect's option now
+shows `⚠`, an uncursed DON effect's option doesn't, and no regular-relic
+effect ever shows the marker (sanity check, since regular effects have no
+curse concept at all). 5 live-DOM assertions, no regression in the
+existing 20/47/1779 test suites (no data pipeline changes needed for
+this one).

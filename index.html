@@ -946,8 +946,11 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       if (isNaN(groupIdx) || groupIdx < 0) return `<option value="">${I18N.t('select_effect_placeholder', '— select effect —')}</option>`;
       let html = '';
       groups[groupIdx].effects.forEach((e, i) => {
+        // Same ⚠ marker used by Exact Effects/Multiple Choice — regular-pool
+        // effects never carry hasCurse, so no mode check is needed here.
+        const cursedTag = e.hasCurse ? ' ⚠' : '';
         const sel = i === currentEffectIdx ? ' selected' : '';
-        html += `<option value="${i}"${sel}>${I18N.effectName(e.name)}</option>`;
+        html += `<option value="${i}"${sel}>${I18N.effectName(e.name)}${cursedTag}</option>`;
       });
       return html;
     }
