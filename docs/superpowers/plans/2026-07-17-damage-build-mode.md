@@ -1658,3 +1658,46 @@ frostbite-target effect on 3 different relics) produced exactly the 3
 expected subgroups with no cross-leakage. 13 live-DOM assertions plus
 24/24 in the updated `tests/build.test.mjs` and 1423/1423 in
 `tests/effect_multipliers.test.mjs`, all passed.
+
+---
+
+### Post-plan addendum: Task 15 — situational effects nest under every affected total, not just their own line
+
+Two rounds of user follow-up on a real scenario: they selected the "Lower
+Attack When Below Max HP" curse (a universal-axis, -8.5% damage debuff) and
+wanted to see its effect propagate through the whole view rather than sit
+as one isolated line disconnected from the real per-element totals. Round
+1 asked for it nested under each active elemental baseline ("what's my
+Physical damage while also below 85% HP"). Round 2 generalized: it should
+also nest under specific conditional entries like Carian Sword Sorcery,
+not only the base axis rows — since the curse applies on top of any hit,
+including a Carian Sword cast made while below 85% HP.
+
+`computeBuildTotals` gained two mechanisms, both keyed off the same
+`damageUniversalOnly` list (conditional entries whose `axes` is exactly
+`['universal']`, i.e. apply regardless of damage type — no self- or
+cross-universal-only nesting, to avoid combinatorial pairs):
+1. `damageAxisNested` / `negationAxisNested` — for each baseline axis that's
+   actually non-1, a nested branch per universal-only entry, value =
+   `axisBaseline × entry.combined` (entry.combined already folds in the
+   universal baseline, so this is a single multiply, not double-counting).
+2. `nestedWithUniversal` attached directly to every OTHER conditional entry
+   (sorcery/incantation/weapon/hitType/status alike), value =
+   `entry.combined × universalEntry.combined`.
+
+Rendering: `renderBuildAxisRows` now takes the nested map and renders a
+`.build-axis-nested` sub-row per baseline axis; `renderConditionalRow` does
+the same for `c.nestedWithUniversal`, using the same CSS class so both
+levels read consistently.
+
+Verified end-to-end against the user's exact URL with a fresh `jsdom`
+instance: Physical (×1.12) and Magic (×1.065) baselines both show "Lower
+Attack When Below Max HP → ×1.025" / "→ ×0.974" nested underneath; Carian
+Sword Sorcery and Improved Bestial Incantations each show the same curse
+nested under their own combined figure; the curse's own line correctly
+shows zero self-nested rows. One test-authoring bug surfaced during
+verification (a loose text-match selector picked up the curse's *name*
+appearing inside another row's nested reference rather than its own row)
+and was fixed in the test, not the product — the underlying HTML was
+already correct. 7 live-DOM assertions plus 34/34 in the updated
+`tests/build.test.mjs`, all passed.

@@ -112,6 +112,7 @@
     .build-subgroup-title { font-weight: 600; color: #ccc; font-size: 0.85rem; margin-bottom: 0.2rem; }
     .build-conditional-item { padding: 0.3rem 0; font-size: 0.85rem; border-top: 1px solid #333; }
     .build-conditional-combined { color: #f0c060; font-size: 0.8rem; }
+    .build-axis-nested { display: flex; justify-content: space-between; padding: 0.1rem 0 0.1rem 1rem; font-size: 0.78rem; color: #d0a840; }
     .build-other-list { font-size: 0.8rem; color: #999; margin-top: 0.5rem; }
     .share-btn { background: none; border: 1px dashed #555; color: #aaa; padding: 0.4rem 0.9rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
     .share-btn:hover { border-color: #f0c060; color: #f0c060; }
@@ -451,9 +452,51 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         (bucketTree[key] ||= []).push({ ...c, ...combinedFor(c) });
       }
 
+      // A universal-axis-only conditional (no category, axes === ['universal'])
+      // applies to EVERY damage type, not just a standalone line — e.g. the
+      // "Lower Attack When Below Max HP" curse should show up nested under each
+      // active elemental baseline too ("what's my Physical damage while also
+      // below 85% HP"), not just as an isolated -8.5% row disconnected from the
+      // real total. Its own `combined` already folds in the universal baseline,
+      // so nesting it under axis X is just axisBaseline × entry.combined.
+      function nestUniversalOnly(baseline, groups) {
+        const universalOnly = groups.flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
+        const nested = {};
+        for (const axis of BUILD_AXES) {
+          if (axis === 'universal' || baseline[axis] === 1) continue;
+          nested[axis] = universalOnly.map(c => ({
+            name: c.name, condition: c.condition, count: c.count,
+            combined: baseline[axis] * c.combined,
+          }));
+        }
+        return nested;
+      }
+      const damageUniversalOnly = [conditionalTree.damage.weapon, conditionalTree.damage.hitType, conditionalTree.damage.status]
+        .flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
+      const damageAxisNested = nestUniversalOnly(damageBaseline, [damageUniversalOnly]);
+      const negationAxisNested = nestUniversalOnly(negationBaseline, [conditionalTree.negation.status]);
+
+      // Same idea, one level deeper: a universal-axis situational effect applies
+      // on top of every OTHER specific conditional entry too, not just the base
+      // axis rows — e.g. Carian Sword Sorcery should show "...also below 85% HP"
+      // nested under IT specifically, not just under the Magic baseline. Entries
+      // that are themselves universal-only are skipped (no self-nesting, and no
+      // nesting against other universal-onlies, to avoid combinatorial pairs).
+      const damageUniversalOnlySet = new Set(damageUniversalOnly);
+      function attachUniversalNesting(entry) {
+        entry.nestedWithUniversal = damageUniversalOnlySet.has(entry) ? [] : damageUniversalOnly.map(u => ({
+          name: u.name, condition: u.condition, count: u.count,
+          combined: entry.combined * u.combined,
+        }));
+        return entry;
+      }
+      for (const group of ['sorcery', 'incantation', 'weapon', 'hitType', 'status']) {
+        conditionalTree.damage[group] = conditionalTree.damage[group].map(attachUniversalNesting);
+      }
+
       return {
         damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
-        conditionalTree,
+        conditionalTree, damageAxisNested, negationAxisNested,
         other: [...otherByName.values()],
       };
     }
@@ -494,9 +537,14 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       const eachSuffix = c.count > 1 ? ' ' + I18N.t('build_each_label', 'each') : '';
       const ownName = I18N.effectName(c.name);
       const breakdown = c.factors.map(f => `${factorLabel(f, ownName)} ${fmtMul(f.value)}`).join(' × ');
+      const nestedRows = (c.nestedWithUniversal || []).map(n => {
+        const nCountSuffix = n.count > 1 ? ` ×${n.count}` : '';
+        return `<div class="build-axis-nested"><span>${I18N.effectName(n.name)}${nCountSuffix} <em>(${n.condition})</em></span><span>${fmtMul(n.combined)}</span></div>`;
+      }).join('');
       return `<div class="build-conditional-item">
         <div>${ownName}${countSuffix} — ${fmtMul(c.value)}${eachSuffix} <em>(${c.condition})</em></div>
         <div class="build-conditional-combined">${breakdown} = ${fmtMul(c.combined)}</div>
+        ${nestedRows}
       </div>`;
     }
 
@@ -515,10 +563,22 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       </div>`;
     }
 
-    function renderBuildAxisRows(baseline) {
+    // Renders each active baseline axis row, plus — when a universal-axis
+    // conditional (crit, guard counter, a situational buff/curse, etc.) is
+    // selected — a nested sub-row per axis showing that axis combined with
+    // it, so a debuff like "Lower Attack When Below Max HP" reads as
+    // "Physical ×1.12 → While HP is below 85% ×1.026" instead of sitting
+    // disconnected from the real per-element total.
+    function renderBuildAxisRows(baseline, axisNested) {
       return Object.entries(baseline)
         .filter(([, v]) => Math.abs(v - 1) > 1e-9)
-        .map(([axis, v]) => `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS[axis]()}</span><span>${fmtMul(v)}</span></div>`)
+        .map(([axis, v]) => {
+          const nestedRows = (axisNested && axisNested[axis] || []).map(n => {
+            const countSuffix = n.count > 1 ? ` ×${n.count}` : '';
+            return `<div class="build-axis-nested"><span>${I18N.effectName(n.name)}${countSuffix} <em>(${n.condition})</em></span><span>${fmtMul(n.combined)}</span></div>`;
+          }).join('');
+          return `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS[axis]()}</span><span>${fmtMul(v)}</span></div>${nestedRows}`;
+        })
         .join('');
     }
 
@@ -537,7 +597,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       const r = computeBuildTotals(effects);
       const dmgTree = r.conditionalTree.damage;
 
-      const damageBody = renderBuildAxisRows(r.damageBaseline)
+      const damageBody = renderBuildAxisRows(r.damageBaseline, r.damageAxisNested)
         + renderBuildSubgroup(BUILD_CATEGORY_LABELS.sorcery, r.categoryBaseline.sorcery, dmgTree.sorcery)
         + renderBuildSubgroup(BUILD_CATEGORY_LABELS.incantation, r.categoryBaseline.incantation, dmgTree.incantation)
         + renderBuildSubgroup(BUILD_GROUP_LABELS.weapon, undefined, dmgTree.weapon)
@@ -548,7 +608,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         ${damageBody || `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
       </div>`;
 
-      const negationBody = renderBuildAxisRows(r.negationBaseline)
+      const negationBody = renderBuildAxisRows(r.negationBaseline, r.negationAxisNested)
         + renderBuildSubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.negation.status);
       const negationHtml = `<div class="build-summary-section">
         <div class="build-summary-title">${I18N.t('build_negation_title', 'Damage Negation')}</div>

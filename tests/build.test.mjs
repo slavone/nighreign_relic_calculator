@@ -79,9 +79,51 @@ function computeBuildTotals(effects) {
     (bucketTree[key] ||= []).push({ ...c, ...combinedFor(c) });
   }
 
+  // A universal-axis-only conditional (no category, axes === ['universal'])
+  // applies to EVERY damage type, not just a standalone line — e.g. the
+  // "Lower Attack When Below Max HP" curse should show up nested under each
+  // active elemental baseline too ("what's my Physical damage while also
+  // below 85% HP"), not just as an isolated -8.5% row disconnected from the
+  // real total. Its own `combined` already folds in the universal baseline,
+  // so nesting it under axis X is just axisBaseline × entry.combined.
+  function nestUniversalOnly(baseline, groups) {
+    const universalOnly = groups.flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
+    const nested = {};
+    for (const axis of AXES) {
+      if (axis === 'universal' || baseline[axis] === 1) continue;
+      nested[axis] = universalOnly.map(c => ({
+        name: c.name, condition: c.condition, count: c.count,
+        combined: baseline[axis] * c.combined,
+      }));
+    }
+    return nested;
+  }
+  const damageUniversalOnly = [conditionalTree.damage.weapon, conditionalTree.damage.hitType, conditionalTree.damage.status]
+    .flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
+  const damageAxisNested = nestUniversalOnly(damageBaseline, [damageUniversalOnly]);
+  const negationAxisNested = nestUniversalOnly(negationBaseline, [conditionalTree.negation.status]);
+
+  // Same idea, one level deeper: a universal-axis situational effect applies
+  // on top of every OTHER specific conditional entry too, not just the base
+  // axis rows — e.g. Carian Sword Sorcery should show "...also below 85% HP"
+  // nested under IT specifically, not just under the Magic baseline. Entries
+  // that are themselves universal-only are skipped (no self-nesting, and no
+  // nesting against other universal-onlies, to avoid combinatorial pairs).
+  const damageUniversalOnlySet = new Set(damageUniversalOnly);
+  function attachUniversalNesting(entry) {
+    entry.nestedWithUniversal = damageUniversalOnlySet.has(entry) ? [] : damageUniversalOnly.map(u => ({
+      name: u.name, condition: u.condition, count: u.count,
+      combined: entry.combined * u.combined,
+    }));
+    return entry;
+  }
+  for (const group of ['sorcery', 'incantation', 'weapon', 'hitType', 'status']) {
+    conditionalTree.damage[group] = conditionalTree.damage[group].map(attachUniversalNesting);
+  }
+
   return {
     damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
-    conditionalTree,
+    conditionalTree, damageAxisNested, negationAxisNested,
     other: [...otherByName.values()],
   };
 }
@@ -191,6 +233,49 @@ function test(label, actual, expected, tolerance = 1e-9) {
     { name: 'Physical Attack Up', mul: physicalUp },
   ]);
   test('duplicate baseline effects both apply', r.damageBaseline.physical, 1.04 * 1.04);
+}
+
+// User-reported request, matching their exact scenario: a universal-axis
+// curse (Lower Attack When Below Max HP) shouldn't just sit as an isolated
+// -8.5% line — it should also nest under every ACTIVE elemental baseline
+// ("what's my Physical damage while also below 85% HP"), since it applies
+// regardless of damage type. Only baselines that are actually non-1 get a
+// nested branch — Magic stays untouched here, so it must not appear.
+{
+  const physicalUp4 = { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.12 };
+  const hpCurse = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' };
+  const r = computeBuildTotals([
+    { name: 'Physical Attack Up +4', mul: physicalUp4 },
+    { name: 'Lower Attack When Below Max HP', mul: hpCurse },
+  ]);
+  test('physical baseline is 1.12', r.damageBaseline.physical, 1.12);
+  test('magic baseline stays untouched', r.damageBaseline.magic, 1);
+  test('curse nests under damage.status on its own', r.conditionalTree.damage.status.length, 1);
+  test('damageAxisNested has a physical branch', !!r.damageAxisNested.physical, true);
+  test('damageAxisNested has no magic branch (baseline untouched)', r.damageAxisNested.magic, undefined);
+  test('nested physical branch = physical baseline × curse combined (1.12 × 0.915)',
+    r.damageAxisNested.physical[0].combined, 1.12 * 0.915);
+}
+
+// User follow-up: the same curse should ALSO nest under a specific entry
+// like Carian Sword Sorcery, not just the base axis rows — since it applies
+// on top of any hit, including a Carian Sword spell cast while below 85% HP.
+{
+  const magicUp = { tier: 'baseline', bucket: 'damage', axes: ['magic'], value: 1.12 };
+  const carianSword = { tier: 'conditional', bucket: 'damage', axes: ['magic'], category: 'sorcery', value: 1.12, condition: 'Casting Carian Sword sorceries only' };
+  const hpCurse = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' };
+  const r = computeBuildTotals([
+    { name: 'Magic Attack Power Up +4', mul: magicUp },
+    { name: 'Improved Carian Sword Sorcery', mul: carianSword },
+    { name: 'Lower Attack When Below Max HP', mul: hpCurse },
+  ]);
+  const carianRow = r.conditionalTree.damage.sorcery.find(c => c.name === 'Improved Carian Sword Sorcery');
+  test('Carian row carries a nestedWithUniversal entry', carianRow.nestedWithUniversal.length, 1);
+  test('nested entry is the HP curse', carianRow.nestedWithUniversal[0].name, 'Lower Attack When Below Max HP');
+  test('nested combined = Carian combined × curse combined',
+    carianRow.nestedWithUniversal[0].combined, carianRow.combined * 0.915);
+  const curseRow = r.conditionalTree.damage.status.find(c => c.name === 'Lower Attack When Below Max HP');
+  test('the curse itself does not nest under itself (empty array)', curseRow.nestedWithUniversal.length, 0);
 }
 
 // Unmapped effects fall into `other`, never silently multiplied.
