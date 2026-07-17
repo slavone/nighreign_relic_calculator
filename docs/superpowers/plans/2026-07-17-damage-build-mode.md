@@ -1830,3 +1830,46 @@ Other Effects section now shows "Resource" above the FP Consumption/Max
 HP rows and "No Computed Multiplier" above the three flat-effect bullets,
 in that order. 4 live-DOM assertions, no regression in the existing
 20/39/1455 test suites.
+
+### Post-plan addendum: Task 21 — three more real gaps in the same scenario
+
+Same URL, one more round of user feedback exposed three separate real
+issues, not just polish:
+
+1. **Data gap**: `Improved Damage Negation at Low HP` ("Increases damage
+   negation by 16% when HP is below 40%") was completely unmapped in both
+   `effect_multipliers.mjs` and `descriptions.mjs` — it silently fell into
+   the flat Other Effects list instead of Damage Negation's Actions
+   subgroup, where every other HP-threshold/timing negation effect
+   already lives. Added the mapping (`conditional`, `negation`,
+   `axes: ['universal']`, `group: 'status'`, `value: 0.16`) and a
+   description. Scanned both source CSVs for any other similarly-missed
+   "when HP is..." effects — the only other matches (Poison/Rot Buildup
+   When Below Max HP, the "Slowly restore HP..." regen effect) are
+   genuinely non-multiplier effects (flat buildup infliction, HP/s regen)
+   and correctly stay unmapped.
+2. **Missing descriptions**: the flat "No Computed Multiplier" list showed
+   bare effect names with zero explanation of what they actually do (e.g.
+   "All Resistances Down" with no indication it's −80 resistances). `desc`
+   is now threaded through `getBuildEffects()` → `computeBuildTotals`'s
+   `otherByName` map → rendered as "Name — description" using the same
+   `I18N.effectDesc()` helper used everywhere else in the app.
+3. **Opaque sub-labels**: "Resource" and "No Computed Multiplier" read as
+   unexplained jargon on their own. Renamed "Resource" → "Resource Stats"
+   and added a one-line italic caption under the "Other Effects" title
+   ("Effects that don't combine into the Attack Power / Damage Negation
+   totals above") — JP/KR translations included, new `build_other_caption`
+   i18n key, new `.build-summary-caption` CSS class.
+
+Required re-running `prepare_data.mjs`/`prepare_don_data.mjs` and the
+embed step (both `descriptions.mjs` and `effect_multipliers.mjs` changed).
+Verified against the user's exact URL with a fresh `jsdom` instance:
+Improved Damage Negation at Low HP now appears inside the Damage Negation
+section (nested under the Physical baseline too, as any universal-axis
+conditional should) and is gone from Other Effects; "All Resistances
+Down" and "Continuous HP Loss" now show their real descriptions; the
+caption and "Resource Stats" label both render. 7 live-DOM assertions,
+plus two new permanent regression tests (one in
+`tests/effect_multipliers.test.mjs` for the mapping, one in
+`tests/build.test.mjs` for the `desc` passthrough) — 20/40/1466 across
+the three test suites, all passed.

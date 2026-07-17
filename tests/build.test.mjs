@@ -26,7 +26,7 @@ function computeBuildTotals(effects) {
     if (!m) {
       const existing = otherByName.get(effect.name);
       if (existing) existing.count++;
-      else otherByName.set(effect.name, { name: effect.name, count: 1 });
+      else otherByName.set(effect.name, { name: effect.name, desc: effect.desc, count: 1 });
       continue;
     }
     if (m.tier === 'conditional') {
@@ -322,6 +322,15 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('unmapped effect count', r.other.length, 1);
   test('unmapped effect name', r.other[0].name, 'Vigor +1');
   test('unmapped effect does not touch damage baseline', r.damageBaseline.physical, 1);
+}
+
+// User-caught gap: unmapped effects showed a bare name with no explanation
+// of what they do. `desc` must survive into the `other` entry so the UI can
+// render it — e.g. "All Resistances Down — −80 all status resistances"
+// instead of leaving the user to guess.
+{
+  const r = computeBuildTotals([{ name: 'All Resistances Down', desc: '−80 all status resistances' }]);
+  test('unmapped effect carries its desc through to `other`', r.other[0].desc, '−80 all status resistances');
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

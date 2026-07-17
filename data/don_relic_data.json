@@ -2793,7 +2793,18 @@
           "id": "7012300",
           "name": "Improved Damage Negation at Low HP",
           "w": 55,
-          "hasCurse": false
+          "hasCurse": false,
+          "desc": "+16% damage negation when HP is below 40%",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "negation",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 0.16,
+            "condition": "While HP is below 40%"
+          }
         }
       ]
     },

@@ -131,6 +131,8 @@ export const EFFECT_DESCRIPTIONS = {
   'Improved Holy Damage Negation +1':      '+15% holy damage negation',
   'Improved Holy Damage Negation +2':      '+16% holy damage negation',
 
+  'Improved Damage Negation at Low HP': '+16% damage negation when HP is below 40%',
+
   // ── Physical Damage Negation (DON) ────────────────────────────────────────
   'Improved Physical Damage Negation +1': '+10.5% physical damage negation',
   'Improved Physical Damage Negation +2': '+12% physical damage negation',

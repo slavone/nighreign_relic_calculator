@@ -165,6 +165,7 @@ export const EFFECT_MULTIPLIERS = {
   'Improved Poise & Damage Negation When Knocked Back by Damage': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: 0.20, condition: '20s after being hit' },
   'Reduced Damage Negation After Evading': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'Right after evading' },
   'Reduced Damage Negation for Flask Usages': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'While using flasks' },
+  'Improved Damage Negation at Low HP': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: 0.16, condition: 'While HP is below 40%' },
 };
 
 // ── Weapon-type Attack Power (single-weapon = conditional; 3+ equipped = baseline universal) ──

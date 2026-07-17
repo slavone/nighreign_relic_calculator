@@ -3180,7 +3180,18 @@
             46,
             40,
             35
-          ]
+          ],
+          "desc": "+16% damage negation when HP is below 40%",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "negation",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 0.16,
+            "condition": "While HP is below 40%"
+          }
         }
       ]
     },

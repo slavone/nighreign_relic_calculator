@@ -99,6 +99,15 @@ const evasionCurse = EFFECT_MULTIPLIERS['Reduced Damage Negation After Evading']
 check('evasion curse is negative negation, conditional', evasionCurse &&
   evasionCurse.tier === 'conditional' && evasionCurse.bucket === 'negation' && evasionCurse.value === -0.45);
 
+// User-caught gap: this real relic effect (Defensive category, "Increases
+// damage negation by 16% when HP is below 40%") was completely unmapped,
+// so it silently fell into the flat Other Effects list instead of the
+// Damage Negation section's Actions subgroup where it belongs.
+const lowHpNegation = EFFECT_MULTIPLIERS['Improved Damage Negation at Low HP'];
+check('Improved Damage Negation at Low HP is mapped as a conditional negation', lowHpNegation &&
+  lowHpNegation.tier === 'conditional' && lowHpNegation.bucket === 'negation' &&
+  lowHpNegation.group === 'status' && lowHpNegation.value === 0.16);
+
 // Guards against the exact mistake that slipped through once already: editing
 // effect_multipliers.mjs without re-running prepare_data.mjs/prepare_don_data.mjs
 // and re-embedding — data/relic_data.json and data/don_relic_data.json (and by
