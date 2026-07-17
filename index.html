@@ -542,9 +542,14 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       // nesting against other universal-onlies, to avoid combinatorial pairs).
       const damageUniversalOnlySet = new Set(damageUniversalOnly);
       function attachUniversalNesting(entry) {
+        // Must multiply by `u.value` (u's own raw self-multiplier), never
+        // `u.combined` — u.combined already folds in the shared universal
+        // baseline (via its own factors), and so does entry.combined, so
+        // multiplying the two combined figures together would double-count
+        // that shared baseline factor instead of applying it once.
         entry.nestedWithUniversal = damageUniversalOnlySet.has(entry) ? [] : damageUniversalOnly.map(u => ({
           name: u.name, condition: u.condition, count: u.count,
-          combined: entry.combined * u.combined,
+          combined: entry.combined * Math.pow(u.value, u.count),
         }));
         return entry;
       }

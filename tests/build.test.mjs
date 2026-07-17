@@ -154,9 +154,14 @@ function computeBuildTotals(effects) {
   // nesting against other universal-onlies, to avoid combinatorial pairs).
   const damageUniversalOnlySet = new Set(damageUniversalOnly);
   function attachUniversalNesting(entry) {
+    // Must multiply by `u.value` (u's own raw self-multiplier), never
+    // `u.combined` — u.combined already folds in the shared universal
+    // baseline (via its own factors), and so does entry.combined, so
+    // multiplying the two combined figures together would double-count
+    // that shared baseline factor instead of applying it once.
     entry.nestedWithUniversal = damageUniversalOnlySet.has(entry) ? [] : damageUniversalOnly.map(u => ({
       name: u.name, condition: u.condition, count: u.count,
-      combined: entry.combined * u.combined,
+      combined: entry.combined * Math.pow(u.value, u.count),
     }));
     return entry;
   }
@@ -337,10 +342,42 @@ function test(label, actual, expected, tolerance = 1e-9) {
   const carianRow = r.conditionalTree.damage.sorcery.find(c => c.name === 'Improved Carian Sword Sorcery');
   test('Carian row carries a nestedWithUniversal entry', carianRow.nestedWithUniversal.length, 1);
   test('nested entry is the HP curse', carianRow.nestedWithUniversal[0].name, 'Lower Attack When Below Max HP');
-  test('nested combined = Carian combined × curse combined',
+  // No universal BASELINE is active in this scenario, so curse.value (0.915)
+  // and curse.combined happen to be numerically equal here — this assertion
+  // alone can't distinguish the correct formula (entry.combined × u.value)
+  // from the buggy one (entry.combined × u.combined). See the dedicated
+  // "double-counting" test below, which uses an active universal baseline
+  // specifically to tell the two formulas apart.
+  test('nested combined = Carian combined × curse value',
     carianRow.nestedWithUniversal[0].combined, carianRow.combined * 0.915);
   const curseRow = r.conditionalTree.damage.status.find(c => c.name === 'Lower Attack When Below Max HP');
   test('the curse itself does not nest under itself (empty array)', curseRow.nestedWithUniversal.length, 0);
+}
+
+// User-reported bug: with an ACTIVE universal baseline (e.g. from a real
+// "3+ weapon type equipped" effect) present, nesting one conditional entry
+// under another universal-only conditional (e.g. a school-specific
+// incantation bonus nested with a frostbite curse) squared the universal
+// baseline instead of applying it once — because entry.combined and
+// u.combined each independently already include that shared factor.
+{
+  const fireUp = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
+  const universalBaseline = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.2 };
+  const giantsFlame = { tier: 'conditional', bucket: 'damage', axes: ['fire'], category: 'incantation', value: 1.12, condition: "Casting Giants' Flame incantations only" };
+  const frostbite = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs frostbite-afflicted enemies' };
+  const r = computeBuildTotals([
+    { name: 'Fire Attack Power Up +4', mul: fireUp },
+    { name: 'Improved Attack Power with 3+ Daggers Equipped', mul: universalBaseline },
+    { name: "Improved Giants' Flame Incantations", mul: giantsFlame },
+    { name: 'Attack power up when facing frostbite-afflicted enemy', mul: frostbite },
+  ]);
+  const giantsFlameRow = r.conditionalTree.damage.incantation.find(c => c.name === "Improved Giants' Flame Incantations");
+  const nested = giantsFlameRow.nestedWithUniversal.find(n => n.name === 'Attack power up when facing frostbite-afflicted enemy');
+  const trueValue = 1.12 /* fire baseline */ * 1.2 /* universal baseline */ * 1.12 /* Giants' Flame */ * 1.1 /* frostbite */;
+  test('nested combined matches the true from-scratch value (no double-counted universal)',
+    nested.combined, trueValue);
+  test('nested combined is NOT the buggy double-counted value',
+    Math.abs(nested.combined - giantsFlameRow.combined * (1.2 * 1.1)) > 1e-9, true);
 }
 
 // User-reported bug: Resource/Recovery used to blend every resource stat

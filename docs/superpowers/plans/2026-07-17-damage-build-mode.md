@@ -2117,3 +2117,47 @@ translation checks, plus two new permanent regression tests in
 `tests/effect_multipliers.test.mjs` and 5 new ones in
 `tests/build.test.mjs` covering the pool-merge mechanism specifically —
 20/52/2346 across the three test suites, all passed.
+
+### Post-plan addendum: Task 29 — fixed a Universal-baseline double-counting bug
+
+User-reported "weird result" while selecting `Improved Attack Power with
+3+ [Weapon Type] Equipped` alongside a school-specific incantation bonus
+and a frostbite curse — investigating led to a genuine two-part
+conversation (not just a bug report): first clarifying that "Universal"
+is structurally a baseline damage-type row like Physical/Magic/Fire/
+Lightning/Holy (proposed folding it into each element the way Affinity
+already does), then the user pushed back that they want to see BOTH the
+separate baseline breakdown AND a combined total — same as spell schools
+already show — and provided a second, more detailed example that exposed
+an actual correctness bug underneath the display question.
+
+Root cause, confirmed by hand-computing the exact numbers from the user's
+pasted HTML: `attachUniversalNesting` (added in Task 23, "nest situational
+effects under every affected total") computed a specific conditional
+entry's nesting under ANOTHER universal-only conditional as
+`entry.combined * u.combined` — but `u.combined` already folds in the
+shared universal baseline as one of its own factors, and so does
+`entry.combined`, so multiplying the two together SQUARES the universal
+baseline instead of applying it once (e.g. "Improved Giants' Flame
+Incantations" nested with a frostbite curse showed ×2.186 instead of the
+correct ×1.656). Task 23's original test for this exact code path
+happened to have no active universal baseline in its scenario, so
+`u.combined === u.value` there and the bug was invisible — a coincidence,
+not a real pass.
+
+Fix: `entry.combined * Math.pow(u.value, u.count)` — multiply by u's own
+raw self-multiplier (raised to its duplicate count), never its full
+combined figure, matching how `damageAxisNested` (the other nesting path)
+already avoided this by using the raw baseline value on one side.
+Strengthened the misleading Task-23 test (relabeled to clarify it
+couldn't distinguish the two formulas) and added a dedicated regression
+test with an active universal baseline specifically designed to tell the
+buggy and correct formulas apart — verified by temporarily reverting the
+fix and confirming the new test fails (2/2 assertions) before restoring
+it. Verified live against a reconstructed version of the user's scenario
+with a fresh `jsdom` instance: the nested combined value now reads ×1.656,
+matching the correct from-scratch computation. The Universal-display
+design conversation itself remains open ("lets think") — this addendum
+covers only the confirmed math bug it surfaced, not a resolution to the
+sizing/labeling question. 4 live-DOM assertions, 2 new permanent
+regression tests, 20/54/2346 across the three test suites.
