@@ -264,6 +264,7 @@
 efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desired d in slot t]
                    + ((W_t − freeGW_t) / W_t) · efSlots(rest, D)     [slot t free, if slots remain]</pre>
         <p data-i18n-html="meth_formula_p4">Delicate results are exact. Multiply by 0.25 if a specific relic color is required. <strong>Deep of Night</strong> relics use a single-pool model (no tiers): P = K! × Σ over K-group subsets of ef(S, W) × curseFactor.</p>
+        <p data-i18n="meth_build_mode_note">Damage Build mode (a separate, third tab) doesn't compute probability — it lets you enter your actual equipped relics' effects and see the combined Damage / Damage Negation / Resource multipliers, splitting baseline (always-on) from conditional (weapon/school-specific or situational) effects.</p>
       </section>
 
       <section>

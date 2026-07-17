@@ -45,6 +45,28 @@ P = K×(K−1)×…×(K−n+1) × ∏(w_i / W) × (0.25 if specific color) × �
 
 - DON pool: tables 2000000 + 2100000, W = 19961. Curse pool: table 3000000, 24 curses, W = 2400.
 
+## Damage Build Mode
+
+A third mode, independent of the probability calculator: enter the actual
+effects on up to 6 equipped relics (3 Regular + 3 Deep of Night, DON
+toggleable off) and see the combined Damage / Damage Negation / Resource
+multipliers.
+
+Effects are classified as **baseline** (always-on, folds into a running
+total per damage-type axis: Physical/Magic/Fire/Lightning/Holy/Universal, plus
+Sorcery/Incantation category multipliers) or **conditional** (real value, but
+tied to a specific weapon/spell-school or a transient trigger — shown as its
+own line with a "combined with your baseline" figure rather than silently
+merged). Anything not classified (flat stat bonuses, resistances, variable
+per-kill scaling effects) is listed as plain text.
+
+See `docs/superpowers/specs/2026-07-17-damage-build-mode-design.md` for the
+full design rationale, including the spell-school → damage-type mapping.
+
+Effect classification data lives in `effect_multipliers.mjs` and flows
+through the same `prepare_data.mjs` / `prepare_don_data.mjs` → embed pipeline
+as effect descriptions.
+
 ## Regenerating Data
 
 Raw game files go in `data/`. Then run:
