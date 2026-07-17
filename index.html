@@ -617,6 +617,188 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       return html;
     }
 
+    // --- Damage Build mode: relic panel UI ---
+    // Unlike buildGroupOptions/buildEffectOptions/buildCurseOptions (which read the
+    // global `mode`), these take their pool explicitly since Build mode shows Regular
+    // and DON relics side by side regardless of the top Regular/DON toggle.
+    function buildOptionsForGroups(groups, usedIndices, currentGroupIdx) {
+      let html = `<option value="">${I18N.t('select_group_placeholder', '— select group —')}</option>`;
+      groups.forEach((g, i) => {
+        if (!usedIndices.has(i) || i === currentGroupIdx) {
+          const sel = i === currentGroupIdx ? ' selected' : '';
+          html += `<option value="${i}"${sel}>${I18N.groupName(g.groupName)} (${g.effects.length})</option>`;
+        }
+      });
+      return html;
+    }
+
+    function buildEffectOptionsForGroups(groups, groupIdx, currentEffectIdx) {
+      if (isNaN(groupIdx) || groupIdx < 0) return `<option value="">${I18N.t('select_effect_placeholder', '— select effect —')}</option>`;
+      let html = '';
+      groups[groupIdx].effects.forEach((e, i) => {
+        const sel = i === currentEffectIdx ? ' selected' : '';
+        html += `<option value="${i}"${sel}>${I18N.effectName(e.name)}</option>`;
+      });
+      return html;
+    }
+
+    function buildCurseOptionsFor(currentCurseIdx) {
+      let html = `<option value="">${I18N.t('curse_any', 'Any curse')}</option>`;
+      DON_DATA.curses.forEach((c, i) => {
+        const sel = i === currentCurseIdx ? ' selected' : '';
+        html += `<option value="${i}"${sel}>${I18N.effectName(c.name)}</option>`;
+      });
+      return html;
+    }
+
+    function activeBuildPreDLCGroups(pool) {
+      // Mirrors activeGroups()'s pre-DLC filtering, but parametrized to an explicit pool
+      // (DATA or DON_DATA) instead of the global `mode`.
+      if (!preDLC) return pool.groups;
+      return pool.groups
+        .map(g => ({ ...g, effects: g.effects.filter(e => !e.dlc) }))
+        .filter(g => g.effects.length > 0);
+    }
+
+    function createRelicPanel(pool, allowCurse, title) {
+      const panel = document.createElement('div');
+      panel.className = 'relic-panel';
+      const titleEl = document.createElement('div');
+      titleEl.className = 'relic-panel-title';
+      titleEl.textContent = title;
+      const slotsEl = document.createElement('div');
+      slotsEl.className = 'relic-panel-slots';
+      const addBtn = document.createElement('button');
+      addBtn.className = 'add-effect-btn';
+      addBtn.type = 'button';
+      addBtn.textContent = I18N.t('add_effect', '+ Add desired effect');
+
+      function usedGroupIndices() {
+        return new Set([...slotsEl.querySelectorAll('.group-select')]
+          .map(s => parseInt(s.value)).filter(v => !isNaN(v)));
+      }
+      function updateAddBtnState() {
+        addBtn.disabled = slotsEl.querySelectorAll('.slot-block').length >= 3;
+      }
+      function refreshGroupDropdowns() {
+        const groups = activeBuildPreDLCGroups(pool);
+        slotsEl.querySelectorAll('.slot-block').forEach(block => {
+          const groupSel = block.querySelector('.group-select');
+          const cur = parseInt(groupSel.value);
+          groupSel.innerHTML = buildOptionsForGroups(groups, usedGroupIndices(), cur);
+        });
+      }
+
+      function addRow() {
+        if (slotsEl.querySelectorAll('.slot-block').length >= 3) return;
+        const groups = activeBuildPreDLCGroups(pool);
+        const block = document.createElement('div');
+        block.className = 'slot-block';
+        const row = document.createElement('div');
+        row.className = 'slot';
+        const groupSel = document.createElement('select');
+        groupSel.className = 'group-select';
+        groupSel.innerHTML = buildOptionsForGroups(groups, usedGroupIndices(), NaN);
+        const effectSel = document.createElement('select');
+        effectSel.className = 'effect-select';
+        effectSel.innerHTML = `<option value="">${I18N.t('select_effect_placeholder', '— select effect —')}</option>`;
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = I18N.t('remove', 'Remove');
+        row.append(groupSel, effectSel, removeBtn);
+        block.append(row);
+
+        groupSel.addEventListener('change', () => {
+          const gIdx = parseInt(groupSel.value);
+          effectSel.innerHTML = buildEffectOptionsForGroups(groups, gIdx, NaN);
+          if (!isNaN(gIdx)) effectSel.selectedIndex = 0;
+          refreshGroupDropdowns();
+          updateResult();
+        });
+        effectSel.addEventListener('change', updateResult);
+        removeBtn.addEventListener('click', () => {
+          block.remove();
+          refreshGroupDropdowns();
+          updateAddBtnState();
+          updateResult();
+        });
+
+        slotsEl.appendChild(block);
+        updateAddBtnState();
+      }
+
+      addBtn.addEventListener('click', addRow);
+      panel.append(titleEl, slotsEl, addBtn);
+
+      // Every DON relic carries exactly one curse — this lives on the panel
+      // itself, not per effect slot, so it must NOT go inside addRow().
+      if (allowCurse) {
+        const curseRow = document.createElement('div');
+        curseRow.className = 'curse-row visible';
+        const curseLabel = document.createElement('span');
+        curseLabel.className = 'curse-label';
+        curseLabel.textContent = I18N.t('curse_label', 'Curse:');
+        const curseSel = document.createElement('select');
+        curseSel.className = 'curse-select';
+        curseSel.innerHTML = buildCurseOptionsFor(NaN);
+        curseSel.addEventListener('change', updateResult);
+        curseRow.append(curseLabel, curseSel);
+        panel.append(curseRow);
+      }
+
+      updateAddBtnState();
+      return panel;
+    }
+
+    function buildRelicPanels() {
+      const regularContainer = document.getElementById('build-regular-relics');
+      const donContainer = document.getElementById('build-don-relics');
+      regularContainer.innerHTML = '';
+      donContainer.innerHTML = '';
+      for (let i = 1; i <= 3; i++) {
+        regularContainer.appendChild(createRelicPanel(DATA, false,
+          I18N.t('build_relic_label', 'Relic') + ' ' + i));
+      }
+      for (let i = 1; i <= 3; i++) {
+        donContainer.appendChild(createRelicPanel(DON_DATA, true,
+          I18N.t('build_don_relic_label', 'DON Relic') + ' ' + i));
+      }
+    }
+
+    // Reads every selected effect across all 6 relic panels (plus any selected
+    // curses) and returns the flat list computeBuildTotals() expects.
+    function getBuildEffects() {
+      const effects = [];
+      // Curses live once per relic panel (`.relic-panel`), not per effect slot
+      // — iterate panels, not a flat list of slot-blocks, so each DON relic's
+      // single curse is only read once regardless of how many effect rows it has.
+      function collectFromPanels(container, pool, includeCurse) {
+        const groups = activeBuildPreDLCGroups(pool);
+        container.querySelectorAll('.relic-panel').forEach(panel => {
+          panel.querySelectorAll('.slot-block').forEach(block => {
+            const gIdx = parseInt(block.querySelector('.group-select').value);
+            const eIdx = parseInt(block.querySelector('.effect-select').value);
+            if (isNaN(gIdx) || isNaN(eIdx)) return;
+            const effect = groups[gIdx]?.effects[eIdx];
+            if (effect) effects.push({ name: effect.name, mul: effect.mul });
+          });
+          if (includeCurse) {
+            const curseSel = panel.querySelector('.curse-select');
+            const cIdx = parseInt(curseSel?.value);
+            if (!isNaN(cIdx)) {
+              const curse = DON_DATA.curses[cIdx];
+              if (curse) effects.push({ name: curse.name, mul: curse.mul });
+            }
+          }
+        });
+      }
+      collectFromPanels(document.getElementById('build-regular-relics'), DATA, false);
+      if (document.getElementById('build-don-toggle').checked) {
+        collectFromPanels(document.getElementById('build-don-relics'), DON_DATA, true);
+      }
+      return effects;
+    }
+
     function updateCurseRow(slotBlock) {
       if (mode !== 'don') return;
       const groupSel  = slotBlock.querySelector('.group-select');
@@ -1139,6 +1321,14 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     document.querySelectorAll('#color-checkboxes input').forEach(cb =>
       cb.addEventListener('change', updateResult));
     addSlotBtn.addEventListener('click', addSlot);
+
+    document.getElementById('build-don-toggle').addEventListener('change', () => {
+      document.getElementById('build-don-relics').style.display =
+        document.getElementById('build-don-toggle').checked ? '' : 'none';
+      document.getElementById('build-don-heading').style.display =
+        document.getElementById('build-don-toggle').checked ? '' : 'none';
+      updateResult();
+    });
 
     // Calc mode toggle
     document.querySelectorAll('[data-calcmode]').forEach(btn => {
