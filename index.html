@@ -99,6 +99,18 @@
     .slot-block { margin-bottom: 0.4rem; }
     #add-slot { background: none; border: 1px dashed #555; color: #aaa; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-top: 0.4rem; font-size: 0.85rem; }
     #add-slot:hover { border-color: #f0c060; color: #f0c060; }
+    .build-don-toggle-label { display: block; margin-bottom: 1rem; color: #ccc; font-size: 0.9rem; }
+    .relic-panel { border: 1px solid #444; border-radius: 6px; padding: 0.8rem; margin-bottom: 1rem; }
+    .relic-panel-title { font-weight: 600; color: #f0c060; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .add-effect-btn { background: none; border: 1px dashed #555; color: #aaa; padding: 0.4rem 0.9rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+    .add-effect-btn:hover { border-color: #f0c060; color: #f0c060; }
+    .add-effect-btn:disabled { opacity: 0.4; cursor: default; }
+    .build-summary-section { border: 1px solid #444; border-radius: 6px; padding: 0.8rem; margin-top: 1rem; }
+    .build-summary-title { font-weight: 600; color: #f0c060; margin-bottom: 0.5rem; }
+    .build-axis-row { display: flex; justify-content: space-between; padding: 0.15rem 0; font-size: 0.9rem; }
+    .build-conditional-item { padding: 0.3rem 0; font-size: 0.85rem; border-top: 1px solid #333; }
+    .build-conditional-combined { color: #f0c060; }
+    .build-other-list { font-size: 0.8rem; color: #999; margin-top: 0.5rem; }
     .share-btn { background: none; border: 1px dashed #555; color: #aaa; padding: 0.4rem 0.9rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
     .share-btn:hover { border-color: #f0c060; color: #f0c060; }
     #share-status { font-size: 0.8rem; color: #8ac07a; }
@@ -139,6 +151,7 @@
   <div class="mode-toggle" style="margin-bottom: 1rem;">
     <button class="mode-btn" data-calcmode="v1" data-i18n="calcmode_v1">Exact Effects</button>
     <button class="mode-btn active" data-calcmode="v2" data-i18n="calcmode_v2">Multiple Choice</button>
+    <button class="mode-btn" data-calcmode="v3" data-i18n="calcmode_v3">Damage Build</button>
   </div>
 
   <div class="controls">
@@ -170,6 +183,18 @@
   <div id="v1-section" style="display:none">
     <div id="slots-container"></div>
     <button id="add-slot" data-i18n="add_effect">+ Add desired effect</button>
+  </div>
+
+  <div id="v3-section" style="display:none">
+    <label class="build-don-toggle-label">
+      <input type="checkbox" id="build-don-toggle" checked>
+      <span data-i18n="build_don_toggle">Include Deep of Night relics</span>
+    </label>
+    <h3 data-i18n="build_regular_heading">Regular Relics</h3>
+    <div id="build-regular-relics"></div>
+    <h3 id="build-don-heading" data-i18n="build_don_heading">Deep of Night Relics</h3>
+    <div id="build-don-relics"></div>
+    <div id="build-summary"></div>
   </div>
 
   <div id="v2-section">
