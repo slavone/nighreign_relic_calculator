@@ -50,10 +50,18 @@
 //            Optional on `flat` entries purely as informational display text (e.g. an
 //            HP-gated buildup curse) — it does NOT affect how duplicates merge, since
 //            flat entries always sum regardless of any trigger condition.
+// variableCount: baseline damage/negation only — the effect's real-world "count" (times
+//            triggered so far this run, e.g. bosses defeated) isn't the number of relics/
+//            slots carrying it, so the UI shows a count selector (0..maxCount) instead of
+//            deriving count from duplicate selection, and feeds the SAME effect into
+//            computeBuildTotals `count` times — no engine changes needed, this reuses the
+//            existing per-occurrence multiply.
+// maxCount:  required alongside variableCount — the highest count the count selector
+//            offers, i.e. the real in-game cap for that trigger (confirmed with the user).
 //
 // Effect names not present here are treated as Flat/Other by the build-mode UI — that's
 // the safe default for anything not classified (flat stat bonuses, resistances, flavor
-// text, variable/unbounded-scaling effects like "per boss defeated").
+// text).
 //
 // See docs/superpowers/specs/2026-07-17-damage-build-mode-design.md for the full rationale,
 // including the spell-school → damage-type mapping (confirmed with the user).
@@ -109,6 +117,15 @@ export const EFFECT_MULTIPLIERS = {
   'Improved Affinity Attack Power': { tier: 'baseline', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], value: 1.05 },
   'Improved Affinity Attack Power +1': { tier: 'baseline', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], value: 1.08 },
   'Improved Affinity Attack Power +2': { tier: 'baseline', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], value: 1.1 },
+
+  // ── Run-progress scaling (baseline, universal) — the multiplier applies
+  // permanently for the rest of the run once triggered, but how many times
+  // it's triggered depends on the player's actual run (bosses/invaders
+  // cleared), not on relic/slot duplication, so the UI offers a count
+  // selector (0..maxCount, capped at the real in-game max) instead of
+  // deriving count from how many relics carry the effect.
+  'Attack power increased for each evergaol prisoner defeated': { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05, variableCount: true, maxCount: 7 },
+  'Attack power increased for each Night Invader defeated': { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.07, variableCount: true, maxCount: 4 },
 
   // ── Sorcery / Incantation category multipliers (baseline, no fixed axis) ─
   'Improved Sorceries': { tier: 'baseline', bucket: 'damage', category: 'sorcery', value: 1.05 },

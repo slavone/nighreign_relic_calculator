@@ -463,7 +463,17 @@
             40,
             35
           ],
-          "desc": "1.05× damage per Evergaol boss defeated"
+          "desc": "1.05× damage per Evergaol boss defeated",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.05,
+            "variableCount": true,
+            "maxCount": 7
+          }
         },
         {
           "id": 7060200,
@@ -473,7 +483,17 @@
             40,
             35
           ],
-          "desc": "1.07× damage per Night Invader defeated"
+          "desc": "1.07× damage per Night Invader defeated",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.07,
+            "variableCount": true,
+            "maxCount": 4
+          }
         },
         {
           "id": 7080000,

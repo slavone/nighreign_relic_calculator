@@ -2231,3 +2231,86 @@ Equipped)" — both the isolated multiplier and its trigger condition are
 now visible, and it correctly combines into the real per-element total
 via the existing nesting display. 20/57/2394 across the three test
 suites, all passing.
+
+### Post-plan addendum: Task 31 — added kill-count selectors for Evergaol /
+Night Invader attack-power bonuses, and closed the resulting baseline
+Universal display gap
+
+User request: "Attack power increased for each evergaol prisoner
+defeated" (1.05x per kill) and "...each Night Invader defeated" (1.07x
+per kill) were completely unmapped in `effect_multipliers.mjs` — real
+percent-per-kill multipliers that fell into the flat "Non Stackable"
+bucket with no numeric contribution at all. Unlike every other
+multiplicative effect, their real "count" is a run-progress number the
+player tracks themselves (bosses/invaders actually cleared), not how many
+relics/slots carry the effect — so they needed a dedicated count input
+rather than the existing duplicate-selection-derived count. Asked the
+user for the real in-game caps to bound the selector: confirmed 7
+Evergaols, 4 Night Invaders. The user's other suggestion — a toggle for
+the "3+ weapon types" bonus — turned out already covered by Task 30's
+fix (selecting the relic effect from its dropdown already IS the on/off
+toggle); confirmed with the user and made no change there.
+
+Classification: both effects added as `{ tier: 'baseline', bucket:
+'damage', axes: ['universal'], value, variableCount: true, maxCount }` —
+genuinely baseline (permanent for the rest of the run once triggered),
+unlike Task 30's reclassified weapon bonus. Documented the new
+`variableCount`/`maxCount` fields in the file's header comment and added
+schema validation + spot-checks in `tests/effect_multipliers.test.mjs`.
+
+Engine: zero changes to `computeBuildTotals`. A baseline-tier entry
+already multiplies its value into the running baseline once per
+occurrence in the effects array — so the UI just pushes the SAME effect
+into that array `count` times (once per kill), and `value^count` falls
+out for free, the same mechanism that already handles two relics with
+the same baseline effect selected.
+
+UI (`createRelicPanel`'s `addRow()`): added a `count-row`/`count-select`
+per slot, built once and toggled visible via `updateCountRowVisibility()`
+— mirrors `updateCurseRowVisibility()` exactly, wired into both the
+group-select and effect-select `change` handlers. Options are rebuilt
+0..maxCount only when the slot's effect actually changes (tracked via a
+`data-effect-name` attribute), so switching away and back doesn't reset
+a count the player already set. `getBuildEffects()` reads the selected
+count and pushes the effect that many times (0 if unset/zero — the row
+contributes nothing rather than crashing). Share-link round-trip: added
+an `n` URL param (`${prefix}${relicNum}n${slotNum}`) alongside the
+existing `s` (slot) and `c` (curse) params in `buildShareURL()`, threaded
+through `restoreFromURL()`'s return shape (regular panels gained a
+`counts` array, matching how DON panels already carry `curses`) and
+`applyRestoredBuildPanel()` (new `countKeys` parameter, gated by the
+same `effect.mul.variableCount` check used on first selection).
+
+Second-order fix this surfaced: since Evergaol/Night Invader are the
+FIRST real always-on baseline-tier Universal effects (Task 30 correctly
+moved the only prior example, the weapon bonus, to conditional), the
+original "Universal sits as an isolated, unexplained number" display gap
+from the Task 29/30 design conversation was suddenly real again — Fire
+×1.065 and All Damage ×1.158 would've rendered as two disconnected
+numbers with no visible combined total. Fixed in `renderBuildAxisRows`
+(render-layer only, no `computeBuildTotals` duplication needed): every
+non-universal axis row now gets an extra nested line combining it with
+the baseline Universal value whenever the latter is active — "Fire
+×1.065 → All Damage ×1.158 → ×1.233" — using the exact same
+`build-axis-nested` row style already used for named conditional
+nesting, just unconditioned (no name/condition text, since a baseline
+source has neither). Conditional entries needed no equivalent fix:
+`combinedFor` already folds `damageBaseline.universal` into every
+conditional entry's own `combined` figure and factor-breakdown line, so
+e.g. Carian Sword Sorcery already correctly shows the Universal baseline
+as one of its multiplied factors.
+
+Regenerated `data/relic_data.json` (Evergaol/Night Invader are
+regular-pool-only, `don_relic_data.json` unchanged) and re-embedded.
+Added 2 new `tests/build.test.mjs` cases for the push-N-times mechanism
+using the real values (1.05³, 1.07⁴ at the real max). Verified live with
+`jsdom`, driving actual DOM interactions (not eval) — selected the
+Evergaol effect in relic 1, confirmed the count-row appeared with options
+0–7 defaulting to 1, set it to 3, added Fire Attack Power Up +2 in relic
+2, and read the real rendered summary HTML: `Fire ×1.065` → nested `All
+Damage ×1.158 → ×1.233`, plus the standalone `All Damage ×1.158` row, and
+the share URL `r1s1=7060000&r1n1=3&r2s1=7001602`. Then loaded that exact
+URL fresh and confirmed the restore reconstructs identical state
+(group/effect/count all round-trip, rendered HTML byte-identical).
+Added `build_count_label` ("Count:" / 回数： / 횟수:) to both locales.
+20/62/2587 across the three test suites, all passing.

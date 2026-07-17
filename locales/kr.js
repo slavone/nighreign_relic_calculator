@@ -65,6 +65,7 @@ window.__LOCALE_KR__ = {
     "select_curse_placeholder": "— 저주 선택 —",
     "remove": "제거",
     "curse_label": "저주:",
+    "build_count_label": "횟수:",
     "select_all": "전체 선택",
     "select_none": "선택 해제",
     "share_button": "선택 항목 공유",

@@ -65,6 +65,7 @@ window.__LOCALE_JP__ = {
     "select_curse_placeholder": "— 呪いを選択 —",
     "remove": "削除",
     "curse_label": "呪い：",
+    "build_count_label": "回数：",
     "select_all": "全選択",
     "select_none": "選択解除",
     "share_button": "選択内容を共有",

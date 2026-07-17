@@ -93,6 +93,13 @@ for (const [name, m] of entries) {
     check(`${name}: baseline has no condition string`, m.condition === undefined);
     check(`${name}: baseline has no group`, m.group === undefined);
   }
+  if (m.variableCount !== undefined) {
+    check(`${name}: variableCount is boolean true`, m.variableCount === true);
+    check(`${name}: variableCount only applies to baseline tier (count is chosen by the player, not derived from duplicate selection)`, m.tier === 'baseline');
+    check(`${name}: variableCount requires a positive integer maxCount`, Number.isInteger(m.maxCount) && m.maxCount > 0);
+  } else {
+    check(`${name}: maxCount only appears alongside variableCount`, m.maxCount === undefined);
+  }
   // Negation values are fractional (can be negative for a curse that *removes*
   // negation); damage/resource values are multipliers, always positive.
   if (m.bucket === 'negation') {
@@ -131,6 +138,16 @@ check('3+ Katana bonus is a universal conditional, not an always-on baseline', k
   katana3plus.tier === 'conditional' && katana3plus.axes.includes('universal') &&
   katana3plus.group === 'weapon' && katana3plus.value === 1.2 &&
   katana3plus.condition === '3+ Katana Equipped');
+
+const evergaol = EFFECT_MULTIPLIERS['Attack power increased for each evergaol prisoner defeated'];
+check('evergaol bonus is a variable-count universal baseline, capped at 7', evergaol &&
+  evergaol.tier === 'baseline' && evergaol.axes.includes('universal') &&
+  evergaol.value === 1.05 && evergaol.variableCount === true && evergaol.maxCount === 7);
+
+const nightInvader = EFFECT_MULTIPLIERS['Attack power increased for each Night Invader defeated'];
+check('Night Invader bonus is a variable-count universal baseline, capped at 4', nightInvader &&
+  nightInvader.tier === 'baseline' && nightInvader.axes.includes('universal') &&
+  nightInvader.value === 1.07 && nightInvader.variableCount === true && nightInvader.maxCount === 4);
 
 const evasionCurse = EFFECT_MULTIPLIERS['Reduced Damage Negation After Evading'];
 check('evasion curse is negative negation, conditional', evasionCurse &&

@@ -520,5 +520,35 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('positive pool total shows an explicit +', vigorRow.desc, '+60 Max HP');
 }
 
+// User-requested: Evergaol/Night Invader kill-count bonuses (1.05x per
+// Evergaol, 1.07x per Night Invader) scale with a real run count the player
+// states directly, not with relic/slot duplication — the UI feeds the SAME
+// baseline effect into computeBuildTotals `count` times (once per kill), so
+// no engine changes were needed here: a baseline entry already multiplies
+// its value in once per occurrence in the effects array, same as any other
+// duplicate baseline effect.
+{
+  const evergaol = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05, variableCount: true, maxCount: 7 };
+  const fireUp = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
+  const r = computeBuildTotals([
+    { name: 'Attack power increased for each evergaol prisoner defeated', mul: evergaol },
+    { name: 'Attack power increased for each evergaol prisoner defeated', mul: evergaol },
+    { name: 'Attack power increased for each evergaol prisoner defeated', mul: evergaol },
+    { name: 'Fire Attack Power Up +4', mul: fireUp },
+  ]);
+  test('3 evergaol kills compound to 1.05^3', r.damageBaseline.universal, Math.pow(1.05, 3));
+  test('fire baseline stays independent of the universal baseline', r.damageBaseline.fire, 1.12);
+  test('real fire total reads as fire baseline * universal baseline', r.damageBaseline.fire * r.damageBaseline.universal, 1.12 * Math.pow(1.05, 3));
+}
+
+{
+  const nightInvader = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.07, variableCount: true, maxCount: 4 };
+  const r0 = computeBuildTotals([]);
+  const r4 = computeBuildTotals(Array.from({ length: 4 }, () =>
+    ({ name: 'Attack power increased for each Night Invader defeated', mul: nightInvader })));
+  test('0 kills leaves the universal baseline untouched', r0.damageBaseline.universal, 1);
+  test('4 Night Invader kills (the real in-game max) compound to 1.07^4', r4.damageBaseline.universal, Math.pow(1.07, 4));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
