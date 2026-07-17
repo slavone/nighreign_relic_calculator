@@ -2,6 +2,7 @@
 // self-consistent shape so the calc engine (computeBuildTotals) never has
 // to guess or crash on malformed data.
 import { EFFECT_MULTIPLIERS } from '../effect_multipliers.mjs';
+import { readFileSync } from 'fs';
 
 let passed = 0, failed = 0;
 function check(label, ok) {
@@ -13,6 +14,7 @@ const VALID_TIERS = new Set(['baseline', 'conditional']);
 const VALID_BUCKETS = new Set(['damage', 'negation', 'resource']);
 const VALID_AXES = new Set(['physical', 'magic', 'fire', 'lightning', 'holy', 'universal']);
 const VALID_CATEGORIES = new Set(['sorcery', 'incantation']);
+const VALID_GROUPS = new Set(['weapon', 'hitType', 'status']);
 
 const entries = Object.entries(EFFECT_MULTIPLIERS);
 check('at least 80 entries present', entries.length >= 80);
@@ -37,10 +39,17 @@ for (const [name, m] of entries) {
   if (m.category !== undefined) {
     check(`${name}: category is valid`, VALID_CATEGORIES.has(m.category));
   }
+  if (m.group !== undefined) {
+    check(`${name}: group is valid`, VALID_GROUPS.has(m.group));
+    check(`${name}: group and category are mutually exclusive`, m.category === undefined);
+  }
   if (m.tier === 'conditional') {
     check(`${name}: conditional has a condition string`, typeof m.condition === 'string' && m.condition.length > 0);
+    check(`${name}: conditional has a category or a group (for the summary tree)`,
+      m.category !== undefined || m.group !== undefined);
   } else {
     check(`${name}: baseline has no condition string`, m.condition === undefined);
+    check(`${name}: baseline has no group`, m.group === undefined);
   }
   // Negation values are fractional (can be negative for a curse that *removes*
   // negation); damage/resource values are multipliers, always positive.
@@ -82,6 +91,33 @@ check('3+ Katana bonus is baseline universal', katana3plus &&
 const evasionCurse = EFFECT_MULTIPLIERS['Reduced Damage Negation After Evading'];
 check('evasion curse is negative negation, conditional', evasionCurse &&
   evasionCurse.tier === 'conditional' && evasionCurse.bucket === 'negation' && evasionCurse.value === -0.45);
+
+// Guards against the exact mistake that slipped through once already: editing
+// effect_multipliers.mjs without re-running prepare_data.mjs/prepare_don_data.mjs
+// and re-embedding — data/relic_data.json and data/don_relic_data.json (and by
+// extension index.html's embedded DATA/DON_DATA) must reflect the CURRENT
+// source, not a stale snapshot from before a field was added.
+function findMulByName(data, name) {
+  for (const g of data.groups) {
+    const e = g.effects.find(e => e.name === name);
+    if (e) return e.mul;
+  }
+  return undefined;
+}
+
+const relicData = JSON.parse(readFileSync(new URL('../data/relic_data.json', import.meta.url), 'utf8'));
+const donData = JSON.parse(readFileSync(new URL('../data/don_relic_data.json', import.meta.url), 'utf8'));
+
+check('regenerated data/relic_data.json has the current Physical Attack Up +1 mul',
+  JSON.stringify(findMulByName(relicData, 'Physical Attack Up +1')) === JSON.stringify(EFFECT_MULTIPLIERS['Physical Attack Up +1']));
+check('regenerated data/relic_data.json has the current group field (Katana, weapon)',
+  JSON.stringify(findMulByName(relicData, 'Improved Katana Attack Power')) === JSON.stringify(EFFECT_MULTIPLIERS['Improved Katana Attack Power']));
+check('regenerated data/don_relic_data.json has the current Improved Bestial Incantations mul',
+  JSON.stringify(findMulByName(donData, 'Improved Bestial Incantations')) === JSON.stringify(EFFECT_MULTIPLIERS['Improved Bestial Incantations']));
+
+const donCurse = donData.curses.find(c => c.name === 'Reduced Damage Negation After Evading');
+check('regenerated data/don_relic_data.json curse list has the current group field',
+  donCurse && JSON.stringify(donCurse.mul) === JSON.stringify(EFFECT_MULTIPLIERS['Reduced Damage Negation After Evading']));
 
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);

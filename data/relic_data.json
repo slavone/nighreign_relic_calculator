@@ -340,6 +340,7 @@
             "axes": [
               "physical"
             ],
+            "group": "status",
             "value": 1.1,
             "condition": "30s after using grease items"
           }
@@ -359,6 +360,7 @@
             "axes": [
               "universal"
             ],
+            "group": "status",
             "value": 1.15,
             "condition": "10s after taking a hit"
           }
@@ -378,6 +380,7 @@
             "axes": [
               "universal"
             ],
+            "group": "hitType",
             "value": 1.15,
             "condition": "First light attack only"
           }
@@ -397,6 +400,7 @@
             "axes": [
               "universal"
             ],
+            "group": "hitType",
             "value": 1.17,
             "condition": "On guard counters"
           }
@@ -416,6 +420,7 @@
             "axes": [
               "universal"
             ],
+            "group": "hitType",
             "value": 1.18,
             "condition": "On critical hits"
           }
@@ -897,6 +902,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Dagger hits only"
           }
@@ -916,6 +922,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Straight Sword hits only"
           }
@@ -935,6 +942,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Greatsword hits only"
           }
@@ -954,6 +962,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Colossal Sword hits only"
           }
@@ -973,6 +982,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Curved Sword hits only"
           }
@@ -992,6 +1002,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Curved Greatsword hits only"
           }
@@ -1011,6 +1022,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Katana hits only"
           }
@@ -1030,6 +1042,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Twinblade hits only"
           }
@@ -1049,6 +1062,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Thrusting Sword hits only"
           }
@@ -1068,6 +1082,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Heavy Thrusting Sword hits only"
           }
@@ -1087,6 +1102,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Axe hits only"
           }
@@ -1106,6 +1122,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Greataxe hits only"
           }
@@ -1125,6 +1142,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Hammer hits only"
           }
@@ -1144,6 +1162,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Great Hammer hits only"
           }
@@ -1163,6 +1182,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Flail hits only"
           }
@@ -1182,6 +1202,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Spear hits only"
           }
@@ -1201,6 +1222,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Great Spear hits only"
           }
@@ -1220,6 +1242,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Halberd hits only"
           }
@@ -1239,6 +1262,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Reaper hits only"
           }
@@ -1258,6 +1282,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Fist hits only"
           }
@@ -1277,6 +1302,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Claw hits only"
           }
@@ -1296,6 +1322,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Whip hits only"
           }
@@ -1315,6 +1342,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.09,
             "condition": "Colossal Weapon hits only"
           }
@@ -1334,6 +1362,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.06,
             "condition": "Bow hits only"
           }
@@ -1363,6 +1392,7 @@
             "axes": [
               "universal"
             ],
+            "group": "status",
             "value": 1.1,
             "condition": "vs frostbite-afflicted enemies"
           }
@@ -1392,6 +1422,7 @@
             "axes": [
               "universal"
             ],
+            "group": "status",
             "value": 1.1,
             "condition": "vs poison-afflicted enemies"
           }
@@ -1411,6 +1442,7 @@
             "axes": [
               "universal"
             ],
+            "group": "status",
             "value": 1.1,
             "condition": "vs rot-afflicted enemies"
           }
@@ -3212,6 +3244,7 @@
             "axes": [
               "magic"
             ],
+            "group": "weapon",
             "value": 1.15,
             "condition": "Stone/Gravity Stone throws only"
           }
@@ -3261,6 +3294,7 @@
             "axes": [
               "universal"
             ],
+            "group": "status",
             "value": 0.2,
             "condition": "20s after being hit"
           }
@@ -3350,6 +3384,7 @@
             "axes": [
               "physical"
             ],
+            "group": "weapon",
             "value": 1.15,
             "condition": "Throwing Knife throws only"
           }
@@ -3379,6 +3414,7 @@
             "axes": [
               "universal"
             ],
+            "group": "weapon",
             "value": 1.15,
             "condition": "Throwing Pot throws only"
           }

@@ -9,6 +9,10 @@
 // category:  optional — 'sorcery' | 'incantation'. Layers on top of whichever axis the
 //            spell actually deals; general "Improved Sorceries/Incantations" entries have
 //            a category but no axes (they don't have a fixed element themselves).
+// group:     conditional entries without a category still need a display bucket for the
+//            nested summary tree: 'weapon' (single-weapon/throwable-specific), 'hitType'
+//            (crit/guard-counter/initial-attack), or 'status' (timing windows, vs-enemy-
+//            status, curses — everything else transient/state-dependent).
 // value:     multiplier (e.g. 1.09) for damage/resource. Fractional negation amount
 //            (e.g. 0.10, or negative for a curse that *removes* negation) for negation —
 //            combined via ∏(1 − v), never a straight product.
@@ -40,7 +44,7 @@ export const EFFECT_MULTIPLIERS = {
   'Reduced Flask HP Restoration': { tier: 'baseline', bucket: 'resource', value: 0.85 },
   'Ultimate Art Charging Impaired': { tier: 'baseline', bucket: 'resource', value: 0.85 },
   // DON curse — temporary state after being downed, not fixed-rate.
-  'Near Death Reduces Max HP': { tier: 'conditional', bucket: 'resource', value: 0.75, condition: '60s after being downed' },
+  'Near Death Reduces Max HP': { tier: 'conditional', bucket: 'resource', group: 'status', value: 0.75, condition: '60s after being downed' },
 
   // ── Elemental Attack Up (baseline damage) ─────────────────────────────────
   'Physical Attack Up': { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.04 },
@@ -100,37 +104,37 @@ export const EFFECT_MULTIPLIERS = {
   // 'Improved Dragon Communion Incantations' intentionally omitted — see comment above.
 
   // ── Specific hit-type / timing-window damage (conditional) ───────────────
-  'Improved Initial Standard Attack': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.15, condition: 'First light attack only' },
-  'Improved Critical Hits': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.18, condition: 'On critical hits' },
-  'Taking attacks improves attack power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.15, condition: '10s after taking a hit' },
-  'Improved Guard Counters': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.17, condition: 'On guard counters' },
-  'Improved Guard Counters +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.25, condition: 'On guard counters' },
-  'Improved Guard Counters +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.29, condition: 'On guard counters' },
-  'Physical attack power increases after using grease items': { tier: 'conditional', bucket: 'damage', axes: ['physical'], value: 1.1, condition: '30s after using grease items' },
-  'Physical attack power increases after using grease items +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], value: 1.17, condition: '30s after using grease items' },
-  'Physical attack power increases after using grease items +2': { tier: 'conditional', bucket: 'damage', axes: ['physical'], value: 1.2, condition: '30s after using grease items' },
-  'Attack power up when facing frostbite-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.1, condition: 'vs frostbite-afflicted enemies' },
-  'Attack power up when facing frostbite-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.16, condition: 'vs frostbite-afflicted enemies' },
-  'Attack power up when facing frostbite-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.2, condition: 'vs frostbite-afflicted enemies' },
-  'Attack power up when facing poison-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.1, condition: 'vs poison-afflicted enemies' },
-  'Attack power up when facing poison-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.16, condition: 'vs poison-afflicted enemies' },
-  'Attack power up when facing poison-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.2, condition: 'vs poison-afflicted enemies' },
-  'Attack power up when facing scarlet rot-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.1, condition: 'vs rot-afflicted enemies' },
-  'Attack power up when facing scarlet rot-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.16, condition: 'vs rot-afflicted enemies' },
-  'Attack power up when facing scarlet rot-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.2, condition: 'vs rot-afflicted enemies' },
-  'Sleep in Vicinity Improves Attack Power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.12, condition: 'After sleep procs nearby' },
-  'Sleep in Vicinity Improves Attack Power +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.22, condition: 'After sleep procs nearby' },
-  'Madness in Vicinity Improves Attack Power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.12, condition: 'After madness procs nearby' },
-  'Madness in Vicinity Improves Attack Power +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.22, condition: 'After madness procs nearby' },
-  'Improved Glintstone and Gravity Stone Damage': { tier: 'conditional', bucket: 'damage', axes: ['magic'], value: 1.15, condition: 'Stone/Gravity Stone throws only' },
-  'Improved Glintstone and Gravity Stone Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['magic'], value: 1.3, condition: 'Stone/Gravity Stone throws only' },
-  'Improved Throwing Knife Damage': { tier: 'conditional', bucket: 'damage', axes: ['physical'], value: 1.15, condition: 'Throwing Knife throws only' },
-  'Improved Throwing Knife Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], value: 1.3, condition: 'Throwing Knife throws only' },
-  'Improved Throwing Pot Damage': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.15, condition: 'Throwing Pot throws only' },
-  'Improved Throwing Pot Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 1.3, condition: 'Throwing Pot throws only' },
+  'Improved Initial Standard Attack': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.15, condition: 'First light attack only' },
+  'Improved Critical Hits': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.18, condition: 'On critical hits' },
+  'Taking attacks improves attack power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.15, condition: '10s after taking a hit' },
+  'Improved Guard Counters': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.17, condition: 'On guard counters' },
+  'Improved Guard Counters +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.25, condition: 'On guard counters' },
+  'Improved Guard Counters +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.29, condition: 'On guard counters' },
+  'Physical attack power increases after using grease items': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.1, condition: '30s after using grease items' },
+  'Physical attack power increases after using grease items +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.17, condition: '30s after using grease items' },
+  'Physical attack power increases after using grease items +2': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.2, condition: '30s after using grease items' },
+  'Attack power up when facing frostbite-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs frostbite-afflicted enemies' },
+  'Attack power up when facing frostbite-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs frostbite-afflicted enemies' },
+  'Attack power up when facing frostbite-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs frostbite-afflicted enemies' },
+  'Attack power up when facing poison-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs poison-afflicted enemies' },
+  'Attack power up when facing poison-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs poison-afflicted enemies' },
+  'Attack power up when facing poison-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs poison-afflicted enemies' },
+  'Attack power up when facing scarlet rot-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs rot-afflicted enemies' },
+  'Attack power up when facing scarlet rot-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs rot-afflicted enemies' },
+  'Attack power up when facing scarlet rot-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs rot-afflicted enemies' },
+  'Sleep in Vicinity Improves Attack Power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.12, condition: 'After sleep procs nearby' },
+  'Sleep in Vicinity Improves Attack Power +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.22, condition: 'After sleep procs nearby' },
+  'Madness in Vicinity Improves Attack Power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.12, condition: 'After madness procs nearby' },
+  'Madness in Vicinity Improves Attack Power +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.22, condition: 'After madness procs nearby' },
+  'Improved Glintstone and Gravity Stone Damage': { tier: 'conditional', bucket: 'damage', axes: ['magic'], group: 'weapon', value: 1.15, condition: 'Stone/Gravity Stone throws only' },
+  'Improved Glintstone and Gravity Stone Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['magic'], group: 'weapon', value: 1.3, condition: 'Stone/Gravity Stone throws only' },
+  'Improved Throwing Knife Damage': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.15, condition: 'Throwing Knife throws only' },
+  'Improved Throwing Knife Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.3, condition: 'Throwing Knife throws only' },
+  'Improved Throwing Pot Damage': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.15, condition: 'Throwing Pot throws only' },
+  'Improved Throwing Pot Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.3, condition: 'Throwing Pot throws only' },
 
   // ── DON curse: HP-threshold-dependent damage debuff (conditional) ────────
-  'Lower Attack When Below Max HP': { tier: 'conditional', bucket: 'damage', axes: ['universal'], value: 0.915, condition: 'While HP is below 85%' },
+  'Lower Attack When Below Max HP': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' },
 
   // ── Damage Negation (baseline) ────────────────────────────────────────────
   'Fire Damage Negation Up': { tier: 'baseline', bucket: 'negation', axes: ['fire'], value: 0.10 },
@@ -152,9 +156,9 @@ export const EFFECT_MULTIPLIERS = {
   'Improved Affinity Damage Negation +2': { tier: 'baseline', bucket: 'negation', axes: ['magic', 'fire', 'lightning', 'holy'], value: 0.12 },
 
   // ── Damage Negation (conditional: time-window or state-dependent) ────────
-  'Improved Poise & Damage Negation When Knocked Back by Damage': { tier: 'conditional', bucket: 'negation', axes: ['universal'], value: 0.20, condition: '20s after being hit' },
-  'Reduced Damage Negation After Evading': { tier: 'conditional', bucket: 'negation', axes: ['universal'], value: -0.45, condition: 'Right after evading' },
-  'Reduced Damage Negation for Flask Usages': { tier: 'conditional', bucket: 'negation', axes: ['universal'], value: -0.45, condition: 'While using flasks' },
+  'Improved Poise & Damage Negation When Knocked Back by Damage': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: 0.20, condition: '20s after being hit' },
+  'Reduced Damage Negation After Evading': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'Right after evading' },
+  'Reduced Damage Negation for Flask Usages': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'While using flasks' },
 };
 
 // ── Weapon-type Attack Power (single-weapon = conditional; 3+ equipped = baseline universal) ──
@@ -192,7 +196,7 @@ for (const w of WEAPON_TYPES) {
   const singleValue = w.singleValue ?? 1.09;
   const groupValue = w.groupValue ?? 1.2;
   EFFECT_MULTIPLIERS[`Improved ${w.single} Attack Power`] = {
-    tier: 'conditional', bucket: 'damage', axes: ['physical'], value: singleValue,
+    tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: singleValue,
     condition: `${w.single} hits only`,
   };
   EFFECT_MULTIPLIERS[`Improved Attack Power with 3+ ${w.plural} Equipped`] = {

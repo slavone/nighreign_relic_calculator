@@ -1610,3 +1610,51 @@ Sorcery ×4 — ×1.12 each" row with combined `×1.974` (= 1.12² baseline ×
 1.12⁴), matching hand-computed expectations. Also added a permanent
 regression test (`tests/build.test.mjs`) reproducing this scenario. 5
 live-DOM assertions plus 18/18 in the updated unit test file, all passed.
+
+---
+
+### Post-plan addendum: Task 14 — nested summary tree (base_dmg / sorceries / weapons / hit-type / status)
+
+User follow-up, sketched as a small YAML mockup: instead of a flat
+Conditional Effects list, nest each specific effect under its category or
+group so the multiplication chain reads naturally — e.g. `sorceries: {dmg:
+1.1, carian: 1.25 * 1.1 * 1.12}`. Confirmed with the user this should
+generalize to *every* conditional effect, not just Sorcery/Incantation:
+Weapons, Hit-Type Bonuses (crit/guard-counter/initial-attack), and
+Situational Effects (timing windows, vs-enemy-status, curses) each get
+their own named subgroup.
+
+`effect_multipliers.mjs` gained a `group` field (`'weapon' | 'hitType' |
+'status'`) on every conditional entry that lacks a `category` — mutually
+exclusive with `category`, validated by the schema test.
+`computeBuildTotals` replaced its flat `conditional` array with a
+`conditionalTree` nested by `bucket -> (category ?? group)`, and
+`combinedFor` now returns `{ combined, factors }` — a list of `{kind:
+'axis'|'category'|'resource'|'self', key?, value}` — so the renderer can
+show the full transparent multiplication chain (e.g. "Magic ×1.12 ×
+Sorcery ×1.1 × Improved Carian Sword Sorcery ×1.574 = ×1.939") instead of
+one opaque combined number. `renderBuildSummary` was rewritten around a new
+`renderBuildSubgroup` helper.
+
+**Real bug caught during verification, unrelated to the design itself**: the
+`group` field never reached the live app. Editing `effect_multipliers.mjs`
+alone doesn't touch `data/relic_data.json` / `data/don_relic_data.json` or
+`index.html`'s embedded `DATA`/`DON_DATA` — those needed `prepare_data.mjs`
++ `prepare_don_data.mjs` re-run and the embed script re-applied, which was
+skipped. Every group-only (no category) conditional entry silently landed
+in neither bucket and vanished from the tree until this was caught by a
+live jsdom test showing "No effects selected yet" despite real selections.
+Added a permanent regression test in `tests/effect_multipliers.test.mjs`
+that diffs `EFFECT_MULTIPLIERS` against what's actually baked into both
+JSON files, specifically so a future "forgot to re-run the pipeline"
+mistake fails loudly instead of silently.
+
+Verified end-to-end with fresh `jsdom` instances against the served app:
+the user's second URL now renders `Sorcery: {Sorcery ×1.1, Improved Carian
+Sword Sorcery ×4 — ×1.12 each → Magic ×1.12 × Sorcery ×1.1 × Improved
+Carian Sword Sorcery ×1.574 = ×1.939}` nested correctly; a separate
+Weapons/Hit-Type/Situational scenario (Katana + Critical Hits + a
+frostbite-target effect on 3 different relics) produced exactly the 3
+expected subgroups with no cross-leakage. 13 live-DOM assertions plus
+24/24 in the updated `tests/build.test.mjs` and 1423/1423 in
+`tests/effect_multipliers.test.mjs`, all passed.
