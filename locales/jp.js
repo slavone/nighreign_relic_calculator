@@ -29,7 +29,6 @@ window.__LOCALE_JP__ = {
     "build_group_status": "行動",
     "build_conditional_title": "条件付き効果",
     "build_other_title": "その他の効果",
-    "build_flat_label": "固定効果",
     "build_other_unclassified_label": "倍率計算不可",
     "build_damage_title": "攻撃力",
     "build_negation_title": "ダメージ軽減",

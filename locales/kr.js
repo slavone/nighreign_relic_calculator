@@ -29,7 +29,6 @@ window.__LOCALE_KR__ = {
     "build_group_status": "행동",
     "build_conditional_title": "조건부 효과",
     "build_other_title": "기타 효과",
-    "build_flat_label": "고정 효과",
     "build_other_unclassified_label": "배율 계산 불가",
     "build_damage_title": "공격력",
     "build_negation_title": "피해 경감",

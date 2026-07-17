@@ -1947,3 +1947,25 @@ remains correctly nested in Damage Negation. 9 live-DOM assertions across
 both scenarios, plus 47/1777 in the two updated unit test suites
 (including new tests for cross-name isolation and positive-value
 formatting), all passed.
+
+### Post-plan addendum: Task 24 — flat effects render as plain rows, no subgroup
+
+Immediate user follow-up on Task 23: the "Flat Effects" subgroup (added
+in that same commit) was unwanted — user wanted resource stats and flat
+effects listed in one flat sequence, each row formatted exactly like a
+resource-stat row (`Name → value`, no box, no two-line layout, no
+subgroup wrapper). `renderBuildFlatList` was simplified to emit plain
+`.build-axis-row` divs (same class already used for Physical/Magic/FP
+Consumption/etc.) instead of `.build-conditional-item` boxes inside a
+labeled subgroup; the now-dead `build_flat_label` i18n key was removed
+from both locale files. `computeBuildTotals` is unchanged.
+
+Verified against the user's exact URL with a fresh `jsdom` instance: five
+sequential flat rows in the exact requested order (FP Consumption, Max
+HP, Rune Gain, All Resistances Down, Continuous HP Loss), no subgroup
+title, no conditional-item boxes — matching the user's literal mockup.
+As a side confirmation, the same run also showed a real duplicate
+("Improved Damage Negation at Low HP" selected on two different regular
+relics) correctly merging into one `×2` entry, nested under all five
+elemental Damage Negation baselines. 8 live-DOM assertions, no regression
+in the existing 20/47/1777 test suites (pure rendering simplification).

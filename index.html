@@ -636,19 +636,13 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       // here is regenerated from the (possibly combined) total, not the
       // original per-copy text — e.g. two relics with "All Resistances Down"
       // read as "All Resistances Down ×2 — −160 all status resistances", the
-      // real combined effect, not the base −80 with a bare count tag.
-      const items = flat.map(f => {
+      // real combined effect, not the base −80 with a bare count tag. Rendered
+      // as a plain row, same as a resource-stat row — no subgroup wrapper.
+      return flat.map(f => {
         const countSuffix = f.count > 1 ? ` ×${f.count}` : '';
         const conditionSuffix = f.condition ? ` <em>(${f.condition})</em>` : '';
-        return `<div class="build-conditional-item">
-        <div>${I18N.effectName(f.name)}${countSuffix}${conditionSuffix}</div>
-        <div class="build-other-desc">${f.desc}</div>
-      </div>`;
+        return `<div class="build-axis-row"><span>${I18N.effectName(f.name)}${countSuffix}${conditionSuffix}</span><span>${f.desc}</span></div>`;
       }).join('');
-      return `<div class="build-subgroup">
-        <div class="build-subgroup-title">${I18N.t('build_flat_label', 'Flat Effects')}</div>
-        ${items}
-      </div>`;
     }
 
     function renderBuildOtherList(other) {
