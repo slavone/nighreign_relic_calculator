@@ -153,7 +153,7 @@
   <div class="mode-toggle" style="margin-bottom: 1rem;">
     <button class="mode-btn" data-calcmode="v1" data-i18n="calcmode_v1">Exact Effects</button>
     <button class="mode-btn active" data-calcmode="v2" data-i18n="calcmode_v2">Multiple Choice</button>
-    <button class="mode-btn" data-calcmode="v3" data-i18n="calcmode_v3">Damage Build</button>
+    <button class="mode-btn" data-calcmode="v3" data-i18n="calcmode_v3">Effect Multipliers</button>
   </div>
 
   <div class="controls">
@@ -266,7 +266,7 @@
 efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desired d in slot t]
                    + ((W_t − freeGW_t) / W_t) · efSlots(rest, D)     [slot t free, if slots remain]</pre>
         <p data-i18n-html="meth_formula_p4">Delicate results are exact. Multiply by 0.25 if a specific relic color is required. <strong>Deep of Night</strong> relics use a single-pool model (no tiers): P = K! × Σ over K-group subsets of ef(S, W) × curseFactor.</p>
-        <p data-i18n="meth_build_mode_note">Damage Build mode (a separate, third tab) doesn't compute probability — it lets you enter your actual equipped relics' effects and see the combined Damage / Damage Negation / Resource multipliers, splitting baseline (always-on) from conditional (weapon/school-specific or situational) effects.</p>
+        <p data-i18n="meth_build_mode_note">Effect Multipliers mode (a separate, third tab) doesn't compute probability — it lets you enter your actual equipped relics' effects and see the combined Damage / Damage Negation / Resource multipliers, splitting baseline (always-on) from conditional (weapon/school-specific or situational) effects.</p>
       </section>
 
       <section>
@@ -372,7 +372,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       return total;
     }
 
-    // Damage Build mode — pure calc engine. Kept in sync with tests/build.test.mjs.
+    // Effect Multipliers mode — pure calc engine. Kept in sync with tests/build.test.mjs.
     const BUILD_AXES = ['physical', 'magic', 'fire', 'lightning', 'holy', 'universal'];
 
     function computeBuildTotals(effects) {
@@ -764,7 +764,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       return html;
     }
 
-    // --- Damage Build mode: relic panel UI ---
+    // --- Effect Multipliers mode: relic panel UI ---
     // Unlike buildGroupOptions/buildEffectOptions/buildCurseOptions (which read the
     // global `mode`), these take their pool explicitly since Build mode shows Regular
     // and DON relics side by side regardless of the top Regular/DON toggle.

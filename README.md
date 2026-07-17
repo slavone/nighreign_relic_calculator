@@ -45,7 +45,7 @@ P = K×(K−1)×…×(K−n+1) × ∏(w_i / W) × (0.25 if specific color) × �
 
 - DON pool: tables 2000000 + 2100000, W = 19961. Curse pool: table 3000000, 24 curses, W = 2400.
 
-## Damage Build Mode
+## Effect Multipliers Mode
 
 A third mode, independent of the probability calculator: enter the actual
 effects on up to 6 equipped relics (3 Regular + 3 Deep of Night, DON
