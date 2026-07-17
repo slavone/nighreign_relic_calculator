@@ -267,7 +267,7 @@
 efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desired d in slot t]
                    + ((W_t − freeGW_t) / W_t) · efSlots(rest, D)     [slot t free, if slots remain]</pre>
         <p data-i18n-html="meth_formula_p4">Delicate results are exact. Multiply by 0.25 if a specific relic color is required. <strong>Deep of Night</strong> relics use a single-pool model (no tiers): P = K! × Σ over K-group subsets of ef(S, W) × curseFactor.</p>
-        <p data-i18n="meth_build_mode_note">Effect Multipliers mode (a separate, third tab) doesn't compute probability — it lets you enter your actual equipped relics' effects and see the combined Attack Power / Damage Negation / Resource multipliers, splitting baseline (always-on) from conditional (weapon/school-specific or situational) effects.</p>
+        <p data-i18n="meth_build_mode_note">Effect Multipliers mode (a separate, third tab) doesn't compute probability — it lets you enter your actual equipped relics' effects and see the combined Attack Power / Damage Negation multipliers, plus resource stats and any unclassified effects under Other Effects, splitting baseline (always-on) from conditional (weapon/school-specific or situational) effects.</p>
       </section>
 
       <section>
@@ -606,13 +606,10 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         .join('');
     }
 
-    function renderBuildOther(other) {
+    function renderBuildOtherList(other) {
       if (other.length === 0) return '';
       const items = other.map(o => `<li>${I18N.effectName(o.name)}${o.count > 1 ? ` ×${o.count}` : ''}</li>`).join('');
-      return `<div class="build-summary-section">
-        <div class="build-summary-title">${I18N.t('build_other_title', 'Other Effects')}</div>
-        <ul class="build-other-list">${items}</ul>
-      </div>`;
+      return `<ul class="build-other-list">${items}</ul>`;
     }
 
     function renderBuildSummary() {
@@ -639,22 +636,28 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         ${negationBody || `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
       </div>`;
 
-      // Each resource stat gets its own row (never blended into one "Combined"
-      // number) — FP consumption, cooldown, ultimate gauge, max HP/FP/stamina,
-      // and flask healing are different units and multiplying them together
-      // would be meaningless.
+      // Resource/Recovery and the flat unmapped-effect list are merged into a
+      // single "Other Effects" block. Each resource stat still gets its own
+      // labeled row (never blended into one "Combined" number) — FP
+      // consumption, cooldown, ultimate gauge, max HP/FP/stamina, and flask
+      // healing are different units and multiplying them together would be
+      // meaningless.
       const resourceStatRows = Object.entries(r.resourceBaseline)
         .filter(([, v]) => Math.abs(v - 1) > 1e-9)
         .map(([stat, v]) => `<div class="build-axis-row"><span>${BUILD_RESOURCE_STAT_LABELS[stat]()}</span><span>${fmtMul(v)}</span></div>`)
         .join('');
       const resourceBody = resourceStatRows
         + renderBuildSubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.resource.status);
-      const resourceHtml = `<div class="build-summary-section">
-        <div class="build-summary-title">${I18N.t('build_resource_title', 'Resource / Recovery')}</div>
-        ${resourceBody || `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
-      </div>`;
+      const otherListHtml = renderBuildOtherList(r.other);
+      const otherBody = resourceBody + otherListHtml;
+      const otherHtml = otherBody
+        ? `<div class="build-summary-section">
+        <div class="build-summary-title">${I18N.t('build_other_title', 'Other Effects')}</div>
+        ${otherBody}
+      </div>`
+        : '';
 
-      summaryEl.innerHTML = damageHtml + negationHtml + resourceHtml + renderBuildOther(r.other);
+      summaryEl.innerHTML = damageHtml + negationHtml + otherHtml;
     }
 
     function calculateProbabilityV2(quality, colorFactor) {

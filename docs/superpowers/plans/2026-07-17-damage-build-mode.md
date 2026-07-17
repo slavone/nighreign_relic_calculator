@@ -1774,3 +1774,33 @@ pure rendering fix. 8 live-DOM assertions across two scenarios, all
 passed; no regression in the existing 39/39 `tests/build.test.mjs` suite
 (the calc engine's `factors` output was already correct — only its
 unconditional rendering was the bug).
+
+### Post-plan addendum: Task 19 — "Situational Effects" renamed to "Actions"; Resource/Recovery merged into "Other Effects"
+
+Two more small user-requested adjustments. First, renamed the `status`
+group's display label from "Situational Effects" to "Actions" (English
+fallback + JP 行動 / KR 행동) — purely cosmetic, the internal `'status'`
+group key is unchanged.
+
+Second: Resource/Recovery and Other Effects were merged into a single
+"Other Effects" block. `renderBuildOther` was split into
+`renderBuildOtherList` (just the flat unmapped-effect `<ul>`, no longer
+wrapping its own section) and `renderBuildSummary` now concatenates the
+resource stat rows + resource-conditional subgroup + the flat other-list
+under one shared "Other Effects" title, hiding the whole block only when
+all three are empty. The now-dead `build_resource_title` i18n key was
+removed from both locale files (JP/KR); the methodology note and README
+were reworded to describe two multiplier sections (Attack Power, Damage
+Negation) plus resource stats and unclassified effects folded into Other
+Effects, with matching JP/KR translation updates.
+
+`computeBuildTotals` is completely unchanged — this was a pure rendering
+merge. Verified with two live jsdom scenarios: a build with both a
+resource baseline (Reduced FP Consumption) and an unmapped effect
+(Improved Damage Negation at Low HP) renders exactly 3 sections total
+(Attack Power, Damage Negation, Other Effects) with both pieces of
+content inside the merged block; a build with nothing resource- or
+other-related renders no "Other Effects" section at all. 7 live-DOM
+assertions across both scenarios, plus 20/39/1455 unchanged across the
+three existing test suites (as expected, since the calc engine wasn't
+touched).
