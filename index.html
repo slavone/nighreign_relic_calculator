@@ -1272,6 +1272,10 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         b.classList.toggle('active', b.dataset.curseFilter === curseFilter.mode));
       document.getElementById('v1-section').style.display = calcMode === 'v1' ? '' : 'none';
       document.getElementById('v2-section').style.display = calcMode === 'v2' ? '' : 'none';
+      document.getElementById('v3-section').style.display = calcMode === 'v3' ? '' : 'none';
+      document.querySelector('.controls').style.display = calcMode === 'v3' ? 'none' : '';
+      document.getElementById('result').style.display = calcMode === 'v3' ? 'none' : '';
+      document.querySelector('.share-row').style.display = calcMode === 'v3' ? 'none' : '';
       document.getElementById('curse-checkboxes').classList.toggle('visible', curseFilter.mode === 'selected');
 
       return {
@@ -1353,8 +1357,13 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         updateDataNote();
         if (calcMode === 'v1') {
           clearSlots(); addSlot(); updateAddBtn();
-        } else {
+        } else if (calcMode === 'v2') {
           buildPoolUI(); updatePoolSummary();
+        } else {
+          // Rebuilding is necessary, not just cosmetic: each panel's <select> option
+          // indices are computed against activeBuildPreDLCGroups(pool), which just
+          // changed — stale indices would silently read back the wrong effect.
+          buildRelicPanels();
         }
         updateResult();
       });
@@ -1414,10 +1423,16 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           b.classList.toggle('active', b.dataset.calcmode === calcMode));
         document.getElementById('v1-section').style.display = calcMode === 'v1' ? '' : 'none';
         document.getElementById('v2-section').style.display = calcMode === 'v2' ? '' : 'none';
+        document.getElementById('v3-section').style.display = calcMode === 'v3' ? '' : 'none';
+        document.querySelector('.controls').style.display = calcMode === 'v3' ? 'none' : '';
+        document.getElementById('result').style.display = calcMode === 'v3' ? 'none' : '';
+        document.querySelector('.share-row').style.display = calcMode === 'v3' ? 'none' : '';
         if (calcMode === 'v1') {
           clearSlots(); addSlot(); updateAddBtn();
-        } else {
+        } else if (calcMode === 'v2') {
           buildPoolUI(); buildCurseFilterUI(); updatePoolSummary();
+        } else {
+          buildRelicPanels();
         }
         updateCurseFilterVisibility();
         updateResult();
@@ -1470,6 +1485,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       const restored = restoreFromURL();
       buildPoolUI();
       buildCurseFilterUI();
+      buildRelicPanels();
       applyRestoredSelections(restored);
       updateCurseFilterVisibility();
       updatePoolSummary();
