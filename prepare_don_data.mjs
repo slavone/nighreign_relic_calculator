@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { EFFECT_DESCRIPTIONS, CURSE_DESCRIPTIONS } from './descriptions.mjs';
+import { EFFECT_MULTIPLIERS } from './effect_multipliers.mjs';
 
 function unescapeHtml(str) {
   return str.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
@@ -109,8 +110,9 @@ const addEffect = (eid, w, fromTable2000) => {
   if (!groupMap[compatId].find(e => e.id === eid)) {
     const eName = unescapeHtml(name);
     const desc = EFFECT_DESCRIPTIONS[eName.replace(/\n/g, ' ')] || '';
+    const mul = EFFECT_MULTIPLIERS[eName.replace(/\n/g, ' ')];
     const dlc = DLC_EFFECT_IDS.has(Number(eid));
-    groupMap[compatId].push({ id: eid, name: eName, w, hasCurse, ...(desc && { desc }), ...(dlc && { dlc: true }) });
+    groupMap[compatId].push({ id: eid, name: eName, w, hasCurse, ...(desc && { desc }), ...(mul && { mul }), ...(dlc && { dlc: true }) });
   }
 };
 
@@ -134,10 +136,11 @@ for (const [eid, raw] of Object.entries(weights2200raw)) {
   if (!p || p.isDebuff || p.compatId !== CHAR_ABILITY_COMPAT) continue;
   const eName = unescapeHtml(name);
   const desc = EFFECT_DESCRIPTIONS[eName.replace(/\n/g, ' ')] || '';
+  const mul = EFFECT_MULTIPLIERS[eName.replace(/\n/g, ' ')];
   const dlc = wPre === 0; // Scholar / Undertaker: absent from the pre-DLC pool
   (groupMap[CHAR_ABILITY_COMPAT] ||= []).push({
     id: eid, name: eName, w: wDlc, wPre, hasCurse: false,
-    ...(desc && { desc }), ...(dlc && { dlc: true }),
+    ...(desc && { desc }), ...(mul && { mul }), ...(dlc && { dlc: true }),
   });
 }
 
@@ -183,7 +186,8 @@ const curses = Object.entries(cursePureWeights)
   .map(([eid, w]) => {
     const name = unescapeHtml(names[eid] || '(unknown)');
     const desc = CURSE_DESCRIPTIONS[name] || '';
-    return { name, w, ...(desc && { desc }) };
+    const mul = EFFECT_MULTIPLIERS[name];
+    return { name, w, ...(desc && { desc }), ...(mul && { mul }) };
   })
   .filter(c => c.name !== '(unknown)')
   .sort((a, b) => a.name.localeCompare(b.name));

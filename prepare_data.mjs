@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { EFFECT_DESCRIPTIONS } from './descriptions.mjs';
+import { EFFECT_MULTIPLIERS } from './effect_multipliers.mjs';
 
 const NAME_OVERRIDES = {
   100:     'Attack Power',
@@ -66,9 +67,10 @@ const clean = raw
     const effects = g.effects.map(e => {
       const name = unescapeHtml(e.name);
       const desc = EFFECT_DESCRIPTIONS[name.replace(/\n/g, ' ')] || '';
+      const mul = EFFECT_MULTIPLIERS[name.replace(/\n/g, ' ')];
       const dlc = DLC_EFFECT_IDS.has(Number(e.id));
       const ws = weights[e.id] ?? [0, 0, 0];
-      return { id: e.id, name, ws, ...(desc && { desc }), ...(dlc && { dlc: true }) };
+      return { id: e.id, name, ws, ...(desc && { desc }), ...(mul && { mul }), ...(dlc && { dlc: true }) };
     });
 
     if (g.compatibilityId === 900) {

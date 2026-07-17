@@ -67,21 +67,45 @@
           "name": "Fire Attack Power Up +2",
           "w": 69,
           "hasCurse": false,
-          "desc": "1.065× fire damage"
+          "desc": "1.065× fire damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "fire"
+            ],
+            "value": 1.065
+          }
         },
         {
           "id": "6001600",
           "name": "Fire Attack Power Up +3",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.105× fire damage"
+          "desc": "1.105× fire damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "fire"
+            ],
+            "value": 1.105
+          }
         },
         {
           "id": "6001601",
           "name": "Fire Attack Power Up +4",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.12× fire damage"
+          "desc": "1.12× fire damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "fire"
+            ],
+            "value": 1.12
+          }
         },
         {
           "id": "7150000",
@@ -95,567 +119,1248 @@
           "name": "Holy Attack Power Up +2",
           "w": 69,
           "hasCurse": false,
-          "desc": "1.065× holy damage"
+          "desc": "1.065× holy damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "holy"
+            ],
+            "value": 1.065
+          }
         },
         {
           "id": "6001800",
           "name": "Holy Attack Power Up +3",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.105× holy damage"
+          "desc": "1.105× holy damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "holy"
+            ],
+            "value": 1.105
+          }
         },
         {
           "id": "6001801",
           "name": "Holy Attack Power Up +4",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.12× holy damage"
+          "desc": "1.12× holy damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "holy"
+            ],
+            "value": 1.12
+          }
         },
         {
           "id": "6610800",
           "name": "Improved Affinity Attack Power",
           "w": 69,
           "hasCurse": false,
-          "desc": "1.05× magic/fire/lightning/holy damage"
+          "desc": "1.05× magic/fire/lightning/holy damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "value": 1.05
+          }
         },
         {
           "id": "6610801",
           "name": "Improved Affinity Attack Power +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.08× magic/fire/lightning/holy damage"
+          "desc": "1.08× magic/fire/lightning/holy damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "value": 1.08
+          }
         },
         {
           "id": "6610802",
           "name": "Improved Affinity Attack Power +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.1× magic/fire/lightning/holy damage"
+          "desc": "1.1× magic/fire/lightning/holy damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "value": 1.1
+          }
         },
         {
           "id": "7081000",
           "name": "Improved Attack Power with 3+ Axes Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Axes equipped"
+          "desc": "1.2× damage with 3+ Axes equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7082400",
           "name": "Improved Attack Power with 3+ Bows Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.1× damage with 3+ Bows equipped"
+          "desc": "1.1× damage with 3+ Bows equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.1
+          }
         },
         {
           "id": "7082100",
           "name": "Improved Attack Power with 3+ Claws Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Claws equipped"
+          "desc": "1.2× damage with 3+ Claws equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080300",
           "name": "Improved Attack Power with 3+ Colossal Swords Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Colossal Swords equipped"
+          "desc": "1.2× damage with 3+ Colossal Swords equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7082300",
           "name": "Improved Attack Power with 3+ Colossal Weapons Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Colossal Weapons equipped"
+          "desc": "1.2× damage with 3+ Colossal Weapons equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080500",
           "name": "Improved Attack Power with 3+ Curved Greatswords Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Curved Greatswords equipped"
+          "desc": "1.2× damage with 3+ Curved Greatswords equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080400",
           "name": "Improved Attack Power with 3+ Curved Swords Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Curved Swords equipped"
+          "desc": "1.2× damage with 3+ Curved Swords equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080000",
           "name": "Improved Attack Power with 3+ Daggers Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Daggers equipped"
+          "desc": "1.2× damage with 3+ Daggers equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7082000",
           "name": "Improved Attack Power with 3+ Fists Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Fists equipped"
+          "desc": "1.2× damage with 3+ Fists equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7081400",
           "name": "Improved Attack Power with 3+ Flails Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Flails equipped"
+          "desc": "1.2× damage with 3+ Flails equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7081300",
           "name": "Improved Attack Power with 3+ Great Hammers Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Great Hammers equipped"
+          "desc": "1.2× damage with 3+ Great Hammers equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7081700",
           "name": "Improved Attack Power with 3+ Great Spears Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Great Spears equipped"
+          "desc": "1.2× damage with 3+ Great Spears equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7081100",
           "name": "Improved Attack Power with 3+ Greataxes Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Greataxes equipped"
+          "desc": "1.2× damage with 3+ Greataxes equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080200",
           "name": "Improved Attack Power with 3+ Greatswords Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Greatswords equipped"
+          "desc": "1.2× damage with 3+ Greatswords equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7081800",
           "name": "Improved Attack Power with 3+ Halberds Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Halberds equipped"
+          "desc": "1.2× damage with 3+ Halberds equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7081200",
           "name": "Improved Attack Power with 3+ Hammers Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Hammers equipped"
+          "desc": "1.2× damage with 3+ Hammers equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080900",
           "name": "Improved Attack Power with 3+ Heavy Thrusting Swords Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Heavy Thrusting Swords equipped"
+          "desc": "1.2× damage with 3+ Heavy Thrusting Swords equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080600",
           "name": "Improved Attack Power with 3+ Katana Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Katanas equipped"
+          "desc": "1.2× damage with 3+ Katanas equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7081900",
           "name": "Improved Attack Power with 3+ Reapers Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Reapers equipped"
+          "desc": "1.2× damage with 3+ Reapers equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7081500",
           "name": "Improved Attack Power with 3+ Spears Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Spears equipped"
+          "desc": "1.2× damage with 3+ Spears equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080100",
           "name": "Improved Attack Power with 3+ Straight Swords Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Straight Swords equipped"
+          "desc": "1.2× damage with 3+ Straight Swords equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080800",
           "name": "Improved Attack Power with 3+ Thrusting Swords Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Thrusting Swords equipped"
+          "desc": "1.2× damage with 3+ Thrusting Swords equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7080700",
           "name": "Improved Attack Power with 3+ Twinblades Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Twinblades equipped"
+          "desc": "1.2× damage with 3+ Twinblades equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7082200",
           "name": "Improved Attack Power with 3+ Whips Equipped",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.2× damage with 3+ Whips equipped"
+          "desc": "1.2× damage with 3+ Whips equipped",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2
+          }
         },
         {
           "id": "7331000",
           "name": "Improved Axe Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Axe damage"
+          "desc": "1.09× Axe damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Axe hits only"
+          }
         },
         {
           "id": "7332400",
           "name": "Improved Bow Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.06× Bow damage"
+          "desc": "1.06× Bow damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.06,
+            "condition": "Bow hits only"
+          }
         },
         {
           "id": "7332100",
           "name": "Improved Claw Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Claw damage"
+          "desc": "1.09× Claw damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Claw hits only"
+          }
         },
         {
           "id": "7330300",
           "name": "Improved Colossal Sword Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Colossal Sword damage"
+          "desc": "1.09× Colossal Sword damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Colossal Sword hits only"
+          }
         },
         {
           "id": "7332300",
           "name": "Improved Colossal Weapon Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Colossal Weapon damage"
+          "desc": "1.09× Colossal Weapon damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Colossal Weapon hits only"
+          }
         },
         {
           "id": "7040200",
           "name": "Improved Critical Hits",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.18× critical hit damage"
+          "desc": "1.18× critical hit damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.18,
+            "condition": "On critical hits"
+          }
         },
         {
           "id": "7330500",
           "name": "Improved Curved Greatsword Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Curved Greatsword damage"
+          "desc": "1.09× Curved Greatsword damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Curved Greatsword hits only"
+          }
         },
         {
           "id": "7330400",
           "name": "Improved Curved Sword Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Curved Sword damage"
+          "desc": "1.09× Curved Sword damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Curved Sword hits only"
+          }
         },
         {
           "id": "7330000",
           "name": "Improved Dagger Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Dagger damage"
+          "desc": "1.09× Dagger damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Dagger hits only"
+          }
         },
         {
           "id": "7332000",
           "name": "Improved Fist Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Fist damage"
+          "desc": "1.09× Fist damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Fist hits only"
+          }
         },
         {
           "id": "7331400",
           "name": "Improved Flail Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Flail damage"
+          "desc": "1.09× Flail damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Flail hits only"
+          }
         },
         {
           "id": "7331300",
           "name": "Improved Great Hammer Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Great Hammer damage"
+          "desc": "1.09× Great Hammer damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Great Hammer hits only"
+          }
         },
         {
           "id": "7331700",
           "name": "Improved Great Spear Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Great Spear damage"
+          "desc": "1.09× Great Spear damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Great Spear hits only"
+          }
         },
         {
           "id": "7331100",
           "name": "Improved Greataxe Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Greataxe damage"
+          "desc": "1.09× Greataxe damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Greataxe hits only"
+          }
         },
         {
           "id": "7330200",
           "name": "Improved Greatsword Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Greatsword damage"
+          "desc": "1.09× Greatsword damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Greatsword hits only"
+          }
         },
         {
           "id": "7040100",
           "name": "Improved Guard Counters",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.17× guard counter damage"
+          "desc": "1.17× guard counter damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.17,
+            "condition": "On guard counters"
+          }
         },
         {
           "id": "6040100",
           "name": "Improved Guard Counters +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.25× guard counter damage"
+          "desc": "1.25× guard counter damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.25,
+            "condition": "On guard counters"
+          }
         },
         {
           "id": "6040101",
           "name": "Improved Guard Counters +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.29× guard counter damage"
+          "desc": "1.29× guard counter damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.29,
+            "condition": "On guard counters"
+          }
         },
         {
           "id": "7331800",
           "name": "Improved Halberd Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Halberd damage"
+          "desc": "1.09× Halberd damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Halberd hits only"
+          }
         },
         {
           "id": "7331200",
           "name": "Improved Hammer Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Hammer damage"
+          "desc": "1.09× Hammer damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Hammer hits only"
+          }
         },
         {
           "id": "7330900",
           "name": "Improved Heavy Thrusting Sword Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Heavy Thrusting Sword damage"
+          "desc": "1.09× Heavy Thrusting Sword damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Heavy Thrusting Sword hits only"
+          }
         },
         {
           "id": "6611300",
           "name": "Improved Incantations",
           "w": 69,
           "hasCurse": false,
-          "desc": "1.05× incantation damage"
+          "desc": "1.05× incantation damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "category": "incantation",
+            "value": 1.05
+          }
         },
         {
           "id": "6611301",
           "name": "Improved Incantations +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.085× incantation damage"
+          "desc": "1.085× incantation damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "category": "incantation",
+            "value": 1.085
+          }
         },
         {
           "id": "6611302",
           "name": "Improved Incantations +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.1× incantation damage"
+          "desc": "1.1× incantation damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "category": "incantation",
+            "value": 1.1
+          }
         },
         {
           "id": "7040000",
           "name": "Improved Initial Standard Attack",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.15× first light attack damage"
+          "desc": "1.15× first light attack damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.15,
+            "condition": "First light attack only"
+          }
         },
         {
           "id": "7330600",
           "name": "Improved Katana Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Katana damage"
+          "desc": "1.09× Katana damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Katana hits only"
+          }
         },
         {
           "id": "7331900",
           "name": "Improved Reaper Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Reaper damage"
+          "desc": "1.09× Reaper damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Reaper hits only"
+          }
         },
         {
           "id": "6611200",
           "name": "Improved Sorceries",
           "w": 69,
           "hasCurse": false,
-          "desc": "1.05× sorcery damage"
+          "desc": "1.05× sorcery damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "category": "sorcery",
+            "value": 1.05
+          }
         },
         {
           "id": "6611201",
           "name": "Improved Sorceries +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.085× sorcery damage"
+          "desc": "1.085× sorcery damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "category": "sorcery",
+            "value": 1.085
+          }
         },
         {
           "id": "6611202",
           "name": "Improved Sorceries +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.1× sorcery damage"
+          "desc": "1.1× sorcery damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "category": "sorcery",
+            "value": 1.1
+          }
         },
         {
           "id": "7331500",
           "name": "Improved Spear Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Spear damage"
+          "desc": "1.09× Spear damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Spear hits only"
+          }
         },
         {
           "id": "7330100",
           "name": "Improved Straight Sword Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Straight Sword damage"
+          "desc": "1.09× Straight Sword damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Straight Sword hits only"
+          }
         },
         {
           "id": "7330800",
           "name": "Improved Thrusting Sword Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Thrusting Sword damage"
+          "desc": "1.09× Thrusting Sword damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Thrusting Sword hits only"
+          }
         },
         {
           "id": "7330700",
           "name": "Improved Twinblade Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Twinblade damage"
+          "desc": "1.09× Twinblade damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Twinblade hits only"
+          }
         },
         {
           "id": "7332200",
           "name": "Improved Whip Attack Power",
           "w": 10,
           "hasCurse": false,
-          "desc": "1.09× Whip damage"
+          "desc": "1.09× Whip damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.09,
+            "condition": "Whip hits only"
+          }
         },
         {
           "id": "7001702",
           "name": "Lightning Attack Power Up +2",
           "w": 69,
           "hasCurse": false,
-          "desc": "1.065× lightning damage"
+          "desc": "1.065× lightning damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "lightning"
+            ],
+            "value": 1.065
+          }
         },
         {
           "id": "6001700",
           "name": "Lightning Attack Power Up +3",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.105× lightning damage"
+          "desc": "1.105× lightning damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "lightning"
+            ],
+            "value": 1.105
+          }
         },
         {
           "id": "6001701",
           "name": "Lightning Attack Power Up +4",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.12× lightning damage"
+          "desc": "1.12× lightning damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "lightning"
+            ],
+            "value": 1.12
+          }
         },
         {
           "id": "6600100",
           "name": "Madness in Vicinity Improves Attack Power",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.12× damage after madness procs nearby"
+          "desc": "1.12× damage after madness procs nearby",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.12,
+            "condition": "After madness procs nearby"
+          }
         },
         {
           "id": "6600101",
           "name": "Madness in Vicinity Improves Attack Power +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.22× damage after madness procs nearby"
+          "desc": "1.22× damage after madness procs nearby",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.22,
+            "condition": "After madness procs nearby"
+          }
         },
         {
           "id": "7001502",
           "name": "Magic Attack Power Up +2",
           "w": 69,
           "hasCurse": false,
-          "desc": "1.065× magic damage"
+          "desc": "1.065× magic damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "value": 1.065
+          }
         },
         {
           "id": "6001500",
           "name": "Magic Attack Power Up +3",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.105× magic damage"
+          "desc": "1.105× magic damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "value": 1.105
+          }
         },
         {
           "id": "6001501",
           "name": "Magic Attack Power Up +4",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.12× magic damage"
+          "desc": "1.12× magic damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "value": 1.12
+          }
         },
         {
           "id": "7030900",
           "name": "Physical attack power increases after using grease items",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.1× physical damage for 30s after using grease"
+          "desc": "1.1× physical damage for 30s after using grease",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.1,
+            "condition": "30s after using grease items"
+          }
         },
         {
           "id": "6030900",
           "name": "Physical attack power increases after using grease items +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.17× physical damage for 30s after using grease"
+          "desc": "1.17× physical damage for 30s after using grease",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.17,
+            "condition": "30s after using grease items"
+          }
         },
         {
           "id": "6030901",
           "name": "Physical attack power increases after using grease items +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.2× physical damage for 30s after using grease"
+          "desc": "1.2× physical damage for 30s after using grease",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.2,
+            "condition": "30s after using grease items"
+          }
         },
         {
           "id": "7001402",
           "name": "Physical Attack Up +2",
           "w": 69,
           "hasCurse": false,
-          "desc": "1.06× physical damage"
+          "desc": "1.06× physical damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.06
+          }
         },
         {
           "id": "6001400",
           "name": "Physical Attack Up +3",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.105× physical damage"
+          "desc": "1.105× physical damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.105
+          }
         },
         {
           "id": "6001401",
           "name": "Physical Attack Up +4",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.12× physical damage"
+          "desc": "1.12× physical damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.12
+          }
         },
         {
           "id": "6600000",
           "name": "Sleep in Vicinity Improves Attack Power",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.12× damage after sleep procs nearby"
+          "desc": "1.12× damage after sleep procs nearby",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.12,
+            "condition": "After sleep procs nearby"
+          }
         },
         {
           "id": "6600001",
           "name": "Sleep in Vicinity Improves Attack Power +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.22× damage after sleep procs nearby"
+          "desc": "1.22× damage after sleep procs nearby",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.22,
+            "condition": "After sleep procs nearby"
+          }
         }
       ]
     },
@@ -668,21 +1373,48 @@
           "name": "Attack power up when facing frostbite-afflicted\nenemy",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.1× damage vs frostbite-afflicted targets"
+          "desc": "1.1× damage vs frostbite-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.1,
+            "condition": "vs frostbite-afflicted enemies"
+          }
         },
         {
           "id": "6260400",
           "name": "Attack power up when facing frostbite-afflicted enemy +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.16× damage vs frostbite-afflicted targets"
+          "desc": "1.16× damage vs frostbite-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.16,
+            "condition": "vs frostbite-afflicted enemies"
+          }
         },
         {
           "id": "6260401",
           "name": "Attack power up when facing frostbite-afflicted enemy +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.2× damage vs frostbite-afflicted targets"
+          "desc": "1.2× damage vs frostbite-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2,
+            "condition": "vs frostbite-afflicted enemies"
+          }
         }
       ]
     },
@@ -695,42 +1427,96 @@
           "name": "Attack power up when facing poison-afflicted enemy",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.1× damage vs poison-afflicted targets"
+          "desc": "1.1× damage vs poison-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.1,
+            "condition": "vs poison-afflicted enemies"
+          }
         },
         {
           "id": "6260000",
           "name": "Attack power up when facing poison-afflicted enemy +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.16× damage vs poison-afflicted targets"
+          "desc": "1.16× damage vs poison-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.16,
+            "condition": "vs poison-afflicted enemies"
+          }
         },
         {
           "id": "6260001",
           "name": "Attack power up when facing poison-afflicted enemy +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.2× damage vs poison-afflicted targets"
+          "desc": "1.2× damage vs poison-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2,
+            "condition": "vs poison-afflicted enemies"
+          }
         },
         {
           "id": "7260300",
           "name": "Attack power up when facing scarlet rot-afflicted\nenemy",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.1× damage vs rot-afflicted targets"
+          "desc": "1.1× damage vs rot-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.1,
+            "condition": "vs rot-afflicted enemies"
+          }
         },
         {
           "id": "6260300",
           "name": "Attack power up when facing scarlet rot-afflicted enemy +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "1.16× damage vs rot-afflicted targets"
+          "desc": "1.16× damage vs rot-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.16,
+            "condition": "vs rot-afflicted enemies"
+          }
         },
         {
           "id": "6260301",
           "name": "Attack power up when facing scarlet rot-afflicted enemy +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.2× damage vs rot-afflicted targets"
+          "desc": "1.2× damage vs rot-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.2,
+            "condition": "vs rot-afflicted enemies"
+          }
         }
       ]
     },
@@ -1430,21 +2216,45 @@
           "name": "Fire Damage Negation Up",
           "w": 69,
           "hasCurse": false,
-          "desc": "+10% fire damage negation"
+          "desc": "+10% fire damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "fire"
+            ],
+            "value": 0.1
+          }
         },
         {
           "id": "6002700",
           "name": "Improved Fire Damage Negation +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "+15% fire damage negation"
+          "desc": "+15% fire damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "fire"
+            ],
+            "value": 0.15
+          }
         },
         {
           "id": "6002701",
           "name": "Improved Fire Damage Negation +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "+16% fire damage negation"
+          "desc": "+16% fire damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "fire"
+            ],
+            "value": 0.16
+          }
         }
       ]
     },
@@ -1620,21 +2430,45 @@
           "name": "Holy Damage Negation Up",
           "w": 69,
           "hasCurse": false,
-          "desc": "+10% holy damage negation"
+          "desc": "+10% holy damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "holy"
+            ],
+            "value": 0.1
+          }
         },
         {
           "id": "6002900",
           "name": "Improved Holy Damage Negation +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "+15% holy damage negation"
+          "desc": "+15% holy damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "holy"
+            ],
+            "value": 0.15
+          }
         },
         {
           "id": "6002901",
           "name": "Improved Holy Damage Negation +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "+16% holy damage negation"
+          "desc": "+16% holy damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "holy"
+            ],
+            "value": 0.16
+          }
         }
       ]
     },
@@ -1835,21 +2669,54 @@
           "name": "Improved Affinity Damage Negation",
           "w": 69,
           "hasCurse": false,
-          "desc": "+6% magic/fire/lightning/holy damage negation"
+          "desc": "+6% magic/fire/lightning/holy damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "value": 0.06
+          }
         },
         {
           "id": "6611101",
           "name": "Improved Affinity Damage Negation +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "+10.5% magic/fire/lightning/holy damage negation"
+          "desc": "+10.5% magic/fire/lightning/holy damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "value": 0.105
+          }
         },
         {
           "id": "6611102",
           "name": "Improved Affinity Damage Negation +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "+12% magic/fire/lightning/holy damage negation"
+          "desc": "+12% magic/fire/lightning/holy damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "value": 0.12
+          }
         }
       ]
     },
@@ -1914,7 +2781,12 @@
           "name": "Improved Flask HP Restoration",
           "w": 55,
           "hasCurse": false,
-          "desc": "1.1× HP from flasks"
+          "desc": "1.1× HP from flasks",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "value": 1.1
+          }
         }
       ]
     },
@@ -1947,14 +2819,32 @@
           "name": "Improved Glintstone and Gravity Stone Damage",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.15× stone projectile damage"
+          "desc": "1.15× stone projectile damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "value": 1.15,
+            "condition": "Stone/Gravity Stone throws only"
+          }
         },
         {
           "id": "6040500",
           "name": "Improved Glintstone and Gravity Stone Damage +1",
           "w": 28,
           "hasCurse": true,
-          "desc": "1.3× stone projectile damage"
+          "desc": "1.3× stone projectile damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "value": 1.3,
+            "condition": "Stone/Gravity Stone throws only"
+          }
         }
       ]
     },
@@ -1967,21 +2857,45 @@
           "name": "Improved Lightning Damage Negation +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "+15% lightning damage negation"
+          "desc": "+15% lightning damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "lightning"
+            ],
+            "value": 0.15
+          }
         },
         {
           "id": "6002801",
           "name": "Improved Lightning Damage Negation +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "+16% lightning damage negation"
+          "desc": "+16% lightning damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "lightning"
+            ],
+            "value": 0.16
+          }
         },
         {
           "id": "7002800",
           "name": "Lightning Damage Negation Up",
           "w": 69,
           "hasCurse": false,
-          "desc": "+10% lightning damage negation"
+          "desc": "+10% lightning damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "lightning"
+            ],
+            "value": 0.1
+          }
         }
       ]
     },
@@ -2014,21 +2928,45 @@
           "name": "Improved Magic Damage Negation +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "+15% magic damage negation"
+          "desc": "+15% magic damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "magic"
+            ],
+            "value": 0.15
+          }
         },
         {
           "id": "6002601",
           "name": "Improved Magic Damage Negation +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "+16% magic damage negation"
+          "desc": "+16% magic damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "magic"
+            ],
+            "value": 0.16
+          }
         },
         {
           "id": "7002600",
           "name": "Magic Damage Negation Up",
           "w": 69,
           "hasCurse": false,
-          "desc": "+10% magic damage negation"
+          "desc": "+10% magic damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "magic"
+            ],
+            "value": 0.1
+          }
         }
       ]
     },
@@ -2053,14 +2991,30 @@
           "name": "Improved Physical Damage Negation +1",
           "w": 269,
           "hasCurse": true,
-          "desc": "+10.5% physical damage negation"
+          "desc": "+10.5% physical damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "physical"
+            ],
+            "value": 0.105
+          }
         },
         {
           "id": "6611002",
           "name": "Improved Physical Damage Negation +2",
           "w": 130,
           "hasCurse": true,
-          "desc": "+12% physical damage negation"
+          "desc": "+12% physical damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "physical"
+            ],
+            "value": 0.12
+          }
         }
       ]
     },
@@ -2073,7 +3027,16 @@
           "name": "Improved Poise & Damage Negation When Knocked Back\nby Damage",
           "w": 55,
           "hasCurse": false,
-          "desc": "20% damage negation and 0.8× poise damage taken for 20s after being hit"
+          "desc": "20% damage negation and 0.8× poise damage taken for 20s after being hit",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "negation",
+            "axes": [
+              "universal"
+            ],
+            "value": 0.2,
+            "condition": "20s after being hit"
+          }
         }
       ]
     },
@@ -2146,14 +3109,32 @@
           "name": "Improved Throwing Knife Damage",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.15× throwing knife damage"
+          "desc": "1.15× throwing knife damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.15,
+            "condition": "Throwing Knife throws only"
+          }
         },
         {
           "id": "6040400",
           "name": "Improved Throwing Knife Damage +1",
           "w": 28,
           "hasCurse": true,
-          "desc": "1.3× throwing knife damage"
+          "desc": "1.3× throwing knife damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.3,
+            "condition": "Throwing Knife throws only"
+          }
         }
       ]
     },
@@ -2166,14 +3147,32 @@
           "name": "Improved Throwing Pot Damage",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.15× throwing pot damage"
+          "desc": "1.15× throwing pot damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.15,
+            "condition": "Throwing Pot throws only"
+          }
         },
         {
           "id": "6040300",
           "name": "Improved Throwing Pot Damage +1",
           "w": 28,
           "hasCurse": true,
-          "desc": "1.3× throwing pot damage"
+          "desc": "1.3× throwing pot damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.3,
+            "condition": "Throwing Pot throws only"
+          }
         }
       ]
     },
@@ -2186,7 +3185,12 @@
           "name": "Increased Maximum FP",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.15× maximum FP"
+          "desc": "1.15× maximum FP",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "value": 1.15
+          }
         }
       ]
     },
@@ -2199,7 +3203,12 @@
           "name": "Increased Maximum HP",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.1× maximum HP"
+          "desc": "1.1× maximum HP",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "value": 1.1
+          }
         }
       ]
     },
@@ -2212,7 +3221,12 @@
           "name": "Increased Maximum Stamina",
           "w": 130,
           "hasCurse": true,
-          "desc": "1.12× maximum stamina"
+          "desc": "1.12× maximum stamina",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "value": 1.12
+          }
         }
       ]
     },
@@ -2367,7 +3381,12 @@
           "name": "Reduced FP Consumption",
           "w": 69,
           "hasCurse": false,
-          "desc": "0.92× FP consumption"
+          "desc": "0.92× FP consumption",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "value": 0.92
+          }
         }
       ]
     },
@@ -2429,21 +3448,51 @@
           "name": "Improved Bestial Incantations",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Bestial incantation damage"
+          "desc": "1.12× Bestial incantation damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "category": "incantation",
+            "value": 1.12,
+            "condition": "Casting Bestial incantations only"
+          }
         },
         {
           "id": "7043300",
           "name": "Improved Carian Sword Sorcery",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Carian Sword sorcery damage"
+          "desc": "1.12× Carian Sword sorcery damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "category": "sorcery",
+            "value": 1.12,
+            "condition": "Casting Carian Sword sorceries only"
+          }
         },
         {
           "id": "7043600",
           "name": "Improved Crystalian sorcery",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Crystalian sorcery damage"
+          "desc": "1.12× Crystalian sorcery damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "category": "sorcery",
+            "value": 1.12,
+            "condition": "Casting Crystalian sorceries only"
+          }
         },
         {
           "id": "7044600",
@@ -2457,70 +3506,170 @@
           "name": "Improved Dragon Cult Incantations",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Dragon Cult incantation damage"
+          "desc": "1.12× Dragon Cult incantation damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "lightning"
+            ],
+            "category": "incantation",
+            "value": 1.12,
+            "condition": "Casting Dragon Cult incantations only"
+          }
         },
         {
           "id": "7044500",
           "name": "Improved Frenzied Flame Incantations",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Frenzied Flame incantation damage"
+          "desc": "1.12× Frenzied Flame incantation damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "fire"
+            ],
+            "category": "incantation",
+            "value": 1.12,
+            "condition": "Casting Frenzied Flame incantations only"
+          }
         },
         {
           "id": "7044000",
           "name": "Improved Fundamentalist Incantations",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Fundamentalist incantation damage"
+          "desc": "1.12× Fundamentalist incantation damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "holy"
+            ],
+            "category": "incantation",
+            "value": 1.12,
+            "condition": "Casting Fundamentalist incantations only"
+          }
         },
         {
           "id": "7044200",
           "name": "Improved Giants' Flame Incantations",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Giants' Flame incantation damage"
+          "desc": "1.12× Giants' Flame incantation damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "fire"
+            ],
+            "category": "incantation",
+            "value": 1.12,
+            "condition": "Casting Giants' Flame incantations only"
+          }
         },
         {
           "id": "7043400",
           "name": "Improved Glintblade Sorcery",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Glintblade sorcery damage"
+          "desc": "1.12× Glintblade sorcery damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "category": "sorcery",
+            "value": 1.12,
+            "condition": "Casting Glintblade sorceries only"
+          }
         },
         {
           "id": "7044300",
           "name": "Improved Godslayer Incantations",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Godslayer incantation damage"
+          "desc": "1.12× Godslayer incantation damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "fire"
+            ],
+            "category": "incantation",
+            "value": 1.12,
+            "condition": "Casting Godslayer incantations only"
+          }
         },
         {
           "id": "7043700",
           "name": "Improved Gravity Sorcery",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Gravity sorcery damage"
+          "desc": "1.12× Gravity sorcery damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "category": "sorcery",
+            "value": 1.12,
+            "condition": "Casting Gravity sorceries only"
+          }
         },
         {
           "id": "7043500",
           "name": "Improved Invisibility Sorcery",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Invisibility sorcery damage"
+          "desc": "1.12× Invisibility sorcery damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "category": "sorcery",
+            "value": 1.12,
+            "condition": "Casting Invisibility sorceries only"
+          }
         },
         {
           "id": "7043200",
           "name": "Improved Stonedigger Sorcery",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Stonedigger sorcery damage"
+          "desc": "1.12× Stonedigger sorcery damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "category": "sorcery",
+            "value": 1.12,
+            "condition": "Casting Stonedigger sorceries only"
+          }
         },
         {
           "id": "7043800",
           "name": "Improved Thorn Sorcery",
           "w": 28,
           "hasCurse": false,
-          "desc": "1.12× Thorn sorcery damage"
+          "desc": "1.12× Thorn sorcery damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "category": "sorcery",
+            "value": 1.12,
+            "condition": "Casting Thorn sorceries only"
+          }
         }
       ]
     },
@@ -2593,12 +3742,27 @@
     {
       "name": "Lower Attack When Below Max HP",
       "w": 100,
-      "desc": "0.915× damage when HP below 85%"
+      "desc": "0.915× damage when HP below 85%",
+      "mul": {
+        "tier": "conditional",
+        "bucket": "damage",
+        "axes": [
+          "universal"
+        ],
+        "value": 0.915,
+        "condition": "While HP is below 85%"
+      }
     },
     {
       "name": "Near Death Reduces Max HP",
       "w": 100,
-      "desc": "0.75× max HP for 60s after being downed"
+      "desc": "0.75× max HP for 60s after being downed",
+      "mul": {
+        "tier": "conditional",
+        "bucket": "resource",
+        "value": 0.75,
+        "condition": "60s after being downed"
+      }
     },
     {
       "name": "Poison Buildup When Below Max HP",
@@ -2608,12 +3772,30 @@
     {
       "name": "Reduced Damage Negation After Evading",
       "w": 100,
-      "desc": "−45% damage negation right after rolling"
+      "desc": "−45% damage negation right after rolling",
+      "mul": {
+        "tier": "conditional",
+        "bucket": "negation",
+        "axes": [
+          "universal"
+        ],
+        "value": -0.45,
+        "condition": "Right after evading"
+      }
     },
     {
       "name": "Reduced Damage Negation for Flask Usages",
       "w": 100,
-      "desc": "−45% damage negation while using flasks"
+      "desc": "−45% damage negation while using flasks",
+      "mul": {
+        "tier": "conditional",
+        "bucket": "negation",
+        "axes": [
+          "universal"
+        ],
+        "value": -0.45,
+        "condition": "While using flasks"
+      }
     },
     {
       "name": "Reduced Dexterity and Faith",
@@ -2628,7 +3810,12 @@
     {
       "name": "Reduced Flask HP Restoration",
       "w": 100,
-      "desc": "0.85× HP from flasks"
+      "desc": "0.85× HP from flasks",
+      "mul": {
+        "tier": "baseline",
+        "bucket": "resource",
+        "value": 0.85
+      }
     },
     {
       "name": "Reduced Intelligence and Dexterity",
@@ -2698,7 +3885,12 @@
     {
       "name": "Ultimate Art Charging Impaired",
       "w": 100,
-      "desc": "0.85× ultimate gauge gain"
+      "desc": "0.85× ultimate gauge gain",
+      "mul": {
+        "tier": "baseline",
+        "bucket": "resource",
+        "value": 0.85
+      }
     }
   ]
 }
