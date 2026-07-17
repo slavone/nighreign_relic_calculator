@@ -418,6 +418,79 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       };
     }
 
+    const BUILD_AXIS_LABELS = {
+      physical: () => I18N.t('build_axis_physical', 'Physical'),
+      magic: () => I18N.t('build_axis_magic', 'Magic'),
+      fire: () => I18N.t('build_axis_fire', 'Fire'),
+      lightning: () => I18N.t('build_axis_lightning', 'Lightning'),
+      holy: () => I18N.t('build_axis_holy', 'Holy'),
+      universal: () => I18N.t('build_axis_universal', 'Universal'),
+    };
+    const BUILD_CATEGORY_LABELS = {
+      sorcery: () => I18N.t('build_category_sorcery', 'Sorcery'),
+      incantation: () => I18N.t('build_category_incantation', 'Incantation'),
+    };
+
+    function fmtMul(v) { return '×' + v.toFixed(3).replace(/\.?0+$/, ''); }
+
+    function renderBuildSection(titleKey, titleFallback, baseline, extraRowsHtml) {
+      const rows = Object.entries(baseline)
+        .filter(([, v]) => Math.abs(v - 1) > 1e-9)
+        .map(([axis, v]) => `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS[axis]()}</span><span>${fmtMul(v)}</span></div>`)
+        .join('') + (extraRowsHtml || '');
+      return `<div class="build-summary-section">
+        <div class="build-summary-title">${I18N.t(titleKey, titleFallback)}</div>
+        ${rows || `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
+      </div>`;
+    }
+
+    function renderBuildConditional(conditional) {
+      if (conditional.length === 0) return '';
+      const items = conditional.map(c => {
+        const axisLabel = (c.axes || []).map(a => BUILD_AXIS_LABELS[a]()).join(' + ');
+        const categoryLabel = c.category ? ' + ' + BUILD_CATEGORY_LABELS[c.category]() : '';
+        return `<div class="build-conditional-item">
+          <div>${I18N.effectName(c.name)} — ${fmtMul(c.value)} <em>(${c.condition})</em></div>
+          <div class="build-conditional-combined">${I18N.t('build_combined_label', 'Combined')}: ${axisLabel}${categoryLabel} → ${fmtMul(c.combined)}</div>
+        </div>`;
+      }).join('');
+      return `<div class="build-summary-section">
+        <div class="build-summary-title">${I18N.t('build_conditional_title', 'Conditional Effects')}</div>
+        ${items}
+      </div>`;
+    }
+
+    function renderBuildOther(other) {
+      if (other.length === 0) return '';
+      const items = other.map(o => `<li>${I18N.effectName(o.name)}</li>`).join('');
+      return `<div class="build-summary-section">
+        <div class="build-summary-title">${I18N.t('build_other_title', 'Other Effects')}</div>
+        <ul class="build-other-list">${items}</ul>
+      </div>`;
+    }
+
+    function renderBuildSummary() {
+      const summaryEl = document.getElementById('build-summary');
+      const effects = getBuildEffects();
+      const r = computeBuildTotals(effects);
+
+      // Fold category baselines into the same "Damage" box as their own rows
+      // (they're not elemental axes, but they belong conceptually with damage).
+      const categoryRows = Object.entries(r.categoryBaseline).filter(([, v]) => Math.abs(v - 1) > 1e-9);
+      const categoryExtra = categoryRows.map(([cat, v]) =>
+        `<div class="build-axis-row"><span>${BUILD_CATEGORY_LABELS[cat]()}</span><span>${fmtMul(v)}</span></div>`).join('');
+      const damageHtml = renderBuildSection('build_damage_title', 'Damage', r.damageBaseline, categoryExtra);
+
+      const negationHtml = renderBuildSection('build_negation_title', 'Damage Negation', r.negationBaseline);
+      const resourceHtml = `<div class="build-summary-section">
+        <div class="build-summary-title">${I18N.t('build_resource_title', 'Resource / Recovery')}</div>
+        <div class="build-axis-row"><span>${I18N.t('build_resource_combined', 'Combined')}</span><span>${fmtMul(r.resourceBaseline)}</span></div>
+      </div>`;
+
+      summaryEl.innerHTML = damageHtml + negationHtml + resourceHtml +
+        renderBuildConditional(r.conditional) + renderBuildOther(r.other);
+    }
+
     function calculateProbabilityV2(quality, colorFactor) {
       const K = quality;
       const pool = getDesiredPool();
@@ -1053,6 +1126,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     }
 
     function updateResult() {
+      if (calcMode === 'v3') { renderBuildSummary(); return; }
       document.getElementById('share-btn').style.display = hasAnySelection() ? '' : 'none';
       history.replaceState(null, '', buildShareURL());
       const K = getQuality();

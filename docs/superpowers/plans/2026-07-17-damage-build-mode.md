@@ -1157,11 +1157,15 @@ Add after `computeBuildTotals` (from Task 4):
 
     function fmtMul(v) { return '×' + v.toFixed(3).replace(/\.?0+$/, ''); }
 
-    function renderBuildSection(titleKey, titleFallback, baseline, isNegation) {
+    // extraRowsHtml is appended into `rows` BEFORE the closing div — never patch
+    // the returned HTML with .replace('</div>...', ...) afterward, since a plain
+    // string .replace() consumes the matched closing tag instead of inserting
+    // before it, producing malformed nested HTML.
+    function renderBuildSection(titleKey, titleFallback, baseline, extraRowsHtml) {
       const rows = Object.entries(baseline)
         .filter(([, v]) => Math.abs(v - 1) > 1e-9)
         .map(([axis, v]) => `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS[axis]()}</span><span>${fmtMul(v)}</span></div>`)
-        .join('');
+        .join('') + (extraRowsHtml || '');
       return `<div class="build-summary-section">
         <div class="build-summary-title">${I18N.t(titleKey, titleFallback)}</div>
         ${rows || `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
@@ -1198,18 +1202,14 @@ Add after `computeBuildTotals` (from Task 4):
       const effects = getBuildEffects();
       const r = computeBuildTotals(effects);
 
-      const damageRows = { ...r.damageBaseline };
       // Fold category baselines into the same "Damage" box as their own rows
       // (they're not elemental axes, but they belong conceptually with damage).
-      let damageHtml = renderBuildSection('build_damage_title', 'Damage', damageRows, false);
       const categoryRows = Object.entries(r.categoryBaseline).filter(([, v]) => Math.abs(v - 1) > 1e-9);
-      if (categoryRows.length > 0) {
-        const extra = categoryRows.map(([cat, v]) =>
-          `<div class="build-axis-row"><span>${BUILD_CATEGORY_LABELS[cat]()}</span><span>${fmtMul(v)}</span></div>`).join('');
-        damageHtml = damageHtml.replace('</div>\n      </div>', extra + '</div>\n      </div>');
-      }
+      const categoryExtra = categoryRows.map(([cat, v]) =>
+        `<div class="build-axis-row"><span>${BUILD_CATEGORY_LABELS[cat]()}</span><span>${fmtMul(v)}</span></div>`).join('');
+      const damageHtml = renderBuildSection('build_damage_title', 'Damage', r.damageBaseline, categoryExtra);
 
-      const negationHtml = renderBuildSection('build_negation_title', 'Damage Negation', r.negationBaseline, true);
+      const negationHtml = renderBuildSection('build_negation_title', 'Damage Negation', r.negationBaseline);
       const resourceHtml = `<div class="build-summary-section">
         <div class="build-summary-title">${I18N.t('build_resource_title', 'Resource / Recovery')}</div>
         <div class="build-axis-row"><span>${I18N.t('build_resource_combined', 'Combined')}</span><span>${fmtMul(r.resourceBaseline)}</span></div>
