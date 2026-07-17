@@ -1517,3 +1517,33 @@ Add the corresponding `meth_build_mode_note` key with a Japanese/Korean translat
 git add README.md index.html locales/jp.js locales/kr.js
 git commit -m "docs: describe Damage Build mode in README and in-app methodology"
 ```
+
+---
+
+### Post-plan addendum: Task 11 — URL share-link sync for Build mode
+
+Not in the original plan — Task 8's URL Non-goal turned out to be user-visible
+(`updateResult()`'s early return for `calcMode === 'v3'` skipped
+`history.replaceState` entirely, so nothing about Build mode ever reached the
+URL, not even `calc=v3`). Added after a user report during finishing:
+
+- `buildShareURL()` gained a `calcMode === 'v3'` branch: `calc=v3`,
+  `buildDon=0` (only if unchecked), and per-relic-panel params
+  `r{1-3}s{1-3}` / `d{1-3}s{1-3}` / `d{1-3}c` (effect ids / curse names,
+  mirroring the existing `slot{n}` / `slot{n}c` convention).
+- `restoreFromURL()` resolves `calc=v3`, restores the DON-include checkbox,
+  and returns a `build: { donIncluded, regular, don }` restore payload.
+- `applyRestoredSelections()` gained a v3 branch (`applyRestoredBuildPanel`)
+  that simulates `.click()` on each panel's "+ Add effect" button to create
+  the right number of rows, then sets `<select>` values against
+  `findBuildEffectByKey` (a pool-parametrized twin of `findEffectByKey`).
+- `updateResult()`'s early return now calls `history.replaceState` before
+  `renderBuildSummary()`.
+
+Verified with a throwaway `jsdom` instance (installed outside the repo, never
+added as a project dependency) driving the actual served `index.html`:
+select effects across regular + DON panels including a curse → URL updates
+correctly → reloading that exact URL restores identical selections →
+unchecking "include DON relics" removes their contribution and sets
+`buildDon=0`. 26/26 assertions passed, plus a 13-assertion regression pass
+confirming v1/v2 mode and runtime mode-switching were unaffected.

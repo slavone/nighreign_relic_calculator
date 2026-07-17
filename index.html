@@ -734,6 +734,23 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         .filter(g => g.effects.length > 0);
     }
 
+    // Stable-key lookups for Build mode share links — mirrors effectKeyFor/
+    // findEffectByKey, but parametrized to an explicit filtered group list
+    // instead of the global activeGroups(), since each relic panel is pinned
+    // to one pool regardless of the top Regular/DON toggle.
+    function buildEffectKeyFor(groups, groupIdx, effectIdx) {
+      const e = groups[groupIdx]?.effects[effectIdx];
+      return e ? String(e.id) : null;
+    }
+    function findBuildEffectByKey(groups, key) {
+      for (let g = 0; g < groups.length; g++) {
+        for (let e = 0; e < groups[g].effects.length; e++) {
+          if (String(groups[g].effects[e].id) === key) return { groupIdx: g, effectIdx: e };
+        }
+      }
+      return null;
+    }
+
     function createRelicPanel(pool, allowCurse, title) {
       const panel = document.createElement('div');
       panel.className = 'relic-panel';
@@ -1127,7 +1144,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     }
 
     function updateResult() {
-      if (calcMode === 'v3') { renderBuildSummary(); return; }
+      if (calcMode === 'v3') { history.replaceState(null, '', buildShareURL()); renderBuildSummary(); return; }
       document.getElementById('share-btn').style.display = hasAnySelection() ? '' : 'none';
       history.replaceState(null, '', buildShareURL());
       const K = getQuality();
@@ -1209,8 +1226,11 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       if (mode === 'don') sp.set('mode', 'don');
       if (preDLC) sp.set('dlc', 'pre');
       if (calcMode === 'v1') sp.set('calc', 'v1');
-      if (getQuality() !== 3) sp.set('quality', String(getQuality()));
-      document.querySelectorAll('#color-checkboxes input:checked').forEach(cb => sp.append('color', cb.value));
+      if (calcMode === 'v3') sp.set('calc', 'v3');
+      if (calcMode !== 'v3') {
+        if (getQuality() !== 3) sp.set('quality', String(getQuality()));
+        document.querySelectorAll('#color-checkboxes input:checked').forEach(cb => sp.append('color', cb.value));
+      }
 
       if (calcMode === 'v2') {
         getDesiredPool().forEach(({ groupIdx, effectIndices }) => {
@@ -1223,7 +1243,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           sp.set('curseMode', 'selected');
           [...curseFilter.indices].forEach(i => sp.append('curse', DON_DATA.curses[i].name));
         }
-      } else {
+      } else if (calcMode === 'v1') {
         [...slotsContainer.querySelectorAll('.slot-block')].forEach((block, i) => {
           const n = i + 1;
           const gIdx = parseInt(block.querySelector('.group-select').value);
@@ -1238,6 +1258,30 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
             if (DON_DATA.curses[cIdx]) sp.set('slot' + n + 'c', DON_DATA.curses[cIdx].name);
           }
         });
+      } else {
+        const donIncluded = document.getElementById('build-don-toggle').checked;
+        if (!donIncluded) sp.set('buildDon', '0');
+
+        function encodePanel(container, prefix, pool) {
+          const groups = activeBuildPreDLCGroups(pool);
+          [...container.querySelectorAll('.relic-panel')].forEach((panel, pIdx) => {
+            const relicNum = pIdx + 1;
+            [...panel.querySelectorAll('.slot-block')].forEach((block, sIdx) => {
+              const gIdx = parseInt(block.querySelector('.group-select').value);
+              const eIdx = parseInt(block.querySelector('.effect-select').value);
+              if (isNaN(gIdx) || isNaN(eIdx)) return;
+              const key = buildEffectKeyFor(groups, gIdx, eIdx);
+              if (key != null) sp.set(`${prefix}${relicNum}s${sIdx + 1}`, key);
+            });
+            const curseSel = panel.querySelector('.curse-select');
+            if (curseSel && curseSel.value !== '') {
+              const cIdx = parseInt(curseSel.value);
+              if (DON_DATA.curses[cIdx]) sp.set(`${prefix}${relicNum}c`, DON_DATA.curses[cIdx].name);
+            }
+          });
+        }
+        encodePanel(document.getElementById('build-regular-relics'), 'r', DATA);
+        if (donIncluded) encodePanel(document.getElementById('build-don-relics'), 'd', DON_DATA);
       }
 
       if (I18N.locale !== 'en') sp.set('lang', I18N.locale);
@@ -1249,7 +1293,12 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       const params = new URLSearchParams(location.search);
       mode = params.get('mode') === 'don' ? 'don' : 'regular';
       preDLC = params.get('dlc') === 'pre';
-      calcMode = params.get('calc') === 'v1' ? 'v1' : 'v2';
+      calcMode = params.get('calc') === 'v1' ? 'v1' : params.get('calc') === 'v3' ? 'v3' : 'v2';
+
+      const buildDonIncluded = params.get('buildDon') !== '0';
+      document.getElementById('build-don-toggle').checked = buildDonIncluded;
+      document.getElementById('build-don-relics').style.display = buildDonIncluded ? '' : 'none';
+      document.getElementById('build-don-heading').style.display = buildDonIncluded ? '' : 'none';
 
       const q = params.get('quality');
       if (q === '1' || q === '2') qualitySelect.value = q;
@@ -1282,7 +1331,48 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       return {
         poolKeys: params.getAll('pool'),
         slots: [1, 2, 3].map(i => ({ key: params.get('slot' + i), curseKey: params.get('slot' + i + 'c') })),
+        build: {
+          donIncluded: buildDonIncluded,
+          regular: [1, 2, 3].map(r => [1, 2, 3].map(s => params.get(`r${r}s${s}`))),
+          don: [1, 2, 3].map(r => ({
+            slots: [1, 2, 3].map(s => params.get(`d${r}s${s}`)),
+            curse: params.get(`d${r}c`),
+          })),
+        },
       };
+    }
+
+    function applyRestoredBuildPanel(panel, pool, slotKeys, curseKey) {
+      const groups = activeBuildPreDLCGroups(pool);
+      const maxIdx = slotKeys.reduce((m, k, i) => k != null ? i + 1 : m, 0);
+      const addBtn = panel.querySelector('.add-effect-btn');
+      for (let i = 0; i < maxIdx; i++) addBtn.click();
+      const blocks = [...panel.querySelectorAll('.slot-block')];
+      blocks.forEach((block, i) => {
+        const key = slotKeys[i];
+        if (key == null) return;
+        const found = findBuildEffectByKey(groups, key);
+        if (!found) return;
+        const groupSel = block.querySelector('.group-select');
+        const effectSel = block.querySelector('.effect-select');
+        groupSel.value = found.groupIdx;
+        effectSel.innerHTML = buildEffectOptionsForGroups(groups, found.groupIdx, found.effectIdx);
+      });
+      // Re-exclude now-used groups from every row's dropdown (addBtn.click() only
+      // knew about rows that existed at click-time, before values were set above).
+      const usedIndices = new Set(blocks.map(b => parseInt(b.querySelector('.group-select').value)).filter(v => !isNaN(v)));
+      blocks.forEach(block => {
+        const groupSel = block.querySelector('.group-select');
+        const cur = parseInt(groupSel.value);
+        groupSel.innerHTML = buildOptionsForGroups(groups, usedIndices, cur);
+      });
+      if (curseKey != null) {
+        const curseSel = panel.querySelector('.curse-select');
+        if (curseSel) {
+          const cIdx = DON_DATA.curses.findIndex(c => c.name === curseKey);
+          if (cIdx !== -1) curseSel.value = cIdx;
+        }
+      }
     }
 
     function applyRestoredSelections(restored) {
@@ -1300,7 +1390,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         });
         touched.forEach(details => updateEffectDescsForSection(details, parseInt(details.dataset.groupIdx)));
         if (touched.size > 0) updatePoolSummary();
-      } else {
+      } else if (calcMode === 'v1') {
         const maxIdx = restored.slots.reduce((m, s, i) => s.key != null ? i + 1 : m, 0);
         for (let i = 0; i < maxIdx; i++) addSlot();
         const blocks = [...slotsContainer.querySelectorAll('.slot-block')];
@@ -1326,6 +1416,17 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         });
         refreshGroupDropdowns();
         updateAddBtn();
+      } else {
+        const regularPanels = [...document.getElementById('build-regular-relics').querySelectorAll('.relic-panel')];
+        restored.build.regular.forEach((slotKeys, i) => {
+          if (regularPanels[i]) applyRestoredBuildPanel(regularPanels[i], DATA, slotKeys, null);
+        });
+        if (restored.build.donIncluded) {
+          const donPanels = [...document.getElementById('build-don-relics').querySelectorAll('.relic-panel')];
+          restored.build.don.forEach((r, i) => {
+            if (donPanels[i]) applyRestoredBuildPanel(donPanels[i], DON_DATA, r.slots, r.curse);
+          });
+        }
       }
     }
 
