@@ -142,6 +142,16 @@ check('Improved Guard Counters +2 is physical, not universal', guardCounter2 &&
   guardCounter2.tier === 'conditional' && guardCounter2.axes.includes('physical') &&
   !guardCounter2.axes.includes('universal') && guardCounter2.group === 'hitType' && guardCounter2.value === 1.29);
 
+const initialAttack = EFFECT_MULTIPLIERS['Improved Initial Standard Attack'];
+check('Improved Initial Standard Attack is physical, not universal', initialAttack &&
+  initialAttack.tier === 'conditional' && initialAttack.axes.includes('physical') &&
+  !initialAttack.axes.includes('universal') && initialAttack.group === 'hitType');
+
+const greaseItems = EFFECT_MULTIPLIERS['Physical attack power increases after using grease items +2'];
+check('grease items bonus is physical, matching its name', greaseItems &&
+  greaseItems.tier === 'conditional' && greaseItems.axes.includes('physical') &&
+  !greaseItems.axes.includes('universal') && greaseItems.group === 'status' && greaseItems.value === 1.2);
+
 check('Dragon Communion Incantations is intentionally unmapped',
   EFFECT_MULTIPLIERS['Improved Dragon Communion Incantations'] === undefined);
 

@@ -155,7 +155,10 @@ export const EFFECT_MULTIPLIERS = {
   // 'Improved Dragon Communion Incantations' intentionally omitted — see comment above.
 
   // ── Specific hit-type / timing-window damage (conditional) ───────────────
-  'Improved Initial Standard Attack': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.15, condition: 'First light attack only' },
+  // Same physical-only reasoning as Critical Hits/Guard Counters below — the
+  // first-light-attack bonus is a physical damage component, not a "special"
+  // applying to every damage type (user-confirmed).
+  'Improved Initial Standard Attack': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.15, condition: 'First light attack only' },
   // Critical hit / guard counter bonus damage is physical-only (the FromSoft
   // riposte/critical multiplier applies to the weapon's physical damage
   // component, not affinity/elemental) — user-confirmed, not a "special"

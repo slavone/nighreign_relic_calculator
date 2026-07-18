@@ -2602,3 +2602,70 @@ BOTH combine correctly (e.g. Evergaol×2 + Night Invader×3 → Physical
 (had selected Night Invader with count=0, which correctly contributes
 nothing). No code change needed — noted here since the investigation
 happened but turned out to be a non-issue.
+
+### Post-plan addendum: Task 36 — v3 reuses the regular/Deep of Night mode
+toggle instead of its own "Include DON relics" checkbox; Improved Initial
+Standard Attack reclassified to physical
+
+User: "we already have a toggle regular/deep of night. for v3 we have
+added an additional checkbox Include Deep of Night relics. can we remove
+the new checkbox and use the old toggle in that context for v3?" The v1/v2
+mode toggle (`mode`, 'regular'|'don') and v3's `#build-don-toggle` checkbox
+were previously independent — the top toggle had literally no effect on
+v3, which always showed both relic sections and used its own checkbox to
+decide whether to read DON panel selections. Unified them: "Regular"
+selected now means v3 only reads/shows regular relics; "Deep of Night"
+means it also shows/reads the DON panels alongside them (an additive
+inclusion, not an exclusive switch — v3 never hides the regular panels).
+
+Removed the checkbox HTML/CSS entirely. Replaced every
+`document.getElementById('build-don-toggle').checked` read with
+`mode === 'don'`: `getBuildEffects()`'s DON-panel collection guard,
+`buildShareURL()`'s `donIncluded` (the separate `buildDon` URL param was
+also removed — fully redundant now that `mode` is already encoded),
+`restoreFromURL()`'s DON-panel display/return-object derivation. Since
+`mode` defaults to `'regular'`, `#build-don-relics`/`#build-don-heading`
+now default to `display:none` in the HTML (previously they defaulted
+visible, matching the checkbox's `checked` default) — a real behavior
+change (DON panels no longer shown by default in v3), which is exactly
+what unifying the controls implies. Added the missing display-sync to 3
+places that previously relied on the checkbox's own `change` listener
+(now deleted): the mode-toggle click handler's new `calcMode === 'v3'`
+branch, and the calc-mode-toggle handler's v3 branch (after
+`buildRelicPanels()` rebuilds the DOM, display must be re-applied since
+a fresh `buildRelicPanels()` call doesn't touch container display style).
+`restoreFromURL()` already covers the page-load path.
+
+Separately, user: "Improved initial attack is listed as special trigger,
+it should rather be just a subcategory within the physical, like guard
+counters." Same reasoning as Task 35 (Critical Hits/Guard Counters): the
+first-light-attack bonus is physical-only, not a universal special.
+Reclassified `'Improved Initial Standard Attack'` from
+`axes: ['universal']` to `axes: ['physical']` — no other engine/render
+changes needed, it automatically routes through Task 34's axis-nesting
+mechanism (nests under Physical in Totals) since it's already `group:
+'hitType'`, which Task 35 already wired into `axisConditionals`.
+
+**Self-correction caught mid-task:** the user also initially said
+"Physical attack power increases after using grease items should be in
+special triggers," which I implemented (reclassified to universal) — but
+they immediately followed up "axes should obviously be physical only,"
+reversing it. Reverted cleanly back to `axes: ['physical']` (its original,
+correct classification) before regenerating data, so no incorrect
+intermediate state was ever committed.
+
+Regenerated `data/relic_data.json`/`data/don_relic_data.json` (diff shows
+exactly the one intended change — universal→physical for Improved Initial
+Standard Attack in both pools) and re-embedded. Added a schema spot-check
+in `tests/effect_multipliers.test.mjs` for the Initial Standard Attack
+reclassification and confirmed the grease-items spot-check still asserts
+physical (unchanged). Verified live with `jsdom`: confirmed the checkbox
+no longer exists in the DOM; DON container hidden by default when
+entering v3 with mode='regular'; clicking "Deep of Night" shows the DON
+panels and adds `mode=don` to the URL; clicking back to "Regular" hides
+them and removes it; a DON-relic effect (Fire Attack Power Up +4) combined
+correctly with a regular-relic effect (Physical Attack Up +1) only when
+mode='don', both live-interactively and via a `mode=don` URL restored
+fresh. Improved Initial Standard Attack now nests under Physical in
+Totals ("Physical ×1.05" → nested "Improved Initial Standard Attack
+×1.208" = 1.05×1.15). 20/95/2591 across the three test suites.
