@@ -23,7 +23,8 @@ const FLAT_POOL_TEMPLATES = {
 // the renderer (index.html) resolves it through i18n, matching how every
 // other translated string in the output stays untranslated until render.
 
-function computeBuildTotals(effects) {
+function computeBuildTotals(effects, enabledSpecialNames) {
+  enabledSpecialNames = enabledSpecialNames || new Set();
   const damageBaseline = Object.fromEntries(AXES.map(a => [a, 1]));
   const negationBaseline = Object.fromEntries(AXES.map(a => [a, 1]));
   const categoryBaseline = { sorcery: 1, incantation: 1 };
@@ -44,6 +45,13 @@ function computeBuildTotals(effects) {
   // instead of effect name — one relic-effect selection can feed 2+ pools at
   // once (e.g. "Reduced Vigor and Arcane" touches both vigor and arcane).
   const flatByPool = new Map();
+  // Baseline entries grouped by name too, purely so the summary can show
+  // WHICH selected effects fed a given baseline number (e.g. "Fire: ×1.12 ×
+  // ×1.1" from two different relics) instead of one already-flattened
+  // product with no memory of its sources. damageBaseline/negationBaseline/
+  // categoryBaseline/resourceBaseline above are untouched — they remain the
+  // single source of truth for every combined figure.
+  const baselineByName = new Map();
 
   for (const effect of effects) {
     const m = effect.mul;
@@ -73,6 +81,9 @@ function computeBuildTotals(effects) {
       else conditionalByName.set(effect.name, { name: effect.name, ...m, count: 1 });
       continue;
     }
+    const existingB = baselineByName.get(effect.name);
+    if (existingB) existingB.count++;
+    else baselineByName.set(effect.name, { name: effect.name, ...m, count: 1 });
     if (m.bucket === 'resource') {
       resourceBaseline[m.stat] *= m.value;
     } else if (m.bucket === 'negation') {
@@ -123,50 +134,109 @@ function computeBuildTotals(effects) {
   }
 
   // A universal-axis-only conditional (no category, axes === ['universal'])
-  // applies to EVERY damage type, not just a standalone line — e.g. the
-  // "Lower Attack When Below Max HP" curse should show up nested under each
-  // active elemental baseline too ("what's my Physical damage while also
-  // below 85% HP"), not just as an isolated -8.5% row disconnected from the
-  // real total. Its own `combined` already folds in the universal baseline,
-  // so nesting it under axis X is just axisBaseline × entry.combined.
-  function nestUniversalOnly(baseline, groups) {
-    const universalOnly = groups.flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
-    const nested = {};
-    for (const axis of AXES) {
-      if (axis === 'universal' || baseline[axis] === 1) continue;
-      nested[axis] = universalOnly.map(c => ({
-        name: c.name, condition: c.condition, count: c.count,
-        combined: baseline[axis] * c.combined,
-      }));
-    }
-    return nested;
-  }
+  // is a genuinely SITUATIONAL/temporal trigger — crit, guard counter, vs-a-
+  // status-afflicted enemy, 3+ weapon type equipped, etc. — that may or may
+  // not be active at any given moment, unlike a spell-school or single-
+  // weapon-hit conditional (which just means "while doing X", the exact
+  // scenario its own total already represents). These are exactly the
+  // candidates for the player-toggled "specials" checkboxes: excluded from
+  // every Totals figure unless explicitly enabled, so the player can explore
+  // a maximum-multiplier scenario without every proc being silently assumed
+  // to always be active.
   const damageUniversalOnly = [conditionalTree.damage.weapon, conditionalTree.damage.hitType, conditionalTree.damage.status]
     .flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
-  const damageAxisNested = nestUniversalOnly(damageBaseline, [damageUniversalOnly]);
-  const negationAxisNested = nestUniversalOnly(negationBaseline, [conditionalTree.negation.status]);
+  const negationUniversalOnly = conditionalTree.negation.status.filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
 
-  // Same idea, one level deeper: a universal-axis situational effect applies
-  // on top of every OTHER specific conditional entry too, not just the base
-  // axis rows — e.g. Carian Sword Sorcery should show "...also below 85% HP"
-  // nested under IT specifically, not just under the Magic baseline. Entries
-  // that are themselves universal-only are skipped (no self-nesting, and no
-  // nesting against other universal-onlies, to avoid combinatorial pairs).
-  const damageUniversalOnlySet = new Set(damageUniversalOnly);
-  function attachUniversalNesting(entry) {
-    // Must multiply by `u.value` (u's own raw self-multiplier), never
-    // `u.combined` — u.combined already folds in the shared universal
-    // baseline (via its own factors), and so does entry.combined, so
-    // multiplying the two combined figures together would double-count
-    // that shared baseline factor instead of applying it once.
-    entry.nestedWithUniversal = damageUniversalOnlySet.has(entry) ? [] : damageUniversalOnly.map(u => ({
-      name: u.name, condition: u.condition, count: u.count,
-      combined: entry.combined * Math.pow(u.value, u.count),
-    }));
-    return entry;
+  function specialsMultiplier(list, isNegation) {
+    return list.reduce((p, c) => {
+      if (!enabledSpecialNames.has(c.name)) return p;
+      return p * Math.pow(isNegation ? (1 - c.value) : c.value, c.count);
+    }, 1);
   }
+  const damageSpecialsMultiplier = specialsMultiplier(damageUniversalOnly, false);
+  const negationSpecialsMultiplier = specialsMultiplier(negationUniversalOnly, true);
+
+  // Totals: the REAL grand-total multiplier per axis/category — baseline
+  // axis/category value × the baseline All-Damage sources (Evergaol/Night
+  // Invader kills, always active once triggered) × only the situational
+  // specials currently toggled on. damageBaseline[axis] never includes
+  // damageBaseline.universal (they're independent accumulator slots), so
+  // it's folded in here explicitly.
+  const damageTotals = {};
+  for (const axis of AXES) {
+    damageTotals[axis] = axis === 'universal'
+      ? damageBaseline.universal * damageSpecialsMultiplier
+      : damageBaseline[axis] * damageBaseline.universal * damageSpecialsMultiplier;
+  }
+  const negationTotals = {};
+  for (const axis of AXES) {
+    negationTotals[axis] = axis === 'universal'
+      ? negationBaseline.universal * negationSpecialsMultiplier
+      : negationBaseline[axis] * negationBaseline.universal * negationSpecialsMultiplier;
+  }
+  const categoryTotals = {
+    sorcery: categoryBaseline.sorcery * damageBaseline.universal * damageSpecialsMultiplier,
+    incantation: categoryBaseline.incantation * damageBaseline.universal * damageSpecialsMultiplier,
+  };
+
+  // Every non-universal-only conditional entry (spell school, single-weapon
+  // hit) gets its own Totals figure too: its `combined` (which already folds
+  // in its own axis/category baseline plus the universal BASELINE) times
+  // whichever specials are toggled on. Universal-only entries (the specials
+  // themselves) get no `total` of their own — they only ever appear as a
+  // checkbox, never a totaled row.
+  const damageUniversalOnlySet = new Set(damageUniversalOnly);
   for (const group of ['sorcery', 'incantation', 'weapon', 'hitType', 'status']) {
-    conditionalTree.damage[group] = conditionalTree.damage[group].map(attachUniversalNesting);
+    conditionalTree.damage[group] = conditionalTree.damage[group].map(c => ({
+      ...c, total: damageUniversalOnlySet.has(c) ? undefined : c.combined * damageSpecialsMultiplier,
+    }));
+  }
+  const negationUniversalOnlySet = new Set(negationUniversalOnly);
+  conditionalTree.negation.status = conditionalTree.negation.status.map(c => ({
+    ...c, total: negationUniversalOnlySet.has(c) ? undefined : c.combined * negationSpecialsMultiplier,
+  }));
+
+  // Breakdown/inventory views: which selected effects fed each axis,
+  // category, or resource stat, so the summary can show "Fire: ×1.12 × ×1.1"
+  // (the individual contributing values) instead of one already-flattened
+  // number. Multi-axis baseline sources (Improved Affinity Attack Power,
+  // which touches magic+fire+lightning+holy at once) are pulled OUT of each
+  // individual axis's list — grouped by their own axes signature instead —
+  // so a shared source doesn't silently vanish into 4 different rows with no
+  // trace it was ever one selection.
+  function baselineRows(filterFn) {
+    return [...baselineByName.values()].filter(filterFn)
+      .map(b => ({ name: b.name, value: b.value, count: b.count }));
+  }
+  const damageAxisBreakdown = {}, negationAxisBreakdown = {};
+  for (const axis of AXES) {
+    damageAxisBreakdown[axis] = baselineRows(b => b.bucket === 'damage' && b.axes && b.axes.length === 1 && b.axes[0] === axis);
+    negationAxisBreakdown[axis] = baselineRows(b => b.bucket === 'negation' && b.axes && b.axes.length === 1 && b.axes[0] === axis);
+  }
+  const categoryBaselineBreakdown = {
+    sorcery: baselineRows(b => b.category === 'sorcery'),
+    incantation: baselineRows(b => b.category === 'incantation'),
+  };
+  const resourceBreakdown = {};
+  for (const stat of RESOURCE_STATS) {
+    resourceBreakdown[stat] = baselineRows(b => b.bucket === 'resource' && b.stat === stat);
+  }
+  const damageMultiAxisGroups = [];
+  {
+    const seen = new Map();
+    for (const b of baselineByName.values()) {
+      if (b.bucket !== 'damage' || !b.axes || b.axes.length <= 1) continue;
+      const key = [...b.axes].sort().join(',');
+      if (!seen.has(key)) seen.set(key, { axes: b.axes, rows: [] });
+      seen.get(key).rows.push({ name: b.name, value: b.value, count: b.count });
+    }
+    for (const g of seen.values()) {
+      const combined = g.rows.reduce((p, r) => p * Math.pow(r.value, r.count), 1);
+      damageMultiAxisGroups.push({
+        axes: g.axes, rows: g.rows, combined,
+        total: combined * damageBaseline.universal * damageSpecialsMultiplier,
+      });
+    }
   }
 
   // Flat entries: description is regenerated from the template using the
@@ -193,7 +263,12 @@ function computeBuildTotals(effects) {
 
   return {
     damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
-    conditionalTree, damageAxisNested, negationAxisNested, flat,
+    conditionalTree,
+    damageAxisBreakdown, negationAxisBreakdown, categoryBaselineBreakdown, resourceBreakdown,
+    damageMultiAxisGroups,
+    damageUniversalOnly, negationUniversalOnly,
+    damageTotals, negationTotals, categoryTotals,
+    flat,
     other: [...otherByName.values()],
   };
 }
@@ -261,27 +336,29 @@ function test(label, actual, expected, tolerance = 1e-9) {
   const physicalUp1 = { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.05 };
   const katana3plus = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.2, condition: '3+ Katana Equipped' };
   const katanaSingle = { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.09, condition: 'Katana hits only' };
-  const r = computeBuildTotals([
+  const effects = [
     { name: 'Physical Attack Up +1', mul: physicalUp1 },
     { name: 'Improved Attack Power with 3+ Katana Equipped', mul: katana3plus },
     { name: 'Improved Katana Attack Power', mul: katanaSingle },
-  ]);
-  test('no more always-on universal baseline from this effect', r.damageBaseline.universal, 1);
-  const weaponRows = r.conditionalTree.damage.weapon;
-  const katana3Row = weaponRows.find(c => c.name === 'Improved Attack Power with 3+ Katana Equipped');
-  const katanaSingleRow = weaponRows.find(c => c.name === 'Improved Katana Attack Power');
-  test('3+ Katana bonus nests under damage.weapon as a conditional', !!katana3Row, true);
-  test('3+ Katana condition text is preserved for display', katana3Row.condition, '3+ Katana Equipped');
-  test('3+ Katana combined is its own self value (no other universal baseline active)', katana3Row.combined, 1.2);
-  // The Physical baseline row itself must show a nested "combined with 3+
-  // Katana" figure, since that's the only place a universal-axis conditional's
-  // effect on a SPECIFIC element becomes visible.
-  test('Physical baseline nests the 3+ Katana bonus (universal-only nesting)',
-    r.damageAxisNested.physical.find(n => n.name === 'Improved Attack Power with 3+ Katana Equipped').combined,
-    1.05 * 1.2);
-  test('single-weapon Katana bonus nests with the 3+ Katana bonus too',
-    katanaSingleRow.nestedWithUniversal.find(n => n.name === 'Improved Attack Power with 3+ Katana Equipped').combined,
-    (1.05 * 1.09) * 1.2);
+  ];
+  const rOff = computeBuildTotals(effects);
+  test('no more always-on universal baseline from this effect', rOff.damageBaseline.universal, 1);
+  const weaponRowsOff = rOff.conditionalTree.damage.weapon;
+  const katana3RowOff = weaponRowsOff.find(c => c.name === 'Improved Attack Power with 3+ Katana Equipped');
+  const katanaSingleRowOff = weaponRowsOff.find(c => c.name === 'Improved Katana Attack Power');
+  test('3+ Katana bonus nests under damage.weapon as a conditional', !!katana3RowOff, true);
+  test('3+ Katana condition text is preserved for display', katana3RowOff.condition, '3+ Katana Equipped');
+  test('3+ Katana combined is its own self value (no other universal baseline active)', katana3RowOff.combined, 1.2);
+  test('a universal-only special gets no `total` of its own', katana3RowOff.total, undefined);
+  // Toggled OFF by default — a situational special like "3+ Katana Equipped"
+  // must NOT silently apply to Totals just because it's selected.
+  test('Physical total ignores the special while toggled off', rOff.damageTotals.physical, 1.05);
+  test('single-weapon Katana total ignores the special while toggled off', katanaSingleRowOff.total, 1.05 * 1.09);
+
+  const rOn = computeBuildTotals(effects, new Set(['Improved Attack Power with 3+ Katana Equipped']));
+  const katanaSingleRowOn = rOn.conditionalTree.damage.weapon.find(c => c.name === 'Improved Katana Attack Power');
+  test('toggling the special ON folds it into the Physical total', rOn.damageTotals.physical, 1.05 * 1.2);
+  test('toggling it ON also folds it into the single-weapon Katana total', katanaSingleRowOn.total, (1.05 * 1.09) * 1.2);
 }
 
 // User-reported bug: the same conditional effect selected on 4 different
@@ -322,82 +399,83 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('duplicate baseline effects both apply', r.damageBaseline.physical, 1.04 * 1.04);
 }
 
-// User-reported request, matching their exact scenario: a universal-axis
-// curse (Lower Attack When Below Max HP) shouldn't just sit as an isolated
-// -8.5% line — it should also nest under every ACTIVE elemental baseline
-// ("what's my Physical damage while also below 85% HP"), since it applies
-// regardless of damage type. Only baselines that are actually non-1 get a
-// nested branch — Magic stays untouched here, so it must not appear.
+// A universal-axis curse (Lower Attack When Below Max HP) is a "special":
+// excluded from Totals by default (its situational-ness is exactly why it
+// needs the toggle), but once toggled on it applies to EVERY active
+// elemental baseline ("what's my Physical damage while also below 85%
+// HP") since it applies regardless of damage type. Magic stays untouched
+// here either way, since there's no magic baseline active.
 {
   const physicalUp4 = { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.12 };
   const hpCurse = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' };
-  const r = computeBuildTotals([
+  const effects = [
     { name: 'Physical Attack Up +4', mul: physicalUp4 },
     { name: 'Lower Attack When Below Max HP', mul: hpCurse },
-  ]);
-  test('physical baseline is 1.12', r.damageBaseline.physical, 1.12);
-  test('magic baseline stays untouched', r.damageBaseline.magic, 1);
-  test('curse nests under damage.status on its own', r.conditionalTree.damage.status.length, 1);
-  test('damageAxisNested has a physical branch', !!r.damageAxisNested.physical, true);
-  test('damageAxisNested has no magic branch (baseline untouched)', r.damageAxisNested.magic, undefined);
-  test('nested physical branch = physical baseline × curse combined (1.12 × 0.915)',
-    r.damageAxisNested.physical[0].combined, 1.12 * 0.915);
+  ];
+  const rOff = computeBuildTotals(effects);
+  test('physical baseline is 1.12', rOff.damageBaseline.physical, 1.12);
+  test('magic baseline stays untouched', rOff.damageBaseline.magic, 1);
+  test('curse nests under damage.status on its own', rOff.conditionalTree.damage.status.length, 1);
+  test('curse toggled off: physical total is just the baseline', rOff.damageTotals.physical, 1.12);
+  test('curse toggled off: magic total stays untouched', rOff.damageTotals.magic, 1);
+
+  const rOn = computeBuildTotals(effects, new Set(['Lower Attack When Below Max HP']));
+  test('curse toggled on: physical total = physical baseline × curse value', rOn.damageTotals.physical, 1.12 * 0.915);
+  // Universal specials apply to EVERY damage type by definition, even Magic
+  // (which has no baseline of its own here) — its real total becomes just
+  // the curse's own value, not left at 1.
+  test('curse toggled on: magic total also reflects it (universal applies broadly)', rOn.damageTotals.magic, 0.915);
 }
 
-// User follow-up: the same curse should ALSO nest under a specific entry
-// like Carian Sword Sorcery, not just the base axis rows — since it applies
-// on top of any hit, including a Carian Sword spell cast while below 85% HP.
+// The same curse should ALSO fold into a specific entry's Totals figure like
+// Carian Sword Sorcery, not just the base axis rows — since it applies on
+// top of any hit, including a Carian Sword spell cast while below 85% HP.
 {
   const magicUp = { tier: 'baseline', bucket: 'damage', axes: ['magic'], value: 1.12 };
   const carianSword = { tier: 'conditional', bucket: 'damage', axes: ['magic'], category: 'sorcery', value: 1.12, condition: 'Casting Carian Sword sorceries only' };
   const hpCurse = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' };
-  const r = computeBuildTotals([
+  const effects = [
     { name: 'Magic Attack Power Up +4', mul: magicUp },
     { name: 'Improved Carian Sword Sorcery', mul: carianSword },
     { name: 'Lower Attack When Below Max HP', mul: hpCurse },
-  ]);
-  const carianRow = r.conditionalTree.damage.sorcery.find(c => c.name === 'Improved Carian Sword Sorcery');
-  test('Carian row carries a nestedWithUniversal entry', carianRow.nestedWithUniversal.length, 1);
-  test('nested entry is the HP curse', carianRow.nestedWithUniversal[0].name, 'Lower Attack When Below Max HP');
-  // No universal BASELINE is active in this scenario, so curse.value (0.915)
-  // and curse.combined happen to be numerically equal here — this assertion
-  // alone can't distinguish the correct formula (entry.combined × u.value)
-  // from the buggy one (entry.combined × u.combined). See the dedicated
-  // "double-counting" test below, which uses an active universal baseline
-  // specifically to tell the two formulas apart.
-  test('nested combined = Carian combined × curse value',
-    carianRow.nestedWithUniversal[0].combined, carianRow.combined * 0.915);
-  const curseRow = r.conditionalTree.damage.status.find(c => c.name === 'Lower Attack When Below Max HP');
-  test('the curse itself does not nest under itself (empty array)', curseRow.nestedWithUniversal.length, 0);
+  ];
+  const rOff = computeBuildTotals(effects);
+  const carianRowOff = rOff.conditionalTree.damage.sorcery.find(c => c.name === 'Improved Carian Sword Sorcery');
+  const curseRowOff = rOff.conditionalTree.damage.status.find(c => c.name === 'Lower Attack When Below Max HP');
+  test('curse toggled off: Carian total is just its own combined figure', carianRowOff.total, carianRowOff.combined);
+  test('a universal-only special (the curse) gets no total of its own', curseRowOff.total, undefined);
+
+  const rOn = computeBuildTotals(effects, new Set(['Lower Attack When Below Max HP']));
+  const carianRowOn = rOn.conditionalTree.damage.sorcery.find(c => c.name === 'Improved Carian Sword Sorcery');
+  test('curse toggled on: Carian total = Carian combined × curse value', carianRowOn.total, carianRowOn.combined * 0.915);
 }
 
-// User-reported bug: with an ACTIVE universal baseline present (no current
-// real effect sets one — every real universal-axis effect is conditional,
-// see the 3+-weapon-equipped test above — but the engine still supports the
-// tier generically, so this uses a synthetic stand-in), nesting one
-// conditional entry under another universal-only conditional (e.g. a
-// school-specific incantation bonus nested with a frostbite curse) squared
-// the universal baseline instead of applying it once — because
-// entry.combined and u.combined each independently already include that
-// shared factor.
+// Structural regression guard for the double-counting bug fixed in Task 29
+// (attachUniversalNesting computing entry.combined × u.combined, squaring a
+// shared active universal BASELINE instead of applying it once): the new
+// specialsMultiplier() computes purely from each special's raw `value`/
+// `count`, never from another entry's `.combined` — so double-counting a
+// shared baseline factor is structurally impossible, unlike the old nesting
+// code this replaced. Uses a synthetic baseline-tier universal effect since
+// no current real effect sets one (every real universal-axis effect is
+// conditional — see the 3+-weapon-equipped test above).
 {
   const fireUp = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
   const universalBaseline = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.2 };
   const giantsFlame = { tier: 'conditional', bucket: 'damage', axes: ['fire'], category: 'incantation', value: 1.12, condition: "Casting Giants' Flame incantations only" };
   const frostbite = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs frostbite-afflicted enemies' };
-  const r = computeBuildTotals([
+  const effects = [
     { name: 'Fire Attack Power Up +4', mul: fireUp },
     { name: 'Hypothetical Universal Baseline Buff', mul: universalBaseline },
     { name: "Improved Giants' Flame Incantations", mul: giantsFlame },
     { name: 'Attack power up when facing frostbite-afflicted enemy', mul: frostbite },
-  ]);
+  ];
+  const r = computeBuildTotals(effects, new Set(['Attack power up when facing frostbite-afflicted enemy']));
   const giantsFlameRow = r.conditionalTree.damage.incantation.find(c => c.name === "Improved Giants' Flame Incantations");
-  const nested = giantsFlameRow.nestedWithUniversal.find(n => n.name === 'Attack power up when facing frostbite-afflicted enemy');
-  const trueValue = 1.12 /* fire baseline */ * 1.2 /* universal baseline */ * 1.12 /* Giants' Flame */ * 1.1 /* frostbite */;
-  test('nested combined matches the true from-scratch value (no double-counted universal)',
-    nested.combined, trueValue);
-  test('nested combined is NOT the buggy double-counted value',
-    Math.abs(nested.combined - giantsFlameRow.combined * (1.2 * 1.1)) > 1e-9, true);
+  const trueValue = 1.12 /* fire baseline */ * 1.2 /* universal baseline, already in .combined */ * 1.12 /* Giants' Flame, already in .combined */ * 1.1 /* frostbite, toggled on */;
+  test('total matches the true from-scratch value (no double-counted universal)', giantsFlameRow.total, trueValue);
+  test('total is NOT the buggy double-counted value',
+    Math.abs(giantsFlameRow.total - giantsFlameRow.combined * (1.2 * 1.1)) > 1e-9, true);
 }
 
 // User-reported bug: Resource/Recovery used to blend every resource stat
@@ -548,6 +626,94 @@ function test(label, actual, expected, tolerance = 1e-9) {
     ({ name: 'Attack power increased for each Night Invader defeated', mul: nightInvader })));
   test('0 kills leaves the universal baseline untouched', r0.damageBaseline.universal, 1);
   test('4 Night Invader kills (the real in-game max) compound to 1.07^4', r4.damageBaseline.universal, Math.pow(1.07, 4));
+}
+
+// User-requested redesign: the summary should show WHICH selected effects
+// fed each axis (e.g. "Fire: ×1.12 × ×1.1" from two different relics), not
+// just the pre-flattened product — damageAxisBreakdown carries that list.
+{
+  const fireUp2 = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.065 };
+  const fireUp4 = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
+  const r = computeBuildTotals([
+    { name: 'Fire Attack Power Up +2', mul: fireUp2 },
+    { name: 'Fire Attack Power Up +4', mul: fireUp4 },
+  ]);
+  test('fire breakdown has 2 distinct contributors', r.damageAxisBreakdown.fire.length, 2);
+  test('fire breakdown includes both sources by name',
+    r.damageAxisBreakdown.fire.map(c => c.name).sort().join(','),
+    ['Fire Attack Power Up +2', 'Fire Attack Power Up +4'].sort().join(','));
+  test('magic breakdown is empty (untouched)', r.damageAxisBreakdown.magic.length, 0);
+  test('fire baseline still reflects both (unchanged accumulator)', r.damageBaseline.fire, 1.065 * 1.12);
+}
+
+// The same effect selected twice (e.g. 2 relics both with the same tier)
+// collapses into ONE breakdown entry with count=2, not 2 separate rows.
+{
+  const fireUp2 = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.065 };
+  const r = computeBuildTotals([
+    { name: 'Fire Attack Power Up +2', mul: fireUp2 },
+    { name: 'Fire Attack Power Up +2', mul: fireUp2 },
+  ]);
+  test('duplicate baseline source collapses to 1 breakdown entry', r.damageAxisBreakdown.fire.length, 1);
+  test('duplicate breakdown entry carries count=2', r.damageAxisBreakdown.fire[0].count, 2);
+}
+
+// Multi-axis baseline sources (Improved Affinity Attack Power, which touches
+// magic+fire+lightning+holy at once) must NOT silently vanish into 4
+// separate per-axis rows with no trace of a shared source — they get pulled
+// into their own damageMultiAxisGroups entry instead, and each per-axis
+// breakdown list stays axis-SPECIFIC only.
+{
+  const affinity1 = { tier: 'baseline', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], value: 1.05 };
+  const fireUp2 = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.065 };
+  const r = computeBuildTotals([
+    { name: 'Improved Affinity Attack Power', mul: affinity1 },
+    { name: 'Fire Attack Power Up +2', mul: fireUp2 },
+  ]);
+  test('fire breakdown excludes the multi-axis Affinity source', r.damageAxisBreakdown.fire.length, 1);
+  test('fire breakdown only has the fire-specific source', r.damageAxisBreakdown.fire[0].name, 'Fire Attack Power Up +2');
+  test('exactly 1 multi-axis group (Affinity)', r.damageMultiAxisGroups.length, 1);
+  test('the multi-axis group touches magic/fire/lightning/holy', [...r.damageMultiAxisGroups[0].axes].sort().join(','),
+    ['magic', 'fire', 'lightning', 'holy'].sort().join(','));
+  test('the multi-axis group has its own combined value', r.damageMultiAxisGroups[0].combined, 1.05);
+  // damageBaseline.fire (the unchanged accumulator, used for Totals) still
+  // includes BOTH sources multiplied together — only the breakdown DISPLAY
+  // splits them apart.
+  test('damageBaseline.fire (Totals source) still includes affinity + fire-specific', r.damageBaseline.fire, 1.05 * 1.065);
+  test('real fire total = fire-specific × affinity (both folded into damageTotals.fire)',
+    r.damageTotals.fire, 1.05 * 1.065);
+  test('the multi-axis group itself carries a `total` (its own combined, no universal baseline active here)',
+    r.damageMultiAxisGroups[0].total, 1.05);
+}
+
+// Universal-axis BASELINE sources (Evergaol/Night Invader kills) must show
+// up as their OWN separately-named rows in the breakdown, not blended into
+// one generic "All Damage" line — damageAxisBreakdown.universal is exactly
+// baselineByName grouped by name, so each real source keeps its identity.
+{
+  const evergaol = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05, variableCount: true, maxCount: 7 };
+  const nightInvader = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.07, variableCount: true, maxCount: 4 };
+  const r = computeBuildTotals([
+    { name: 'Attack power increased for each evergaol prisoner defeated', mul: evergaol },
+    { name: 'Attack power increased for each evergaol prisoner defeated', mul: evergaol },
+    { name: 'Attack power increased for each Night Invader defeated', mul: nightInvader },
+  ]);
+  test('universal breakdown has 2 distinct named sources', r.damageAxisBreakdown.universal.length, 2);
+  const evergaolRow = r.damageAxisBreakdown.universal.find(c => c.name === 'Attack power increased for each evergaol prisoner defeated');
+  const invaderRow = r.damageAxisBreakdown.universal.find(c => c.name === 'Attack power increased for each Night Invader defeated');
+  test('evergaol row carries count=2 (2 kills)', evergaolRow.count, 2);
+  test('night invader row carries count=1 (1 kill)', invaderRow.count, 1);
+  test('all_dmg total = evergaol^2 × nightInvader^1', r.damageTotals.universal, Math.pow(1.05, 2) * Math.pow(1.07, 1));
+}
+
+// Category baseline breakdown (Sorcery/Incantation general boosts) follows
+// the same per-name grouping.
+{
+  const sorc1 = { tier: 'baseline', bucket: 'damage', category: 'sorcery', value: 1.05 };
+  const r = computeBuildTotals([{ name: 'Improved Sorceries', mul: sorc1 }]);
+  test('sorcery category breakdown has 1 contributor', r.categoryBaselineBreakdown.sorcery.length, 1);
+  test('sorcery category breakdown names the source', r.categoryBaselineBreakdown.sorcery[0].name, 'Improved Sorceries');
+  test('incantation category breakdown stays empty', r.categoryBaselineBreakdown.incantation.length, 0);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

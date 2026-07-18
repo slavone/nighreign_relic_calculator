@@ -119,6 +119,9 @@
     .build-conditional-combined { color: #f0c060; font-size: 0.8rem; }
     .build-other-desc { color: #999; font-size: 0.8rem; }
     .build-axis-nested { display: flex; justify-content: space-between; padding: 0.1rem 0 0.1rem 1rem; font-size: 0.78rem; color: #d0a840; }
+    .build-special-row { display: flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0; font-size: 0.85rem; cursor: pointer; }
+    .build-special-row input { cursor: pointer; }
+    .build-totals-section { margin-top: 0.8rem; padding-top: 0.6rem; border-top: 1px dashed #555; }
     .share-btn { background: none; border: 1px dashed #555; color: #aaa; padding: 0.4rem 0.9rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
     .share-btn:hover { border-color: #f0c060; color: #f0c060; }
     #share-status { font-size: 0.8rem; color: #8ac07a; }
@@ -304,6 +307,15 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     let preDLC = false;
     let calcMode = 'v2';
     let curseFilter = { mode: 'any', indices: new Set() };
+    // Effect Multipliers mode: which situational "special" effects (crit,
+    // guard counter, vs-a-status enemy, 3+ weapon type equipped, etc.) are
+    // currently toggled ON for the Totals section's max-multiplier scenario.
+    // Keyed by effect NAME (not id) — these entries already collapse to one
+    // row per name regardless of which/how-many relic slots carry them, so
+    // there's no single slot position to key a toggle off of; the name IS
+    // the toggle's identity, matching how computeBuildTotals already groups
+    // them. Pruned each render to drop names no longer selected anywhere.
+    let enabledSpecials = new Set();
 
     function activeGroups() {
       const src = mode === 'don' ? DON_DATA : DATA;
@@ -415,7 +427,8 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       arcane: () => I18N.t('build_pool_arcane', 'Arcane'),
     };
 
-    function computeBuildTotals(effects) {
+    function computeBuildTotals(effects, enabledSpecialNames) {
+      enabledSpecialNames = enabledSpecialNames || new Set();
       const damageBaseline = Object.fromEntries(BUILD_AXES.map(a => [a, 1]));
       const negationBaseline = Object.fromEntries(BUILD_AXES.map(a => [a, 1]));
       const categoryBaseline = { sorcery: 1, incantation: 1 };
@@ -437,6 +450,13 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       // 2+ pools at once (e.g. "Reduced Vigor and Arcane" touches both vigor
       // and arcane).
       const flatByPool = new Map();
+      // Baseline entries grouped by name too, purely so the summary can show
+      // WHICH selected effects fed a given baseline number (e.g. "Fire: ×1.12
+      // × ×1.1" from two different relics) instead of one already-flattened
+      // product with no memory of its sources. damageBaseline/negationBaseline/
+      // categoryBaseline/resourceBaseline above are untouched — they remain
+      // the single source of truth for every combined figure.
+      const baselineByName = new Map();
 
       for (const effect of effects) {
         const m = effect.mul;
@@ -466,6 +486,9 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           else conditionalByName.set(effect.name, { name: effect.name, ...m, count: 1 });
           continue;
         }
+        const existingB = baselineByName.get(effect.name);
+        if (existingB) existingB.count++;
+        else baselineByName.set(effect.name, { name: effect.name, ...m, count: 1 });
         if (m.bucket === 'resource') {
           resourceBaseline[m.stat] *= m.value;
         } else if (m.bucket === 'negation') {
@@ -516,50 +539,109 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       }
 
       // A universal-axis-only conditional (no category, axes === ['universal'])
-      // applies to EVERY damage type, not just a standalone line — e.g. the
-      // "Lower Attack When Below Max HP" curse should show up nested under each
-      // active elemental baseline too ("what's my Physical damage while also
-      // below 85% HP"), not just as an isolated -8.5% row disconnected from the
-      // real total. Its own `combined` already folds in the universal baseline,
-      // so nesting it under axis X is just axisBaseline × entry.combined.
-      function nestUniversalOnly(baseline, groups) {
-        const universalOnly = groups.flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
-        const nested = {};
-        for (const axis of BUILD_AXES) {
-          if (axis === 'universal' || baseline[axis] === 1) continue;
-          nested[axis] = universalOnly.map(c => ({
-            name: c.name, condition: c.condition, count: c.count,
-            combined: baseline[axis] * c.combined,
-          }));
-        }
-        return nested;
-      }
+      // is a genuinely SITUATIONAL/temporal trigger — crit, guard counter,
+      // vs-a-status-afflicted enemy, 3+ weapon type equipped, etc. — that may
+      // or may not be active at any given moment, unlike a spell-school or
+      // single-weapon-hit conditional (which just means "while doing X", the
+      // exact scenario its own total already represents). These are exactly
+      // the candidates for the player-toggled "specials" checkboxes: excluded
+      // from every Totals figure unless explicitly enabled, so the player can
+      // explore a maximum-multiplier scenario without every proc being
+      // silently assumed to always be active.
       const damageUniversalOnly = [conditionalTree.damage.weapon, conditionalTree.damage.hitType, conditionalTree.damage.status]
         .flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
-      const damageAxisNested = nestUniversalOnly(damageBaseline, [damageUniversalOnly]);
-      const negationAxisNested = nestUniversalOnly(negationBaseline, [conditionalTree.negation.status]);
+      const negationUniversalOnly = conditionalTree.negation.status.filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
 
-      // Same idea, one level deeper: a universal-axis situational effect applies
-      // on top of every OTHER specific conditional entry too, not just the base
-      // axis rows — e.g. Carian Sword Sorcery should show "...also below 85% HP"
-      // nested under IT specifically, not just under the Magic baseline. Entries
-      // that are themselves universal-only are skipped (no self-nesting, and no
-      // nesting against other universal-onlies, to avoid combinatorial pairs).
-      const damageUniversalOnlySet = new Set(damageUniversalOnly);
-      function attachUniversalNesting(entry) {
-        // Must multiply by `u.value` (u's own raw self-multiplier), never
-        // `u.combined` — u.combined already folds in the shared universal
-        // baseline (via its own factors), and so does entry.combined, so
-        // multiplying the two combined figures together would double-count
-        // that shared baseline factor instead of applying it once.
-        entry.nestedWithUniversal = damageUniversalOnlySet.has(entry) ? [] : damageUniversalOnly.map(u => ({
-          name: u.name, condition: u.condition, count: u.count,
-          combined: entry.combined * Math.pow(u.value, u.count),
-        }));
-        return entry;
+      function specialsMultiplier(list, isNegation) {
+        return list.reduce((p, c) => {
+          if (!enabledSpecialNames.has(c.name)) return p;
+          return p * Math.pow(isNegation ? (1 - c.value) : c.value, c.count);
+        }, 1);
       }
+      const damageSpecialsMultiplier = specialsMultiplier(damageUniversalOnly, false);
+      const negationSpecialsMultiplier = specialsMultiplier(negationUniversalOnly, true);
+
+      // Totals: the REAL grand-total multiplier per axis/category — baseline
+      // axis/category value × the baseline All-Damage sources (Evergaol/Night
+      // Invader kills, always active once triggered) × only the situational
+      // specials currently toggled on. damageBaseline[axis] never includes
+      // damageBaseline.universal (they're independent accumulator slots), so
+      // it's folded in here explicitly.
+      const damageTotals = {};
+      for (const axis of BUILD_AXES) {
+        damageTotals[axis] = axis === 'universal'
+          ? damageBaseline.universal * damageSpecialsMultiplier
+          : damageBaseline[axis] * damageBaseline.universal * damageSpecialsMultiplier;
+      }
+      const negationTotals = {};
+      for (const axis of BUILD_AXES) {
+        negationTotals[axis] = axis === 'universal'
+          ? negationBaseline.universal * negationSpecialsMultiplier
+          : negationBaseline[axis] * negationBaseline.universal * negationSpecialsMultiplier;
+      }
+      const categoryTotals = {
+        sorcery: categoryBaseline.sorcery * damageBaseline.universal * damageSpecialsMultiplier,
+        incantation: categoryBaseline.incantation * damageBaseline.universal * damageSpecialsMultiplier,
+      };
+
+      // Every non-universal-only conditional entry (spell school, single-
+      // weapon hit) gets its own Totals figure too: its `combined` (which
+      // already folds in its own axis/category baseline plus the universal
+      // BASELINE) times whichever specials are toggled on. Universal-only
+      // entries (the specials themselves) get no `total` of their own — they
+      // only ever appear as a checkbox, never a totaled row.
+      const damageUniversalOnlySet = new Set(damageUniversalOnly);
       for (const group of ['sorcery', 'incantation', 'weapon', 'hitType', 'status']) {
-        conditionalTree.damage[group] = conditionalTree.damage[group].map(attachUniversalNesting);
+        conditionalTree.damage[group] = conditionalTree.damage[group].map(c => ({
+          ...c, total: damageUniversalOnlySet.has(c) ? undefined : c.combined * damageSpecialsMultiplier,
+        }));
+      }
+      const negationUniversalOnlySet = new Set(negationUniversalOnly);
+      conditionalTree.negation.status = conditionalTree.negation.status.map(c => ({
+        ...c, total: negationUniversalOnlySet.has(c) ? undefined : c.combined * negationSpecialsMultiplier,
+      }));
+
+      // Breakdown/inventory views: which selected effects fed each axis,
+      // category, or resource stat, so the summary can show "Fire: ×1.12 ×
+      // ×1.1" (the individual contributing values) instead of one already-
+      // flattened number. Multi-axis baseline sources (Improved Affinity
+      // Attack Power, which touches magic+fire+lightning+holy at once) are
+      // pulled OUT of each individual axis's list — grouped by their own axes
+      // signature instead — so a shared source doesn't silently vanish into 4
+      // different rows with no trace it was ever one selection.
+      function baselineRows(filterFn) {
+        return [...baselineByName.values()].filter(filterFn)
+          .map(b => ({ name: b.name, value: b.value, count: b.count }));
+      }
+      const damageAxisBreakdown = {}, negationAxisBreakdown = {};
+      for (const axis of BUILD_AXES) {
+        damageAxisBreakdown[axis] = baselineRows(b => b.bucket === 'damage' && b.axes && b.axes.length === 1 && b.axes[0] === axis);
+        negationAxisBreakdown[axis] = baselineRows(b => b.bucket === 'negation' && b.axes && b.axes.length === 1 && b.axes[0] === axis);
+      }
+      const categoryBaselineBreakdown = {
+        sorcery: baselineRows(b => b.category === 'sorcery'),
+        incantation: baselineRows(b => b.category === 'incantation'),
+      };
+      const resourceBreakdown = {};
+      for (const stat of BUILD_RESOURCE_STATS) {
+        resourceBreakdown[stat] = baselineRows(b => b.bucket === 'resource' && b.stat === stat);
+      }
+      const damageMultiAxisGroups = [];
+      {
+        const seen = new Map();
+        for (const b of baselineByName.values()) {
+          if (b.bucket !== 'damage' || !b.axes || b.axes.length <= 1) continue;
+          const key = [...b.axes].sort().join(',');
+          if (!seen.has(key)) seen.set(key, { axes: b.axes, rows: [] });
+          seen.get(key).rows.push({ name: b.name, value: b.value, count: b.count });
+        }
+        for (const g of seen.values()) {
+          const combined = g.rows.reduce((p, r) => p * Math.pow(r.value, r.count), 1);
+          damageMultiAxisGroups.push({
+            axes: g.axes, rows: g.rows, combined,
+            total: combined * damageBaseline.universal * damageSpecialsMultiplier,
+          });
+        }
       }
 
       // Flat entries: description is regenerated from the template using the
@@ -590,18 +672,26 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
 
       return {
         damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
-        conditionalTree, damageAxisNested, negationAxisNested, flat,
+        conditionalTree,
+        damageAxisBreakdown, negationAxisBreakdown, categoryBaselineBreakdown, resourceBreakdown,
+        damageMultiAxisGroups,
+        damageUniversalOnly, negationUniversalOnly,
+        damageTotals, negationTotals, categoryTotals,
+        flat,
         other: [...otherByName.values()],
       };
     }
 
+    // No 'universal' entry here — that axis never gets a plain per-element
+    // label. Section 1 shows each universal-axis baseline source by its own
+    // effect name (never blended); Section 2's Totals shows it as "All
+    // Damage" via build_all_dmg_label instead.
     const BUILD_AXIS_LABELS = {
       physical: () => I18N.t('build_axis_physical', 'Physical'),
       magic: () => I18N.t('build_axis_magic', 'Magic'),
       fire: () => I18N.t('build_axis_fire', 'Fire'),
       lightning: () => I18N.t('build_axis_lightning', 'Lightning'),
       holy: () => I18N.t('build_axis_holy', 'Holy'),
-      universal: () => I18N.t('build_axis_universal', 'All Damage'),
     };
     const BUILD_CATEGORY_LABELS = {
       sorcery: () => I18N.t('build_category_sorcery', 'Sorcery'),
@@ -633,7 +723,9 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     // Renders a conditional-tree entry's full multiplication chain (every
     // non-1 baseline factor plus the effect's own value) so a nested school
     // like Carian Sword Sorcery reads as "Magic ×1.25 × Sorcery ×1.1 ×
-    // Carian Sword Sorcery ×1.12 = ×1.54", not an opaque final number.
+    // Carian Sword Sorcery ×1.12 = ×1.54", not an opaque final number. Only
+    // used by the Resource/Recovery Actions subgroup now — Attack Power and
+    // Damage Negation moved this breakdown into the Totals section below.
     function factorLabel(f, ownName) {
       if (f.kind === 'axis') return BUILD_AXIS_LABELS[f.key]();
       if (f.kind === 'category') return BUILD_CATEGORY_LABELS[f.key]();
@@ -645,10 +737,6 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
       const eachSuffix = c.count > 1 ? ' ' + I18N.t('build_each_label', 'each') : '';
       const ownName = I18N.effectName(c.name);
-      const nestedRows = (c.nestedWithUniversal || []).map(n => {
-        const nCountSuffix = n.count > 1 ? ` ×${n.count}` : '';
-        return `<div class="build-axis-nested"><span>${I18N.effectName(n.name)}${nCountSuffix} <em>(${n.condition})</em></span><span>${fmtMul(n.combined)}</span></div>`;
-      }).join('');
       // With nothing else selected on the relevant axis/category, `factors`
       // is just the effect's own value — showing a "combined" breakdown line
       // in that case would just repeat the line above verbatim. Only render
@@ -659,7 +747,6 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       return `<div class="build-conditional-item">
         <div>${ownName}${countSuffix} — ${fmtMul(c.value)}${eachSuffix} <em>(${c.condition})</em></div>
         ${combinedRow}
-        ${nestedRows}
       </div>`;
     }
 
@@ -667,6 +754,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     // (e.g. the plain "Improved Sorceries" bonus, with no fixed axis of its
     // own) followed by each specific conditional entry nested under it.
     // Renders nothing if there's no baseline to show and no rows selected.
+    // Only used by Resource/Recovery now (see renderConditionalRow above).
     function renderBuildSubgroup(titleFn, generalBaseline, rows) {
       const hasBaseline = generalBaseline !== undefined && Math.abs(generalBaseline - 1) > 1e-9;
       if (!hasBaseline && rows.length === 0) return '';
@@ -678,33 +766,121 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       </div>`;
     }
 
-    // Renders each active baseline axis row, plus nested sub-rows showing
-    // that axis's REAL combined total once every applicable universal-axis
-    // source is folded in:
-    //  - a baseline All Damage source (e.g. Evergaol/Night Invader kill
-    //    count) — an unnamed, unconditional multiplier, so this shows as a
-    //    plain "All Damage ×v → ×combined" line with no condition text;
-    //  - a universal-axis conditional (crit, guard counter, a situational
-    //    buff/curse, the "3+ weapon type" bonus, etc.) — its own name and
-    //    condition are shown, via `axisNested`.
-    // Without this, a debuff like "Lower Attack When Below Max HP" or a
-    // baseline source like Evergaol kills would sit disconnected from the
-    // real per-element total instead of reading as
-    // "Physical ×1.12 → While HP is below 85% ×1.026".
-    function renderBuildAxisRows(baseline, axisNested) {
-      return Object.entries(baseline)
-        .filter(([, v]) => Math.abs(v - 1) > 1e-9)
-        .map(([axis, v]) => {
-          const universalBaselineRow = (axis !== 'universal' && Math.abs(baseline.universal - 1) > 1e-9)
-            ? `<div class="build-axis-nested"><span>${BUILD_AXIS_LABELS.universal()} ${fmtMul(baseline.universal)}</span><span>${fmtMul(v * baseline.universal)}</span></div>`
-            : '';
-          const nestedRows = (axisNested && axisNested[axis] || []).map(n => {
-            const countSuffix = n.count > 1 ? ` ×${n.count}` : '';
-            return `<div class="build-axis-nested"><span>${I18N.effectName(n.name)}${countSuffix} <em>(${n.condition})</em></span><span>${fmtMul(n.combined)}</span></div>`;
+    // Multi-axis baseline sources (Improved Affinity Attack Power, which
+    // touches magic+fire+lightning+holy at once) get their own identifiable
+    // label instead of silently vanishing into 4 different axis rows.
+    const AFFINITY_AXES_KEY = ['fire', 'holy', 'lightning', 'magic'].join(',');
+    function multiAxisLabel(axes) {
+      const key = [...axes].sort().join(',');
+      if (key === AFFINITY_AXES_KEY) return I18N.t('build_group_affinity', 'Affinity');
+      return axes.map(a => BUILD_AXIS_LABELS[a]()).join(' + ');
+    }
+
+    // Section 1 ("Inventory"): shows WHICH selected effects fed each number,
+    // with no cross-category combination baked in — that's the Totals
+    // section's job. `rows` is a list of {value, count}; each row's value is
+    // repeated `count` times before joining, so 2 different relics feeding
+    // Fire read as "×1.12 × ×1.1", and 3 copies of the same effect read as
+    // "×1.07 × ×1.07 × ×1.07" — the literal contributing numbers, not one
+    // already-flattened product.
+    function fmtBreakdown(rows) {
+      return rows.flatMap(row => Array(row.count).fill(row.value)).map(fmtMul).join(' × ');
+    }
+    function renderInventoryRow(label, rows, conditionText) {
+      const conditionSuffix = conditionText ? ` <em>(${conditionText})</em>` : '';
+      return `<div class="build-axis-row"><span>${label}${conditionSuffix}</span><span>${fmtBreakdown(rows)}</span></div>`;
+    }
+    function renderInventoryAxisRows(axisBreakdown) {
+      return BUILD_AXES.filter(axis => axisBreakdown[axis].length > 0).map(axis => {
+        if (axis === 'universal') {
+          // Each universal-axis BASELINE source (Evergaol/Night Invader
+          // kills, etc.) keeps its own identity here — never blended into
+          // one generic "All Damage" row — so it's clear exactly where it
+          // came from.
+          return axisBreakdown.universal.map(row => {
+            const countSuffix = row.count > 1 ? ` ×${row.count}` : '';
+            return renderInventoryRow(I18N.effectName(row.name) + countSuffix, [row]);
           }).join('');
-          return `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS[axis]()}</span><span>${fmtMul(v)}</span></div>${universalBaselineRow}${nestedRows}`;
-        })
+        }
+        return renderInventoryRow(BUILD_AXIS_LABELS[axis](), axisBreakdown[axis]);
+      }).join('');
+    }
+    function renderInventoryMultiAxisGroups(groups) {
+      return groups.map(g => renderInventoryRow(multiAxisLabel(g.axes), g.rows)).join('');
+    }
+    function renderInventoryConditionalRow(c) {
+      const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
+      return renderInventoryRow(I18N.effectName(c.name) + countSuffix, [{ value: c.value, count: c.count }], c.condition);
+    }
+    function renderInventorySubgroup(titleFn, categoryBreakdown, rows) {
+      const hasCategory = categoryBreakdown && categoryBreakdown.length > 0;
+      if (!hasCategory && rows.length === 0) return '';
+      const categoryRow = hasCategory ? renderInventoryRow(titleFn(), categoryBreakdown) : '';
+      return `<div class="build-subgroup">
+        <div class="build-subgroup-title">${titleFn()}</div>
+        ${categoryRow}${rows.map(renderInventoryConditionalRow).join('')}
+      </div>`;
+    }
+
+    // Section 2 ("Totals"): the REAL grand-total multiplier per axis/
+    // category — baseline value × the baseline All-Damage sources × only
+    // the situational specials currently toggled on below. "All Damage" is
+    // always shown (even at ×1) as the reference point; every other row
+    // only appears when actually present, matching Section 1's rule. An
+    // axis touched by a multi-axis group (e.g. Fire under Affinity) is
+    // shown NESTED under that group instead of also as a separate top-level
+    // row, so the same number never appears twice.
+    function renderTotalsAxisRows(totals, axisBreakdown, multiAxisGroups) {
+      const touchedByGroup = new Set(multiAxisGroups.flatMap(g => g.axes));
+      const allDmgRow = `<div class="build-axis-row"><span>${I18N.t('build_all_dmg_label', 'All Damage')}</span><span>${fmtMul(totals.universal)}</span></div>`;
+      const axisRows = BUILD_AXES.filter(axis => axis !== 'universal' && axisBreakdown[axis].length > 0 && !touchedByGroup.has(axis))
+        .map(axis => `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS[axis]()}</span><span>${fmtMul(totals[axis])}</span></div>`)
         .join('');
+      const groupRows = multiAxisGroups.map(g => {
+        const nested = g.axes.filter(axis => axisBreakdown[axis].length > 0).map(axis =>
+          `<div class="build-axis-nested"><span>${BUILD_AXIS_LABELS[axis]()}</span><span>${fmtMul(totals[axis])}</span></div>`
+        ).join('');
+        return `<div class="build-axis-row"><span>${multiAxisLabel(g.axes)}</span><span>${fmtMul(g.total)}</span></div>${nested}`;
+      }).join('');
+      return allDmgRow + axisRows + groupRows;
+    }
+    function renderTotalsConditionalRow(c) {
+      const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
+      return `<div class="build-axis-row"><span>${I18N.effectName(c.name)}${countSuffix} <em>(${c.condition})</em></span><span>${fmtMul(c.total)}</span></div>`;
+    }
+    function renderTotalsSubgroup(titleFn, categoryTotal, rows) {
+      // Universal-only specials carry no `total` of their own (folding a
+      // special into itself would be meaningless — they only ever show up
+      // as a checkbox), so they're filtered out here rather than rendered
+      // as a broken row.
+      const totaled = rows.filter(c => c.total !== undefined);
+      const hasCategory = categoryTotal !== undefined;
+      if (!hasCategory && totaled.length === 0) return '';
+      const categoryRow = hasCategory
+        ? `<div class="build-axis-row"><span>${titleFn()}</span><span>${fmtMul(categoryTotal)}</span></div>` : '';
+      return `<div class="build-subgroup">
+        <div class="build-subgroup-title">${titleFn()}</div>
+        ${categoryRow}${totaled.map(renderTotalsConditionalRow).join('')}
+      </div>`;
+    }
+    // One checkbox per situational "special" the player has selected — OFF
+    // by default (see `enabledSpecials`), so a proc isn't silently assumed
+    // to always be active. Toggling folds its value into every Totals
+    // figure above on the next render.
+    function renderSpecialsCheckboxes(list) {
+      if (list.length === 0) return '';
+      const rows = list.map(c => {
+        const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
+        const checked = enabledSpecials.has(c.name) ? ' checked' : '';
+        return `<label class="build-special-row">
+          <input type="checkbox" class="special-checkbox" data-special-name="${c.name}"${checked}>
+          <span>${I18N.effectName(c.name)}${countSuffix} <em>(${c.condition})</em> ${fmtMul(c.value)}</span>
+        </label>`;
+      }).join('');
+      return `<div class="build-subgroup">
+        <div class="build-subgroup-title">${I18N.t('build_specials_title', 'Special Triggers')}</div>
+        ${rows}
+      </div>`;
     }
 
     function renderBuildFlatList(flat) {
@@ -758,25 +934,50 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     function renderBuildSummary() {
       const summaryEl = document.getElementById('build-summary');
       const effects = getBuildEffects();
-      const r = computeBuildTotals(effects);
+      const r = computeBuildTotals(effects, enabledSpecials);
       const dmgTree = r.conditionalTree.damage;
 
-      const damageBody = renderBuildAxisRows(r.damageBaseline, r.damageAxisNested)
-        + renderBuildSubgroup(BUILD_CATEGORY_LABELS.sorcery, r.categoryBaseline.sorcery, dmgTree.sorcery)
-        + renderBuildSubgroup(BUILD_CATEGORY_LABELS.incantation, r.categoryBaseline.incantation, dmgTree.incantation)
-        + renderBuildSubgroup(BUILD_GROUP_LABELS.weapon, undefined, dmgTree.weapon)
-        + renderBuildSubgroup(BUILD_GROUP_LABELS.hitType, undefined, dmgTree.hitType)
-        + renderBuildSubgroup(BUILD_GROUP_LABELS.status, undefined, dmgTree.status);
+      // Attack Power: Section 1 (Inventory — which effects fed each number)
+      // followed by Section 2 (Totals — the real grand-total once specials
+      // are toggled). Both sections only render once something is actually
+      // selected; an empty build just shows the placeholder, same as before.
+      const damageInventoryBody = renderInventoryAxisRows(r.damageAxisBreakdown)
+        + renderInventoryMultiAxisGroups(r.damageMultiAxisGroups)
+        + renderInventorySubgroup(BUILD_CATEGORY_LABELS.sorcery, r.categoryBaselineBreakdown.sorcery, dmgTree.sorcery)
+        + renderInventorySubgroup(BUILD_CATEGORY_LABELS.incantation, r.categoryBaselineBreakdown.incantation, dmgTree.incantation)
+        + renderInventorySubgroup(BUILD_GROUP_LABELS.weapon, undefined, dmgTree.weapon)
+        + renderInventorySubgroup(BUILD_GROUP_LABELS.hitType, undefined, dmgTree.hitType)
+        + renderInventorySubgroup(BUILD_GROUP_LABELS.status, undefined, dmgTree.status);
+      const damageTotalsBody = renderSpecialsCheckboxes(r.damageUniversalOnly)
+        + renderTotalsAxisRows(r.damageTotals, r.damageAxisBreakdown, r.damageMultiAxisGroups)
+        + renderTotalsSubgroup(BUILD_CATEGORY_LABELS.sorcery, Math.abs(r.categoryBaseline.sorcery - 1) > 1e-9 ? r.categoryTotals.sorcery : undefined, dmgTree.sorcery)
+        + renderTotalsSubgroup(BUILD_CATEGORY_LABELS.incantation, Math.abs(r.categoryBaseline.incantation - 1) > 1e-9 ? r.categoryTotals.incantation : undefined, dmgTree.incantation)
+        + renderTotalsSubgroup(BUILD_GROUP_LABELS.weapon, undefined, dmgTree.weapon)
+        + renderTotalsSubgroup(BUILD_GROUP_LABELS.hitType, undefined, dmgTree.hitType)
+        + renderTotalsSubgroup(BUILD_GROUP_LABELS.status, undefined, dmgTree.status);
+      const damageHasSelections = !!damageInventoryBody;
       const damageHtml = `<div class="build-summary-section">
         <div class="build-summary-title">${I18N.t('build_damage_title', 'Attack Power')}</div>
-        ${damageBody || `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
+        ${damageHasSelections ? damageInventoryBody : `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
+        ${damageHasSelections ? `<div class="build-totals-section">
+          <div class="build-summary-title">${I18N.t('build_totals_title', 'Totals')}</div>
+          ${damageTotalsBody}
+        </div>` : ''}
       </div>`;
 
-      const negationBody = renderBuildAxisRows(r.negationBaseline, r.negationAxisNested)
-        + renderBuildSubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.negation.status);
+      const negationInventoryBody = renderInventoryAxisRows(r.negationAxisBreakdown)
+        + renderInventorySubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.negation.status);
+      const negationTotalsBody = renderSpecialsCheckboxes(r.negationUniversalOnly)
+        + renderTotalsAxisRows(r.negationTotals, r.negationAxisBreakdown, [])
+        + renderTotalsSubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.negation.status);
+      const negationHasSelections = !!negationInventoryBody;
       const negationHtml = `<div class="build-summary-section">
         <div class="build-summary-title">${I18N.t('build_negation_title', 'Damage Negation')}</div>
-        ${negationBody || `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
+        ${negationHasSelections ? negationInventoryBody : `<div class="build-axis-row"><span>${I18N.t('build_none_selected', 'No effects selected yet')}</span></div>`}
+        ${negationHasSelections ? `<div class="build-totals-section">
+          <div class="build-summary-title">${I18N.t('build_totals_title', 'Totals')}</div>
+          ${negationTotalsBody}
+        </div>` : ''}
       </div>`;
 
       // Resource/Recovery and the flat unmapped-effect list are merged into a
@@ -784,7 +985,9 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       // exactly like Physical/Magic axis rows under Attack Power — no extra
       // grouping wrapper — since FP consumption, cooldown, ultimate gauge,
       // max HP/FP/stamina, and flask healing are different units and must
-      // never be blended into one number.
+      // never be blended into one number. Unlike Attack Power/Damage
+      // Negation, there's no "universal" cross-cutting source here, so no
+      // Inventory/Totals split applies — this section is unchanged.
       const resourceStatRows = Object.entries(r.resourceBaseline)
         .filter(([, v]) => Math.abs(v - 1) > 1e-9)
         .map(([stat, v]) => `<div class="build-axis-row"><span>${BUILD_RESOURCE_STAT_LABELS[stat]()}</span><span>${fmtMul(v)}</span></div>`)
@@ -801,6 +1004,19 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         : '';
 
       summaryEl.innerHTML = damageHtml + negationHtml + otherHtml;
+
+      // Toggling a special re-renders with the new set applied to every
+      // Totals figure — enabledSpecials persists across renders (module
+      // state) so the player's chosen scenario survives switching relics.
+      // Goes through updateResult() (not a direct renderBuildSummary() call)
+      // so the share URL picks up the new `special` param too.
+      summaryEl.querySelectorAll('.special-checkbox').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const name = cb.dataset.specialName;
+          if (cb.checked) enabledSpecials.add(name); else enabledSpecials.delete(name);
+          updateResult();
+        });
+      });
     }
 
     function calculateProbabilityV2(quality, colorFactor) {
@@ -1687,6 +1903,11 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         }
         encodePanel(document.getElementById('build-regular-relics'), 'r', DATA);
         if (donIncluded) encodePanel(document.getElementById('build-don-relics'), 'd', DON_DATA);
+        // Toggled specials are keyed by effect NAME (see enabledSpecials'
+        // declaration) rather than by relic/slot id — the same named special
+        // can appear on more than one slot and always collapses to one
+        // checkbox, so there's no single slot position to encode it against.
+        enabledSpecials.forEach(name => sp.append('special', name));
       }
 
       if (I18N.locale !== 'en') sp.set('lang', I18N.locale);
@@ -1718,6 +1939,8 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           if (i != null) curseFilter.indices.add(i);
         });
       }
+
+      enabledSpecials = new Set(params.getAll('special'));
 
       document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
       document.querySelectorAll('[data-dlc]').forEach(b =>

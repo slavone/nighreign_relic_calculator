@@ -2314,3 +2314,115 @@ URL fresh and confirmed the restore reconstructs identical state
 (group/effect/count all round-trip, rendered HTML byte-identical).
 Added `build_count_label` ("Count:" / 回数： / 횟수:) to both locales.
 20/62/2587 across the three test suites, all passing.
+
+### Post-plan addendum: Task 32 — full Attack Power / Damage Negation
+redesign: Inventory + Totals sections, replacing the old inline nesting
+
+User provided a concrete YAML mockup (`ui.yaml`, kept untracked — their own
+working file) proposing a structural redesign: show each category's raw
+composition first (which selected effects fed it, and their individual
+values — "night_invaders: 1.07 * 1.07 * 1.07", not one flattened number),
+then a SEPARATE "Totals" block with the real grand-total per axis/category,
+where situational effects (crit, guard counter, vs-status-afflicted enemy,
+3+ weapon type equipped) are OFF by default and toggled on via checkbox so
+the player can explore a maximum-multiplier scenario without every proc
+being silently assumed active. Clarified three points before implementing
+(all "Recommended" answers): (1) the toggle applies only to genuinely
+situational/temporal universal-axis conditionals — spell-school and single-
+weapon-hit conditionals stay always-on, since their own total already means
+"while doing X"; (2) yes, track individual contributing values per axis/
+category rather than one pre-flattened baseline product; (3) yes, un-blend
+Evergaol/Night Invader (and any future universal-axis baseline source) back
+into separately-named rows in the inventory list, only combining them in
+Totals — this reverses part of Task 31's "All Damage" blending, which
+turned out to be the wrong call once real per-source distinctness mattered.
+
+**Engine (`computeBuildTotals`, index.html + tests/build.test.mjs,
+identical):** Added a second parameter, `enabledSpecialNames` (a Set,
+defaults to empty), and `baselineByName` — baseline-tier effects grouped by
+name with a count, mirroring how `conditionalByName` already works, purely
+so the summary can show sources rather than one flattened product;
+`damageBaseline`/`negationBaseline`/`categoryBaseline`/`resourceBaseline`
+are untouched and remain the single source of truth for every combined
+figure. From `baselineByName`, derived: `damageAxisBreakdown`/
+`negationAxisBreakdown` (single-axis-only contributors per axis — the
+universal axis's list is exactly Evergaol/Night Invader/etc., each keeping
+its own name), `categoryBaselineBreakdown` (sorcery/incantation),
+`resourceBreakdown`, and `damageMultiAxisGroups` (baseline entries touching
+2+ axes at once, e.g. Improved Affinity Attack Power, grouped by their axes
+signature so a shared source doesn't silently vanish into 4 axis rows with
+no trace of it). `damageUniversalOnly`/`negationUniversalOnly` (already
+existed) are now exactly the "specials" checkbox candidate list.
+`specialsMultiplier()` computes purely from each toggled special's own raw
+`value`/`count` (never another entry's `.combined`) — structurally
+preventing the Task-29 double-counting bug from being reintroduced, since
+there's no longer any nesting-of-combined-figures code path at all.
+`damageTotals`/`negationTotals`/`categoryTotals` are the real grand-totals:
+baseline value × the universal BASELINE sources × only the toggled
+specials. Every non-universal-only conditional entry (spell school,
+single-weapon hit) gets a `total` field the same way; universal-only
+entries get `total: undefined` (they're a checkbox, never a totaled row).
+Multi-axis groups get a `total` field too. **Removed entirely:**
+`nestUniversalOnly`/`attachUniversalNesting`/`damageAxisNested`/
+`negationAxisNested`/`nestedWithUniversal` — superseded by Totals, which
+combines the same information more completely (every toggled special at
+once, not one nested line per possible pairing).
+
+**Tests:** rewrote every test referencing the removed nesting fields to use
+`damageTotals`/`total`/the specials Set instead (verified both toggled-off
+and toggled-on behavior), relabeled the Task-29 double-counting regression
+test to confirm the new `specialsMultiplier()` design makes the bug class
+structurally impossible, and added new tests for the breakdown structures:
+multiple different-valued contributors merging into one axis's breakdown
+list, duplicate-name collapsing to one entry with a count, Affinity's
+multi-axis group excluding itself from the plain per-axis lists, and
+Evergaol/Night Invader surfacing as separately-named universal-axis rows
+(not blended). 20/86/2587 across the three suites.
+
+**Render (index.html only, no engine impact):** Split into
+`renderInventory*` (Section 1 — flat name/label + `fmtBreakdown()`, which
+repeats each contributor's value `count` times and joins with " × ", no
+cross-category combination) and `renderTotals*` (Section 2 — "All Damage"
+always shown as the reference point even at ×1; every other row only when
+"present", matching Section 1's own presence rule; an axis touched by a
+multi-axis group, e.g. Fire under Affinity, is shown NESTED under that
+group instead of ALSO as a separate top-level row, so the same number never
+displays twice; a per-bucket "Special Triggers" checkbox list, OFF by
+default, wired through `updateResult()` — not a bare `renderBuildSummary()`
+call — so toggling one also updates the share URL). `enabledSpecials`
+(module-level `Set`, keyed by effect NAME since duplicate selections of the
+same special already collapse to one entry with no single slot position to
+key a toggle off of) persists across renders and round-trips through a new
+repeated `special` URL param, read back in `restoreFromURL()`.
+Resource/Recovery and the flat/other lists are UNCHANGED — no "universal"
+cross-cutting concept applies there, so the Inventory/Totals split wasn't
+needed. Removed the now-fully-unused `renderBuildAxisRows` and the
+`universal` entry from `BUILD_AXIS_LABELS` (dead since Section 1 shows each
+universal source by name and Section 2 uses the new `build_all_dmg_label`
+key instead) along with its now-orphaned `build_axis_universal` locale
+strings.
+
+**Bug caught during verification:** the specials checkbox's `change`
+handler initially called `renderBuildSummary()` directly instead of
+`updateResult()` — re-rendered correctly but never updated the share URL,
+so a shared link silently dropped which specials were toggled on. Caught
+by the live jsdom round-trip test (toggle → grab share URL → load it fresh
+→ compare); fixed by routing through `updateResult()` like every other
+v3 input already does.
+
+**Live verification:** reconstructed a realistic scenario with real
+relic/DON ids (2 different Physical Attack Up tiers, Fire Attack Power Up
++4, 2 copies of Improved Affinity Attack Power +2, 3 copies of Improved
+Carian Sword Sorcery across 3 different relics, a single Katana hit
+conditional, the 3+ Katana Equipped special, the vs-poison special, and 3
+Night Invader kills via the count selector) and hand-verified every number
+in the rendered HTML against the formula by hand (e.g. Carian's total
+before/after toggling specials: `1.2250 × 1.21 × 1.4049 = ×2.083`, then
+`× 1.32 = ×2.749` — matched exactly). Confirmed Fire nests correctly under
+Affinity (fire-specific IS present) while Magic/Lightning/Holy don't (no
+axis-specific source selected for them), and that Sorcery's own category
+total is omitted (no "Improved Sorceries" baseline active) while Carian's
+row still totals correctly. Then verified the share-URL round-trip
+separately (see the bug above). New i18n keys `build_group_affinity`,
+`build_all_dmg_label`, `build_specials_title`, `build_totals_title` added
+to both locales.
