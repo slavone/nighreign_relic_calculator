@@ -197,17 +197,23 @@ function computeBuildTotals(effects, enabledSpecialNames) {
   // hit-type bonus) gets its own Totals figure too: its `combined` (which
   // already folds in its own axis/category baseline plus the universal
   // BASELINE) times whichever specials matching ITS OWN axis are toggled
-  // on. Specials themselves get no `total` of their own — they only ever
-  // appear as a checkbox, never a totaled row.
+  // on. A multi-axis entry (e.g. Improved Throwing Pot Damage, which matches
+  // Affinity's own magic+fire+lightning+holy signature) isn't bound to one
+  // specific element, so — like Affinity's own total — only universal
+  // specials apply, never an axis-specific one. Specials themselves get no
+  // `total` of their own — they only ever appear as a checkbox, never a
+  // totaled row.
   const damageSpecialsSet = new Set(damageSpecials);
   for (const group of ['sorcery', 'incantation', 'weapon', 'hitType', 'status']) {
     conditionalTree.damage[group] = conditionalTree.damage[group].map(c => ({
-      ...c, total: damageSpecialsSet.has(c) ? undefined : c.combined * specialsMultiplierFor(damageSpecials, false, c.axes[0]),
+      ...c, total: damageSpecialsSet.has(c) ? undefined
+        : c.combined * specialsMultiplierFor(damageSpecials, false, c.axes.length === 1 ? c.axes[0] : 'universal'),
     }));
   }
   const negationSpecialsSet = new Set(negationSpecials);
   conditionalTree.negation.status = conditionalTree.negation.status.map(c => ({
-    ...c, total: negationSpecialsSet.has(c) ? undefined : c.combined * specialsMultiplierFor(negationSpecials, true, c.axes[0]),
+    ...c, total: negationSpecialsSet.has(c) ? undefined
+      : c.combined * specialsMultiplierFor(negationSpecials, true, c.axes.length === 1 ? c.axes[0] : 'universal'),
   }));
 
   // Breakdown/inventory views: which selected effects fed each axis,
@@ -792,6 +798,26 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('grease items toggled on: physical total = physical baseline × grease value', rOn.damageTotals.physical, 1.05 * 1.1);
   test('grease items toggled on: affinity total stays UNTOUCHED (axis-specific special must not leak)', rOn.damageMultiAxisGroups[0].total, 1.1);
   test('grease items toggled on: magic total (an Affinity element) also stays untouched', rOn.damageTotals.magic, 1.1);
+}
+
+// User-requested: Improved Throwing Pot Damage deals Affinity damage (not
+// truly universal) — a MULTI-axis conditional matching Affinity's own
+// signature. Its own total shouldn't be bound to one specific element (no
+// axis-specific special should leak into it, matching how Affinity's own
+// group total works), but it SHOULD combine with whichever specific
+// elements are actually present (e.g. a Fire-specific bonus), since
+// combinedFor already loops over every one of its axes.
+{
+  const fireUp = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
+  const throwingPot = { tier: 'conditional', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], group: 'weapon', value: 1.15, condition: 'Throwing Pot throws only' };
+  const r = computeBuildTotals([
+    { name: 'Fire Attack Power Up +4', mul: fireUp },
+    { name: 'Improved Throwing Pot Damage', mul: throwingPot },
+  ]);
+  const potRow = r.conditionalTree.damage.weapon.find(c => c.name === 'Improved Throwing Pot Damage');
+  test('throwing pot combines with the active Fire-specific bonus', potRow.combined, 1.12 * 1.15);
+  test('throwing pot total (no specials toggled) equals its own combined', potRow.total, potRow.combined);
+  test('throwing pot is NOT a special (no checkbox)', r.damageSpecials.includes(potRow), false);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

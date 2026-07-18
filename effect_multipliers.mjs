@@ -201,8 +201,13 @@ export const EFFECT_MULTIPLIERS = {
   'Improved Glintstone and Gravity Stone Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['magic'], group: 'weapon', value: 1.3, condition: 'Stone/Gravity Stone throws only' },
   'Improved Throwing Knife Damage': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.15, condition: 'Throwing Knife throws only' },
   'Improved Throwing Knife Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.3, condition: 'Throwing Knife throws only' },
-  'Improved Throwing Pot Damage': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.15, condition: 'Throwing Pot throws only' },
-  'Improved Throwing Pot Damage +1': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.3, condition: 'Throwing Pot throws only' },
+  // User-confirmed: thrown pots deal Affinity damage (fire/magic/lightning/
+  // holy depending on the pot type), not truly universal damage — so this
+  // is a multi-axis weapon conditional matching Affinity's own signature,
+  // like Improved Affinity Attack Power but conditional instead of baseline.
+  // Not a "special" — selecting it already means "while throwing pots".
+  'Improved Throwing Pot Damage': { tier: 'conditional', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], group: 'weapon', value: 1.15, condition: 'Throwing Pot throws only' },
+  'Improved Throwing Pot Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], group: 'weapon', value: 1.3, condition: 'Throwing Pot throws only' },
   // ── DON curse: HP-threshold-dependent damage debuff (conditional) ────────
   'Lower Attack When Below Max HP': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' },
   // ── Damage Negation (baseline) ────────────────────────────────────────────

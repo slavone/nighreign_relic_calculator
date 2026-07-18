@@ -2761,3 +2761,68 @@ items — toggling grease items ON changed Physical from ×1.05 to ×1.155
 (1.05×1.1) while Affinity stayed at ×1.1, completely unchanged, confirming
 the axis-specific special never leaks into the cross-element figure.
 20/100/2739 across the three test suites, all passing.
+
+### Post-plan addendum: Task 38 — share button in v3, and multi-axis
+conditional entries (Improved Throwing Pot Damage → Affinity)
+
+User: "lets also add a share selection button to v3." The share URL was
+already kept live-synced in v3 (`buildShareURL()`/`history.replaceState`
+already ran on every `updateResult()` call) — only the visible button/copy
+UX was missing, hidden via `calcMode === 'v3' ? 'none' : ''` on `.share-row`
+everywhere it was set. Removed all 3 such lines (the two calc-mode-toggle
+handlers and the one in `restoreFromURL()`'s section-visibility block) so
+`.share-row` is always visible regardless of mode; extended
+`hasAnySelection()` with a `calcMode === 'v3'` branch
+(`getBuildEffects().length > 0`, reusing the same "is anything actually
+selected" signal used to gate the button in v1/v2) and split
+`updateResult()`'s v3 early-return into its own block that also toggles
+`#share-btn`'s visibility before calling `renderBuildSummary()`. The click
+handler itself needed zero changes — `buildShareURL()` already had a
+correct v3 branch. Verified live with `jsdom`: button hidden with nothing
+selected, appears once an effect is picked, and clicking it (with a
+stubbed `navigator.clipboard`, since jsdom doesn't implement it) copies
+the exact same URL `buildShareURL()` produces and shows "Copied!".
+
+Separately, user: "Improved throwing pot damage is listed as special
+trigger. they should be a subcategory under affinity damage, as pots do
+affinity dmg, affinity dmg multiplier shout apply to it and also fire
+affinity as well." Thrown pots (Fire Pots, Magic Pots, Lightning Pots, Holy
+Water Pots per the in-game item names) deal Affinity damage, not literally
+universal damage — reclassified `'Improved Throwing Pot Damage'`/`'+1'`
+from `special: true, axes: ['universal']` to a plain (non-special)
+conditional with `axes: ['magic', 'fire', 'lightning', 'holy']` — exactly
+Affinity's own multi-axis signature, the first CONDITIONAL entry to use
+one (previously only baseline entries, i.e. Improved Affinity Attack
+Power, were multi-axis).
+
+This needed real engine/render generalization, since everything built so
+far for conditional entries assumed exactly one axis:
+- `combinedFor()` needed no change at all — its factor-building loop
+  already iterated over every axis in `c.axes` generically, so a 4-axis
+  conditional already correctly combines with the universal baseline AND
+  every one of magic/fire/lightning/holy's own baselines wherever active
+  (verified: with only a Fire-specific baseline active, Throwing Pot's
+  `combined` came out to fire × pot, exactly as if it were a plain
+  2-factor multiply).
+- The `total` computation (both files) now picks the specials-scope axis
+  as `c.axes.length === 1 ? c.axes[0] : 'universal'` — a multi-axis entry
+  isn't bound to one element, so (like Affinity's own group total) only
+  toggled UNIVERSAL specials apply to it, never an axis-specific one.
+- `renderTotalsAxisRows` gained `conditionalsForGroup(groupAxes)`, matching
+  entries whose OWN axes signature (sorted, joined) equals a multi-axis
+  group's signature exactly — nesting them directly under that group's row
+  (Affinity), alongside (not instead of) the per-specific-element nested
+  lines Fire/Magic/etc. already get. `conditionalsFor(axis)` (single-axis
+  matching, used for Physical and for each specific Affinity element) was
+  left untouched — a multi-axis entry never matches its `axes.length ===
+  1` check, so there's no double-nesting risk between the two helpers.
+
+Added a build.test.mjs case confirming: Throwing Pot's `combined` folds in
+an active Fire-specific baseline (1.12 × 1.15), its `total` with nothing
+toggled equals its own `combined` (no leaked axis-specific special), and
+it's absent from `damageSpecials` (no longer a checkbox). Verified live:
+Fire Attack Power Up +4 (DON) + Throwing Pot Damage +1 — Totals shows
+"Affinity ×1" with TWO nested lines beneath it: "Fire ×1.12" (the plain
+axis figure) and "Improved Throwing Pot Damage +1 ×1.456" (1.12 × 1.3,
+its own combined total) — no more Special Triggers checkbox for it.
+20/103/2739 across the three test suites.

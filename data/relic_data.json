@@ -3675,10 +3675,12 @@
           "desc": "1.15× throwing pot damage",
           "mul": {
             "tier": "conditional",
-            "special": true,
             "bucket": "damage",
             "axes": [
-              "universal"
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
             ],
             "group": "weapon",
             "value": 1.15,
