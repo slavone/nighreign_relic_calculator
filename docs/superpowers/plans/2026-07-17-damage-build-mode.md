@@ -2426,3 +2426,86 @@ row still totals correctly. Then verified the share-URL round-trip
 separately (see the bug above). New i18n keys `build_group_affinity`,
 `build_all_dmg_label`, `build_specials_title`, `build_totals_title` added
 to both locales.
+
+### Post-plan addendum: Task 33 — Physical/Affinity always shown in Totals,
+"All Damage" row removed, negation-Affinity gap fixed, negation breakdown
+display bug fixed
+
+User feedback after seeing Task 32 live: "there are basically two types of
+dmg - physical and affinity" — so Totals should always show Physical and
+Affinity (even at ×1), with Fire/Magic/Lightning/Holy still only shown when
+they diverge from the general Affinity number (e.g. Giants' Flame relying
+on an elevated Fire total). Mid-turn follow-up: remove the separate "All
+Damage" row entirely, since Physical and Affinity now always show it
+folded in already — a third always-shown row for the same
+universal-baseline contribution was redundant now that both fundamental
+types already carry it.
+
+**Real bug found while implementing:** effect_multipliers.mjs has
+`'Improved Affinity Damage Negation'` (3 tiers, axes: magic+fire+lightning+
+holy, negation bucket) — a genuine multi-axis Affinity-type effect for
+Damage Negation, mirroring its Attack Power counterpart. Task 32 only built
+`damageMultiAxisGroups` for the `'damage'` bucket; selecting the negation
+version made it vanish from the summary ENTIRELY (not shown in Inventory
+OR Totals) — a real gap, not just a display preference. Generalized the
+one-off `damageMultiAxisGroups` builder into `buildMultiAxisGroups(bucket,
+universalBaseline, specialsMul)`, called once per bucket, producing both
+`damageMultiAxisGroups` and a new `negationMultiAxisGroups`. Also missing:
+`renderBuildSummary()`'s negation Inventory body never called
+`renderInventoryMultiAxisGroups` at all — added it.
+
+**"Always show Affinity" implementation:** rather than gate Affinity's
+presence in the returned list on whether any contributing effect was
+selected, `buildMultiAxisGroups` now unconditionally seeds a
+`{axes: AFFINITY_AXES, rows: []}` entry for the canonical
+magic+fire+lightning+holy signature before returning — same pattern as
+Physical (which needed no seeding, since `renderTotalsAxisRows` just always
+renders a Physical row now regardless of `axisBreakdown.physical`).
+`renderInventoryMultiAxisGroups` filters out empty-rows groups, since
+Section 1 must still only show what's actually selected — the "always
+show" rule is Totals-only, per the user's own scoping ("in totals... we
+should always show").
+
+**Second bug caught while writing the negation test:** the generic
+`buildMultiAxisGroups` combined rows via a straight `∏v` (correct for
+damage) — for negation, the combination rule is `∏(1−v)` (a "remaining
+damage" factor), matching how `negationBaseline` accumulates everywhere
+else. Fixed with an `isNegation` branch inside the reduce. Caught by a new
+test (`negation Affinity combined = (1 - 0.06)`) that initially failed with
+`got 0.06, expected 0.94` before the fix.
+
+**Third bug caught via reasoning before it shipped:** Section 1's new
+per-axis/multi-axis-group breakdown display (`fmtBreakdown`) was built to
+show each contributing effect's RAW `value` (correct for damage, where raw
+value === the multiplier). For negation, raw value (e.g. 0.10 for a
++10%-negation relic) and the actual combined "remaining damage" factor
+(0.90) are different numbers that don't compose the same way — showing
+"×0.100" per source would have been actively misleading, and multiplying
+two raw negation values together in the reader's head wouldn't reconstruct
+the real total. Threaded an `isNegation` flag through
+`fmtBreakdown`/`renderInventoryRow`/`renderInventoryAxisRows`/
+`renderInventoryMultiAxisGroups`, transforming each row to `(1 − value)` for
+display only when the bucket is negation — verified live: "Fire Damage
+Negation Up" (raw 0.10) now reads as "Fire: ×0.900" in Section 1, matching
+what Totals already correctly showed. `renderInventoryConditionalRow` (used
+for negation curses like "Reduced Damage Negation After Evading") was left
+untouched — it already showed raw values before this session's redesign
+too, so leaving it alone avoids scope creep on a pre-existing pattern the
+user didn't flag.
+
+**Removed:** the `allDmgRow` line and its `build_all_dmg_label` i18n key
+(both locales) — Physical and Affinity always carry the universal-baseline
+contribution now, so a separate "All Damage" row duplicated information
+with no reference point of its own.
+
+Added 8 new tests to `tests/build.test.mjs` covering: Affinity's placeholder
+entry when nothing is selected (both buckets), the real negation-Affinity
+effect populating `negationMultiAxisGroups` with the correct `(1−v)`
+combination. Verified live with `jsdom`: a build with only Carian Sword
+Sorcery selected (no baseline at all) correctly shows Physical ×1 and
+Affinity ×1 in Totals with no All Damage row; a negation build with Fire
+Damage Negation Up + Improved Affinity Damage Negation shows Section 1's
+"Fire: ×0.900" / "Affinity: ×0.940" and Totals' nested "Fire: ×0.846"
+(0.9 × 0.94, both sources sharing the same accumulator slot) correctly
+below the general "Affinity: ×0.940" row. 20/95/2587 across the three test
+suites, all passing.

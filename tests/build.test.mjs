@@ -221,23 +221,34 @@ function computeBuildTotals(effects, enabledSpecialNames) {
   for (const stat of RESOURCE_STATS) {
     resourceBreakdown[stat] = baselineRows(b => b.bucket === 'resource' && b.stat === stat);
   }
-  const damageMultiAxisGroups = [];
-  {
+  // Physical and Affinity (magic+fire+lightning+holy) are the two
+  // fundamental damage types — Affinity always gets a group entry here,
+  // even with zero contributing effects (combined 1), so the Totals section
+  // can always show it as a reference point next to Physical, the same way
+  // "All Damage" always shows regardless of whether anything actually
+  // populates it. Both damage AND negation have a real "Improved Affinity
+  // ..." baseline effect, so this applies to both.
+  const AFFINITY_AXES = ['fire', 'holy', 'lightning', 'magic'];
+  const AFFINITY_AXES_KEY = AFFINITY_AXES.join(',');
+  function buildMultiAxisGroups(bucket, universalBaseline, specialsMul) {
     const seen = new Map();
     for (const b of baselineByName.values()) {
-      if (b.bucket !== 'damage' || !b.axes || b.axes.length <= 1) continue;
+      if (b.bucket !== bucket || !b.axes || b.axes.length <= 1) continue;
       const key = [...b.axes].sort().join(',');
       if (!seen.has(key)) seen.set(key, { axes: b.axes, rows: [] });
       seen.get(key).rows.push({ name: b.name, value: b.value, count: b.count });
     }
-    for (const g of seen.values()) {
-      const combined = g.rows.reduce((p, r) => p * Math.pow(r.value, r.count), 1);
-      damageMultiAxisGroups.push({
-        axes: g.axes, rows: g.rows, combined,
-        total: combined * damageBaseline.universal * damageSpecialsMultiplier,
-      });
-    }
+    if (!seen.has(AFFINITY_AXES_KEY)) seen.set(AFFINITY_AXES_KEY, { axes: AFFINITY_AXES, rows: [] });
+    // Negation combines via ∏(1 − v) (a "remaining damage" factor), same as
+    // negationBaseline elsewhere — damage combines via a straight ∏v.
+    const isNegation = bucket === 'negation';
+    return [...seen.values()].map(g => {
+      const combined = g.rows.reduce((p, r) => p * Math.pow(isNegation ? (1 - r.value) : r.value, r.count), 1);
+      return { axes: g.axes, rows: g.rows, combined, total: combined * universalBaseline * specialsMul };
+    });
   }
+  const damageMultiAxisGroups = buildMultiAxisGroups('damage', damageBaseline.universal, damageSpecialsMultiplier);
+  const negationMultiAxisGroups = buildMultiAxisGroups('negation', negationBaseline.universal, negationSpecialsMultiplier);
 
   // Flat entries: description is regenerated from the template using the
   // SUMMED value across duplicates (not the original per-copy number), so
@@ -265,7 +276,7 @@ function computeBuildTotals(effects, enabledSpecialNames) {
     damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
     conditionalTree,
     damageAxisBreakdown, negationAxisBreakdown, categoryBaselineBreakdown, resourceBreakdown,
-    damageMultiAxisGroups,
+    damageMultiAxisGroups, negationMultiAxisGroups,
     damageUniversalOnly, negationUniversalOnly,
     damageTotals, negationTotals, categoryTotals,
     flat,
@@ -714,6 +725,33 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('sorcery category breakdown has 1 contributor', r.categoryBaselineBreakdown.sorcery.length, 1);
   test('sorcery category breakdown names the source', r.categoryBaselineBreakdown.sorcery[0].name, 'Improved Sorceries');
   test('incantation category breakdown stays empty', r.categoryBaselineBreakdown.incantation.length, 0);
+}
+
+// User-requested: Physical and Affinity are "the two fundamental damage
+// types" and should always have a Totals reference row, even with nothing
+// selected — mirroring how "All Damage" always shows. Affinity therefore
+// always gets a multi-axis group entry (combined=1, empty rows) even when
+// no Affinity-type effect is selected at all.
+{
+  const r = computeBuildTotals([]);
+  test('damageMultiAxisGroups always includes an Affinity entry, even empty', r.damageMultiAxisGroups.length, 1);
+  test('the empty Affinity entry has no contributing rows', r.damageMultiAxisGroups[0].rows.length, 0);
+  test('the empty Affinity entry has combined=1', r.damageMultiAxisGroups[0].combined, 1);
+  test('the empty Affinity entry totals to 1 (nothing else active)', r.damageMultiAxisGroups[0].total, 1);
+  test('negationMultiAxisGroups also always includes an Affinity entry', r.negationMultiAxisGroups.length, 1);
+  test('negation Affinity entry totals to 1 too', r.negationMultiAxisGroups[0].total, 1);
+}
+
+// Negation has a real "Improved Affinity Damage Negation" baseline effect
+// (axes: magic+fire+lightning+holy, like its Attack Power counterpart) —
+// it must populate negationMultiAxisGroups the same way, not just damage's.
+{
+  const affinityNeg = { tier: 'baseline', bucket: 'negation', axes: ['magic', 'fire', 'lightning', 'holy'], value: 0.06 };
+  const r = computeBuildTotals([{ name: 'Improved Affinity Damage Negation', mul: affinityNeg }]);
+  test('negation Affinity group has 1 contributing row', r.negationMultiAxisGroups[0].rows.length, 1);
+  test('negation Affinity group names the source', r.negationMultiAxisGroups[0].rows[0].name, 'Improved Affinity Damage Negation');
+  // Negation combines via (1 − v), same as any other negation baseline.
+  test('negation Affinity combined = (1 - 0.06)', r.negationMultiAxisGroups[0].combined, 0.94);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

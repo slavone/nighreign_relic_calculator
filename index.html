@@ -626,23 +626,34 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       for (const stat of BUILD_RESOURCE_STATS) {
         resourceBreakdown[stat] = baselineRows(b => b.bucket === 'resource' && b.stat === stat);
       }
-      const damageMultiAxisGroups = [];
-      {
+      // Physical and Affinity (magic+fire+lightning+holy) are the two
+      // fundamental damage types — Affinity always gets a group entry here,
+      // even with zero contributing effects (combined 1), so the Totals
+      // section can always show it as a reference point next to Physical,
+      // the same way "All Damage" always shows regardless of whether
+      // anything actually populates it. Both damage AND negation have a real
+      // "Improved Affinity ..." baseline effect, so this applies to both.
+      const AFFINITY_AXES = ['fire', 'holy', 'lightning', 'magic'];
+      const AFFINITY_AXES_KEY = AFFINITY_AXES.join(',');
+      function buildMultiAxisGroups(bucket, universalBaseline, specialsMul) {
         const seen = new Map();
         for (const b of baselineByName.values()) {
-          if (b.bucket !== 'damage' || !b.axes || b.axes.length <= 1) continue;
+          if (b.bucket !== bucket || !b.axes || b.axes.length <= 1) continue;
           const key = [...b.axes].sort().join(',');
           if (!seen.has(key)) seen.set(key, { axes: b.axes, rows: [] });
           seen.get(key).rows.push({ name: b.name, value: b.value, count: b.count });
         }
-        for (const g of seen.values()) {
-          const combined = g.rows.reduce((p, r) => p * Math.pow(r.value, r.count), 1);
-          damageMultiAxisGroups.push({
-            axes: g.axes, rows: g.rows, combined,
-            total: combined * damageBaseline.universal * damageSpecialsMultiplier,
-          });
-        }
+        if (!seen.has(AFFINITY_AXES_KEY)) seen.set(AFFINITY_AXES_KEY, { axes: AFFINITY_AXES, rows: [] });
+        // Negation combines via ∏(1 − v) (a "remaining damage" factor), same
+        // as negationBaseline elsewhere — damage combines via a straight ∏v.
+        const isNegation = bucket === 'negation';
+        return [...seen.values()].map(g => {
+          const combined = g.rows.reduce((p, r) => p * Math.pow(isNegation ? (1 - r.value) : r.value, r.count), 1);
+          return { axes: g.axes, rows: g.rows, combined, total: combined * universalBaseline * specialsMul };
+        });
       }
+      const damageMultiAxisGroups = buildMultiAxisGroups('damage', damageBaseline.universal, damageSpecialsMultiplier);
+      const negationMultiAxisGroups = buildMultiAxisGroups('negation', negationBaseline.universal, negationSpecialsMultiplier);
 
       // Flat entries: description is regenerated from the template using the
       // SUMMED value across duplicates (not the original per-copy number), so
@@ -674,7 +685,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         damageBaseline, negationBaseline, categoryBaseline, resourceBaseline,
         conditionalTree,
         damageAxisBreakdown, negationAxisBreakdown, categoryBaselineBreakdown, resourceBreakdown,
-        damageMultiAxisGroups,
+        damageMultiAxisGroups, negationMultiAxisGroups,
         damageUniversalOnly, negationUniversalOnly,
         damageTotals, negationTotals, categoryTotals,
         flat,
@@ -684,8 +695,8 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
 
     // No 'universal' entry here — that axis never gets a plain per-element
     // label. Section 1 shows each universal-axis baseline source by its own
-    // effect name (never blended); Section 2's Totals shows it as "All
-    // Damage" via build_all_dmg_label instead.
+    // effect name (never blended); Section 2's Totals folds it directly into
+    // the always-shown Physical/Affinity figures instead of a separate row.
     const BUILD_AXIS_LABELS = {
       physical: () => I18N.t('build_axis_physical', 'Physical'),
       magic: () => I18N.t('build_axis_magic', 'Magic'),
@@ -782,31 +793,38 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     // repeated `count` times before joining, so 2 different relics feeding
     // Fire read as "×1.12 × ×1.1", and 3 copies of the same effect read as
     // "×1.07 × ×1.07 × ×1.07" — the literal contributing numbers, not one
-    // already-flattened product.
-    function fmtBreakdown(rows) {
-      return rows.flatMap(row => Array(row.count).fill(row.value)).map(fmtMul).join(' × ');
+    // already-flattened product. Negation baseline values are stored RAW
+    // (e.g. 0.10 for a +10%-negation relic) but combine via (1 − v), not by
+    // multiplying raw values together — so `isNegation` displays each row as
+    // its own (1 − v) "remaining damage" factor instead, matching what
+    // actually gets multiplied to produce the combined total.
+    function fmtBreakdown(rows, isNegation) {
+      return rows.flatMap(row => Array(row.count).fill(isNegation ? (1 - row.value) : row.value)).map(fmtMul).join(' × ');
     }
-    function renderInventoryRow(label, rows, conditionText) {
+    function renderInventoryRow(label, rows, conditionText, isNegation) {
       const conditionSuffix = conditionText ? ` <em>(${conditionText})</em>` : '';
-      return `<div class="build-axis-row"><span>${label}${conditionSuffix}</span><span>${fmtBreakdown(rows)}</span></div>`;
+      return `<div class="build-axis-row"><span>${label}${conditionSuffix}</span><span>${fmtBreakdown(rows, isNegation)}</span></div>`;
     }
-    function renderInventoryAxisRows(axisBreakdown) {
+    function renderInventoryAxisRows(axisBreakdown, isNegation) {
       return BUILD_AXES.filter(axis => axisBreakdown[axis].length > 0).map(axis => {
         if (axis === 'universal') {
           // Each universal-axis BASELINE source (Evergaol/Night Invader
           // kills, etc.) keeps its own identity here — never blended into
-          // one generic "All Damage" row — so it's clear exactly where it
-          // came from.
+          // one generic row — so it's clear exactly where it came from.
           return axisBreakdown.universal.map(row => {
             const countSuffix = row.count > 1 ? ` ×${row.count}` : '';
-            return renderInventoryRow(I18N.effectName(row.name) + countSuffix, [row]);
+            return renderInventoryRow(I18N.effectName(row.name) + countSuffix, [row], undefined, isNegation);
           }).join('');
         }
-        return renderInventoryRow(BUILD_AXIS_LABELS[axis](), axisBreakdown[axis]);
+        return renderInventoryRow(BUILD_AXIS_LABELS[axis](), axisBreakdown[axis], undefined, isNegation);
       }).join('');
     }
-    function renderInventoryMultiAxisGroups(groups) {
-      return groups.map(g => renderInventoryRow(multiAxisLabel(g.axes), g.rows)).join('');
+    function renderInventoryMultiAxisGroups(groups, isNegation) {
+      // Affinity always has an entry in `groups` (even with 0 contributing
+      // rows) so the Totals section can always show it — Section 1 only
+      // shows what's actually selected, so empty placeholders are skipped.
+      return groups.filter(g => g.rows.length > 0)
+        .map(g => renderInventoryRow(multiAxisLabel(g.axes), g.rows, undefined, isNegation)).join('');
     }
     function renderInventoryConditionalRow(c) {
       const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
@@ -823,17 +841,21 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     }
 
     // Section 2 ("Totals"): the REAL grand-total multiplier per axis/
-    // category — baseline value × the baseline All-Damage sources × only
-    // the situational specials currently toggled on below. "All Damage" is
-    // always shown (even at ×1) as the reference point; every other row
-    // only appears when actually present, matching Section 1's rule. An
-    // axis touched by a multi-axis group (e.g. Fire under Affinity) is
-    // shown NESTED under that group instead of also as a separate top-level
-    // row, so the same number never appears twice.
+    // category — baseline value × the baseline All-Damage sources (Evergaol/
+    // Night Invader kills, etc.) × only the situational specials currently
+    // toggled on below. There's no separate "All Damage" row — every damage
+    // type reduces to either Physical or Affinity (magic/fire/lightning/
+    // holy), so those two are always shown (even at ×1) as the fundamental
+    // reference points, already including any universal-baseline/specials
+    // contribution. Every OTHER axis only appears when actually present,
+    // matching Section 1's rule, and shows NESTED under Affinity (e.g. Fire,
+    // when it's higher than the general Affinity number thanks to its own
+    // bonus) instead of also as a separate top-level row, so the same number
+    // never appears twice.
     function renderTotalsAxisRows(totals, axisBreakdown, multiAxisGroups) {
       const touchedByGroup = new Set(multiAxisGroups.flatMap(g => g.axes));
-      const allDmgRow = `<div class="build-axis-row"><span>${I18N.t('build_all_dmg_label', 'All Damage')}</span><span>${fmtMul(totals.universal)}</span></div>`;
-      const axisRows = BUILD_AXES.filter(axis => axis !== 'universal' && axisBreakdown[axis].length > 0 && !touchedByGroup.has(axis))
+      const physicalRow = `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS.physical()}</span><span>${fmtMul(totals.physical)}</span></div>`;
+      const axisRows = BUILD_AXES.filter(axis => axis !== 'universal' && axis !== 'physical' && axisBreakdown[axis].length > 0 && !touchedByGroup.has(axis))
         .map(axis => `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS[axis]()}</span><span>${fmtMul(totals[axis])}</span></div>`)
         .join('');
       const groupRows = multiAxisGroups.map(g => {
@@ -842,7 +864,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         ).join('');
         return `<div class="build-axis-row"><span>${multiAxisLabel(g.axes)}</span><span>${fmtMul(g.total)}</span></div>${nested}`;
       }).join('');
-      return allDmgRow + axisRows + groupRows;
+      return physicalRow + axisRows + groupRows;
     }
     function renderTotalsConditionalRow(c) {
       const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
@@ -965,10 +987,11 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         </div>` : ''}
       </div>`;
 
-      const negationInventoryBody = renderInventoryAxisRows(r.negationAxisBreakdown)
+      const negationInventoryBody = renderInventoryAxisRows(r.negationAxisBreakdown, true)
+        + renderInventoryMultiAxisGroups(r.negationMultiAxisGroups, true)
         + renderInventorySubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.negation.status);
       const negationTotalsBody = renderSpecialsCheckboxes(r.negationUniversalOnly)
-        + renderTotalsAxisRows(r.negationTotals, r.negationAxisBreakdown, [])
+        + renderTotalsAxisRows(r.negationTotals, r.negationAxisBreakdown, r.negationMultiAxisGroups)
         + renderTotalsSubgroup(BUILD_GROUP_LABELS.status, undefined, r.conditionalTree.negation.status);
       const negationHasSelections = !!negationInventoryBody;
       const negationHtml = `<div class="build-summary-section">

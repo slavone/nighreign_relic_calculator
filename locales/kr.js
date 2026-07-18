@@ -21,7 +21,6 @@ window.__LOCALE_KR__ = {
     "build_category_sorcery": "마법",
     "build_category_incantation": "기도",
     "build_group_affinity": "전속성",
-    "build_all_dmg_label": "전체 피해",
     "build_specials_title": "특수 트리거",
     "build_totals_title": "합계",
     "build_none_selected": "아직 선택된 효과가 없습니다",

@@ -21,7 +21,6 @@ window.__LOCALE_JP__ = {
     "build_category_sorcery": "魔術",
     "build_category_incantation": "祈祷",
     "build_group_affinity": "全属性",
-    "build_all_dmg_label": "全ダメージ",
     "build_specials_title": "特殊トリガー",
     "build_totals_title": "合計",
     "build_none_selected": "まだ効果が選択されていません",
