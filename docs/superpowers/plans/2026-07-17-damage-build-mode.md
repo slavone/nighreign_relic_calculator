@@ -2826,3 +2826,70 @@ Fire Attack Power Up +4 (DON) + Throwing Pot Damage +1 — Totals shows
 axis figure) and "Improved Throwing Pot Damage +1 ×1.456" (1.12 × 1.3,
 its own combined total) — no more Special Triggers checkbox for it.
 20/103/2739 across the three test suites.
+
+### Post-plan addendum: Task 39 — translated condition text (jp/kr)
+
+User pasted a jp-locale v3 URL and reported missing translations. The
+effect/curse NAMES on that page were all already translated (verified by
+grep before assuming anything) — the actual gap was every `condition`
+string (e.g. "On critical hits", "vs frostbite-afflicted enemies"),
+rendered raw and untranslated in every build-mode row since Task 5, since
+`c.condition` was always interpolated directly with no `I18N` wrapper at
+all. Counted the real gap by diffing every distinct `condition` value
+across the regenerated `data/relic_data.json` + `data/don_relic_data.json`
+against a from-scratch translation map: 76 distinct conditions in the
+live data, none previously translatable.
+
+Two of those 76 are template-generated per weapon type (`${w.single} hits
+only`, `3+ ${w.plural} Equipped`, expanding to 48 concrete strings across
+24 weapon types) — translating all 48 by hand would drown out the other
+~30 conditions with near-duplicate entries differing only by weapon name.
+Instead added a small `weaponTypes` map (English weapon name → translated
+name, both singular and plural keys, reusing the exact terminology already
+established in each locale's existing `Improved <Weapon> Attack Power`
+name translations rather than inventing new terms) plus a 2-entry
+`conditionTemplates` map (`hitsOnly`, `equipped3Plus`) that the two
+patterns get rebuilt from at lookup time.
+
+New `I18N.condition(en)` method in `i18n.js`: direct lookup in
+`strings.conditions` first; if that misses, regex-matches the two weapon
+templates and substitutes the weapon name into the matching translated
+template; otherwise falls back to the raw English string (same fallback
+philosophy as `effectName`/`groupName`). Wrapped every one of the 8 places
+in `index.html` that interpolated `c.condition`/`f.condition` directly
+(the resource-bucket `renderConditionalRow`, `renderInventoryConditionalRow`,
+both `renderTotalsAxisRows` nesting helpers, `renderTotalsConditionalRow`,
+`renderSpecialsCheckboxes`, and the flat-tier `conditionSuffix` in
+`renderBuildFlatList`) with `I18N.condition(...)`.
+
+Populated `locales/jp.js`/`locales/kr.js` with all 32 static condition
+translations (31 + one caught by an automated coverage check — "Casting
+Giants' Flame incantations only" was missed on the first pass, since school
+names were transcribed from a hand-read list rather than generated
+programmatically from the effect_multipliers.mjs source; a script diffing
+`data/*.json`'s actual distinct conditions against the new translation
+maps caught it immediately, before it shipped) plus the 47-entry
+`weaponTypes` map and 2 `conditionTemplates`, sourcing terminology from
+each locale's EXISTING translated effect names for consistency (e.g. JP
+"冷気"/"毒"/"腐敗" for frostbite/poison/rot, already used in the
+frostbite/poison/rot attack-power effect names; KR "치명적인 일격" for
+"critical hits", already used in "Improved Critical Hits"'s own
+translation) rather than inventing new vocabulary. Flat-tier descriptions
+(e.g. "−80 all status resistances") remain English-only, unchanged — this
+matches the project's existing, deliberate convention that only effect/
+group names, conditions, and UI labels get translated, not free-text
+descriptions.
+
+Verified 100% coverage programmatically before considering this done: a
+script loaded both locale files, computed every distinct `condition`
+string actually present in the regenerated data (76), and confirmed each
+either had a direct `conditions` entry or matched a weapon template with a
+`weaponTypes` entry — 0 missing for both jp and kr. Verified live with
+`jsdom` against the user's exact reported URL (mode=don, several damage/
+negation/resource effects and 2 curses) in both jp and kr: every condition
+in the rendered summary now reads in the target language (e.g. "獣の祈祷
+使用時のみ", "짐승 기도 사용 시에만" for "Casting Bestial incantations
+only"), with no leftover English condition text anywhere on the page.
+20/103/2739 across the three test suites (no engine changes this task, so
+no test additions needed — this was purely i18n data + a render-layer
+wrapper).

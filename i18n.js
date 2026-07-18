@@ -51,6 +51,25 @@ const I18N = {
     return this.strings.effects?.[en]?.desc ?? fb;
   },
 
+  // Build-mode condition text (e.g. "On critical hits", "Katana hits
+  // only"). Most conditions are static strings looked up directly; the two
+  // per-weapon-type conditions (generated from a template in
+  // effect_multipliers.mjs, one per weapon) are matched by pattern and
+  // rebuilt from a translated template + a translated weapon-type name,
+  // rather than needing one translated entry per weapon per condition.
+  condition(en) {
+    if (this.strings.conditions?.[en]) return this.strings.conditions[en];
+    let m = en.match(/^(.+) hits only$/);
+    if (m && this.strings.weaponTypes?.[m[1]] && this.strings.conditionTemplates?.hitsOnly) {
+      return this.strings.conditionTemplates.hitsOnly.replace('{w}', this.strings.weaponTypes[m[1]]);
+    }
+    m = en.match(/^3\+ (.+) Equipped$/);
+    if (m && this.strings.weaponTypes?.[m[1]] && this.strings.conditionTemplates?.equipped3Plus) {
+      return this.strings.conditionTemplates.equipped3Plus.replace('{w}', this.strings.weaponTypes[m[1]]);
+    }
+    return en;
+  },
+
   groupName(en) {
     return this.strings.groups?.[en] ?? en;
   },

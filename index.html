@@ -774,7 +774,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         ? `<div class="build-conditional-combined">${c.factors.map(f => `${factorLabel(f, ownName)} ${fmtMul(f.value)}`).join(' × ')} = ${fmtMul(c.combined)}</div>`
         : '';
       return `<div class="build-conditional-item">
-        <div>${ownName}${countSuffix} — ${fmtMul(c.value)}${eachSuffix} <em>(${c.condition})</em></div>
+        <div>${ownName}${countSuffix} — ${fmtMul(c.value)}${eachSuffix} <em>(${I18N.condition(c.condition)})</em></div>
         ${combinedRow}
       </div>`;
     }
@@ -846,7 +846,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     }
     function renderInventoryConditionalRow(c) {
       const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
-      return renderInventoryRow(I18N.effectName(c.name) + countSuffix, [{ value: c.value, count: c.count }], c.condition);
+      return renderInventoryRow(I18N.effectName(c.name) + countSuffix, [{ value: c.value, count: c.count }], I18N.condition(c.condition));
     }
     function renderInventorySubgroup(titleFn, categoryBreakdown, rows) {
       const hasCategory = categoryBreakdown && categoryBreakdown.length > 0;
@@ -886,7 +886,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         return axisConditionals.filter(c => c.axes.length === 1 && c.axes[0] === axis && c.total !== undefined)
           .map(c => {
             const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
-            return `<div class="build-axis-nested"><span>${I18N.effectName(c.name)}${countSuffix} <em>(${c.condition})</em></span><span>${fmtMul(c.total)}</span></div>`;
+            return `<div class="build-axis-nested"><span>${I18N.effectName(c.name)}${countSuffix} <em>(${I18N.condition(c.condition)})</em></span><span>${fmtMul(c.total)}</span></div>`;
           }).join('');
       }
       function conditionalsForGroup(groupAxes) {
@@ -894,7 +894,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         return axisConditionals.filter(c => c.total !== undefined && c.axes.length > 1 && [...c.axes].sort().join(',') === key)
           .map(c => {
             const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
-            return `<div class="build-axis-nested"><span>${I18N.effectName(c.name)}${countSuffix} <em>(${c.condition})</em></span><span>${fmtMul(c.total)}</span></div>`;
+            return `<div class="build-axis-nested"><span>${I18N.effectName(c.name)}${countSuffix} <em>(${I18N.condition(c.condition)})</em></span><span>${fmtMul(c.total)}</span></div>`;
           }).join('');
       }
       const physicalRow = `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS.physical()}</span><span>${fmtMul(totals.physical)}</span></div>${conditionalsFor('physical')}`;
@@ -911,7 +911,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
     }
     function renderTotalsConditionalRow(c) {
       const countSuffix = c.count > 1 ? ` ×${c.count}` : '';
-      return `<div class="build-axis-row"><span>${I18N.effectName(c.name)}${countSuffix} <em>(${c.condition})</em></span><span>${fmtMul(c.total)}</span></div>`;
+      return `<div class="build-axis-row"><span>${I18N.effectName(c.name)}${countSuffix} <em>(${I18N.condition(c.condition)})</em></span><span>${fmtMul(c.total)}</span></div>`;
     }
     function renderTotalsSubgroup(titleFn, categoryTotal, rows) {
       // Universal-only specials carry no `total` of their own (folding a
@@ -939,7 +939,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         const checked = enabledSpecials.has(c.name) ? ' checked' : '';
         return `<label class="build-special-row">
           <input type="checkbox" class="special-checkbox" data-special-name="${c.name}"${checked}>
-          <span>${I18N.effectName(c.name)}${countSuffix} <em>(${c.condition})</em> ${fmtMul(c.value)}</span>
+          <span>${I18N.effectName(c.name)}${countSuffix} <em>(${I18N.condition(c.condition)})</em> ${fmtMul(c.value)}</span>
         </label>`;
       }).join('');
       return `<div class="build-subgroup">
@@ -959,7 +959,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       // as a plain row, same as a resource-stat row — no subgroup wrapper.
       return flat.map(f => {
         const countSuffix = f.count > 1 ? ` ×${f.count}` : '';
-        const conditionSuffix = f.condition ? ` <em>(${f.condition})</em>` : '';
+        const conditionSuffix = f.condition ? ` <em>(${I18N.condition(f.condition)})</em>` : '';
         // Pool-based entries (e.g. "Vigor", combining "Vigor +1" and the
         // curse "Reduced Vigor and Arcane") carry a `pool` key instead of a
         // translatable effect `name` — I18N.effectName() only knows real
