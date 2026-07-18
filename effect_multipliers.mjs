@@ -58,6 +58,18 @@
 //            existing per-occurrence multiply.
 // maxCount:  required alongside variableCount — the highest count the count selector
 //            offers, i.e. the real in-game cap for that trigger (confirmed with the user).
+// special:   conditional tier only, optional boolean (true or absent — never false). Marks
+//            a genuinely SITUATIONAL/temporal trigger (vs-a-status enemy, 3+ weapon type
+//            equipped, a grease-item window, a curse tied to evading/flasks/low HP, etc.)
+//            that may or may not be active at any given moment — as opposed to a spell-
+//            school, single-weapon-hit, or hit-type conditional (crit, guard counter, first
+//            light attack), which just means "while doing X", a stable playstyle choice, not
+//            a fluctuating state. Specials get a checkbox in the build-mode UI (off by
+//            default) instead of an always-on totaled row; toggling one folds it into every
+//            Totals figure that shares its axis (or every axis, if truly universal — see
+//            axes below). NOT implied by axis: a special can be axis-specific (grease items
+//            is physical-only) — confirmed per-effect with the user, not inferred from axis
+//            or group.
 //
 // Effect names not present here are treated as Flat/Other by the build-mode UI — that's
 // the safe default for anything not classified (flat stat bonuses, resistances, flavor
@@ -165,36 +177,34 @@ export const EFFECT_MULTIPLIERS = {
   // applying to all damage types, so these are physical-axis conditionals
   // like a weapon-specific hit, not universal-only.
   'Improved Critical Hits': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.18, condition: 'On critical hits' },
-  'Taking attacks improves attack power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.15, condition: '10s after taking a hit' },
+  'Taking attacks improves attack power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.15, condition: '10s after taking a hit' },
   'Improved Guard Counters': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.17, condition: 'On guard counters' },
   'Improved Guard Counters +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.25, condition: 'On guard counters' },
   'Improved Guard Counters +2': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.29, condition: 'On guard counters' },
-  'Physical attack power increases after using grease items': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.1, condition: '30s after using grease items' },
-  'Physical attack power increases after using grease items +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.17, condition: '30s after using grease items' },
-  'Physical attack power increases after using grease items +2': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.2, condition: '30s after using grease items' },
-  'Attack power up when facing frostbite-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs frostbite-afflicted enemies' },
-  'Attack power up when facing frostbite-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs frostbite-afflicted enemies' },
-  'Attack power up when facing frostbite-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs frostbite-afflicted enemies' },
-  'Attack power up when facing poison-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs poison-afflicted enemies' },
-  'Attack power up when facing poison-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs poison-afflicted enemies' },
-  'Attack power up when facing poison-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs poison-afflicted enemies' },
-  'Attack power up when facing scarlet rot-afflicted enemy': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs rot-afflicted enemies' },
-  'Attack power up when facing scarlet rot-afflicted enemy +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs rot-afflicted enemies' },
-  'Attack power up when facing scarlet rot-afflicted enemy +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs rot-afflicted enemies' },
-  'Sleep in Vicinity Improves Attack Power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.12, condition: 'After sleep procs nearby' },
-  'Sleep in Vicinity Improves Attack Power +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.22, condition: 'After sleep procs nearby' },
-  'Madness in Vicinity Improves Attack Power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.12, condition: 'After madness procs nearby' },
-  'Madness in Vicinity Improves Attack Power +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.22, condition: 'After madness procs nearby' },
+  'Physical attack power increases after using grease items': { tier: 'conditional', special: true, bucket: 'damage', axes: ['physical'], group: 'status', value: 1.1, condition: '30s after using grease items' },
+  'Physical attack power increases after using grease items +1': { tier: 'conditional', special: true, bucket: 'damage', axes: ['physical'], group: 'status', value: 1.17, condition: '30s after using grease items' },
+  'Physical attack power increases after using grease items +2': { tier: 'conditional', special: true, bucket: 'damage', axes: ['physical'], group: 'status', value: 1.2, condition: '30s after using grease items' },
+  'Attack power up when facing frostbite-afflicted enemy': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs frostbite-afflicted enemies' },
+  'Attack power up when facing frostbite-afflicted enemy +1': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs frostbite-afflicted enemies' },
+  'Attack power up when facing frostbite-afflicted enemy +2': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs frostbite-afflicted enemies' },
+  'Attack power up when facing poison-afflicted enemy': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs poison-afflicted enemies' },
+  'Attack power up when facing poison-afflicted enemy +1': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs poison-afflicted enemies' },
+  'Attack power up when facing poison-afflicted enemy +2': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs poison-afflicted enemies' },
+  'Attack power up when facing scarlet rot-afflicted enemy': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs rot-afflicted enemies' },
+  'Attack power up when facing scarlet rot-afflicted enemy +1': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.16, condition: 'vs rot-afflicted enemies' },
+  'Attack power up when facing scarlet rot-afflicted enemy +2': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.2, condition: 'vs rot-afflicted enemies' },
+  'Sleep in Vicinity Improves Attack Power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.12, condition: 'After sleep procs nearby' },
+  'Sleep in Vicinity Improves Attack Power +1': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.22, condition: 'After sleep procs nearby' },
+  'Madness in Vicinity Improves Attack Power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.12, condition: 'After madness procs nearby' },
+  'Madness in Vicinity Improves Attack Power +1': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.22, condition: 'After madness procs nearby' },
   'Improved Glintstone and Gravity Stone Damage': { tier: 'conditional', bucket: 'damage', axes: ['magic'], group: 'weapon', value: 1.15, condition: 'Stone/Gravity Stone throws only' },
   'Improved Glintstone and Gravity Stone Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['magic'], group: 'weapon', value: 1.3, condition: 'Stone/Gravity Stone throws only' },
   'Improved Throwing Knife Damage': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.15, condition: 'Throwing Knife throws only' },
   'Improved Throwing Knife Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.3, condition: 'Throwing Knife throws only' },
-  'Improved Throwing Pot Damage': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.15, condition: 'Throwing Pot throws only' },
-  'Improved Throwing Pot Damage +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.3, condition: 'Throwing Pot throws only' },
-
+  'Improved Throwing Pot Damage': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.15, condition: 'Throwing Pot throws only' },
+  'Improved Throwing Pot Damage +1': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.3, condition: 'Throwing Pot throws only' },
   // ── DON curse: HP-threshold-dependent damage debuff (conditional) ────────
-  'Lower Attack When Below Max HP': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' },
-
+  'Lower Attack When Below Max HP': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' },
   // ── Damage Negation (baseline) ────────────────────────────────────────────
   'Fire Damage Negation Up': { tier: 'baseline', bucket: 'negation', axes: ['fire'], value: 0.10 },
   'Magic Damage Negation Up': { tier: 'baseline', bucket: 'negation', axes: ['magic'], value: 0.10 },
@@ -215,15 +225,14 @@ export const EFFECT_MULTIPLIERS = {
   'Improved Affinity Damage Negation +2': { tier: 'baseline', bucket: 'negation', axes: ['magic', 'fire', 'lightning', 'holy'], value: 0.12 },
 
   // ── Damage Negation (conditional: time-window or state-dependent) ────────
-  'Improved Poise & Damage Negation When Knocked Back by Damage': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: 0.20, condition: '20s after being hit' },
-  'Reduced Damage Negation After Evading': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'Right after evading' },
-  'Reduced Damage Negation for Flask Usages': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'While using flasks' },
-  'Improved Damage Negation at Low HP': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: 0.16, condition: 'While HP is below 40%' },
+  'Improved Poise & Damage Negation When Knocked Back by Damage': { tier: 'conditional', special: true, bucket: 'negation', axes: ['universal'], group: 'status', value: 0.20, condition: '20s after being hit' },
+  'Reduced Damage Negation After Evading': { tier: 'conditional', special: true, bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'Right after evading' },
+  'Reduced Damage Negation for Flask Usages': { tier: 'conditional', special: true, bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'While using flasks' },
+  'Improved Damage Negation at Low HP': { tier: 'conditional', special: true, bucket: 'negation', axes: ['universal'], group: 'status', value: 0.16, condition: 'While HP is below 40%' },
   // Two-stage curse (−23% then escalating to −35% on repeated rolls within
   // 15s) — tracked at its worst-case (escalated) value, same "Actions"
   // treatment as every other timing-window negation curse above.
-  'Repeated Evasions Lower Damage Negation': { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.35, condition: '15s after repeated evasions (escalates from −23% to −35%)' },
-
+  'Repeated Evasions Lower Damage Negation': { tier: 'conditional', special: true, bucket: 'negation', axes: ['universal'], group: 'status', value: -0.35, condition: '15s after repeated evasions (escalates from −23% to −35%)' },
   // ── Flat/additive DON curses ──────────────────────────────────────────────
   // Duplicates SUM (see `flat` tier note above), not multiply — two copies of
   // "All Resistances Down" really do mean −160, not −80 squared or ×2 tagged
@@ -357,7 +366,7 @@ for (const w of WEAPON_TYPES) {
     condition: `${w.single} hits only`,
   };
   EFFECT_MULTIPLIERS[`Improved Attack Power with 3+ ${w.plural} Equipped`] = {
-    tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: groupValue,
+    tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'weapon', value: groupValue,
     condition: `3+ ${w.plural} Equipped`,
   };
 }

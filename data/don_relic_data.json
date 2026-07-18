@@ -221,6 +221,7 @@
           "desc": "1.2× damage with 3+ Axes equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -238,6 +239,7 @@
           "desc": "1.1× damage with 3+ Bows equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -255,6 +257,7 @@
           "desc": "1.2× damage with 3+ Claws equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -272,6 +275,7 @@
           "desc": "1.2× damage with 3+ Colossal Swords equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -289,6 +293,7 @@
           "desc": "1.2× damage with 3+ Colossal Weapons equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -306,6 +311,7 @@
           "desc": "1.2× damage with 3+ Curved Greatswords equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -323,6 +329,7 @@
           "desc": "1.2× damage with 3+ Curved Swords equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -340,6 +347,7 @@
           "desc": "1.2× damage with 3+ Daggers equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -357,6 +365,7 @@
           "desc": "1.2× damage with 3+ Fists equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -374,6 +383,7 @@
           "desc": "1.2× damage with 3+ Flails equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -391,6 +401,7 @@
           "desc": "1.2× damage with 3+ Great Hammers equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -408,6 +419,7 @@
           "desc": "1.2× damage with 3+ Great Spears equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -425,6 +437,7 @@
           "desc": "1.2× damage with 3+ Greataxes equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -442,6 +455,7 @@
           "desc": "1.2× damage with 3+ Greatswords equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -459,6 +473,7 @@
           "desc": "1.2× damage with 3+ Halberds equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -476,6 +491,7 @@
           "desc": "1.2× damage with 3+ Hammers equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -493,6 +509,7 @@
           "desc": "1.2× damage with 3+ Heavy Thrusting Swords equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -510,6 +527,7 @@
           "desc": "1.2× damage with 3+ Katanas equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -527,6 +545,7 @@
           "desc": "1.2× damage with 3+ Reapers equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -544,6 +563,7 @@
           "desc": "1.2× damage with 3+ Spears equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -561,6 +581,7 @@
           "desc": "1.2× damage with 3+ Straight Swords equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -578,6 +599,7 @@
           "desc": "1.2× damage with 3+ Thrusting Swords equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -595,6 +617,7 @@
           "desc": "1.2× damage with 3+ Twinblades equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -612,6 +635,7 @@
           "desc": "1.2× damage with 3+ Whips equipped",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1245,6 +1269,7 @@
           "desc": "1.12× damage after madness procs nearby",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1262,6 +1287,7 @@
           "desc": "1.22× damage after madness procs nearby",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1324,6 +1350,7 @@
           "desc": "1.1× physical damage for 30s after using grease",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "physical"
@@ -1341,6 +1368,7 @@
           "desc": "1.17× physical damage for 30s after using grease",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "physical"
@@ -1358,6 +1386,7 @@
           "desc": "1.2× physical damage for 30s after using grease",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "physical"
@@ -1420,6 +1449,7 @@
           "desc": "1.12× damage after sleep procs nearby",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1437,6 +1467,7 @@
           "desc": "1.22× damage after sleep procs nearby",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1460,6 +1491,7 @@
           "desc": "1.1× damage vs frostbite-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1477,6 +1509,7 @@
           "desc": "1.16× damage vs frostbite-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1494,6 +1527,7 @@
           "desc": "1.2× damage vs frostbite-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1517,6 +1551,7 @@
           "desc": "1.1× damage vs poison-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1534,6 +1569,7 @@
           "desc": "1.16× damage vs poison-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1551,6 +1587,7 @@
           "desc": "1.2× damage vs poison-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1568,6 +1605,7 @@
           "desc": "1.1× damage vs rot-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1585,6 +1623,7 @@
           "desc": "1.16× damage vs rot-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -1602,6 +1641,7 @@
           "desc": "1.2× damage vs rot-afflicted targets",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -2855,6 +2895,7 @@
           "desc": "+16% damage negation when HP is below 40%",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "negation",
             "axes": [
               "universal"
@@ -3177,6 +3218,7 @@
           "desc": "20% damage negation and 0.8× poise damage taken for 20s after being hit",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "negation",
             "axes": [
               "universal"
@@ -3330,6 +3372,7 @@
           "desc": "1.15× throwing pot damage",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -3347,6 +3390,7 @@
           "desc": "1.3× throwing pot damage",
           "mul": {
             "tier": "conditional",
+            "special": true,
             "bucket": "damage",
             "axes": [
               "universal"
@@ -3957,6 +4001,7 @@
       "desc": "0.915× damage when HP below 85%",
       "mul": {
         "tier": "conditional",
+        "special": true,
         "bucket": "damage",
         "axes": [
           "universal"
@@ -3999,6 +4044,7 @@
       "desc": "−45% damage negation right after rolling",
       "mul": {
         "tier": "conditional",
+        "special": true,
         "bucket": "negation",
         "axes": [
           "universal"
@@ -4015,6 +4061,7 @@
       "desc": "−45% damage negation while using flasks",
       "mul": {
         "tier": "conditional",
+        "special": true,
         "bucket": "negation",
         "axes": [
           "universal"
@@ -4150,6 +4197,7 @@
       "desc": "−23%/−35% damage negation for 15s on repeated rolls",
       "mul": {
         "tier": "conditional",
+        "special": true,
         "bucket": "negation",
         "axes": [
           "universal"

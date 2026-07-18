@@ -133,67 +133,81 @@ function computeBuildTotals(effects, enabledSpecialNames) {
     (bucketTree[key] ||= []).push({ ...c, ...combinedFor(c) });
   }
 
-  // A universal-axis-only conditional (no category, axes === ['universal'])
-  // is a genuinely SITUATIONAL/temporal trigger — crit, guard counter, vs-a-
-  // status-afflicted enemy, 3+ weapon type equipped, etc. — that may or may
-  // not be active at any given moment, unlike a spell-school or single-
-  // weapon-hit conditional (which just means "while doing X", the exact
+  // A conditional entry explicitly marked `special: true` in
+  // effect_multipliers.mjs is a genuinely SITUATIONAL/temporal trigger —
+  // vs-a-status-afflicted enemy, 3+ weapon type equipped, a grease-item
+  // window, etc. — that may or may not be active at any given moment,
+  // unlike a spell-school, single-weapon-hit, or hit-type conditional
+  // (crit, guard counter — which just means "while doing X", the exact
   // scenario its own total already represents). These are exactly the
   // candidates for the player-toggled "specials" checkboxes: excluded from
   // every Totals figure unless explicitly enabled, so the player can explore
   // a maximum-multiplier scenario without every proc being silently assumed
-  // to always be active.
-  const damageUniversalOnly = [conditionalTree.damage.weapon, conditionalTree.damage.hitType, conditionalTree.damage.status]
-    .flat().filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
-  const negationUniversalOnly = conditionalTree.negation.status.filter(c => c.axes.length === 1 && c.axes[0] === 'universal');
+  // to always be active. A special isn't necessarily universal-axis (grease
+  // items is physical-only) — each only ever applies to ITS OWN axis (or
+  // every axis, if truly universal), never to an unrelated one, so
+  // specialsMultiplierFor() takes the axis being computed and only counts a
+  // toggled special if it's universal or a match.
+  const damageSpecials = [conditionalTree.damage.weapon, conditionalTree.damage.hitType, conditionalTree.damage.status]
+    .flat().filter(c => c.special);
+  const negationSpecials = conditionalTree.negation.status.filter(c => c.special);
 
-  function specialsMultiplier(list, isNegation) {
+  function specialsMultiplierFor(list, isNegation, axis) {
     return list.reduce((p, c) => {
       if (!enabledSpecialNames.has(c.name)) return p;
+      const cAxis = c.axes[0];
+      if (cAxis !== 'universal' && cAxis !== axis) return p;
       return p * Math.pow(isNegation ? (1 - c.value) : c.value, c.count);
     }, 1);
   }
-  const damageSpecialsMultiplier = specialsMultiplier(damageUniversalOnly, false);
-  const negationSpecialsMultiplier = specialsMultiplier(negationUniversalOnly, true);
+  const damageUniversalSpecialsMultiplier = specialsMultiplierFor(damageSpecials, false, 'universal');
+  const negationUniversalSpecialsMultiplier = specialsMultiplierFor(negationSpecials, true, 'universal');
 
   // Totals: the REAL grand-total multiplier per axis/category — baseline
   // axis/category value × the baseline All-Damage sources (Evergaol/Night
   // Invader kills, always active once triggered) × only the situational
-  // specials currently toggled on. damageBaseline[axis] never includes
+  // specials currently toggled on THAT APPLY TO THIS AXIS (universal
+  // specials apply everywhere; an axis-specific special like grease items
+  // only applies to its own axis). damageBaseline[axis] never includes
   // damageBaseline.universal (they're independent accumulator slots), so
   // it's folded in here explicitly.
   const damageTotals = {};
   for (const axis of AXES) {
+    const specialsMul = specialsMultiplierFor(damageSpecials, false, axis);
     damageTotals[axis] = axis === 'universal'
-      ? damageBaseline.universal * damageSpecialsMultiplier
-      : damageBaseline[axis] * damageBaseline.universal * damageSpecialsMultiplier;
+      ? damageBaseline.universal * specialsMul
+      : damageBaseline[axis] * damageBaseline.universal * specialsMul;
   }
   const negationTotals = {};
   for (const axis of AXES) {
+    const specialsMul = specialsMultiplierFor(negationSpecials, true, axis);
     negationTotals[axis] = axis === 'universal'
-      ? negationBaseline.universal * negationSpecialsMultiplier
-      : negationBaseline[axis] * negationBaseline.universal * negationSpecialsMultiplier;
+      ? negationBaseline.universal * specialsMul
+      : negationBaseline[axis] * negationBaseline.universal * specialsMul;
   }
+  // Category totals aren't bound to one axis (Sorcery can be cast in any
+  // element), so only universal specials apply here — an axis-specific one
+  // belongs on that axis's own total, not the generic category one.
   const categoryTotals = {
-    sorcery: categoryBaseline.sorcery * damageBaseline.universal * damageSpecialsMultiplier,
-    incantation: categoryBaseline.incantation * damageBaseline.universal * damageSpecialsMultiplier,
+    sorcery: categoryBaseline.sorcery * damageBaseline.universal * damageUniversalSpecialsMultiplier,
+    incantation: categoryBaseline.incantation * damageBaseline.universal * damageUniversalSpecialsMultiplier,
   };
 
-  // Every non-universal-only conditional entry (spell school, single-weapon
-  // hit) gets its own Totals figure too: its `combined` (which already folds
-  // in its own axis/category baseline plus the universal BASELINE) times
-  // whichever specials are toggled on. Universal-only entries (the specials
-  // themselves) get no `total` of their own — they only ever appear as a
-  // checkbox, never a totaled row.
-  const damageUniversalOnlySet = new Set(damageUniversalOnly);
+  // Every non-special conditional entry (spell school, single-weapon hit,
+  // hit-type bonus) gets its own Totals figure too: its `combined` (which
+  // already folds in its own axis/category baseline plus the universal
+  // BASELINE) times whichever specials matching ITS OWN axis are toggled
+  // on. Specials themselves get no `total` of their own — they only ever
+  // appear as a checkbox, never a totaled row.
+  const damageSpecialsSet = new Set(damageSpecials);
   for (const group of ['sorcery', 'incantation', 'weapon', 'hitType', 'status']) {
     conditionalTree.damage[group] = conditionalTree.damage[group].map(c => ({
-      ...c, total: damageUniversalOnlySet.has(c) ? undefined : c.combined * damageSpecialsMultiplier,
+      ...c, total: damageSpecialsSet.has(c) ? undefined : c.combined * specialsMultiplierFor(damageSpecials, false, c.axes[0]),
     }));
   }
-  const negationUniversalOnlySet = new Set(negationUniversalOnly);
+  const negationSpecialsSet = new Set(negationSpecials);
   conditionalTree.negation.status = conditionalTree.negation.status.map(c => ({
-    ...c, total: negationUniversalOnlySet.has(c) ? undefined : c.combined * negationSpecialsMultiplier,
+    ...c, total: negationSpecialsSet.has(c) ? undefined : c.combined * specialsMultiplierFor(negationSpecials, true, c.axes[0]),
   }));
 
   // Breakdown/inventory views: which selected effects fed each axis,
@@ -247,8 +261,10 @@ function computeBuildTotals(effects, enabledSpecialNames) {
       return { axes: g.axes, rows: g.rows, combined, total: combined * universalBaseline * specialsMul };
     });
   }
-  const damageMultiAxisGroups = buildMultiAxisGroups('damage', damageBaseline.universal, damageSpecialsMultiplier);
-  const negationMultiAxisGroups = buildMultiAxisGroups('negation', negationBaseline.universal, negationSpecialsMultiplier);
+  // Affinity's own total is a cross-element figure (not bound to one axis),
+  // so — like categoryTotals — only universal specials apply.
+  const damageMultiAxisGroups = buildMultiAxisGroups('damage', damageBaseline.universal, damageUniversalSpecialsMultiplier);
+  const negationMultiAxisGroups = buildMultiAxisGroups('negation', negationBaseline.universal, negationUniversalSpecialsMultiplier);
 
   // Flat entries: description is regenerated from the template using the
   // SUMMED value across duplicates (not the original per-copy number), so
@@ -277,7 +293,7 @@ function computeBuildTotals(effects, enabledSpecialNames) {
     conditionalTree,
     damageAxisBreakdown, negationAxisBreakdown, categoryBaselineBreakdown, resourceBreakdown,
     damageMultiAxisGroups, negationMultiAxisGroups,
-    damageUniversalOnly, negationUniversalOnly,
+    damageSpecials, negationSpecials,
     damageTotals, negationTotals, categoryTotals,
     flat,
     other: [...otherByName.values()],
@@ -321,7 +337,7 @@ function test(label, actual, expected, tolerance = 1e-9) {
 // they're different axes. Nests under conditionalTree.negation.status.
 {
   const fireNeg = { tier: 'baseline', bucket: 'negation', axes: ['fire'], value: 0.10 };
-  const evasionCurse = { tier: 'conditional', bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'Right after evading' };
+  const evasionCurse = { tier: 'conditional', special: true, bucket: 'negation', axes: ['universal'], group: 'status', value: -0.45, condition: 'Right after evading' };
   const r = computeBuildTotals([
     { name: 'Fire Damage Negation Up', mul: fireNeg },
     { name: 'Reduced Damage Negation After Evading', mul: evasionCurse },
@@ -345,7 +361,7 @@ function test(label, actual, expected, tolerance = 1e-9) {
 // (e.g. the frostbite curse) — it just does so as a conditional now.
 {
   const physicalUp1 = { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.05 };
-  const katana3plus = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.2, condition: '3+ Katana Equipped' };
+  const katana3plus = { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'weapon', value: 1.2, condition: '3+ Katana Equipped' };
   const katanaSingle = { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.09, condition: 'Katana hits only' };
   const effects = [
     { name: 'Physical Attack Up +1', mul: physicalUp1 },
@@ -418,7 +434,7 @@ function test(label, actual, expected, tolerance = 1e-9) {
 // here either way, since there's no magic baseline active.
 {
   const physicalUp4 = { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.12 };
-  const hpCurse = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' };
+  const hpCurse = { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' };
   const effects = [
     { name: 'Physical Attack Up +4', mul: physicalUp4 },
     { name: 'Lower Attack When Below Max HP', mul: hpCurse },
@@ -444,7 +460,7 @@ function test(label, actual, expected, tolerance = 1e-9) {
 {
   const magicUp = { tier: 'baseline', bucket: 'damage', axes: ['magic'], value: 1.12 };
   const carianSword = { tier: 'conditional', bucket: 'damage', axes: ['magic'], category: 'sorcery', value: 1.12, condition: 'Casting Carian Sword sorceries only' };
-  const hpCurse = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' };
+  const hpCurse = { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 0.915, condition: 'While HP is below 85%' };
   const effects = [
     { name: 'Magic Attack Power Up +4', mul: magicUp },
     { name: 'Improved Carian Sword Sorcery', mul: carianSword },
@@ -474,7 +490,7 @@ function test(label, actual, expected, tolerance = 1e-9) {
   const fireUp = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
   const universalBaseline = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.2 };
   const giantsFlame = { tier: 'conditional', bucket: 'damage', axes: ['fire'], category: 'incantation', value: 1.12, condition: "Casting Giants' Flame incantations only" };
-  const frostbite = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs frostbite-afflicted enemies' };
+  const frostbite = { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.1, condition: 'vs frostbite-afflicted enemies' };
   const effects = [
     { name: 'Fire Attack Power Up +4', mul: fireUp },
     { name: 'Hypothetical Universal Baseline Buff', mul: universalBaseline },
@@ -752,6 +768,30 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('negation Affinity group names the source', r.negationMultiAxisGroups[0].rows[0].name, 'Improved Affinity Damage Negation');
   // Negation combines via (1 − v), same as any other negation baseline.
   test('negation Affinity combined = (1 - 0.06)', r.negationMultiAxisGroups[0].combined, 0.94);
+}
+
+// User-requested: a special isn't necessarily universal-axis — "Physical
+// attack power increases after using grease items" is physical-only but
+// still genuinely situational (a 30s buff window), so it needs the same
+// toggle as frostbite/poison, but its effect must stay scoped to Physical
+// only — it must NOT leak into Affinity or an unrelated element's total.
+{
+  const physicalUp = { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.05 };
+  const affinityUp = { tier: 'baseline', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], value: 1.1 };
+  const greaseItems = { tier: 'conditional', special: true, bucket: 'damage', axes: ['physical'], group: 'status', value: 1.1, condition: '30s after using grease items' };
+  const effects = [
+    { name: 'Physical Attack Up +1', mul: physicalUp },
+    { name: 'Improved Affinity Attack Power +2', mul: affinityUp },
+    { name: 'Physical attack power increases after using grease items', mul: greaseItems },
+  ];
+  const rOff = computeBuildTotals(effects);
+  test('grease items toggled off: physical total is just the baseline', rOff.damageTotals.physical, 1.05);
+  test('grease items toggled off: affinity group total untouched', rOff.damageMultiAxisGroups[0].total, 1.1);
+
+  const rOn = computeBuildTotals(effects, new Set(['Physical attack power increases after using grease items']));
+  test('grease items toggled on: physical total = physical baseline × grease value', rOn.damageTotals.physical, 1.05 * 1.1);
+  test('grease items toggled on: affinity total stays UNTOUCHED (axis-specific special must not leak)', rOn.damageMultiAxisGroups[0].total, 1.1);
+  test('grease items toggled on: magic total (an Affinity element) also stays untouched', rOn.damageTotals.magic, 1.1);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -100,6 +100,12 @@ for (const [name, m] of entries) {
   } else {
     check(`${name}: maxCount only appears alongside variableCount`, m.maxCount === undefined);
   }
+  if (m.special !== undefined) {
+    check(`${name}: special is boolean true`, m.special === true);
+    check(`${name}: special only applies to conditional tier (specials are player-toggled, not derived from axis/group)`, m.tier === 'conditional');
+    check(`${name}: special entry has exactly one axis (broad application is expressed via axes=['universal'], not multiple axes)`,
+      Array.isArray(m.axes) && m.axes.length === 1);
+  }
   // Negation values are fractional (can be negative for a curse that *removes*
   // negation); damage/resource values are multipliers, always positive.
   if (m.bucket === 'negation') {
@@ -138,19 +144,28 @@ check('Improved Critical Hits is physical, not universal', criticalHits &&
   !criticalHits.axes.includes('universal') && criticalHits.group === 'hitType');
 
 const guardCounter2 = EFFECT_MULTIPLIERS['Improved Guard Counters +2'];
-check('Improved Guard Counters +2 is physical, not universal', guardCounter2 &&
+check('Improved Guard Counters +2 is physical, not universal, and NOT a special', guardCounter2 &&
   guardCounter2.tier === 'conditional' && guardCounter2.axes.includes('physical') &&
-  !guardCounter2.axes.includes('universal') && guardCounter2.group === 'hitType' && guardCounter2.value === 1.29);
+  !guardCounter2.axes.includes('universal') && guardCounter2.group === 'hitType' && guardCounter2.value === 1.29 &&
+  guardCounter2.special === undefined);
 
 const initialAttack = EFFECT_MULTIPLIERS['Improved Initial Standard Attack'];
-check('Improved Initial Standard Attack is physical, not universal', initialAttack &&
+check('Improved Initial Standard Attack is physical, not universal, and NOT a special', initialAttack &&
   initialAttack.tier === 'conditional' && initialAttack.axes.includes('physical') &&
-  !initialAttack.axes.includes('universal') && initialAttack.group === 'hitType');
+  !initialAttack.axes.includes('universal') && initialAttack.group === 'hitType' && initialAttack.special === undefined);
 
+// User-confirmed: despite being physical-axis (matching its name), this IS a
+// genuinely situational special (a 30s buff window after using an item) —
+// a special isn't implied by axis, it's confirmed per-effect.
 const greaseItems = EFFECT_MULTIPLIERS['Physical attack power increases after using grease items +2'];
-check('grease items bonus is physical, matching its name', greaseItems &&
+check('grease items bonus is physical AND a special (axis-specific special)', greaseItems &&
   greaseItems.tier === 'conditional' && greaseItems.axes.includes('physical') &&
-  !greaseItems.axes.includes('universal') && greaseItems.group === 'status' && greaseItems.value === 1.2);
+  !greaseItems.axes.includes('universal') && greaseItems.group === 'status' && greaseItems.value === 1.2 &&
+  greaseItems.special === true);
+
+const frostbiteSpecial = EFFECT_MULTIPLIERS['Attack power up when facing frostbite-afflicted enemy'];
+check('frostbite bonus is universal and a special', frostbiteSpecial &&
+  frostbiteSpecial.axes.includes('universal') && frostbiteSpecial.special === true);
 
 check('Dragon Communion Incantations is intentionally unmapped',
   EFFECT_MULTIPLIERS['Improved Dragon Communion Incantations'] === undefined);
