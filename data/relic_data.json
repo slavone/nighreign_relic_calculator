@@ -428,7 +428,7 @@
             "tier": "conditional",
             "bucket": "damage",
             "axes": [
-              "universal"
+              "physical"
             ],
             "group": "hitType",
             "value": 1.17,
@@ -448,7 +448,7 @@
             "tier": "conditional",
             "bucket": "damage",
             "axes": [
-              "universal"
+              "physical"
             ],
             "group": "hitType",
             "value": 1.18,

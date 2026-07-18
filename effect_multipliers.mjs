@@ -156,11 +156,16 @@ export const EFFECT_MULTIPLIERS = {
 
   // ── Specific hit-type / timing-window damage (conditional) ───────────────
   'Improved Initial Standard Attack': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.15, condition: 'First light attack only' },
-  'Improved Critical Hits': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.18, condition: 'On critical hits' },
+  // Critical hit / guard counter bonus damage is physical-only (the FromSoft
+  // riposte/critical multiplier applies to the weapon's physical damage
+  // component, not affinity/elemental) — user-confirmed, not a "special"
+  // applying to all damage types, so these are physical-axis conditionals
+  // like a weapon-specific hit, not universal-only.
+  'Improved Critical Hits': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.18, condition: 'On critical hits' },
   'Taking attacks improves attack power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'status', value: 1.15, condition: '10s after taking a hit' },
-  'Improved Guard Counters': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.17, condition: 'On guard counters' },
-  'Improved Guard Counters +1': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.25, condition: 'On guard counters' },
-  'Improved Guard Counters +2': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.29, condition: 'On guard counters' },
+  'Improved Guard Counters': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.17, condition: 'On guard counters' },
+  'Improved Guard Counters +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.25, condition: 'On guard counters' },
+  'Improved Guard Counters +2': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.29, condition: 'On guard counters' },
   'Physical attack power increases after using grease items': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.1, condition: '30s after using grease items' },
   'Physical attack power increases after using grease items +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.17, condition: '30s after using grease items' },
   'Physical attack power increases after using grease items +2': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'status', value: 1.2, condition: '30s after using grease items' },

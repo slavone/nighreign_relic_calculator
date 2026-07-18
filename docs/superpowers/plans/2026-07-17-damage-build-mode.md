@@ -2557,3 +2557,48 @@ already includes Affinity's contribution), with no separate Weapons box
 in Totals and the Weapons box still present, unchanged, in Section 1.
 20/95/2587 across the three test suites (no test changes needed — this
 was a render-only change, not an engine change).
+
+### Post-plan addendum: Task 35 — Critical Hits / Guard Counters
+reclassified from universal to physical-only
+
+User: "guard counters are now under special triggers. they should be a
+subcategory under physical as specific dmg type, same for critical."
+Critical hit and guard counter bonus damage is physical-only (the
+FromSoft riposte/critical multiplier applies to the weapon's physical
+damage component, not affinity/elemental) — user-confirmed game knowledge,
+not a guess. Reclassified `'Improved Critical Hits'` and all 3 tiers of
+`'Improved Guard Counters'` in `effect_multipliers.mjs` from
+`axes: ['universal']` to `axes: ['physical']` (kept `group: 'hitType'`).
+This moves them out of `damageUniversalOnly` (no longer a "specials"
+checkbox — they're always-on now, like a weapon-specific hit) and into
+Task 34's axis-nesting path automatically, with zero engine changes needed
+— `renderTotalsAxisRows`'s `axisConditionals` param was updated to receive
+`[...dmgTree.weapon, ...dmgTree.hitType]` (previously weapon only) so
+hit-type entries get the same nesting-under-Physical treatment. Removed
+the now-fully-redundant `renderTotalsSubgroup(BUILD_GROUP_LABELS.hitType,
+...)` call from Totals — after this reclassification, the only entry left
+in `dmgTree.hitType` is "Improved Initial Standard Attack" (still
+universal-only, so still a checkbox with no `total`), meaning that
+subgroup box had become a permanent no-op.
+
+Regenerated `data/relic_data.json` (2 axis changes — only Critical Hits
+exists in the regular pool) and `data/don_relic_data.json` (4 — Critical
+Hits + all 3 Guard Counter tiers exist in the DON pool) and re-embedded.
+Added 2 schema spot-checks in `tests/effect_multipliers.test.mjs`
+confirming `axes.includes('physical')` and NOT `'universal'`. Verified
+live with `jsdom`: Physical Attack Up +1 + Improved Critical Hits +
+Improved Guard Counters +2 — Totals now shows "Physical ×1.05" with both
+nested underneath ("Improved Critical Hits ×1.239" = 1.05×1.18, "Improved
+Guard Counters +2 ×1.355" = 1.05×1.29), Section 1 still lists both raw
+values under "Hit-Type Bonuses" unchanged, and "Affinity ×1" shows with
+nothing nested (as expected, untouched). 20/95/2589 across the three test
+suites.
+
+Also investigated a user-reported "Evergaol/Night Invader overwrite each
+other" concern mid-task — reproduced via both URL restore and live
+interactive dropdown selection across two different relics and found
+BOTH combine correctly (e.g. Evergaol×2 + Night Invader×3 → Physical
+×1.351 = 1.05²×1.07³); user confirmed it was their own testing mistake
+(had selected Night Invader with count=0, which correctly contributes
+nothing). No code change needed — noted here since the investigation
+happened but turned out to be a non-issue.

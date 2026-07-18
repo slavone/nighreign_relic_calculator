@@ -127,6 +127,21 @@ check('Dragon Cult Incantations is lightning', dragonCult && dragonCult.axes.inc
 const stonedigger = EFFECT_MULTIPLIERS['Improved Stonedigger Sorcery'];
 check('Stonedigger Sorcery is magic', stonedigger && stonedigger.axes.includes('magic'));
 
+// User-confirmed: critical hit / guard counter bonus damage is physical-only
+// (the FromSoft riposte/critical multiplier applies to the weapon's
+// physical damage component, not affinity/elemental) — not a "special"
+// applying to all damage types like crit/guard-counter classification used
+// to assume.
+const criticalHits = EFFECT_MULTIPLIERS['Improved Critical Hits'];
+check('Improved Critical Hits is physical, not universal', criticalHits &&
+  criticalHits.tier === 'conditional' && criticalHits.axes.includes('physical') &&
+  !criticalHits.axes.includes('universal') && criticalHits.group === 'hitType');
+
+const guardCounter2 = EFFECT_MULTIPLIERS['Improved Guard Counters +2'];
+check('Improved Guard Counters +2 is physical, not universal', guardCounter2 &&
+  guardCounter2.tier === 'conditional' && guardCounter2.axes.includes('physical') &&
+  !guardCounter2.axes.includes('universal') && guardCounter2.group === 'hitType' && guardCounter2.value === 1.29);
+
 check('Dragon Communion Incantations is intentionally unmapped',
   EFFECT_MULTIPLIERS['Improved Dragon Communion Incantations'] === undefined);
 
