@@ -2509,3 +2509,51 @@ Damage Negation Up + Improved Affinity Damage Negation shows Section 1's
 (0.9 × 0.94, both sources sharing the same accumulator slot) correctly
 below the general "Affinity: ×0.940" row. 20/95/2587 across the three test
 suites, all passing.
+
+### Post-plan addendum: Task 34 — weapon-specific conditionals nest under
+Physical/Affinity in Totals, replacing the separate Weapons box there
+
+User: "for physical, we can show specific weapons values like we show the
+specific affinities within the affinity block" — i.e. extend Task 33's
+nesting (Fire showing an elevated total under Affinity thanks to its own
+bonus) to ALSO cover weapon-specific conditionals (Katana hits, Glintstone/
+Gravity Stone throws, etc.), nested under whichever axis they actually
+belong to, the same "specific value, shown only when it exists" treatment.
+
+Discovered while implementing: `effect_multipliers.mjs`'s `group: 'weapon'`
+entries don't all share one axis — most are physical (the WEAPON_TYPES
+loop, Throwing Knife), but "Improved Glintstone and Gravity Stone Damage"
+is magic-axis. So "nest weapon entries under Physical" would have been
+wrong for Glintstone — the correct rule is "nest each conditional entry
+under whichever SINGLE axis it actually has" (Physical for Katana, under
+Affinity's Magic slot for Glintstone), generalizing the mechanism rather
+than special-casing "weapon" specifically.
+
+`renderTotalsAxisRows` gained a 4th parameter, `axisConditionals` (the
+group's conditional-tree entries to consider for nesting — `dmgTree.weapon`
+for damage, `[]` for negation, which has no weapon group at all) and a new
+`conditionalsFor(axis)` helper that nests each entry whose own `axes` is
+exactly `[axis]` (excluding universal-only ones, which have no `total`
+and are handled as specials checkboxes elsewhere) under Physical or under
+each of Affinity's touched axes. Also removed the now-dead `axisRows`
+variable from Task 33's version of this function: since `multiAxisGroups`
+always carries an Affinity entry (Task 33), every non-physical damage axis
+is ALWAYS "touched" by it, so the old top-level axisRows path had already
+become unreachable — simplified rather than left as confusing dead code.
+Removed the separate `renderTotalsSubgroup(BUILD_GROUP_LABELS.weapon, ...)`
+call from Totals (damage only — negation never had one), since its content
+is now shown nested under Physical/Affinity instead; Section 1's "Weapons"
+box is UNCHANGED (still lists every selected weapon-specific effect with
+its raw value, same as before) — only Totals absorbs the duplicate.
+
+No engine changes were needed — `conditionalTree` entries already carry
+`axes`/`total` from Task 32. Verified live with `jsdom`: Physical Attack Up
++1 + Improved Affinity Attack Power +2 + Improved Katana Attack Power
+(physical) + Improved Glintstone and Gravity Stone Damage (magic) — Totals
+showed "Physical ×1.05" with nested "Improved Katana Attack Power ×1.145"
+(1.05 × 1.09), and "Affinity ×1.1" with nested "Improved Glintstone and
+Gravity Stone Damage ×1.265" (1.1 × 1.15, since damageBaseline.magic
+already includes Affinity's contribution), with no separate Weapons box
+in Totals and the Weapons box still present, unchanged, in Section 1.
+20/95/2587 across the three test suites (no test changes needed — this
+was a render-only change, not an engine change).
