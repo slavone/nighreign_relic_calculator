@@ -76,9 +76,25 @@ function computeBuildTotals(effects, enabledSpecialNames) {
       continue;
     }
     if (m.tier === 'conditional') {
-      const existing = conditionalByName.get(effect.name);
-      if (existing) existing.count++;
-      else conditionalByName.set(effect.name, { name: effect.name, ...m, count: 1 });
+      // Tiers of the same conditional FAMILY (e.g. Throwing Pot / ... +1, or
+      // Guard Counters +0/+1/+2) share a condition + axes signature and stack
+      // multiplicatively — merge into one family entry (keyed by
+      // bucket|group-or-category|axes|condition), accumulating each distinct
+      // tier's value in `tiers`. Situational `special` effects stay keyed by
+      // name (they surface as individual player-toggled checkboxes).
+      const famKey = m.special
+        ? `special:${effect.name}`
+        : `fam:${m.bucket}|${m.category || m.group}|${[...(m.axes || [])].sort().join(',')}|${m.condition}`;
+      const existing = conditionalByName.get(famKey);
+      if (existing) {
+        existing.count++;
+        const tier = existing.tiers.find(t => t.value === m.value);
+        if (tier) tier.count++;
+        else existing.tiers.push({ value: m.value, count: 1, name: effect.name });
+      } else {
+        const displayName = m.special ? effect.name : effect.name.replace(/ \+\d+$/, '');
+        conditionalByName.set(famKey, { name: displayName, ...m, count: 1, tiers: [{ value: m.value, count: 1, name: effect.name }] });
+      }
       continue;
     }
     const existingB = baselineByName.get(effect.name);
@@ -101,22 +117,30 @@ function computeBuildTotals(effects, enabledSpecialNames) {
   // fold into its own "self" factor as value^count (or (1-v)^count for
   // negation) — identical repeated factors reduce to a power.
   function combinedFor(c) {
+    // A family's own contribution is ∏ vᶜ over its tiers (negation combines as
+    // a (1 − v) "remaining damage" factor per tier instead).
+    const selfDamage = () => c.tiers.reduce((p, t) => p * Math.pow(t.value, t.count), 1);
+    const selfNegation = () => c.tiers.reduce((p, t) => p * Math.pow(1 - t.value, t.count), 1);
     const factors = [];
     if (c.bucket === 'resource') {
       if (resourceBaseline[c.stat] !== 1) factors.push({ kind: 'resource', key: c.stat, value: resourceBaseline[c.stat] });
-      factors.push({ kind: 'self', value: Math.pow(c.value, c.count) });
+      factors.push({ kind: 'self', value: selfDamage() });
     } else if (c.bucket === 'negation') {
       if (negationBaseline.universal !== 1) factors.push({ kind: 'axis', key: 'universal', value: negationBaseline.universal });
       for (const axis of c.axes) if (axis !== 'universal' && negationBaseline[axis] !== 1) factors.push({ kind: 'axis', key: axis, value: negationBaseline[axis] });
-      factors.push({ kind: 'self', value: Math.pow(1 - c.value, c.count) });
+      factors.push({ kind: 'self', value: selfNegation() });
     } else {
       if (damageBaseline.universal !== 1) factors.push({ kind: 'axis', key: 'universal', value: damageBaseline.universal });
       for (const axis of c.axes) if (axis !== 'universal' && damageBaseline[axis] !== 1) factors.push({ kind: 'axis', key: axis, value: damageBaseline[axis] });
       if (c.category && categoryBaseline[c.category] !== 1) factors.push({ kind: 'category', key: c.category, value: categoryBaseline[c.category] });
-      factors.push({ kind: 'self', value: Math.pow(c.value, c.count) });
+      factors.push({ kind: 'self', value: selfDamage() });
     }
     const combined = factors.reduce((p, f) => p * f.value, 1);
-    return { combined, factors };
+    // `self` is the family's own contribution alone (∏ over tiers), no baseline
+    // folded in — lets a multi-axis conditional recompute a per-element total
+    // without a baseline being counted once per axis.
+    const self = c.bucket === 'negation' ? selfNegation() : selfDamage();
+    return { combined, factors, self };
   }
 
   // Nest each merged conditional entry under bucket -> (category ?? group):
@@ -196,19 +220,27 @@ function computeBuildTotals(effects, enabledSpecialNames) {
   // Every non-special conditional entry (spell school, single-weapon hit,
   // hit-type bonus) gets its own Totals figure too: its `combined` (which
   // already folds in its own axis/category baseline plus the universal
-  // BASELINE) times whichever specials matching ITS OWN axis are toggled
-  // on. A multi-axis entry (e.g. Improved Throwing Pot Damage, which matches
-  // Affinity's own magic+fire+lightning+holy signature) isn't bound to one
-  // specific element, so — like Affinity's own total — only universal
-  // specials apply, never an axis-specific one. Specials themselves get no
-  // `total` of their own — they only ever appear as a checkbox, never a
-  // totaled row.
+  // BASELINE) times whichever specials matching ITS OWN axis are toggled on.
+  // A MULTI-axis entry (e.g. Improved Throwing Pot Damage, matching Affinity's
+  // magic+fire+lightning+holy signature) is the exception: one hit deals ONE
+  // element, so instead of one figure multiplying every element baseline
+  // together (which overcounts), it carries a `perAxisTotal` map — element
+  // baseline × universal × its own `self` × that axis's specials, per element.
+  // Specials get no `total` of their own — checkbox-only.
   const damageSpecialsSet = new Set(damageSpecials);
   for (const group of ['sorcery', 'incantation', 'weapon', 'hitType', 'status']) {
-    conditionalTree.damage[group] = conditionalTree.damage[group].map(c => ({
-      ...c, total: damageSpecialsSet.has(c) ? undefined
-        : c.combined * specialsMultiplierFor(damageSpecials, false, c.axes.length === 1 ? c.axes[0] : 'universal'),
-    }));
+    conditionalTree.damage[group] = conditionalTree.damage[group].map(c => {
+      if (damageSpecialsSet.has(c)) return { ...c, total: undefined };
+      if (c.axes && c.axes.length > 1) {
+        const perAxisTotal = {};
+        for (const axis of c.axes) {
+          perAxisTotal[axis] = damageBaseline[axis] * damageBaseline.universal * c.self
+            * specialsMultiplierFor(damageSpecials, false, axis);
+        }
+        return { ...c, perAxisTotal, total: undefined };
+      }
+      return { ...c, total: c.combined * specialsMultiplierFor(damageSpecials, false, c.axes[0]) };
+    });
   }
   const negationSpecialsSet = new Set(negationSpecials);
   conditionalTree.negation.status = conditionalTree.negation.status.map(c => ({
@@ -800,13 +832,11 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('grease items toggled on: magic total (an Affinity element) also stays untouched', rOn.damageTotals.magic, 1.1);
 }
 
-// User-requested: Improved Throwing Pot Damage deals Affinity damage (not
-// truly universal) — a MULTI-axis conditional matching Affinity's own
-// signature. Its own total shouldn't be bound to one specific element (no
-// axis-specific special should leak into it, matching how Affinity's own
-// group total works), but it SHOULD combine with whichever specific
-// elements are actually present (e.g. a Fire-specific bonus), since
-// combinedFor already loops over every one of its axes.
+// Improved Throwing Pot Damage deals Affinity damage — a MULTI-axis
+// conditional matching Affinity's signature. A single thrown pot deals ONE
+// element, so it carries a PER-ELEMENT total (not one figure multiplying every
+// element baseline together, which would overcount). With only a Fire baseline
+// active, the Fire pot picks up that bonus; magic/lightning/holy pots don't.
 {
   const fireUp = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
   const throwingPot = { tier: 'conditional', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], group: 'weapon', value: 1.15, condition: 'Throwing Pot throws only' };
@@ -815,9 +845,81 @@ function test(label, actual, expected, tolerance = 1e-9) {
     { name: 'Improved Throwing Pot Damage', mul: throwingPot },
   ]);
   const potRow = r.conditionalTree.damage.weapon.find(c => c.name === 'Improved Throwing Pot Damage');
-  test('throwing pot combines with the active Fire-specific bonus', potRow.combined, 1.12 * 1.15);
-  test('throwing pot total (no specials toggled) equals its own combined', potRow.total, potRow.combined);
+  test('multi-axis conditional carries no single total', potRow.total, undefined);
+  test('fire pot picks up the Fire-specific bonus', potRow.perAxisTotal.fire, 1.12 * 1.15);
+  test('magic pot gets only its own self (no fire leak)', potRow.perAxisTotal.magic, 1.15);
+  test('lightning pot gets only its own self', potRow.perAxisTotal.lightning, 1.15);
   test('throwing pot is NOT a special (no checkbox)', r.damageSpecials.includes(potRow), false);
+}
+
+// Full regression for the user's reported build: Fire +4/+3, Improved Affinity
+// +1, one base Throwing Pot + three "+1". The tiers collapse to ONE family
+// entry (self = 1.15¹ × 1.3³), and its per-element totals must NOT multiply the
+// four affinity baselines together. Fire pot = fire baseline × self; the other
+// three elements only carry the shared Affinity 1.08.
+{
+  const fireUp4 = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.12 };
+  const fireUp3 = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.105 };
+  const affinity = { tier: 'baseline', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], value: 1.08 };
+  const potBase = { tier: 'conditional', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], group: 'weapon', value: 1.15, condition: 'Throwing Pot throws only' };
+  const potPlus1 = { tier: 'conditional', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], group: 'weapon', value: 1.3, condition: 'Throwing Pot throws only' };
+  const r = computeBuildTotals([
+    { name: 'Fire Attack Power Up +4', mul: fireUp4 },
+    { name: 'Fire Attack Power Up +3', mul: fireUp3 },
+    { name: 'Improved Affinity Attack Power +1', mul: affinity },
+    { name: 'Improved Throwing Pot Damage', mul: potBase },
+    { name: 'Improved Throwing Pot Damage +1', mul: potPlus1 },
+    { name: 'Improved Throwing Pot Damage +1', mul: potPlus1 },
+    { name: 'Improved Throwing Pot Damage +1', mul: potPlus1 },
+  ]);
+  const potRows = r.conditionalTree.damage.weapon.filter(c => c.condition === 'Throwing Pot throws only');
+  test('throwing pot tiers collapse to a single family row', potRows.length, 1);
+  const potRow = potRows[0];
+  test('family row uses the base name (no "+N" suffix)', potRow.name, 'Improved Throwing Pot Damage');
+  test('family count reflects all contributing relics', potRow.count, 4);
+  const self = 1.15 * Math.pow(1.3, 3);
+  test('fire pot = fire baseline × self (no other elements folded in)', potRow.perAxisTotal.fire, (1.12 * 1.105 * 1.08) * self);
+  test('magic pot = shared Affinity baseline × self', potRow.perAxisTotal.magic, 1.08 * self);
+  test('holy pot = shared Affinity baseline × self', potRow.perAxisTotal.holy, 1.08 * self);
+  // Guard against the old overcounting bug: the per-element total must be far
+  // below the all-four-axes product (≈ ×4.25 for this build).
+  test('fire pot total is NOT the overcounted all-axes product', potRow.perAxisTotal.fire < 1.08 * 1.08 * 1.08 * (1.12 * 1.105 * 1.08) * self, true);
+  // The per-tier breakdown data survives the merge: each tier keeps its own
+  // name, value and contributing count (so Section 1 can still list them
+  // individually — base ×1.15 and "+1 ×3" ×1.3).
+  test('family keeps two distinct tiers', potRow.tiers.length, 2);
+  const baseTier = potRow.tiers.find(t => t.value === 1.15);
+  const plus1Tier = potRow.tiers.find(t => t.value === 1.3);
+  test('base tier keeps its name and count', baseTier.name + '|' + baseTier.count, 'Improved Throwing Pot Damage|1');
+  test('+1 tier keeps its name and count', plus1Tier.name + '|' + plus1Tier.count, 'Improved Throwing Pot Damage +1|3');
+}
+
+// Guard Counters +0/+1/+2 — a physical-only tiered family — likewise merges
+// into one row with the tiers multiplied.
+{
+  const gc0 = { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.17, condition: 'On guard counters' };
+  const gc1 = { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.25, condition: 'On guard counters' };
+  const gc2 = { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.29, condition: 'On guard counters' };
+  const r = computeBuildTotals([
+    { name: 'Improved Guard Counters', mul: gc0 },
+    { name: 'Improved Guard Counters +1', mul: gc1 },
+    { name: 'Improved Guard Counters +2', mul: gc2 },
+  ]);
+  const gcRows = r.conditionalTree.damage.hitType.filter(c => c.condition === 'On guard counters');
+  test('guard counter tiers collapse to a single family row', gcRows.length, 1);
+  test('guard counter family self = product of all three tiers', gcRows[0].combined, 1.17 * 1.25 * 1.29);
+}
+
+// Different families that merely share a bucket/group but have distinct
+// conditions must NOT merge (two different weapon-hit bonuses stay separate).
+{
+  const katana = { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.09, condition: 'Katana hits only' };
+  const dagger = { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'weapon', value: 1.09, condition: 'Dagger hits only' };
+  const r = computeBuildTotals([
+    { name: 'Improved Katana Attack Power', mul: katana },
+    { name: 'Improved Dagger Attack Power', mul: dagger },
+  ]);
+  test('distinct-condition families stay separate', r.conditionalTree.damage.weapon.length, 2);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -3388,7 +3388,7 @@
           "id": "6040300",
           "name": "Improved Throwing Pot Damage +1",
           "w": 28,
-          "hasCurse": true,
+          "hasCurse": false,
           "desc": "1.3× throwing pot damage",
           "mul": {
             "tier": "conditional",

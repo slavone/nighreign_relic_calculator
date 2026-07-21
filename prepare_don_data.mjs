@@ -36,6 +36,13 @@ function charSortKey(name) {
   return idx === -1 ? CHAR_ORDER.length - 1 : idx;
 }
 
+// DON-exclusive "+N" effects that the trailing-"+N" curse heuristic below
+// (see addEffect's hasCurse) would otherwise mislabel as cursed, but which
+// actually carry no curse.
+const NO_CURSE_IDS = new Set([
+  6040300,  // Improved Throwing Pot Damage +1 — no curse
+]);
+
 // DLC-only effect IDs — not rollable in pre-DLC Deep of Night relics.
 const DLC_EFFECT_IDS = new Set([
   6623200,  // Greenspill Crystal Tear (DLC XML only)
@@ -95,7 +102,7 @@ for (let i = 1; i < tableLines.length; i++) {
 }
 
 // Build DON positive effect groups
-// hasCurse: all table-2000000 effects are cursed; table-2100000 effects cursed if DON-exclusive AND ends with +N
+// hasCurse: all table-2000000 effects are cursed; table-2100000 effects cursed if DON-exclusive AND ends with +N (minus NO_CURSE_IDS exceptions)
 const groupMap = {};
 const addEffect = (eid, w, fromTable2000) => {
   const name = names[eid];
@@ -103,7 +110,7 @@ const addEffect = (eid, w, fromTable2000) => {
   const p = effectParams[eid];
   if (!p || p.isDebuff) return;
   if (p.compatId === 900) return; // character abilities are weighted in table 2200000 (handled below)
-  const hasCurse = fromTable2000 || (!regularPool.has(eid) && / \+\d+$/.test(name));
+  const hasCurse = fromTable2000 || (!regularPool.has(eid) && / \+\d+$/.test(name) && !NO_CURSE_IDS.has(Number(eid)));
   const compatId = p.compatId;
   if (!groupMap[compatId]) groupMap[compatId] = [];
   // Avoid duplicates (an effect could theoretically appear in both tables)
