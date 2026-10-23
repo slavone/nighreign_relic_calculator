@@ -109,7 +109,13 @@
     .add-effect-btn { background: none; border: 1px dashed #555; color: #aaa; padding: 0.4rem 0.9rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
     .add-effect-btn:hover { border-color: #f0c060; color: #f0c060; }
     .add-effect-btn:disabled { opacity: 0.4; cursor: default; }
-    .fixed-relic-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+    .fixed-relic-row { display: none; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+    .fixed-relic-btn { margin-left: 0.4rem; }
+    /* Panel modes: the "Select guaranteed relic" button opens the dropdown
+       (fixed-mode) and hides "+ Add desired effect"; adding a free-form row
+       (has-rows) hides the guaranteed-relic button instead. */
+    .relic-panel.fixed-mode .fixed-relic-row { display: flex; }
+    .relic-panel.fixed-mode .add-effect-btn, .relic-panel.has-rows .fixed-relic-btn { display: none; }
     .fixed-relic-label { font-size: 0.78rem; color: #b0a070; white-space: nowrap; }
     .fixed-relic-select { flex: 1; min-width: 200px; font-size: 0.85rem; }
     .fixed-relic-effects { display: none; }
@@ -1469,7 +1475,9 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           .map(s => parseInt(s.value)).filter(v => !isNaN(v)));
       }
       function updateAddBtnState() {
-        addBtn.disabled = slotsEl.querySelectorAll('.slot-block').length >= 3;
+        const rows = slotsEl.querySelectorAll('.slot-block').length;
+        addBtn.disabled = rows >= 3;
+        panel.classList.toggle('has-rows', rows > 0);
       }
       function refreshGroupDropdowns() {
         const groups = activeBuildPreDLCGroups(pool);
@@ -1610,12 +1618,32 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           refreshFixedRelicDropdowns();
           updateResult();
         });
-        fixedRow.append(fixedLabel, fixedSel);
+        // Leaves guaranteed-relic mode: clears the relic and brings back the
+        // "+ Add desired effect" / "Select guaranteed relic" buttons.
+        const fixedRemove = document.createElement('button');
+        fixedRemove.className = 'remove-btn';
+        fixedRemove.type = 'button';
+        fixedRemove.textContent = I18N.t('remove', 'Remove');
+        fixedRemove.addEventListener('click', () => {
+          setPanelFixedRelic(panel, null);
+          panel.classList.remove('fixed-mode');
+          refreshFixedRelicDropdowns();
+          updateResult();
+        });
+        fixedRow.append(fixedLabel, fixedSel, fixedRemove);
         const fixedEffects = document.createElement('div');
         fixedEffects.className = 'fixed-relic-effects';
         panel.append(fixedRow, fixedEffects);
       }
       panel.append(slotsEl, addBtn);
+      if (allowFixed) {
+        const fixedBtn = document.createElement('button');
+        fixedBtn.className = 'add-effect-btn fixed-relic-btn';
+        fixedBtn.type = 'button';
+        fixedBtn.textContent = I18N.t('fixed_relic_select_btn', 'Select guaranteed relic');
+        fixedBtn.addEventListener('click', () => panel.classList.add('fixed-mode'));
+        panel.append(fixedBtn);
+      }
       updateAddBtnState();
       return panel;
     }
@@ -1667,10 +1695,12 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       // Choosing a relic discards any free-form rows; clearing it again
       // leaves an empty free-form panel.
       panel.querySelectorAll('.relic-panel-slots .slot-block').forEach(b => b.remove());
-      const addBtn = panel.querySelector('.add-effect-btn');
+      const addBtn = panel.querySelector('.add-effect-btn:not(.fixed-relic-btn)');
       if (addBtn) addBtn.disabled = false;
+      panel.classList.remove('has-rows');
       panel.classList.toggle('has-fixed', !!relic);
       if (!relic) { sel.value = ''; return; }
+      panel.classList.add('fixed-mode');
       if (![...sel.options].some(o => o.value === String(relic.id))) {
         sel.insertAdjacentHTML('beforeend', `<option value="${relic.id}">${escapeHtml(fixedRelicLabel(relic))}</option>`);
       }
@@ -2322,7 +2352,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         function applyRestoredBuildPanel(panel, pool, slotKeys, curseKeys, countKeys) {
       const groups = activeBuildPreDLCGroups(pool);
       const maxIdx = slotKeys.reduce((m, k, i) => k != null ? i + 1 : m, 0);
-      const addBtn = panel.querySelector('.add-effect-btn');
+      const addBtn = panel.querySelector('.add-effect-btn:not(.fixed-relic-btn)');
       for (let i = 0; i < maxIdx; i++) addBtn.click();
       const blocks = [...panel.querySelectorAll('.slot-block')];
       blocks.forEach((block, i) => {

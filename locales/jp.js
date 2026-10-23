@@ -129,7 +129,8 @@ window.__LOCALE_JP__ = {
     "fixed_group_remembrance": "追憶の遺物",
     "fixed_group_signboard": "コレクターの看板",
     "fixed_group_misc": "その他",
-    "meth_file_antique": "<code>EquipParamAntique.csv</code> + <code>AntiqueName.fmg.xml</code> + <code>AntiqueName_dlc01.fmg.xml</code> — 固定遺物とその名称"
+    "meth_file_antique": "<code>EquipParamAntique.csv</code> + <code>AntiqueName.fmg.xml</code> + <code>AntiqueName_dlc01.fmg.xml</code> — 固定遺物とその名称",
+    "fixed_relic_select_btn": "固定遺物を選択"
   },
   "effects": {
     "Vigor +1": {

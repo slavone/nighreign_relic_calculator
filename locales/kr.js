@@ -129,7 +129,8 @@ window.__LOCALE_KR__ = {
     "fixed_group_remembrance": "저널 유물",
     "fixed_group_signboard": "수집가의 간판",
     "fixed_group_misc": "기타",
-    "meth_file_antique": "<code>EquipParamAntique.csv</code> + <code>AntiqueName.fmg.xml</code> + <code>AntiqueName_dlc01.fmg.xml</code> — 고정옵션 유물과 이름"
+    "meth_file_antique": "<code>EquipParamAntique.csv</code> + <code>AntiqueName.fmg.xml</code> + <code>AntiqueName_dlc01.fmg.xml</code> — 고정옵션 유물과 이름",
+    "fixed_relic_select_btn": "고정옵션 유물 선택"
   },
   "effects": {
     "Acid Spraymist in possession at start of expedition": {

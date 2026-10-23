@@ -33,7 +33,7 @@ const relicNames = [...new Set(fixed.relics.map(r => r.name))];
 const effectNames = [...new Set(fixed.relics.flatMap(r => r.effects.map(e => e.name)))];
 const conditions = [...new Set(fixed.relics.flatMap(r => r.effects.map(e => e.mul?.condition)).filter(Boolean))];
 const UI_KEYS = ['fixed_relic_label', 'fixed_relic_none', 'fixed_group_boss', 'fixed_group_remembrance',
-  'fixed_group_signboard', 'fixed_group_misc', 'meth_file_antique'];
+  'fixed_group_signboard', 'fixed_group_misc', 'meth_file_antique', 'fixed_relic_select_btn'];
 
 for (const [file, globalName] of [['jp.js', '__LOCALE_JP__'], ['kr.js', '__LOCALE_KR__']]) {
   const loc = loadLocale(file, globalName);
