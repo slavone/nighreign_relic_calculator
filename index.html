@@ -675,6 +675,20 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
             }
             return { ...c, perAxisTotal, total: undefined };
           }
+          // A UNIVERSAL non-special conditional (Improved Skill Attack Power — a
+          // weapon skill of any element) applies to whichever damage type the hit
+          // deals, so it also gets one figure per concrete axis: that axis's
+          // baseline × universal baseline × its own self × that axis's specials —
+          // the same figure a crit gets under Physical.
+          if (c.axes && c.axes.length === 1 && c.axes[0] === 'universal') {
+            const perAxisTotal = {};
+            for (const axis of BUILD_AXES) {
+              if (axis === 'universal') continue;
+              perAxisTotal[axis] = damageBaseline[axis] * damageBaseline.universal * c.self
+                * specialsMultiplierFor(damageSpecials, false, axis);
+            }
+            return { ...c, perAxisTotal, total: c.combined * specialsMultiplierFor(damageSpecials, false, 'universal') };
+          }
           return { ...c, total: c.combined * specialsMultiplierFor(damageSpecials, false, c.axes[0]) };
         });
       }
@@ -972,12 +986,18 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         return axisConditionals.filter(c => c.axes && c.axes.length === 1 && c.axes[0] === axis && c.total !== undefined)
           .map(c => condRow(c, c.total, 'build-axis-nested')).join('');
       }
-      // Multi-axis (Affinity-signature) conditionals belonging to this group.
+      // Universal conditionals (Improved Skill Attack Power) apply to every
+      // damage type, so they nest under Physical AND under each Affinity
+      // group, each with that axis's own per-axis figure.
+      const universalConds = axisConditionals.filter(c => c.perAxisTotal && c.axes.length === 1 && c.axes[0] === 'universal');
+      // Multi-axis (Affinity-signature) conditionals belonging to this group,
+      // plus the universal ones (which cover every element of any group).
       function multiAxisConds(groupAxes) {
         const key = [...groupAxes].sort().join(',');
-        return axisConditionals.filter(c => c.perAxisTotal && c.axes.length > 1 && [...c.axes].sort().join(',') === key);
+        return [...axisConditionals.filter(c => c.perAxisTotal && c.axes.length > 1 && [...c.axes].sort().join(',') === key), ...universalConds];
       }
-      const physicalRow = `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS.physical()}</span><span>${fmtMul(totals.physical)}</span></div>${conditionalsFor('physical')}`;
+      const physicalRow = `<div class="build-axis-row"><span>${BUILD_AXIS_LABELS.physical()}</span><span>${fmtMul(totals.physical)}</span></div>${conditionalsFor('physical')}`
+        + universalConds.map(c => condRow(c, c.perAxisTotal.physical, 'build-axis-nested')).join('');
       const groupRows = multiAxisGroups.map(g => {
         const conds = multiAxisConds(g.axes);
         const nested = g.axes.map(axis => {

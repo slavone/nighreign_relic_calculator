@@ -240,6 +240,20 @@ function computeBuildTotals(effects, enabledSpecialNames) {
         }
         return { ...c, perAxisTotal, total: undefined };
       }
+      // A UNIVERSAL non-special conditional (Improved Skill Attack Power — a
+      // weapon skill of any element) applies to whichever damage type the hit
+      // deals, so it also gets one figure per concrete axis: that axis's
+      // baseline × universal baseline × its own self × that axis's specials —
+      // the same figure a crit gets under Physical.
+      if (c.axes && c.axes.length === 1 && c.axes[0] === 'universal') {
+        const perAxisTotal = {};
+        for (const axis of AXES) {
+          if (axis === 'universal') continue;
+          perAxisTotal[axis] = damageBaseline[axis] * damageBaseline.universal * c.self
+            * specialsMultiplierFor(damageSpecials, false, axis);
+        }
+        return { ...c, perAxisTotal, total: c.combined * specialsMultiplierFor(damageSpecials, false, 'universal') };
+      }
       return { ...c, total: c.combined * specialsMultiplierFor(damageSpecials, false, c.axes[0]) };
     });
   }
@@ -1057,6 +1071,27 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('name-grouped flat row exposes the summed, formatted value', res.valueText, '−160');
   test('pool flat row exposes its pool template', vig.template, '{v} Max HP');
   test('pool flat row exposes an explicitly signed value', vig.valueText, '+20');
+}
+
+// A non-special UNIVERSAL conditional (Improved Skill Attack Power: weapon
+// skills of any element) must reach the Totals like a crit does — one figure
+// per damage axis (Physical, and each Affinity element), not vanish because
+// no single axis matches 'universal'.
+{
+  const skill = { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.15, condition: 'Weapon skills only' };
+  const melee = { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05 };
+  const fireUp = { tier: 'baseline', bucket: 'damage', axes: ['fire'], value: 1.065 };
+  const r = computeBuildTotals([
+    { name: 'Improved Skill Attack Power', mul: skill }, { name: 'Improved Skill Attack Power', mul: skill },
+    { name: 'Improved Melee Attack Power', mul: melee }, { name: 'Improved Melee Attack Power', mul: melee },
+    { name: 'Fire Attack Power Up +2', mul: fireUp },
+  ]);
+  const c = r.conditionalTree.damage.hitType.find(x => x.name === 'Improved Skill Attack Power');
+  test('universal conditional carries a per-axis total map', typeof c?.perAxisTotal, 'object');
+  test('physical: melee² × skill²', c.perAxisTotal.physical, 1.05 * 1.05 * 1.15 * 1.15);
+  test('magic (no own baseline): melee² × skill²', c.perAxisTotal.magic, 1.05 * 1.05 * 1.15 * 1.15);
+  test('fire folds in its own baseline', c.perAxisTotal.fire, 1.065 * 1.05 * 1.05 * 1.15 * 1.15);
+  test('no per-axis entry for the universal slot itself', c.perAxisTotal.universal, undefined);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);
