@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 // Tests for computeBuildTotals(). Duplicated inline to match the exact code
 // in index.html, per this project's existing test convention (see calc.test.mjs).
 
@@ -365,6 +366,19 @@ function parseFixedPanelParams(params, r) {
   const raw = params.get(`r${r}f`);
   const id = raw != null && /^\d+$/.test(raw) ? Number(raw) : null;
   return { relicId: id, counts: [1, 2, 3].map(k => params.get(`r${r}fn${k}`)) };
+}
+
+// Duplicated from index.html (Pre-DLC rebuild helper).
+// Which saved guaranteed-relic selections ({relicId, counts} per panel, or
+// null) survive a panel rebuild: unavailable relics (e.g. DLC under
+// Pre-DLC) and repeats of an already-kept relic become null.
+function survivingFixedSelections(saved, activeIds) {
+  const used = new Set();
+  return saved.map(sel => {
+    if (!sel || !activeIds.has(sel.relicId) || used.has(sel.relicId)) return null;
+    used.add(sel.relicId);
+    return sel;
+  });
 }
 
 // --- Test harness (matches tests/calc.test.mjs style) ---
@@ -986,6 +1000,41 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('missing r{n}f → no relic', parseFixedPanelParams(new URLSearchParams('r1s1=7000000'), 1).relicId, null);
   test('non-numeric r{n}f → no relic', parseFixedPanelParams(new URLSearchParams('r1f=abc'), 1).relicId, null);
   test('other panels are not read', parseFixedPanelParams(new URLSearchParams('r2f=2100'), 1).relicId, null);
+}
+
+// Pre-DLC toggle rebuilds every panel; guaranteed relics are stored by ID
+// (not by option index), so the ones still available must survive it.
+{
+  const saved = [{ relicId: 2100, counts: [] }, { relicId: 2080, counts: [] }, { relicId: 1510, counts: ['4'] }];
+  const preDlcIds = new Set([2100, 1510]);
+  const kept = survivingFixedSelections(saved, preDlcIds);
+  test('base-game relic survives the Pre-DLC rebuild', kept[0]?.relicId, 2100);
+  test('DLC relic is dropped under Pre-DLC', kept[1], null);
+  test('counted relic keeps its count', kept[2]?.counts[0], '4');
+  test('empty panel stays empty', survivingFixedSelections([null], preDlcIds)[0], null);
+}
+
+// Real relic data → totals: a guaranteed relic's effects, read from
+// data/fixed_relics.json, reach computeBuildTotals exactly as the panel feeds them.
+{
+  const fixed = JSON.parse(readFileSync(new URL('../data/fixed_relics.json', import.meta.url), 'utf8'));
+  const relic = id => fixed.relics.find(r => r.id === id);
+  const feed = (id, counts = []) => relic(id).effects.flatMap((e, k) =>
+    countedEntries(e, e.mul?.variableCount ? (counts[k] ?? 1) : 1));
+
+  const lord = computeBuildTotals(feed(2100));
+  test('Night of the Lord: affinity conditional reaches the weapon tree',
+    lord.conditionalTree.damage.weapon.some(c => c.name === 'Boosts Attack Power of Added Affinity Attacks' && c.value === 1.1), true);
+  test('Night of the Lord: weapon-switch buff is a special',
+    lord.damageSpecials.some(sp => sp.name === 'Switching Weapons Boosts Attack Power'), true);
+
+  const glass = computeBuildTotals(feed(19051, [undefined, undefined, 3]));
+  test('Glass Necklace tier 3 from real data → universal ×1.05×1.065×1.09',
+    glass.damageBaseline.universal, 1.05 * 1.065 * 1.09);
+
+  const fathom = computeBuildTotals([...feed(2031), ...feed(14002)]);
+  test('Continuous HP Recovery from two relics sums to +4',
+    fathom.flat.find(f => f.name === 'Continuous HP Recovery')?.value, 4);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -1697,6 +1697,18 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       });
     }
 
+    // Which saved guaranteed-relic selections ({relicId, counts} per panel, or
+    // null) survive a panel rebuild: unavailable relics (e.g. DLC under
+    // Pre-DLC) and repeats of an already-kept relic become null.
+    function survivingFixedSelections(saved, activeIds) {
+      const used = new Set();
+      return saved.map(sel => {
+        if (!sel || !activeIds.has(sel.relicId) || used.has(sel.relicId)) return null;
+        used.add(sel.relicId);
+        return sel;
+      });
+    }
+
     // Re-renders every Regular panel's guaranteed-relic options. A relic can
     // only be equipped once, so one chosen in another panel is disabled here.
     function refreshFixedRelicDropdowns() {
@@ -2468,7 +2480,23 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           // Rebuilding is necessary, not just cosmetic: each panel's <select> option
           // indices are computed against activeBuildPreDLCGroups(pool), which just
           // changed — stale indices would silently read back the wrong effect.
+          // Guaranteed relics are stored by ID instead, so the ones still
+          // available (base-game relics under Pre-DLC) are carried across.
+          const savedFixed = [...document.querySelectorAll('#build-regular-relics .relic-panel')].map(panel => {
+            const sel = panel.querySelector('.fixed-relic-select');
+            if (!sel || sel.value === '') return null;
+            const counts = [];
+            panel.querySelectorAll('.fixed-effect-row').forEach(row => {
+              const countSel = row.querySelector('.count-select');
+              if (countSel) counts[parseInt(row.dataset.effectIdx)] = countSel.value;
+            });
+            return { relicId: Number(sel.value), counts };
+          });
           buildRelicPanels();
+          const kept = survivingFixedSelections(savedFixed, new Set(activeFixedRelics().map(r => r.id)));
+          const panels = [...document.querySelectorAll('#build-regular-relics .relic-panel')];
+          kept.forEach((sel, i) => { if (sel && panels[i]) setPanelFixedRelic(panels[i], sel.relicId, sel.counts); });
+          refreshFixedRelicDropdowns();
         }
         updateResult();
       });
