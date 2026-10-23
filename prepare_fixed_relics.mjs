@@ -73,10 +73,13 @@ function resolveEffect(effectId) {
   if (!param) throw new Error(`effect ${effectId}: not in AttachEffectParam.csv`);
   const raw = effectNames.get(Number(param.attachTextId));
   if (!raw) throw new Error(`effect ${effectId}: no name for attachTextId ${param.attachTextId}`);
-  const name = raw.replace(/\n/g, ' ');
-  const desc = EFFECT_DESCRIPTIONS[name] || '';
-  const mul = EFFECT_MULTIPLIERS[name];
-  return { id: effectId, name, ...(desc && { desc }), ...(mul && { mul }) };
+  // Keep the game file's line breaks in `name`, exactly like the pool data
+  // (relic_data.json): locale keys and specials toggles match on that raw
+  // name. Only the mul/desc lookups use the newline-normalised form.
+  const key = raw.replace(/\n/g, ' ');
+  const desc = EFFECT_DESCRIPTIONS[key] || '';
+  const mul = EFFECT_MULTIPLIERS[key];
+  return { id: effectId, name: raw, ...(desc && { desc }), ...(mul && { mul }) };
 }
 
 const relics = [];

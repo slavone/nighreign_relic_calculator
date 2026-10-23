@@ -122,7 +122,14 @@ window.__LOCALE_JP__ = {
     "meth_corrections_p": "エフェクト6001400（Physical Attack Up）はゲームXMLで「+4」とラベルされていますが、そのウェイト（269）はすべての属性タイプ（Magic/Fire/Lightning/Holy Attack Up）で見られる通常パターン（+3ティアが269、+4ティアが130）に一致します。エフェクト6001401はXML内に名前がありませんでしたが（<code>%null%</code>）、確認済みの+4です。名前はデータパイプラインで手動修正されました。",
     "meth_h3_translation": "翻訳",
     "meth_translation_sources": "日本語エフェクト名の参照元: <a href=\"https://gamerch.com/nightreign/924585\" target=\"_blank\" rel=\"noopener\">Gamerch Wiki</a>、<a href=\"https://gamewith.jp/eldenring/501441\" target=\"_blank\" rel=\"noopener\">GameWith</a>、<a href=\"https://game8.jp/eldenring-nightreign/694115\" target=\"_blank\" rel=\"noopener\">Game8</a>、<a href=\"https://nightreignrelic.com\" target=\"_blank\" rel=\"noopener\">nightreignrelic.com</a>。",
-    "meth_translation_claude": "日本語UIは<a href=\"https://claude.ai\" target=\"_blank\" rel=\"noopener\">Claude</a>（Anthropic）で翻訳されました。翻訳に誤りを見つけた場合は<a href=\"https://github.com/slavone/nighreign_relic_calculator/issues\" target=\"_blank\" rel=\"noopener\">GitHubで報告</a>してください。"
+    "meth_translation_claude": "日本語UIは<a href=\"https://claude.ai\" target=\"_blank\" rel=\"noopener\">Claude</a>（Anthropic）で翻訳されました。翻訳に誤りを見つけた場合は<a href=\"https://github.com/slavone/nighreign_relic_calculator/issues\" target=\"_blank\" rel=\"noopener\">GitHubで報告</a>してください。",
+    "fixed_relic_label": "固定遺物",
+    "fixed_relic_none": "— なし —",
+    "fixed_group_boss": "ボス遺物",
+    "fixed_group_remembrance": "追憶の遺物",
+    "fixed_group_signboard": "コレクターの看板",
+    "fixed_group_misc": "その他",
+    "meth_file_antique": "<code>EquipParamAntique.csv</code> + <code>AntiqueName.fmg.xml</code> + <code>AntiqueName_dlc01.fmg.xml</code> — 固定遺物とその名称"
   },
   "effects": {
     "Vigor +1": {
@@ -1927,7 +1934,130 @@ window.__LOCALE_JP__ = {
     },
     "Windy Crystal Tear in possession at start of expedition": {
       "name": "出撃時に「風の結晶雫」を持つ"
+    },
+    "Stamina Recovery upon Landing Attacks +1": {
+      "name": "攻撃命中時、スタミナ回復+1"
+    },
+    "Improved Critical Hits +1": {
+      "name": "致命の一撃強化+1"
+    },
+    "Poison & Rot in Vicinity Increases Attack Power": {
+      "name": "周囲で毒/腐敗状態の発生時、攻撃力上昇"
+    },
+    "FP Restoration upon Successive Attacks": {
+      "name": "攻撃連続時、FP回復"
+    },
+    "Continuous HP Recovery": {
+      "name": "HP持続回復"
+    },
+    "Huge rune discount for shop purchases while on\nexpedition": {
+      "name": "出撃中、ショップでの購入に必要なルーンが大割引"
+    },
+    "Gesture \"Crossed Legs\" Builds Up Madness": {
+      "name": "ジェスチャー「あぐら」により、発狂が蓄積"
+    },
+    "Madness Continually Recovers FP": {
+      "name": "発狂状態になると、FP持続回復"
+    },
+    "Boosts Attack Power of Added Affinity Attacks": {
+      "name": "属性攻撃力が付加された時、属性攻撃力上昇"
+    },
+    "Frostbite in Vicinity Conceals Self": {
+      "name": "周囲で凍傷状態の発生時、自身の姿を隠す"
+    },
+    "Improved Melee Attack Power": {
+      "name": "近接攻撃力上昇"
+    },
+    "Improved Skill Attack Power": {
+      "name": "戦技攻撃力上昇"
+    },
+    "Continuous FP Recovery": {
+      "name": "FP持続回復"
+    },
+    "Occasionally Nullify Attacks When Damage Negation is Lowered": {
+      "name": "カット率低下時、稀に敵から受ける攻撃を無効化"
+    },
+    "Attacks Inflict Rot when Damage is Taken": {
+      "name": "被ダメージ時、腐敗の状態異常を付加"
+    },
+    "Rot in Vicinity Causes Continuous HP Recovery": {
+      "name": "周囲で腐敗状態の発生時、HP持続回復"
+    },
+    "Status Ailment Gauges Slowly Increase Attack Power": {
+      "name": "状態異常ゲージがある時、徐々に攻撃力上昇"
+    },
+    "Switching Weapons Adds an Affinity Attack": {
+      "name": "武器の持ち替え時、いずれかの属性攻撃力を付加"
+    },
+    "Switching Weapons Boosts Attack Power": {
+      "name": "武器の持ち替え時、物理攻撃力上昇"
+    },
+    "Extended Spell Duration": {
+      "name": "魔術/祈祷、効果時間延長"
+    },
+    "Successive Attacks Boost Attack Power": {
+      "name": "攻撃連続時、攻撃力上昇"
+    },
+    "HP Recovery From Successful Guarding": {
+      "name": "ガード成功時、ＨＰ回復"
+    },
+    "Improved Stance-Breaking when Two-Handing": {
+      "name": "両手持ちの、体勢を崩す力上昇"
+    },
+    "Improved Stance-Breaking when Wielding Two Armaments": {
+      "name": "二刀持ちの、体勢を崩す力上昇"
     }
+  },
+  "relics": {
+    "Night of the Beast": "獣の夜",
+    "Dark Night of the Beast": "獣の暗き夜",
+    "Night of the Baron": "爵の夜",
+    "Dark Night of the Baron": "爵の暗き夜",
+    "Night of the Wise": "識の夜",
+    "Dark Night of the Wise": "識の暗き夜",
+    "Night of the Fathom": "深海の夜",
+    "Dark Night of the Fathom": "深海の暗き夜",
+    "Night of the Demon": "魔の夜",
+    "Dark Night of the Demon": "魔の暗き夜",
+    "Night of the Champion": "狩人の夜",
+    "Dark Night of the Champion": "狩人の暗き夜",
+    "Night of the Miasma": "霞の夜",
+    "Dark Night of the Miasma": "霞の暗き夜",
+    "The Will of the Balancers": "安寧者の遺志",
+    "The Will of Balance": "安寧の意志",
+    "The Night of Dregs": "瓦礫の夜",
+    "Night of the Lord": "王の夜",
+    "Old Pocketwatch": "古びた懐中時計",
+    "Besmirched Frame": "薄汚れたフレーム",
+    "Fell Omen Fetish": "忌み鬼の呪物",
+    "Slate Whetstone": "にび色の砥石",
+    "The Wylder's Earring": "追跡者の耳飾り",
+    "Silver Tear": "銀の雫",
+    "Third Volume": "三冊目の本",
+    "Stone Stake": "石の杭",
+    "Witch's Brooch": "魔女のブローチ",
+    "Cracked Witch's Brooch": "砕けた魔女のブローチ",
+    "Cracked Sealing Wax": "割れた封蝋",
+    "Edge of Order": "聖律の刃",
+    "Golden Dew": "金色の露",
+    "Crown Medal": "頭冠のメダル",
+    "Blessed Iron Coin": "祝福された鉄貨",
+    "Torn Braided Cord": "ちぎれた組み紐",
+    "Black Claw Necklace": "黒爪の首飾り",
+    "Small Makeup Brush": "小さな化粧道具",
+    "Old Portrait": "古びたミニアチュール",
+    "Vestige of Night": "夜の痕跡",
+    "Bone-Like Stone": "骨のような石",
+    "Blessed Flowers": "祝福された花",
+    "Golden Sprout": "黄金の萌芽",
+    "Cleansing Tear": "清浄の雫",
+    "Note \"My Dear Successor\"": "記録「後継者へ」",
+    "Leather Monocle Case": "片眼鏡の革袋",
+    "Glass Necklace": "ガラスの首飾り",
+    "Grand Burning Scene": "壮大な燃える景色",
+    "Grand Drizzly Scene": "壮大な滴る景色",
+    "Grand Luminous Scene": "壮大な輝く景色",
+    "Grand Tranquil Scene": "壮大な静まる景色"
   },
   "groups": {
     "Vigor": "生命力",
@@ -2067,7 +2197,11 @@ window.__LOCALE_JP__ = {
     "vs rot-afflicted enemies": "腐敗状態の敵に対して",
     "While HP is below 40%": "HPが40%未満の時",
     "While HP is below 85%": "HPが85%未満の時",
-    "While using flasks": "聖杯瓶使用中"
+    "While using flasks": "聖杯瓶使用中",
+    "Weapon skills only": "戦技のみ",
+    "Elemental damage on weapons only (not spells)": "武器の属性ダメージのみ（魔術・祈祷は対象外）",
+    "20s after poison/rot procs nearby": "近くで毒/腐敗状態が発生してから20秒間",
+    "10s after switching weapons": "武器の持ち替えから10秒間"
   },
   "weaponTypes": {
     "Dagger": "短剣",

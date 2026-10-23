@@ -252,7 +252,7 @@
         },
         {
           "id": 7012200,
-          "name": "Slowly restore HP for self and nearby allies when HP is low"
+          "name": "Slowly restore HP for self and nearby allies when HP\nis low"
         },
         {
           "id": 7001100,
@@ -274,7 +274,7 @@
       "effects": [
         {
           "id": 7230001,
-          "name": "Huge rune discount for shop purchases while on expedition",
+          "name": "Huge rune discount for shop purchases while on\nexpedition",
           "desc": "20% discount at merchants (stacks with the regular 10% discount)"
         },
         {
@@ -406,11 +406,11 @@
         },
         {
           "id": 7123900,
-          "name": "Changes compatible armament's skill to Chilling Mist at start of expedition"
+          "name": "Changes compatible armament's skill to Chilling Mist\nat start of expedition"
         },
         {
           "id": 7260400,
-          "name": "Attack power up when facing frostbite-afflicted enemy",
+          "name": "Attack power up when facing frostbite-afflicted\nenemy",
           "desc": "1.1× damage vs frostbite-afflicted targets",
           "mul": {
             "tier": "conditional",
@@ -634,7 +634,7 @@
       "effects": [
         {
           "id": 7020000,
-          "name": "[Wylder] Standard attacks enhanced with fiery follow-ups when using Character Skill (greatsword only)"
+          "name": "[Wylder] Standard attacks enhanced with fiery\nfollow-ups when using Character Skill (greatsword only)"
         },
         {
           "id": 7001400,
@@ -679,7 +679,7 @@
       "effects": [
         {
           "id": 11002,
-          "name": "[Wylder] Art gauge greatly filled when ability is activated"
+          "name": "[Wylder] Art gauge greatly filled when ability is\nactivated"
         },
         {
           "id": 7000902,
@@ -716,7 +716,7 @@
       "effects": [
         {
           "id": 7011600,
-          "name": "[Guardian] Creates whirlwind when charging halberd attacks"
+          "name": "[Guardian] Creates whirlwind when charging halberd\nattacks"
         },
         {
           "id": 7341800,
@@ -755,11 +755,11 @@
       "effects": [
         {
           "id": 12002,
-          "name": "[Guardian] Slowly restores nearby allies' HP while Art is active"
+          "name": "[Guardian] Slowly restores nearby allies' HP\nwhile Art is active"
         },
         {
           "id": 7033400,
-          "name": "[Guardian] Successful guards send out shockwaves while ability is active"
+          "name": "[Guardian] Successful guards send out shockwaves while\nability is active"
         },
         {
           "id": 7000002,
@@ -785,11 +785,11 @@
       "effects": [
         {
           "id": 12002,
-          "name": "[Guardian] Slowly restores nearby allies' HP while Art is active"
+          "name": "[Guardian] Slowly restores nearby allies' HP\nwhile Art is active"
         },
         {
           "id": 7033400,
-          "name": "[Guardian] Successful guards send out shockwaves while ability is active"
+          "name": "[Guardian] Successful guards send out shockwaves while\nability is active"
         },
         {
           "id": 7000002,
@@ -892,7 +892,7 @@
       "effects": [
         {
           "id": 7010700,
-          "name": "[Duchess] Successive dagger attack reprises event upon nearby enemies"
+          "name": "[Duchess] Successive dagger attack reprises event upon\nnearby enemies"
         },
         {
           "id": 7330000,
@@ -919,7 +919,7 @@
       "effects": [
         {
           "id": 7032700,
-          "name": "[Duchess] Defeating enemies while Art is active ups attack power"
+          "name": "[Duchess] Defeating enemies while Art is active ups\nattack power"
         },
         {
           "id": 7001100,
@@ -955,7 +955,7 @@
       "effects": [
         {
           "id": 7031300,
-          "name": "[Raider] Damage taken while using Character Skill improves attack power and stamina"
+          "name": "[Raider] Damage taken while using Character Skill\nimproves attack power and stamina"
         },
         {
           "id": 7000302,
@@ -1031,11 +1031,11 @@
       "effects": [
         {
           "id": 7011200,
-          "name": "[Revenant] Trigger ghostflame explosion during Ultimate Art activation"
+          "name": "[Revenant] Trigger ghostflame explosion during\nUltimate Art activation"
         },
         {
           "id": 16002,
-          "name": "[Revenant] Expend own HP to fully heal nearby allies when activating Art"
+          "name": "[Revenant] Expend own HP to fully heal nearby allies\nwhen activating Art"
         },
         {
           "id": 7090000,
@@ -1051,7 +1051,7 @@
       "effects": [
         {
           "id": 7032800,
-          "name": "[Recluse] Collecting affinity residue activates Terra Magica"
+          "name": "[Recluse] Collecting affinity residue activates\nTerra Magica"
         },
         {
           "id": 7001502,
@@ -1080,7 +1080,7 @@
         },
         {
           "id": 17002,
-          "name": "[Recluse] Suffer blood loss and increase attack power upon Art activation"
+          "name": "[Recluse] Suffer blood loss and increase attack\npower upon Art activation"
         },
         {
           "id": 7000502,
@@ -1106,7 +1106,7 @@
       "effects": [
         {
           "id": 7034500,
-          "name": "[Executor] While Character Skill is active, unlocking use of cursed sword restores HP"
+          "name": "[Executor] While Character Skill is active,\nunlocking use of cursed sword restores HP"
         },
         {
           "id": 7000402,
@@ -1136,7 +1136,7 @@
         },
         {
           "id": 7012200,
-          "name": "Slowly restore HP for self and nearby allies when HP is low"
+          "name": "Slowly restore HP for self and nearby allies when HP\nis low"
         },
         {
           "id": 7036100,
@@ -1293,7 +1293,7 @@
         },
         {
           "id": 7122900,
-          "name": "Changes compatible armament's skill to Flaming Strike at start of expedition"
+          "name": "Changes compatible armament's skill to Flaming\nStrike at start of expedition"
         },
         {
           "id": 7001602,
@@ -1318,7 +1318,7 @@
       "effects": [
         {
           "id": 7033400,
-          "name": "[Guardian] Successful guards send out shockwaves while ability is active"
+          "name": "[Guardian] Successful guards send out shockwaves while\nability is active"
         },
         {
           "id": 7030600,
@@ -1348,7 +1348,7 @@
       "effects": [
         {
           "id": 7031800,
-          "name": "[Duchess] Become difficult to spot and silence footsteps after landing critical from behind"
+          "name": "[Duchess] Become difficult to spot and silence\nfootsteps after landing critical from behind"
         },
         {
           "id": 7040200,
@@ -1536,7 +1536,7 @@
       "effects": [
         {
           "id": 7012200,
-          "name": "Slowly restore HP for self and nearby allies when HP is low"
+          "name": "Slowly restore HP for self and nearby allies when HP\nis low"
         },
         {
           "id": 7012300,
@@ -2226,7 +2226,7 @@
       "effects": [
         {
           "id": 7240000,
-          "name": "Improved Poise & Damage Negation When Knocked Back by Damage",
+          "name": "Improved Poise & Damage Negation When Knocked Back\nby Damage",
           "desc": "20% damage negation and 0.8× poise damage taken for 20s after being hit",
           "mul": {
             "tier": "conditional",

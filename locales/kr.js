@@ -122,7 +122,14 @@ window.__LOCALE_KR__ = {
     "meth_corrections_p": "효과 6001400(Physical Attack Up)은 게임 XML에서 \"+4\"로 표시되지만 가중치(269)는 모든 속성 타입의 일반 패턴(+3 등급: 269, +4 등급: 130)과 일치합니다. 효과 6001401은 XML에 이름이 없었지만(<code>%null%</code>) 확인된 +4입니다. 이름은 데이터 파이프라인에서 수동으로 수정되었습니다.",
     "meth_h3_translation": "번역",
     "meth_translation_sources": "한국어 효과 이름 출처: <a href=\"https://nightreignrelic.com\" target=\"_blank\" rel=\"noopener\">nightreignrelic.com</a>.",
-    "meth_translation_claude": "한국어 UI는 <a href=\"https://claude.ai\" target=\"_blank\" rel=\"noopener\">Claude</a> (Anthropic)로 번역되었습니다. 번역 오류를 발견하시면 <a href=\"https://github.com/slavone/nighreign_relic_calculator/issues\" target=\"_blank\" rel=\"noopener\">GitHub에서 신고</a>해 주세요."
+    "meth_translation_claude": "한국어 UI는 <a href=\"https://claude.ai\" target=\"_blank\" rel=\"noopener\">Claude</a> (Anthropic)로 번역되었습니다. 번역 오류를 발견하시면 <a href=\"https://github.com/slavone/nighreign_relic_calculator/issues\" target=\"_blank\" rel=\"noopener\">GitHub에서 신고</a>해 주세요.",
+    "fixed_relic_label": "고정옵션 유물",
+    "fixed_relic_none": "— 없음 —",
+    "fixed_group_boss": "밤의 왕 보스 유물",
+    "fixed_group_remembrance": "저널 유물",
+    "fixed_group_signboard": "수집가의 간판",
+    "fixed_group_misc": "기타",
+    "meth_file_antique": "<code>EquipParamAntique.csv</code> + <code>AntiqueName.fmg.xml</code> + <code>AntiqueName_dlc01.fmg.xml</code> — 고정옵션 유물과 이름"
   },
   "effects": {
     "Acid Spraymist in possession at start of expedition": {
@@ -1600,7 +1607,133 @@ window.__LOCALE_KR__ = {
     },
     "Slowly restore HP for self and nearby allies when HP\nis low": {
       "name": "HP 저하 시 주위 아군을 포함해 HP를 서서히 회복"
+    },
+    "Stamina Recovery upon Landing Attacks +1": {
+      "name": "공격 명중 시 스태미나 회복+1"
+    },
+    "Improved Critical Hits +1": {
+      "name": "치명적인 일격 강화+1"
+    },
+    "Poison & Rot in Vicinity Increases Attack Power": {
+      "name": "주위에서 독 / 부패 발생 시 공격력 상승"
+    },
+    "FP Restoration upon Successive Attacks": {
+      "name": "공격 연속 시 FP 회복"
+    },
+    "Continuous HP Recovery": {
+      "name": "HP 지속 회복"
+    },
+    "Huge rune discount for shop purchases while on\nexpedition": {
+      "name": "출격 중 상점 구매에 필요한 룬 대폭 할인"
+    },
+    "Gesture \"Crossed Legs\" Builds Up Madness": {
+      "name": "제스처 「책상다리」로 발광 축적"
+    },
+    "Madness Continually Recovers FP": {
+      "name": "발광 상태가 되면 FP 지속 회복"
+    },
+    "Boosts Attack Power of Added Affinity Attacks": {
+      "name": "속성 공격력 부여 시 속성 공격력 상승"
+    },
+    "Frostbite in Vicinity Conceals Self": {
+      "name": "주위에서 동상 발생 시 자신의 모습을 숨김"
+    },
+    "Improved Physical Damage Negation": {
+      "name": "물리 경감률 상승"
+    },
+    "Improved Melee Attack Power": {
+      "name": "근접 공격력 상승"
+    },
+    "Improved Skill Attack Power": {
+      "name": "전투 기술 공격력 상승"
+    },
+    "Continuous FP Recovery": {
+      "name": "FP 지속 회복"
+    },
+    "Occasionally Nullify Attacks When Damage Negation is Lowered": {
+      "name": "경감률 저하 시 드물게 적에게 받는 공격을 무효화"
+    },
+    "Attacks Inflict Rot when Damage is Taken": {
+      "name": "대미지를 받을 시 부패 상태 이상 부여"
+    },
+    "Rot in Vicinity Causes Continuous HP Recovery": {
+      "name": "주위에서 부패 상태 발생 시 HP 지속 회복"
+    },
+    "Status Ailment Gauges Slowly Increase Attack Power": {
+      "name": "상태 이상 게이지가 있을 때 서서히 공격력 상승"
+    },
+    "Switching Weapons Adds an Affinity Attack": {
+      "name": "무기 바꿔 들기 시 어느 한 속성 공격력 부여"
+    },
+    "Switching Weapons Boosts Attack Power": {
+      "name": "무기 바꿔 들기 시 물리 공격력 상승"
+    },
+    "Extended Spell Duration": {
+      "name": "마술/기도 효과 시간 연장"
+    },
+    "Successive Attacks Boost Attack Power": {
+      "name": "공격 연속 시 공격력 상승"
+    },
+    "HP Recovery From Successful Guarding": {
+      "name": "가드 성공 시 HP 회복"
+    },
+    "Improved Stance-Breaking when Two-Handing": {
+      "name": "양손 잡기의 자세를 무너뜨리는 힘 상승"
+    },
+    "Improved Stance-Breaking when Wielding Two Armaments": {
+      "name": "이도류의 자세를 무너뜨리는 힘 상승"
     }
+  },
+  "relics": {
+    "Night of the Beast": "짐승의 밤",
+    "Dark Night of the Beast": "짐승의 어두운 밤",
+    "Night of the Baron": "제후의 밤",
+    "Dark Night of the Baron": "제후의 어두운 밤",
+    "Night of the Wise": "지식의 밤",
+    "Dark Night of the Wise": "지식의 어두운 밤",
+    "Night of the Fathom": "심해의 밤",
+    "Dark Night of the Fathom": "심해의 어두운 밤",
+    "Night of the Demon": "악마의 밤",
+    "Dark Night of the Demon": "악마의 어두운 밤",
+    "Night of the Champion": "사냥꾼의 밤",
+    "Dark Night of the Champion": "사냥꾼의 어두운 밤",
+    "Night of the Miasma": "안개의 밤",
+    "Dark Night of the Miasma": "안개의 어두운 밤",
+    "The Will of the Balancers": "안녕을 가져오는 자가 남긴 뜻",
+    "The Will of Balance": "안녕이 남긴 뜻",
+    "The Night of Dregs": "잔해의 밤",
+    "Night of the Lord": "왕의 밤",
+    "Old Pocketwatch": "낡은 회중시계",
+    "Besmirched Frame": "꾀죄죄한 액자",
+    "Fell Omen Fetish": "끔찍한 흉조의 주물",
+    "Slate Whetstone": "회색 숫돌",
+    "The Wylder's Earring": "추적자의 귀고리",
+    "Silver Tear": "은 물방울",
+    "Third Volume": "세 권째 책",
+    "Stone Stake": "돌 말뚝",
+    "Witch's Brooch": "마녀의 브로치",
+    "Cracked Witch's Brooch": "부서진 마녀의 브로치",
+    "Cracked Sealing Wax": "깨진 봉랍",
+    "Edge of Order": "성률의 칼날",
+    "Golden Dew": "금색 이슬",
+    "Crown Medal": "머리관 메달",
+    "Blessed Iron Coin": "축복받은 철전",
+    "Torn Braided Cord": "끊어진 매듭끈",
+    "Black Claw Necklace": "검은 발톱의 목걸이",
+    "Small Makeup Brush": "작은 화장도구",
+    "Old Portrait": "낡은 미니어처 액자",
+    "Vestige of Night": "밤의 흔적",
+    "Bone-Like Stone": "뼈처럼 생긴 돌",
+    "Blessed Flowers": "축복받은 꽃",
+    "Golden Sprout": "황금 싹",
+    "Cleansing Tear": "청정의 물방울",
+    "Note \"My Dear Successor\"": "기록 「후계자에게」",
+    "Leather Monocle Case": "단안경용 가죽 주머니",
+    "Glass Necklace": "유리 목걸이",
+    "Grand Burning Scene": "웅장한 불타는 풍경",
+    "Grand Drizzly Scene": "웅장한 축축한 풍경",
+    "Grand Luminous Scene": "웅장한 빛나는 풍경",
+    "Grand Tranquil Scene": "웅장한 고요한 풍경"
   },
   "groups": {
     "Improved Perfuming Arts": "조향술 강화",
@@ -1733,7 +1866,11 @@ window.__LOCALE_KR__ = {
     "vs rot-afflicted enemies": "부패 상태의 적 상대",
     "While HP is below 40%": "HP가 40% 미만일 때",
     "While HP is below 85%": "HP가 85% 미만일 때",
-    "While using flasks": "성배병 사용 중"
+    "While using flasks": "성배병 사용 중",
+    "Weapon skills only": "전투 기술만",
+    "Elemental damage on weapons only (not spells)": "무기의 속성 피해만 (마술·기도 제외)",
+    "20s after poison/rot procs nearby": "근처에서 독/부패 발생 후 20초간",
+    "10s after switching weapons": "무기 바꿔 들기 후 10초간"
   },
   "weaponTypes": {
     "Dagger": "단검",

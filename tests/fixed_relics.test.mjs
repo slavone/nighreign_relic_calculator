@@ -46,11 +46,12 @@ check('Starlight Shards relic (1520) has 3 Starlight Shards effects',
   names(1520).length === 3 && names(1520).every(n => n === 'Starlight Shards in possession at start of expedition'));
 const evergaol = byId.get(1510)?.effects.find(e => e.name === 'Attack power increased for each evergaol prisoner defeated');
 check('Signboard 1510 carries the counted Evergaol effect', evergaol?.mul?.variableCount === true);
-check('Huge rune discount name is newline-normalised',
-  names(2040).includes('Huge rune discount for shop purchases while on expedition'));
+check('effect names keep the game file\'s line breaks, like the pool data',
+  names(2040).includes('Huge rune discount for shop purchases while on\nexpedition'));
+check('…and still pick up mul/desc via the normalised name',
+  !!byId.get(2040).effects.find(e => e.name.startsWith('Huge rune discount'))?.desc);
 
 check('every relic has at least one effect', relics.every(r => r.effects.length > 0));
-check('no effect name has a raw newline', relics.every(r => r.effects.every(e => !e.name.includes('\n'))));
 check('every effect name resolved (no "?" placeholders)', relics.every(r => r.effects.every(e => !e.name.startsWith('?'))));
 check('every relic has a name', relics.every(r => typeof r.name === 'string' && r.name.length > 0));
 
