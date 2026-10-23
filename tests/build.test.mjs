@@ -338,6 +338,25 @@ function computeBuildTotals(effects, enabledSpecialNames) {
   };
 }
 
+// Duplicated from index.html (getBuildEffects helper).
+// Expands one selected effect into the entries computeBuildTotals() sees.
+// variableCount effects (e.g. "per Evergaol defeated") repeat the SAME
+// effect `count` times — the engine already multiplies a baseline value in
+// once per occurrence, so N copies yield value^N. Tiered counted effects
+// (stepValues, e.g. Glass Necklace's 1.05 → 1.065 → 1.09) instead collapse
+// into ONE entry carrying the product of the first `count` steps, so the
+// summary shows the real combined figure rather than value^count.
+function countedEntries(effect, count) {
+  const { name, mul, desc } = effect;
+  if (!mul?.variableCount) return [{ name, mul, desc }];
+  if (mul.stepValues) {
+    if (count <= 0) return [];
+    const value = mul.stepValues.slice(0, count).reduce((p, v) => p * v, 1);
+    return [{ name, mul: { ...mul, value }, desc }];
+  }
+  return Array.from({ length: count }, () => ({ name, mul, desc }));
+}
+
 // --- Test harness (matches tests/calc.test.mjs style) ---
 let passed = 0, failed = 0;
 function test(label, actual, expected, tolerance = 1e-9) {
@@ -920,6 +939,32 @@ function test(label, actual, expected, tolerance = 1e-9) {
     { name: 'Improved Dagger Attack Power', mul: dagger },
   ]);
   test('distinct-condition families stay separate', r.conditionalTree.damage.weapon.length, 2);
+}
+
+// Counted-effect expansion (getBuildEffects in index.html): a tiered counted
+// effect (stepValues — Glass Necklace's successive-attack tiers) collapses to
+// ONE entry carrying the product of its first N steps, so the summary shows
+// ×1.219 rather than ×1.05³; plain counted effects (Evergaol) still repeat.
+{
+  const glass = { name: 'Successive Attacks Boost Attack Power', desc: 'd',
+    mul: { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05, variableCount: true, maxCount: 3, stepValues: [1.05, 1.065, 1.09] } };
+  const evergaol = { name: 'Attack power increased for each evergaol prisoner defeated',
+    mul: { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05, variableCount: true, maxCount: 7 } };
+  const plain = { name: 'Physical Attack Up +2', mul: { tier: 'baseline', bucket: 'damage', axes: ['physical'], value: 1.06 } };
+
+  const g3 = countedEntries(glass, 3);
+  test('Glass Necklace tier 3 collapses to a single entry', g3.length, 1);
+  test('…whose value is 1.05 × 1.065 × 1.09', g3[0].mul.value, 1.05 * 1.065 * 1.09);
+  test('…and keeps its name and desc', g3[0].name + '|' + g3[0].desc, 'Successive Attacks Boost Attack Power|d');
+  test('Glass Necklace tier 0 contributes no entries at all', countedEntries(glass, 0).length, 0);
+  test('Glass Necklace tier 2 → universal baseline 1.05 × 1.065',
+    computeBuildTotals(countedEntries(glass, 2)).damageBaseline.universal, 1.05 * 1.065);
+  test('Glass Necklace tier 3 shows one baseline row with count 1',
+    computeBuildTotals(countedEntries(glass, 3)).damageBaseline.universal, 1.05 * 1.065 * 1.09);
+  test('Evergaol ×3 still expands to 3 entries', countedEntries(evergaol, 3).length, 3);
+  test('Evergaol ×3 → 1.05^3', computeBuildTotals(countedEntries(evergaol, 3)).damageBaseline.universal, Math.pow(1.05, 3));
+  test('a non-counted effect ignores the count', countedEntries(plain, 5).length, 1);
+  test('source effect mul is not mutated by collapsing', glass.mul.value, 1.05);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -1598,7 +1598,25 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
 
     // Reads every selected effect across all 6 relic panels (plus any selected
     // curses) and returns the flat list computeBuildTotals() expects.
-    function getBuildEffects() {
+// Expands one selected effect into the entries computeBuildTotals() sees.
+    // variableCount effects (e.g. "per Evergaol defeated") repeat the SAME
+    // effect `count` times — the engine already multiplies a baseline value in
+    // once per occurrence, so N copies yield value^N. Tiered counted effects
+    // (stepValues, e.g. Glass Necklace's 1.05 → 1.065 → 1.09) instead collapse
+    // into ONE entry carrying the product of the first `count` steps, so the
+    // summary shows the real combined figure rather than value^count.
+    function countedEntries(effect, count) {
+      const { name, mul, desc } = effect;
+      if (!mul?.variableCount) return [{ name, mul, desc }];
+      if (mul.stepValues) {
+        if (count <= 0) return [];
+        const value = mul.stepValues.slice(0, count).reduce((p, v) => p * v, 1);
+        return [{ name, mul: { ...mul, value }, desc }];
+      }
+      return Array.from({ length: count }, () => ({ name, mul, desc }));
+    }
+
+        function getBuildEffects() {
       const effects = [];
       // Curses are per effect slot, not per relic — only a slot whose selected
       // effect actually has hasCurse gets a visible curse-select (see addRow()
@@ -1612,15 +1630,10 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
             if (isNaN(gIdx) || isNaN(eIdx)) return;
             const effect = groups[gIdx]?.effects[eIdx];
             if (effect) {
-              // variableCount effects (e.g. "per Evergaol defeated") push the
-              // SAME effect into the list `count` times instead of once —
-              // computeBuildTotals already multiplies a baseline entry's value
-              // in once per occurrence, so N pushes naturally yields value^N
-              // with no engine changes needed.
               const count = effect.mul?.variableCount
                 ? (parseInt(block.querySelector('.count-select')?.value) || 0)
                 : 1;
-              for (let i = 0; i < count; i++) effects.push({ name: effect.name, mul: effect.mul, desc: effect.desc });
+              effects.push(...countedEntries(effect, count));
             }
             if (includeCurse) {
               const curseSel = block.querySelector('.curse-select');
