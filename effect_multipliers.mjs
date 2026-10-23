@@ -58,6 +58,12 @@
 //            existing per-occurrence multiply.
 // maxCount:  required alongside variableCount — the highest count the count selector
 //            offers, i.e. the real in-game cap for that trigger (confirmed with the user).
+// stepValues: optional, variableCount entries only — for a TIERED counted effect whose
+//            steps aren't all the same multiplier (Glass Necklace's successive-attack
+//            tiers: 1.05 → 1.065 → 1.09, each multiplying on top of the last). The Nth
+//            step uses stepValues[N-1] instead of `value`; maxCount must equal
+//            stepValues.length and `value` must equal stepValues[0]. The UI collapses
+//            a chosen count into ONE entry carrying the product of the first N steps.
 // special:   conditional tier only, optional boolean (true or absent — never false). Marks
 //            a genuinely SITUATIONAL/temporal trigger (vs-a-status enemy, 3+ weapon type
 //            equipped, a grease-item window, a curse tied to evading/flasks/low HP, etc.)
@@ -138,6 +144,15 @@ export const EFFECT_MULTIPLIERS = {
   // deriving count from how many relics carry the effect.
   'Attack power increased for each evergaol prisoner defeated': { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05, variableCount: true, maxCount: 7 },
   'Attack power increased for each Night Invader defeated': { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.07, variableCount: true, maxCount: 4 },
+  // Guaranteed-relic-only stacking buffs (Night of Dregs, Glass Necklace) —
+  // the stack/tier count is player-chosen the same way (0 = not active).
+  // Dregs assumes stacks multiply (×1.04^N), matching how the Glass Necklace
+  // tiers combine; not independently confirmed.
+  'Status Ailment Gauges Slowly Increase Attack Power': { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.04, variableCount: true, maxCount: 10 },
+  'Successive Attacks Boost Attack Power': { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05, variableCount: true, maxCount: 3, stepValues: [1.05, 1.065, 1.09] },
+  // Will of the Balancers / Will of Balance. The source sheet says this one
+  // applies to ALL attack power (weapon and skills), despite the name.
+  'Improved Melee Attack Power': { tier: 'baseline', bucket: 'damage', axes: ['universal'], value: 1.05 },
 
   // ── Sorcery / Incantation category multipliers (baseline, no fixed axis) ─
   'Improved Sorceries': { tier: 'baseline', bucket: 'damage', category: 'sorcery', value: 1.05 },
@@ -177,6 +192,14 @@ export const EFFECT_MULTIPLIERS = {
   // applying to all damage types, so these are physical-axis conditionals
   // like a weapon-specific hit, not universal-only.
   'Improved Critical Hits': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.18, condition: 'On critical hits' },
+  'Improved Critical Hits +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.23, condition: 'On critical hits' },
+  'Improved Skill Attack Power': { tier: 'conditional', bucket: 'damage', axes: ['universal'], group: 'hitType', value: 1.15, condition: 'Weapon skills only' },
+  // Night of the Lord / Dark Night of the Champion / Golden Dew. Applies to
+  // elemental damage ON THE WEAPON (any source, not just weapon buffs) but
+  // not to sorceries/incantations — so not an always-on affinity baseline.
+  'Boosts Attack Power of Added Affinity Attacks': { tier: 'conditional', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], group: 'weapon', value: 1.1, condition: 'Elemental damage on weapons only (not spells)' },
+  'Switching Weapons Boosts Attack Power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['physical'], group: 'status', value: 1.1, condition: '10s after switching weapons' },
+  'Poison & Rot in Vicinity Increases Attack Power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.12, condition: '20s after poison/rot procs nearby' },
   'Taking attacks improves attack power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.15, condition: '10s after taking a hit' },
   'Improved Guard Counters': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.17, condition: 'On guard counters' },
   'Improved Guard Counters +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.25, condition: 'On guard counters' },
@@ -225,6 +248,8 @@ export const EFFECT_MULTIPLIERS = {
   'Improved Holy Damage Negation +2': { tier: 'baseline', bucket: 'negation', axes: ['holy'], value: 0.16 },
   'Improved Physical Damage Negation +1': { tier: 'baseline', bucket: 'negation', axes: ['physical'], value: 0.105 },
   'Improved Physical Damage Negation +2': { tier: 'baseline', bucket: 'negation', axes: ['physical'], value: 0.12 },
+  // Base (+0) version — only on Dark Night of the Miasma, never rolls randomly.
+  'Improved Physical Damage Negation': { tier: 'baseline', bucket: 'negation', axes: ['physical'], value: 0.10 },
   'Improved Affinity Damage Negation': { tier: 'baseline', bucket: 'negation', axes: ['magic', 'fire', 'lightning', 'holy'], value: 0.06 },
   'Improved Affinity Damage Negation +1': { tier: 'baseline', bucket: 'negation', axes: ['magic', 'fire', 'lightning', 'holy'], value: 0.105 },
   'Improved Affinity Damage Negation +2': { tier: 'baseline', bucket: 'negation', axes: ['magic', 'fire', 'lightning', 'holy'], value: 0.12 },
@@ -260,6 +285,9 @@ export const EFFECT_MULTIPLIERS = {
   'Reduced Vigor and Arcane': { tier: 'flat', pools: [{ pool: 'vigor', value: -60 }, { pool: 'arcane', value: -3 }] },
   'Taking Damage Causes Blood Loss Buildup': { tier: 'flat', value: 44, template: 'Taking damage inflicts {v} blood loss buildup' },
   'Taking Damage Causes Death Buildup': { tier: 'flat', value: 32, template: 'Taking damage inflicts {v} death blight buildup' },
+  // Guaranteed-relic-only additive effects.
+  'Continuous HP Recovery': { tier: 'flat', value: 2, template: '+{v} HP/s' },
+  'Attacks Inflict Rot when Damage is Taken': { tier: 'flat', value: 25, template: 'Taking damage adds {v} rot buildup to your weapon for 12s' },
   'Taking Damage Causes Frost Buildup': { tier: 'flat', value: 44, template: 'Taking damage inflicts {v} frost buildup' },
   'Taking Damage Causes Madness Buildup': { tier: 'flat', value: 40, template: 'Taking damage inflicts {v} madness buildup' },
   'Taking Damage Causes Poison Buildup': { tier: 'flat', value: 52, template: 'Taking damage inflicts {v} poison buildup' },

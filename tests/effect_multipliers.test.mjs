@@ -100,6 +100,15 @@ for (const [name, m] of entries) {
   } else {
     check(`${name}: maxCount only appears alongside variableCount`, m.maxCount === undefined);
   }
+  if (m.stepValues !== undefined) {
+    // Tiered counted effects: the Nth step multiplies in stepValues[N-1]
+    // instead of repeating `value`, so the array must line up with maxCount.
+    check(`${name}: stepValues is a non-empty array of positive numbers`,
+      Array.isArray(m.stepValues) && m.stepValues.length > 0 && m.stepValues.every(v => typeof v === 'number' && v > 0));
+    check(`${name}: stepValues requires variableCount`, m.variableCount === true);
+    check(`${name}: maxCount equals stepValues.length`, m.maxCount === m.stepValues.length);
+    check(`${name}: value equals the first step`, m.value === m.stepValues[0]);
+  }
   if (m.special !== undefined) {
     check(`${name}: special is boolean true`, m.special === true);
     check(`${name}: special only applies to conditional tier (specials are player-toggled, not derived from axis/group)`, m.tier === 'conditional');
@@ -188,6 +197,23 @@ const nightInvader = EFFECT_MULTIPLIERS['Attack power increased for each Night I
 check('Night Invader bonus is a variable-count universal baseline, capped at 4', nightInvader &&
   nightInvader.tier === 'baseline' && nightInvader.axes.includes('universal') &&
   nightInvader.value === 1.07 && nightInvader.variableCount === true && nightInvader.maxCount === 4);
+
+const glassNecklace = EFFECT_MULTIPLIERS['Successive Attacks Boost Attack Power'];
+check('Glass Necklace successive-attack tiers are stepped counted values 1.05/1.065/1.09', glassNecklace &&
+  glassNecklace.variableCount === true && glassNecklace.maxCount === 3 &&
+  JSON.stringify(glassNecklace.stepValues) === JSON.stringify([1.05, 1.065, 1.09]));
+
+const dregsStacks = EFFECT_MULTIPLIERS['Status Ailment Gauges Slowly Increase Attack Power'];
+check('Night of Dregs status-gauge stacks are a counted ×1.04 capped at 10', dregsStacks &&
+  dregsStacks.value === 1.04 && dregsStacks.variableCount === true && dregsStacks.maxCount === 10);
+
+const crit1 = EFFECT_MULTIPLIERS['Improved Critical Hits +1'];
+check('Improved Critical Hits +1 is ×1.23 on critical hits', crit1 &&
+  crit1.value === 1.23 && crit1.condition === 'On critical hits');
+
+const physNeg = EFFECT_MULTIPLIERS['Improved Physical Damage Negation'];
+check('Improved Physical Damage Negation is +10% physical negation', physNeg &&
+  physNeg.bucket === 'negation' && physNeg.value === 0.10);
 
 const evasionCurse = EFFECT_MULTIPLIERS['Reduced Damage Negation After Evading'];
 check('evasion curse is negative negation, conditional', evasionCurse &&

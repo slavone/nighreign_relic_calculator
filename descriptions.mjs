@@ -284,6 +284,33 @@ export const EFFECT_DESCRIPTIONS = {
   'Runes and Item Discovery increased for each great enemy defeated at a Fort': '+16 discovery, 1.055× runes per Fort boss',
   'Arcane increased for each great enemy defeated at a Ruin': '+4 Arcane per Ruin boss',
   'Max stamina increased for each great enemy defeated at a Great Encampment': '1.075× max stamina per Camp boss',
+
+  // ── Guaranteed-relic-only effects (never roll on random relics) ──────────
+  'Improved Melee Attack Power':                         '1.05× all attack power (weapon and skills)',
+  'Improved Skill Attack Power':                         '1.15× weapon skill damage',
+  'Improved Critical Hits +1':                           '1.23× critical hit damage',
+  'Improved Physical Damage Negation':                   '+10% physical damage negation',
+  'Boosts Attack Power of Added Affinity Attacks':       '1.1× elemental damage on weapons (not sorceries/incantations)',
+  'Switching Weapons Adds an Affinity Attack':           '+12 AP of a random element for 10s after switching weapons',
+  'Switching Weapons Boosts Attack Power':               '1.1× physical damage for 10s after switching weapons',
+  'Successive Attacks Boost Attack Power':               '1.05× / 1.065× / 1.09× damage per successive-attack tier (stacking: up to ~1.219×)',
+  'Poison & Rot in Vicinity Increases Attack Power':     '1.12× damage for 20s after poison or rot procs nearby',
+  'Status Ailment Gauges Slowly Increase Attack Power':  '1.04× damage every 20s while a status gauge is visible (up to 10 stacks)',
+  'Attacks Inflict Rot when Damage is Taken':            '+25 rot buildup on your weapon for 12s after taking damage',
+  'Frostbite in Vicinity Conceals Self':                 'Become hidden when frostbite procs nearby',
+  'Occasionally Nullify Attacks When Damage Negation is Lowered': '20% chance to take no damage while any damage negation is lowered',
+  'Stamina Recovery upon Landing Attacks +1':            'Restores 3 stamina on successive attacks',
+  'FP Restoration upon Successive Attacks':              'Restores 5% of max FP on successive attacks',
+  'Continuous HP Recovery':                              '+2 HP/s',
+  'Continuous FP Recovery':                              '+1 FP every 5s',
+  'Rot in Vicinity Causes Continuous HP Recovery':       'Restores 0.15% max HP + 15 HP/s for 15s after rot procs nearby',
+  'HP Recovery From Successful Guarding':                'Restores 8 HP after blocking an attack',
+  'Madness Continually Recovers FP':                     'Restores 2 FP/s for 25s while maddened',
+  'Gesture "Crossed Legs" Builds Up Madness':            'Inflicts 10 madness buildup every 2s while doing the Crossed Legs gesture',
+  'Huge rune discount for shop purchases while on expedition': '20% discount at merchants (stacks with the regular 10% discount)',
+  'Extended Spell Duration':                             '+50% spell duration',
+  'Improved Stance-Breaking when Two-Handing':           '1.05× poise damage when two-handing (not bows)',
+  'Improved Stance-Breaking when Wielding Two Armaments': '1.05× poise damage when power-stancing',
 };
 
 export const CURSE_DESCRIPTIONS = {
