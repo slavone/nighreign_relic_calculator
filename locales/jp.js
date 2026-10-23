@@ -133,85 +133,112 @@ window.__LOCALE_JP__ = {
   },
   "effects": {
     "Vigor +1": {
-      "name": "生命力+1"
+      "name": "生命力+1",
+      "desc": "最大HP+20"
     },
     "Vigor +2": {
-      "name": "生命力+2"
+      "name": "生命力+2",
+      "desc": "最大HP+40"
     },
     "Vigor +3": {
-      "name": "生命力+3"
+      "name": "生命力+3",
+      "desc": "最大HP+60"
     },
     "Mind +1": {
-      "name": "精神力+1"
+      "name": "精神力+1",
+      "desc": "最大FP+5"
     },
     "Mind +2": {
-      "name": "精神力+2"
+      "name": "精神力+2",
+      "desc": "最大FP+10"
     },
     "Mind +3": {
-      "name": "精神力+3"
+      "name": "精神力+3",
+      "desc": "最大FP+15"
     },
     "Endurance +1": {
-      "name": "持久力+1"
+      "name": "持久力+1",
+      "desc": "最大スタミナ+2"
     },
     "Endurance +2": {
-      "name": "持久力+2"
+      "name": "持久力+2",
+      "desc": "最大スタミナ+4"
     },
     "Endurance +3": {
-      "name": "持久力+3"
+      "name": "持久力+3",
+      "desc": "最大スタミナ+6"
     },
     "Strength +1": {
-      "name": "筋力+1"
+      "name": "筋力+1",
+      "desc": "筋力+1"
     },
     "Strength +2": {
-      "name": "筋力+2"
+      "name": "筋力+2",
+      "desc": "筋力+2"
     },
     "Strength +3": {
-      "name": "筋力+3"
+      "name": "筋力+3",
+      "desc": "筋力+3"
     },
     "Dexterity +1": {
-      "name": "技量+1"
+      "name": "技量+1",
+      "desc": "技量+1"
     },
     "Dexterity +2": {
-      "name": "技量+2"
+      "name": "技量+2",
+      "desc": "技量+2"
     },
     "Dexterity +3": {
-      "name": "技量+3"
+      "name": "技量+3",
+      "desc": "技量+3"
     },
     "Intelligence +1": {
-      "name": "知力+1"
+      "name": "知力+1",
+      "desc": "知力+1"
     },
     "Intelligence +2": {
-      "name": "知力+2"
+      "name": "知力+2",
+      "desc": "知力+2"
     },
     "Intelligence +3": {
-      "name": "知力+3"
+      "name": "知力+3",
+      "desc": "知力+3"
     },
     "Faith +1": {
-      "name": "信仰+1"
+      "name": "信仰+1",
+      "desc": "信仰+1"
     },
     "Faith +2": {
-      "name": "信仰+2"
+      "name": "信仰+2",
+      "desc": "信仰+2"
     },
     "Faith +3": {
-      "name": "信仰+3"
+      "name": "信仰+3",
+      "desc": "信仰+3"
     },
     "Arcane +1": {
-      "name": "神秘+1"
+      "name": "神秘+1",
+      "desc": "神秘+1"
     },
     "Arcane +2": {
-      "name": "神秘+2"
+      "name": "神秘+2",
+      "desc": "神秘+2"
     },
     "Arcane +3": {
-      "name": "神秘+3"
+      "name": "神秘+3",
+      "desc": "神秘+3"
     },
     "Poise +1": {
-      "name": "強靭度+1"
+      "name": "強靭度+1",
+      "desc": "受ける強靭削り0.95倍"
     },
     "Poise +2": {
-      "name": "強靭度+2"
+      "name": "強靭度+2",
+      "desc": "受ける強靭削り0.9倍"
     },
     "Poise +3": {
-      "name": "強靭度+3"
+      "name": "強靭度+3",
+      "desc": "受ける強靭削り0.85倍"
     },
     "Physical Attack Power Up": {
       "name": "物理攻撃力上昇"
@@ -223,115 +250,152 @@ window.__LOCALE_JP__ = {
       "name": "物理攻撃力上昇+2"
     },
     "Magic Attack Power Up": {
-      "name": "魔力攻撃力上昇"
+      "name": "魔力攻撃力上昇",
+      "desc": "魔力ダメージ1.045倍"
     },
     "Magic Attack Power Up +1": {
-      "name": "魔力攻撃力上昇+1"
+      "name": "魔力攻撃力上昇+1",
+      "desc": "魔力ダメージ1.055倍"
     },
     "Magic Attack Power Up +2": {
-      "name": "魔力攻撃力上昇+2"
+      "name": "魔力攻撃力上昇+2",
+      "desc": "魔力ダメージ1.065倍"
     },
     "Fire Attack Power Up": {
-      "name": "炎攻撃力上昇"
+      "name": "炎攻撃力上昇",
+      "desc": "炎ダメージ1.045倍"
     },
     "Fire Attack Power Up +1": {
-      "name": "炎攻撃力上昇+1"
+      "name": "炎攻撃力上昇+1",
+      "desc": "炎ダメージ1.055倍"
     },
     "Fire Attack Power Up +2": {
-      "name": "炎攻撃力上昇+2"
+      "name": "炎攻撃力上昇+2",
+      "desc": "炎ダメージ1.065倍"
     },
     "Lightning Attack Power Up": {
-      "name": "雷攻撃力上昇"
+      "name": "雷攻撃力上昇",
+      "desc": "雷ダメージ1.045倍"
     },
     "Lightning Attack Power Up +1": {
-      "name": "雷攻撃力上昇+1"
+      "name": "雷攻撃力上昇+1",
+      "desc": "雷ダメージ1.055倍"
     },
     "Lightning Attack Power Up +2": {
-      "name": "雷攻撃力上昇+2"
+      "name": "雷攻撃力上昇+2",
+      "desc": "雷ダメージ1.065倍"
     },
     "Holy Attack Power Up": {
-      "name": "聖攻撃力上昇"
+      "name": "聖攻撃力上昇",
+      "desc": "聖ダメージ1.045倍"
     },
     "Holy Attack Power Up +1": {
-      "name": "聖攻撃力上昇+1"
+      "name": "聖攻撃力上昇+1",
+      "desc": "聖ダメージ1.055倍"
     },
     "Holy Attack Power Up +2": {
-      "name": "聖攻撃力上昇+2"
+      "name": "聖攻撃力上昇+2",
+      "desc": "聖ダメージ1.065倍"
     },
     "Improved Axe Attack Power": {
-      "name": "斧の攻撃力上昇"
+      "name": "斧の攻撃力上昇",
+      "desc": "斧のダメージ1.09倍"
     },
     "Improved Bow Attack Power": {
-      "name": "弓の攻撃力上昇"
+      "name": "弓の攻撃力上昇",
+      "desc": "弓のダメージ1.06倍"
     },
     "Improved Claw Attack Power": {
-      "name": "爪の攻撃力上昇"
+      "name": "爪の攻撃力上昇",
+      "desc": "爪のダメージ1.09倍"
     },
     "Improved Colossal Sword Attack Power": {
-      "name": "特大剣の攻撃力上昇"
+      "name": "特大剣の攻撃力上昇",
+      "desc": "特大剣のダメージ1.09倍"
     },
     "Improved Colossal Weapon Attack Power": {
-      "name": "特大武器の攻撃力上昇"
+      "name": "特大武器の攻撃力上昇",
+      "desc": "特大武器のダメージ1.09倍"
     },
     "Improved Curved Greatsword Attack Power": {
-      "name": "大曲剣の攻撃力上昇"
+      "name": "大曲剣の攻撃力上昇",
+      "desc": "大曲剣のダメージ1.09倍"
     },
     "Improved Curved Sword Attack Power": {
-      "name": "曲剣の攻撃力上昇"
+      "name": "曲剣の攻撃力上昇",
+      "desc": "曲剣のダメージ1.09倍"
     },
     "Improved Dagger Attack Power": {
-      "name": "短剣の攻撃力上昇"
+      "name": "短剣の攻撃力上昇",
+      "desc": "短剣のダメージ1.09倍"
     },
     "Improved Fist Attack Power": {
-      "name": "拳の攻撃力上昇"
+      "name": "拳の攻撃力上昇",
+      "desc": "拳のダメージ1.09倍"
     },
     "Improved Flail Attack Power": {
-      "name": "フレイルの攻撃力上昇"
+      "name": "フレイルの攻撃力上昇",
+      "desc": "フレイルのダメージ1.09倍"
     },
     "Improved Great Hammer Attack Power": {
-      "name": "大槌の攻撃力上昇"
+      "name": "大槌の攻撃力上昇",
+      "desc": "大槌のダメージ1.09倍"
     },
     "Improved Great Spear Attack Power": {
-      "name": "大槍の攻撃力上昇"
+      "name": "大槍の攻撃力上昇",
+      "desc": "大槍のダメージ1.09倍"
     },
     "Improved Greataxe Attack Power": {
-      "name": "大斧の攻撃力上昇"
+      "name": "大斧の攻撃力上昇",
+      "desc": "大斧のダメージ1.09倍"
     },
     "Improved Greatsword Attack Power": {
-      "name": "大剣の攻撃力上昇"
+      "name": "大剣の攻撃力上昇",
+      "desc": "大剣のダメージ1.09倍"
     },
     "Improved Halberd Attack Power": {
-      "name": "斧槍の攻撃力上昇"
+      "name": "斧槍の攻撃力上昇",
+      "desc": "斧槍のダメージ1.09倍"
     },
     "Improved Hammer Attack Power": {
-      "name": "槌の攻撃力上昇"
+      "name": "槌の攻撃力上昇",
+      "desc": "槌のダメージ1.09倍"
     },
     "Improved Heavy Thrusting Sword Attack Power": {
-      "name": "重刺剣の攻撃力上昇"
+      "name": "重刺剣の攻撃力上昇",
+      "desc": "重刺剣のダメージ1.09倍"
     },
     "Improved Katana Attack Power": {
-      "name": "刀の攻撃力上昇"
+      "name": "刀の攻撃力上昇",
+      "desc": "刀のダメージ1.09倍"
     },
     "Improved Reaper Attack Power": {
-      "name": "大鎌の攻撃力上昇"
+      "name": "大鎌の攻撃力上昇",
+      "desc": "大鎌のダメージ1.09倍"
     },
     "Improved Spear Attack Power": {
-      "name": "槍の攻撃力上昇"
+      "name": "槍の攻撃力上昇",
+      "desc": "槍のダメージ1.09倍"
     },
     "Improved Straight Sword Attack Power": {
-      "name": "直剣の攻撃力上昇"
+      "name": "直剣の攻撃力上昇",
+      "desc": "直剣のダメージ1.09倍"
     },
     "Improved Thrusting Sword Attack Power": {
-      "name": "刺剣の攻撃力上昇"
+      "name": "刺剣の攻撃力上昇",
+      "desc": "刺剣のダメージ1.09倍"
     },
     "Improved Twinblade Attack Power": {
-      "name": "両刃剣の攻撃力上昇"
+      "name": "両刃剣の攻撃力上昇",
+      "desc": "両刃剣のダメージ1.09倍"
     },
     "Improved Whip Attack Power": {
-      "name": "鞭の攻撃力上昇"
+      "name": "鞭の攻撃力上昇",
+      "desc": "鞭のダメージ1.09倍"
     },
     "Improved Attack Power with 3+ Axes Equipped": {
-      "name": "斧を3本以上装備時、攻撃力上昇"
+      "name": "斧を3本以上装備時、攻撃力上昇",
+      "desc": "斧を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Axes": {
       "name": "潜在する力から斧を見つけやすくなる"
@@ -343,25 +407,29 @@ window.__LOCALE_JP__ = {
       "name": "潜在する力からバリスタを見つけやすくなる"
     },
     "Improved Attack Power with 3+ Bows Equipped": {
-      "name": "弓を3本以上装備時、攻撃力上昇"
+      "name": "弓を3本以上装備時、攻撃力上昇",
+      "desc": "弓を3つ以上装備時、ダメージ1.1倍"
     },
     "Dormant Power Helps Discover Bows": {
       "name": "潜在する力から弓を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Claws Equipped": {
-      "name": "爪を3本以上装備時、攻撃力上昇"
+      "name": "爪を3本以上装備時、攻撃力上昇",
+      "desc": "爪を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Claws": {
       "name": "潜在する力から爪を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Colossal Swords Equipped": {
-      "name": "特大剣を3本以上装備時、攻撃力上昇"
+      "name": "特大剣を3本以上装備時、攻撃力上昇",
+      "desc": "特大剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Colossal Swords": {
       "name": "潜在する力から特大剣を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Colossal Weapons Equipped": {
-      "name": "特大武器を3本以上装備時、攻撃力上昇"
+      "name": "特大武器を3本以上装備時、攻撃力上昇",
+      "desc": "特大武器を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Colossal Weapons": {
       "name": "潜在する力から特大武器を見つけやすくなる"
@@ -373,19 +441,22 @@ window.__LOCALE_JP__ = {
       "name": "潜在する力からクロスボウを見つけやすくなる"
     },
     "Improved Attack Power with 3+ Curved Greatswords Equipped": {
-      "name": "大曲剣を3本以上装備時、攻撃力上昇"
+      "name": "大曲剣を3本以上装備時、攻撃力上昇",
+      "desc": "大曲剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Curved Greatswords": {
       "name": "潜在する力から大曲剣を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Curved Swords Equipped": {
-      "name": "曲剣を3本以上装備時、攻撃力上昇"
+      "name": "曲剣を3本以上装備時、攻撃力上昇",
+      "desc": "曲剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Curved Swords": {
       "name": "潜在する力から曲剣を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Daggers Equipped": {
-      "name": "短剣を3本以上装備時、攻撃力上昇"
+      "name": "短剣を3本以上装備時、攻撃力上昇",
+      "desc": "短剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Daggers": {
       "name": "潜在する力から短剣を見つけやすくなる"
@@ -394,31 +465,36 @@ window.__LOCALE_JP__ = {
       "name": "拳の攻撃力上昇"
     },
     "Improved Attack Power with 3+ Fists Equipped": {
-      "name": "拳を3本以上装備時、攻撃力上昇"
+      "name": "拳を3本以上装備時、攻撃力上昇",
+      "desc": "拳を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Fists": {
       "name": "潜在する力から拳を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Flails Equipped": {
-      "name": "フレイルを3本以上装備時、攻撃力上昇"
+      "name": "フレイルを3本以上装備時、攻撃力上昇",
+      "desc": "フレイルを3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Flails": {
       "name": "潜在する力からフレイルを見つけやすくなる"
     },
     "Improved Attack Power with 3+ Great Hammers Equipped": {
-      "name": "大槌を3本以上装備時、攻撃力上昇"
+      "name": "大槌を3本以上装備時、攻撃力上昇",
+      "desc": "大槌を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Great Hammers": {
       "name": "潜在する力から大槌を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Great Spears Equipped": {
-      "name": "大槍を3本以上装備時、攻撃力上昇"
+      "name": "大槍を3本以上装備時、攻撃力上昇",
+      "desc": "大槍を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Great Spears": {
       "name": "潜在する力から大槍を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Greataxes Equipped": {
-      "name": "大斧を3本以上装備時、攻撃力上昇"
+      "name": "大斧を3本以上装備時、攻撃力上昇",
+      "desc": "大斧を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Greataxes": {
       "name": "潜在する力から大斧を見つけやすくなる"
@@ -436,43 +512,50 @@ window.__LOCALE_JP__ = {
       "name": "潜在する力から大盾を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Greatswords Equipped": {
-      "name": "大剣を3本以上装備時、攻撃力上昇"
+      "name": "大剣を3本以上装備時、攻撃力上昇",
+      "desc": "大剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Greatswords": {
       "name": "潜在する力から大剣を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Halberds Equipped": {
-      "name": "斧槍を3本以上装備時、攻撃力上昇"
+      "name": "斧槍を3本以上装備時、攻撃力上昇",
+      "desc": "斧槍を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Halberds": {
       "name": "潜在する力から斧槍を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Hammers Equipped": {
-      "name": "槌を3本以上装備時、攻撃力上昇"
+      "name": "槌を3本以上装備時、攻撃力上昇",
+      "desc": "槌を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Hammers": {
       "name": "潜在する力から槌を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Heavy Thrusting Swords Equipped": {
-      "name": "重刺剣を3本以上装備時、攻撃力上昇"
+      "name": "重刺剣を3本以上装備時、攻撃力上昇",
+      "desc": "重刺剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Heavy Thrusting Swords": {
       "name": "潜在する力から重刺剣を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Reapers Equipped": {
-      "name": "大鎌を3本以上装備時、攻撃力上昇"
+      "name": "大鎌を3本以上装備時、攻撃力上昇",
+      "desc": "大鎌を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Reapers": {
       "name": "潜在する力から大鎌を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Spears Equipped": {
-      "name": "槍を3本以上装備時、攻撃力上昇"
+      "name": "槍を3本以上装備時、攻撃力上昇",
+      "desc": "槍を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Spears": {
       "name": "潜在する力から槍を見つけやすくなる"
     },
     "Improved Attack Power with 3+ Straight Swords Equipped": {
-      "name": "直剣を3本以上装備時、攻撃力上昇"
+      "name": "直剣を3本以上装備時、攻撃力上昇",
+      "desc": "直剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Dormant Power Helps Discover Straight Swords": {
       "name": "潜在する力から直剣を見つけやすくなる"
@@ -1162,127 +1245,166 @@ window.__LOCALE_JP__ = {
       "name": "【葬儀屋】祈祷で自身に補助効果発生時、物理攻撃力上昇"
     },
     "All Resistances Down": {
-      "name": "全耐性低下"
+      "name": "全耐性低下",
+      "desc": "全状態異常耐性−80"
     },
     "Continuous HP Loss": {
-      "name": "HP持続減少"
+      "name": "HP持続減少",
+      "desc": "HP −2/秒"
     },
     "Lower Attack When Below Max HP": {
-      "name": "HP満タン以外で攻撃力低下"
+      "name": "HP満タン以外で攻撃力低下",
+      "desc": "HPが85%未満の時、ダメージ0.915倍"
     },
     "Near Death Reduces Max HP": {
-      "name": "瀕死時、最大HP低下"
+      "name": "瀕死時、最大HP低下",
+      "desc": "瀕死から60秒間、最大HP0.75倍"
     },
     "Poison Buildup When Below Max HP": {
-      "name": "HP満タン以外で毒の蓄積"
+      "name": "HP満タン以外で毒の蓄積",
+      "desc": "HPが85%未満の時、0.22秒ごとに毒蓄積2"
     },
     "Reduced Damage Negation After Evading": {
-      "name": "回避直後、カット率低下"
+      "name": "回避直後、カット率低下",
+      "desc": "回避直後、カット率−45%"
     },
     "Reduced Damage Negation for Flask Usages": {
-      "name": "聖杯瓶使用中、カット率低下"
+      "name": "聖杯瓶使用中、カット率低下",
+      "desc": "聖杯瓶使用中、カット率−45%"
     },
     "Reduced Dexterity and Faith": {
-      "name": "技量と信仰が低下"
+      "name": "技量と信仰が低下",
+      "desc": "技量と信仰−3"
     },
     "Reduced Faith and Strength": {
-      "name": "信仰と筋力が低下"
+      "name": "信仰と筋力が低下",
+      "desc": "信仰と筋力−3"
     },
     "Reduced Flask HP Restoration": {
-      "name": "聖杯瓶の回復量低下"
+      "name": "聖杯瓶の回復量低下",
+      "desc": "聖杯瓶のHP回復量0.85倍"
     },
     "Reduced Intelligence and Dexterity": {
-      "name": "知力と技量が低下"
+      "name": "知力と技量が低下",
+      "desc": "知力と技量−3"
     },
     "Reduced Rune Acquisition": {
-      "name": "取得ルーン減少"
+      "name": "取得ルーン減少",
+      "desc": "取得ルーン0.9倍"
     },
     "Reduced Strength and Intelligence": {
-      "name": "筋力と知力が低下"
+      "name": "筋力と知力が低下",
+      "desc": "筋力と知力−3"
     },
     "Reduced Vigor and Arcane": {
-      "name": "生命力と神秘が低下"
+      "name": "生命力と神秘が低下",
+      "desc": "生命力と神秘−3（HP−60）"
     },
     "Repeated Evasions Lower Damage Negation": {
-      "name": "連続回避でカット率低下"
+      "name": "連続回避でカット率低下",
+      "desc": "連続回避で15秒間カット率−23%/−35%"
     },
     "Rot Buildup When Below Max HP": {
-      "name": "HP満タン以外で腐敗の蓄積"
+      "name": "HP満タン以外で腐敗の蓄積",
+      "desc": "HPが85%未満の時、0.24秒ごとに腐敗蓄積2"
     },
     "Taking Damage Causes Blood Loss Buildup": {
-      "name": "被ダメージ時、出血の状態異常を付加"
+      "name": "被ダメージ時、出血の状態異常を付加",
+      "desc": "被ダメージ時、出血蓄積44"
     },
     "Taking Damage Causes Death Buildup": {
-      "name": "被ダメージ時、死の状態異常を付加"
+      "name": "被ダメージ時、死の状態異常を付加",
+      "desc": "被ダメージ時、死蓄積32"
     },
     "Taking Damage Causes Frost Buildup": {
-      "name": "被ダメージ時、冷気の状態異常を付加"
+      "name": "被ダメージ時、冷気の状態異常を付加",
+      "desc": "被ダメージ時、冷気蓄積44"
     },
     "Taking Damage Causes Madness Buildup": {
-      "name": "被ダメージ時、発狂の状態異常を付加"
+      "name": "被ダメージ時、発狂の状態異常を付加",
+      "desc": "被ダメージ時、発狂蓄積40"
     },
     "Taking Damage Causes Poison Buildup": {
-      "name": "被ダメージ時、毒の状態異常を付加"
+      "name": "被ダメージ時、毒の状態異常を付加",
+      "desc": "被ダメージ時、毒蓄積52"
     },
     "Taking Damage Causes Rot Buildup": {
-      "name": "被ダメージ時、腐敗の状態異常を付加"
+      "name": "被ダメージ時、腐敗の状態異常を付加",
+      "desc": "被ダメージ時、腐敗蓄積44"
     },
     "Taking Damage Causes Sleep Buildup": {
-      "name": "被ダメージ時、睡眠の状態異常を付加"
+      "name": "被ダメージ時、睡眠の状態異常を付加",
+      "desc": "被ダメージ時、睡眠蓄積40"
     },
     "Ultimate Art Charging Impaired": {
-      "name": "アーツゲージ蓄積鈍化"
+      "name": "アーツゲージ蓄積鈍化",
+      "desc": "アーツゲージ蓄積0.85倍"
     },
     "Arcane increased for each great enemy defeated at a Ruin": {
-      "name": "遺跡ボス撃破ごとに神秘上昇"
+      "name": "遺跡ボス撃破ごとに神秘上昇",
+      "desc": "遺跡のボス撃破ごとに神秘+4"
     },
     "Attack power increased for each Night Invader defeated": {
-      "name": "夜の侵略者撃破ごとに攻撃力上昇"
+      "name": "夜の侵略者撃破ごとに攻撃力上昇",
+      "desc": "夜の侵略者撃破ごとにダメージ1.07倍"
     },
     "Attack power increased for each evergaol prisoner defeated": {
-      "name": "封牢の囚撃破ごとに攻撃力上昇"
+      "name": "封牢の囚撃破ごとに攻撃力上昇",
+      "desc": "封牢のボス撃破ごとにダメージ1.05倍"
     },
     "Attack power up when facing frostbite-afflicted\nenemy": {
-      "name": "冷気付着時の攻撃力上昇"
+      "name": "冷気付着時の攻撃力上昇",
+      "desc": "冷気状態の敵へのダメージ1.1倍"
     },
     "Attack power up when facing frostbite-afflicted enemy": {
       "name": "冷気付着時の攻撃力上昇"
     },
     "Attack power up when facing frostbite-afflicted enemy +1": {
-      "name": "冷気付着時の攻撃力上昇+1"
+      "name": "冷気付着時の攻撃力上昇+1",
+      "desc": "冷気状態の敵へのダメージ1.16倍"
     },
     "Attack power up when facing frostbite-afflicted enemy +2": {
-      "name": "冷気付着時の攻撃力上昇+2"
+      "name": "冷気付着時の攻撃力上昇+2",
+      "desc": "冷気状態の敵へのダメージ1.2倍"
     },
     "Attack power up when facing scarlet rot-afflicted\nenemy": {
-      "name": "腐敗付着時の攻撃力上昇"
+      "name": "腐敗付着時の攻撃力上昇",
+      "desc": "腐敗状態の敵へのダメージ1.1倍"
     },
     "Attack power up when facing scarlet rot-afflicted enemy": {
       "name": "腐敗付着時の攻撃力上昇"
     },
     "Attack power up when facing scarlet rot-afflicted enemy +1": {
-      "name": "腐敗付着時の攻撃力上昇+1"
+      "name": "腐敗付着時の攻撃力上昇+1",
+      "desc": "腐敗状態の敵へのダメージ1.16倍"
     },
     "Attack power up when facing scarlet rot-afflicted enemy +2": {
-      "name": "腐敗付着時の攻撃力上昇+2"
+      "name": "腐敗付着時の攻撃力上昇+2",
+      "desc": "腐敗状態の敵へのダメージ1.2倍"
     },
     "Attack power up when facing poison-afflicted enemy": {
-      "name": "毒付着時の攻撃力上昇"
+      "name": "毒付着時の攻撃力上昇",
+      "desc": "毒状態の敵へのダメージ1.1倍"
     },
     "Attack power up when facing poison-afflicted enemy +1": {
-      "name": "毒付着時の攻撃力上昇+1"
+      "name": "毒付着時の攻撃力上昇+1",
+      "desc": "毒状態の敵へのダメージ1.16倍"
     },
     "Attack power up when facing poison-afflicted enemy +2": {
-      "name": "毒付着時の攻撃力上昇+2"
+      "name": "毒付着時の攻撃力上昇+2",
+      "desc": "毒状態の敵へのダメージ1.2倍"
     },
     "Character Skill Cooldown Reduction +1": {
-      "name": "スキルクールタイム軽減+1"
+      "name": "スキルクールタイム軽減+1",
+      "desc": "スキルクールタイム0.95倍"
     },
     "Character Skill Cooldown Reduction +2": {
-      "name": "スキルクールタイム軽減+2"
+      "name": "スキルクールタイム軽減+2",
+      "desc": "スキルクールタイム0.925倍"
     },
     "Character Skill Cooldown Reduction +3": {
-      "name": "スキルクールタイム軽減+3"
+      "name": "スキルクールタイム軽減+3",
+      "desc": "スキルクールタイム0.9倍"
     },
     "Critical Hit Boosts Stamina Recovery Speed": {
       "name": "致命の一撃でスタミナ回復速度上昇"
@@ -1312,43 +1434,53 @@ window.__LOCALE_JP__ = {
       "name": "敵撃破時、味方のみHP回復"
     },
     "HP Restoration upon Thrusting Counterattack": {
-      "name": "刺突カウンターでHP回復"
+      "name": "刺突カウンターでHP回復",
+      "desc": "カウンター命中時に[最大HP × 0.025]のHPを回復"
     },
     "HP restored when using medicinal boluses, etc.": {
-      "name": "薬剤使用時にHP回復"
+      "name": "薬剤使用時にHP回復",
+      "desc": "消費アイテム使用時にHPを50回復"
     },
     "HP restored when using medicinal boluses, etc. +1": {
       "name": "薬剤使用時にHP回復+1"
     },
     "Improved Affinity Damage Negation": {
-      "name": "属性カット率上昇"
+      "name": "属性カット率上昇",
+      "desc": "属性カット率+6%"
     },
     "Improved Blood Loss Resistance": {
-      "name": "出血耐性上昇"
+      "name": "出血耐性上昇",
+      "desc": "出血耐性+75"
     },
     "Improved Damage Negation at Low HP": {
-      "name": "HP低下時、カット率上昇"
+      "name": "HP低下時、カット率上昇",
+      "desc": "HPが40%未満の時、カット率+16%"
     },
     "Improved Damage Negation at Low HP by Damage": {
       "name": "被ダメージ時HP低下でカット率上昇"
     },
     "Improved Death Blight Resistance": {
-      "name": "抗死耐性上昇"
+      "name": "抗死耐性上昇",
+      "desc": "抗死耐性+75"
     },
     "Improved Flask HP Restoration": {
-      "name": "聖杯瓶の回復量上昇"
+      "name": "聖杯瓶の回復量上昇",
+      "desc": "聖杯瓶のHP回復量1.1倍"
     },
     "Improved Frost Resistance": {
-      "name": "冷気耐性上昇"
+      "name": "冷気耐性上昇",
+      "desc": "冷気耐性+75"
     },
     "Improved Glintstone and Gravity Stone Damage": {
-      "name": "輝石・重力石ダメージ上昇"
+      "name": "輝石・重力石ダメージ上昇",
+      "desc": "輝石・重力石のダメージ1.15倍"
     },
     "Improved Lightning Damage Negation": {
       "name": "雷カット率上昇"
     },
     "Improved Madness Resistance": {
-      "name": "発狂耐性上昇"
+      "name": "発狂耐性上昇",
+      "desc": "発狂耐性+75"
     },
     "Improved Magic Damage Negation": {
       "name": "魔力カット率上昇"
@@ -1357,64 +1489,79 @@ window.__LOCALE_JP__ = {
       "name": "調香術強化"
     },
     "Improved Physical Damage Negation": {
-      "name": "物理カット率上昇"
+      "name": "物理カット率上昇",
+      "desc": "物理カット率+10%"
     },
     "Improved Poise & Damage Negation When Knocked Back\nby Damage": {
-      "name": "吹き飛ばし時、強靭度とカット率上昇"
+      "name": "吹き飛ばし時、強靭度とカット率上昇",
+      "desc": "被弾から20秒間、カット率+20%・受ける強靭削り0.8倍"
     },
     "Improved Poise Near Totem Stela": {
       "name": "トーテム碑付近で強靭度上昇"
     },
     "Improved Poison Resistance": {
-      "name": "毒耐性上昇"
+      "name": "毒耐性上昇",
+      "desc": "毒耐性+75"
     },
     "Improved Rot Resistance": {
-      "name": "腐敗耐性上昇"
+      "name": "腐敗耐性上昇",
+      "desc": "腐敗耐性+75"
     },
     "Improved Sleep Resistance": {
-      "name": "睡眠耐性上昇"
+      "name": "睡眠耐性上昇",
+      "desc": "睡眠耐性+75"
     },
     "Improved Throwing Knife Damage": {
-      "name": "投げ短剣ダメージ上昇"
+      "name": "投げ短剣ダメージ上昇",
+      "desc": "投擲ナイフのダメージ1.15倍"
     },
     "Improved Throwing Pot Damage": {
-      "name": "投げ壺ダメージ上昇"
+      "name": "投げ壺ダメージ上昇",
+      "desc": "投擲壺のダメージ1.15倍"
     },
     "Increased Maximum FP": {
-      "name": "最大FP上昇"
+      "name": "最大FP上昇",
+      "desc": "最大FP1.15倍"
     },
     "Increased Maximum FP +1": {
       "name": "最大FP上昇+1"
     },
     "Increased Maximum HP": {
-      "name": "最大HP上昇"
+      "name": "最大HP上昇",
+      "desc": "最大HP1.1倍"
     },
     "Increased Maximum HP +1": {
       "name": "最大HP上昇+1"
     },
     "Increased Maximum Stamina": {
-      "name": "最大スタミナ上昇"
+      "name": "最大スタミナ上昇",
+      "desc": "最大スタミナ1.12倍"
     },
     "Increased Maximum Stamina +1": {
       "name": "最大スタミナ上昇+1"
     },
     "Increased rune acquisition for self and allies": {
-      "name": "自身と味方のルーン取得量増加"
+      "name": "自身と味方のルーン取得量増加",
+      "desc": "自身と味方の取得ルーン1.035倍"
     },
     "Items confer effect to all nearby allies": {
       "name": "アイテム効果が周囲の味方にも付与"
     },
     "Fire Damage Negation Up": {
-      "name": "炎カット率上昇"
+      "name": "炎カット率上昇",
+      "desc": "炎カット率+10%"
     },
     "Lightning Damage Negation Up": {
-      "name": "雷カット率上昇"
+      "name": "雷カット率上昇",
+      "desc": "雷カット率+10%"
     },
     "Magic Damage Negation Up": {
-      "name": "魔力カット率上昇"
+      "name": "魔力カット率上昇",
+      "desc": "魔力カット率+10%"
     },
     "Holy Damage Negation Up": {
-      "name": "聖カット率上昇"
+      "name": "聖カット率上昇",
+      "desc": "聖カット率+10%"
     },
     "Max FP increased for each Sorcerer's Rise unlocked": {
       "name": "魔術師の塔解放ごとに最大FP上昇"
@@ -1432,7 +1579,8 @@ window.__LOCALE_JP__ = {
       "name": "野営地ボス撃破ごとに最大スタミナ上昇"
     },
     "Partial HP Restoration upon Post-Damage Attacks": {
-      "name": "被ダメージ後の攻撃でHP一部回復"
+      "name": "被ダメージ後の攻撃でHP一部回復",
+      "desc": "被ダメージ直後の攻撃命中でHPを回復"
     },
     "Raised Stamina Recovery for Nearby Allies": {
       "name": "周囲の味方のスタミナ回復速度上昇"
@@ -1441,7 +1589,8 @@ window.__LOCALE_JP__ = {
       "name": "自身を除く周囲の味方のスタミナ回復速度上昇"
     },
     "Reduced FP Consumption": {
-      "name": "FP消費軽減"
+      "name": "FP消費軽減",
+      "desc": "FP消費0.92倍"
     },
     "Rune discount for shop purchases while on expedition": {
       "name": "探索中、店のルーン割引"
@@ -1468,13 +1617,16 @@ window.__LOCALE_JP__ = {
       "name": "アーツゲージ自然蓄積"
     },
     "Physical Attack Up": {
-      "name": "物理攻撃力上昇"
+      "name": "物理攻撃力上昇",
+      "desc": "物理ダメージ1.04倍"
     },
     "Physical Attack Up +1": {
-      "name": "物理攻撃力上昇+1"
+      "name": "物理攻撃力上昇+1",
+      "desc": "物理ダメージ1.05倍"
     },
     "Physical Attack Up +2": {
-      "name": "物理攻撃力上昇+2"
+      "name": "物理攻撃力上昇+2",
+      "desc": "物理ダメージ1.06倍"
     },
     "Changes compatible armament's skill to Glintblade\nPhalanx at start of expedition": {
       "name": "出撃時の武器の戦技を「輝剣ファランクス」にする"
@@ -1579,16 +1731,19 @@ window.__LOCALE_JP__ = {
       "name": "ガード中、敵に狙われやすくなる"
     },
     "Fire Attack Power Up +3": {
-      "name": "炎攻撃力上昇＋３"
+      "name": "炎攻撃力上昇＋３",
+      "desc": "炎ダメージ1.105倍"
     },
     "Fire Attack Power Up +4": {
-      "name": "炎攻撃力上昇＋４"
+      "name": "炎攻撃力上昇＋４",
+      "desc": "炎ダメージ1.12倍"
     },
     "Flame-Shrouding Cracked Tear in possession at start of expedition": {
       "name": "出撃時に「炎纏いの割れ雫」を持つ"
     },
     "Flask Also Heals Allies": {
-      "name": "聖杯瓶の回復を、周囲の味方に分配"
+      "name": "聖杯瓶の回復を、周囲の味方に分配",
+      "desc": "聖杯瓶の回復量の50%を周囲の味方にも回復"
     },
     "Greenburst Crystal Tear in possession at start of expedition": {
       "name": "出撃時に「緑湧きの結晶雫」を持つ"
@@ -1597,184 +1752,241 @@ window.__LOCALE_JP__ = {
       "name": "出撃時に「緑溢れの結晶雫」を持つ"
     },
     "Guard counter is given a boost based on current HP": {
-      "name": "ガードカウンターに、自身の現在ＨＰの一部を加える"
+      "name": "ガードカウンターに、自身の現在ＨＰの一部を加える",
+      "desc": "ガードカウンターに現在HP÷20の固定ダメージを追加"
     },
     "HP Restoration upon Thrusting Counterattack +1": {
       "name": "刺突カウンター発生時、ＨＰ回復＋１"
     },
     "Holy Attack Power Up +3": {
-      "name": "聖攻撃力上昇＋３"
+      "name": "聖攻撃力上昇＋３",
+      "desc": "聖ダメージ1.105倍"
     },
     "Holy Attack Power Up +4": {
-      "name": "聖攻撃力上昇＋４"
+      "name": "聖攻撃力上昇＋４",
+      "desc": "聖ダメージ1.12倍"
     },
     "Holy-Shrouding Cracked Tear in possession at start of expedition": {
       "name": "出撃時に「聖纏いの割れ雫」を持つ"
     },
     "Improved Affinity Attack Power": {
-      "name": "属性攻撃力上昇"
+      "name": "属性攻撃力上昇",
+      "desc": "属性ダメージ1.05倍"
     },
     "Improved Affinity Attack Power +1": {
-      "name": "属性攻撃力上昇＋１"
+      "name": "属性攻撃力上昇＋１",
+      "desc": "属性ダメージ1.08倍"
     },
     "Improved Affinity Attack Power +2": {
-      "name": "属性攻撃力上昇＋２"
+      "name": "属性攻撃力上昇＋２",
+      "desc": "属性ダメージ1.1倍"
     },
     "Improved Affinity Damage Negation +1": {
-      "name": "属性カット率上昇＋１"
+      "name": "属性カット率上昇＋１",
+      "desc": "属性カット率+10.5%"
     },
     "Improved Affinity Damage Negation +2": {
-      "name": "属性カット率上昇＋２"
+      "name": "属性カット率上昇＋２",
+      "desc": "属性カット率+12%"
     },
     "Improved Attack Power with 3+ Katana Equipped": {
-      "name": "刀の武器種を３つ以上装備していると攻撃力上昇"
+      "name": "刀の武器種を３つ以上装備していると攻撃力上昇",
+      "desc": "刀を3つ以上装備時、ダメージ1.2倍"
     },
     "Improved Attack Power with 3+ Thrusting Swords Equipped": {
-      "name": "刺剣の武器種を３つ以上装備していると攻撃力上昇"
+      "name": "刺剣の武器種を３つ以上装備していると攻撃力上昇",
+      "desc": "刺剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Improved Attack Power with 3+ Twinblades Equipped": {
-      "name": "両刃剣の武器種を３つ以上装備していると攻撃力上昇"
+      "name": "両刃剣の武器種を３つ以上装備していると攻撃力上昇",
+      "desc": "両刃剣を3つ以上装備時、ダメージ1.2倍"
     },
     "Improved Attack Power with 3+ Whips Equipped": {
-      "name": "鞭の武器種を３つ以上装備していると攻撃力上昇"
+      "name": "鞭の武器種を３つ以上装備していると攻撃力上昇",
+      "desc": "鞭を3つ以上装備時、ダメージ1.2倍"
     },
     "Improved Bestial Incantations": {
-      "name": "獣の祈祷を強化"
+      "name": "獣の祈祷を強化",
+      "desc": "獣の祈祷のダメージ1.12倍"
     },
     "Improved Blood Loss Resistance +1": {
-      "name": "出血耐性上昇＋１"
+      "name": "出血耐性上昇＋１",
+      "desc": "出血耐性+110"
     },
     "Improved Carian Sword Sorcery": {
-      "name": "カーリアの剣の魔術を強化"
+      "name": "カーリアの剣の魔術を強化",
+      "desc": "カーリアの剣の魔術のダメージ1.12倍"
     },
     "Improved Critical Hits": {
-      "name": "致命の一撃強化"
+      "name": "致命の一撃強化",
+      "desc": "致命の一撃のダメージ1.18倍"
     },
     "Improved Crystalian sorcery": {
-      "name": "結晶人の魔術を強化"
+      "name": "結晶人の魔術を強化",
+      "desc": "結晶人の魔術のダメージ1.12倍"
     },
     "Improved Death Blight Resistance +1": {
-      "name": "抗死耐性上昇＋１"
+      "name": "抗死耐性上昇＋１",
+      "desc": "抗死耐性+110"
     },
     "Improved Dragon Communion Incantations": {
-      "name": "竜餐の祈祷を強化"
+      "name": "竜餐の祈祷を強化",
+      "desc": "竜餐の祈祷のダメージ1.12倍"
     },
     "Improved Dragon Cult Incantations": {
-      "name": "王都古竜信仰の祈祷を強化"
+      "name": "王都古竜信仰の祈祷を強化",
+      "desc": "王都古竜信仰の祈祷のダメージ1.12倍"
     },
     "Improved Fire Damage Negation +1": {
-      "name": "炎カット率上昇＋１"
+      "name": "炎カット率上昇＋１",
+      "desc": "炎カット率+15%"
     },
     "Improved Fire Damage Negation +2": {
-      "name": "炎カット率上昇＋２"
+      "name": "炎カット率上昇＋２",
+      "desc": "炎カット率+16%"
     },
     "Improved Frenzied Flame Incantations": {
-      "name": "狂い火の祈祷を強化"
+      "name": "狂い火の祈祷を強化",
+      "desc": "狂い火の祈祷のダメージ1.12倍"
     },
     "Improved Frost Resistance +1": {
-      "name": "冷気耐性上昇＋１"
+      "name": "冷気耐性上昇＋１",
+      "desc": "冷気耐性+110"
     },
     "Improved Fundamentalist Incantations": {
-      "name": "黄金律原理主義の祈祷を強化"
+      "name": "黄金律原理主義の祈祷を強化",
+      "desc": "黄金律原理主義の祈祷のダメージ1.12倍"
     },
     "Improved Giants' Flame Incantations": {
-      "name": "巨人の火の祈祷を強化"
+      "name": "巨人の火の祈祷を強化",
+      "desc": "巨人の火の祈祷のダメージ1.12倍"
     },
     "Improved Glintblade Sorcery": {
-      "name": "輝剣の魔術を強化"
+      "name": "輝剣の魔術を強化",
+      "desc": "輝剣の魔術のダメージ1.12倍"
     },
     "Improved Glintstone and Gravity Stone Damage +1": {
-      "name": "輝石、重力石アイテムの攻撃力上昇＋１"
+      "name": "輝石、重力石アイテムの攻撃力上昇＋１",
+      "desc": "輝石・重力石のダメージ1.3倍"
     },
     "Improved Godslayer Incantations": {
-      "name": "神狩りの祈祷を強化"
+      "name": "神狩りの祈祷を強化",
+      "desc": "神狩りの祈祷のダメージ1.12倍"
     },
     "Improved Gravity Sorcery": {
-      "name": "重力の魔術を強化"
+      "name": "重力の魔術を強化",
+      "desc": "重力の魔術のダメージ1.12倍"
     },
     "Improved Guard Counters": {
-      "name": "ガードカウンター強化"
+      "name": "ガードカウンター強化",
+      "desc": "ガードカウンターのダメージ1.17倍"
     },
     "Improved Guard Counters +1": {
-      "name": "ガードカウンター強化＋１"
+      "name": "ガードカウンター強化＋１",
+      "desc": "ガードカウンターのダメージ1.25倍"
     },
     "Improved Guard Counters +2": {
-      "name": "ガードカウンター強化＋２"
+      "name": "ガードカウンター強化＋２",
+      "desc": "ガードカウンターのダメージ1.29倍"
     },
     "Improved Holy Damage Negation +1": {
-      "name": "聖カット率上昇＋１"
+      "name": "聖カット率上昇＋１",
+      "desc": "聖カット率+15%"
     },
     "Improved Holy Damage Negation +2": {
-      "name": "聖カット率上昇＋２"
+      "name": "聖カット率上昇＋２",
+      "desc": "聖カット率+16%"
     },
     "Improved Incantations": {
-      "name": "祈祷強化"
+      "name": "祈祷強化",
+      "desc": "祈祷のダメージ1.05倍"
     },
     "Improved Incantations +1": {
-      "name": "祈祷強化＋１"
+      "name": "祈祷強化＋１",
+      "desc": "祈祷のダメージ1.085倍"
     },
     "Improved Incantations +2": {
-      "name": "祈祷強化＋２"
+      "name": "祈祷強化＋２",
+      "desc": "祈祷のダメージ1.1倍"
     },
     "Improved Initial Standard Attack": {
-      "name": "通常攻撃の１段目強化"
+      "name": "通常攻撃の１段目強化",
+      "desc": "通常攻撃の１段目のダメージ1.15倍"
     },
     "Improved Invisibility Sorcery": {
-      "name": "不可視の魔術を強化"
+      "name": "不可視の魔術を強化",
+      "desc": "不可視の魔術のダメージ1.12倍"
     },
     "Improved Lightning Damage Negation +1": {
-      "name": "雷カット率上昇＋１"
+      "name": "雷カット率上昇＋１",
+      "desc": "雷カット率+15%"
     },
     "Improved Lightning Damage Negation +2": {
-      "name": "雷カット率上昇＋２"
+      "name": "雷カット率上昇＋２",
+      "desc": "雷カット率+16%"
     },
     "Improved Madness Resistance +1": {
-      "name": "発狂耐性上昇＋１"
+      "name": "発狂耐性上昇＋１",
+      "desc": "発狂耐性+110"
     },
     "Improved Magic Damage Negation +1": {
-      "name": "魔力カット率上昇＋１"
+      "name": "魔力カット率上昇＋１",
+      "desc": "魔力カット率+15%"
     },
     "Improved Magic Damage Negation +2": {
-      "name": "魔力カット率上昇＋２"
+      "name": "魔力カット率上昇＋２",
+      "desc": "魔力カット率+16%"
     },
     "Improved Perfuming Arts +1": {
       "name": "調香術強化＋１"
     },
     "Improved Physical Damage Negation +1": {
-      "name": "物理カット率上昇＋１"
+      "name": "物理カット率上昇＋１",
+      "desc": "物理カット率+10.5%"
     },
     "Improved Physical Damage Negation +2": {
-      "name": "物理カット率上昇＋２"
+      "name": "物理カット率上昇＋２",
+      "desc": "物理カット率+12%"
     },
     "Improved Poison Resistance +1": {
-      "name": "毒耐性上昇＋１"
+      "name": "毒耐性上昇＋１",
+      "desc": "毒耐性+110"
     },
     "Improved Rot Resistance +1": {
-      "name": "腐敗耐性上昇＋１"
+      "name": "腐敗耐性上昇＋１",
+      "desc": "腐敗耐性+110"
     },
     "Improved Sleep Resistance +1": {
-      "name": "睡眠耐性上昇＋１"
+      "name": "睡眠耐性上昇＋１",
+      "desc": "睡眠耐性+110"
     },
     "Improved Sorceries": {
-      "name": "魔術強化"
+      "name": "魔術強化",
+      "desc": "魔術のダメージ1.05倍"
     },
     "Improved Sorceries +1": {
-      "name": "魔術強化＋１"
+      "name": "魔術強化＋１",
+      "desc": "魔術のダメージ1.085倍"
     },
     "Improved Sorceries +2": {
-      "name": "魔術強化＋２"
+      "name": "魔術強化＋２",
+      "desc": "魔術のダメージ1.1倍"
     },
     "Improved Stonedigger Sorcery": {
-      "name": "石掘りの魔術を強化"
+      "name": "石掘りの魔術を強化",
+      "desc": "石掘りの魔術のダメージ1.12倍"
     },
     "Improved Thorn Sorcery": {
-      "name": "茨の魔術を強化"
+      "name": "茨の魔術を強化",
+      "desc": "茨の魔術のダメージ1.12倍"
     },
     "Improved Throwing Knife Damage +1": {
-      "name": "投擲ナイフの攻撃力上昇＋１"
+      "name": "投擲ナイフの攻撃力上昇＋１",
+      "desc": "投擲ナイフのダメージ1.3倍"
     },
     "Improved Throwing Pot Damage +1": {
-      "name": "投擲壺の攻撃力上昇＋１"
+      "name": "投擲壺の攻撃力上昇＋１",
+      "desc": "投擲壺のダメージ1.3倍"
     },
     "Ironjar Aromatic in possession at start of expedition": {
       "name": "出撃時に「鉄壺の香薬」を持つ"
@@ -1783,25 +1995,31 @@ window.__LOCALE_JP__ = {
       "name": "出撃時に「鉛色の硬雫」を持つ"
     },
     "Lightning Attack Power Up +3": {
-      "name": "雷攻撃力上昇＋３"
+      "name": "雷攻撃力上昇＋３",
+      "desc": "雷ダメージ1.105倍"
     },
     "Lightning Attack Power Up +4": {
-      "name": "雷攻撃力上昇＋４"
+      "name": "雷攻撃力上昇＋４",
+      "desc": "雷ダメージ1.12倍"
     },
     "Lightning-Shrouding Cracked Tear in possession at start of expedition": {
       "name": "出撃時に「雷纏いの割れ雫」を持つ"
     },
     "Madness in Vicinity Improves Attack Power": {
-      "name": "周囲で発狂状態の発生時、攻撃力上昇"
+      "name": "周囲で発狂状態の発生時、攻撃力上昇",
+      "desc": "周囲で発狂発生後、ダメージ1.12倍"
     },
     "Madness in Vicinity Improves Attack Power +1": {
-      "name": "周囲で発狂状態の発生時、攻撃力上昇＋１"
+      "name": "周囲で発狂状態の発生時、攻撃力上昇＋１",
+      "desc": "周囲で発狂発生後、ダメージ1.22倍"
     },
     "Magic Attack Power Up +3": {
-      "name": "魔力攻撃力上昇＋３"
+      "name": "魔力攻撃力上昇＋３",
+      "desc": "魔力ダメージ1.105倍"
     },
     "Magic Attack Power Up +4": {
-      "name": "魔力攻撃力上昇＋４"
+      "name": "魔力攻撃力上昇＋４",
+      "desc": "魔力ダメージ1.12倍"
     },
     "Magic-Shrouding Cracked Tear in possession at start of expedition": {
       "name": "出撃時に「魔力纏いの割れ雫」を持つ"
@@ -1822,10 +2040,12 @@ window.__LOCALE_JP__ = {
       "name": "小盾の武器種を３つ以上装備していると最大ＨＰ上昇"
     },
     "Max HP increased for each great enemy defeated at a Great Church.": {
-      "name": "大教会の強敵を倒す度、最大ＨＰ上昇"
+      "name": "大教会の強敵を倒す度、最大ＨＰ上昇",
+      "desc": "大教会のボス撃破ごとに最大HP1.05倍"
     },
     "Max stamina increased for each great enemy defeated at a Great Encampment": {
-      "name": "大野営地の強敵を倒す度、最大スタミナ上昇"
+      "name": "大野営地の強敵を倒す度、最大スタミナ上昇",
+      "desc": "大野営地のボス撃破ごとに最大スタミナ1.075倍"
     },
     "Opaline Bubbletear in possession at start of expedition": {
       "name": "出撃時に「真珠色の泡雫」を持つ"
@@ -1840,19 +2060,24 @@ window.__LOCALE_JP__ = {
       "name": "ダメージを受けた直後、攻撃によりＨＰの一部を回復＋２"
     },
     "Physical Attack Up +3": {
-      "name": "物理攻撃力上昇＋３"
+      "name": "物理攻撃力上昇＋３",
+      "desc": "物理ダメージ1.105倍"
     },
     "Physical Attack Up +4": {
-      "name": "物理攻撃力上昇＋４"
+      "name": "物理攻撃力上昇＋４",
+      "desc": "物理ダメージ1.12倍"
     },
     "Physical attack power increases after using grease items": {
-      "name": "脂アイテム使用時、追加で物理攻撃力上昇"
+      "name": "脂アイテム使用時、追加で物理攻撃力上昇",
+      "desc": "脂アイテム使用から30秒間、物理ダメージ1.1倍"
     },
     "Physical attack power increases after using grease items +1": {
-      "name": "脂アイテム使用時、追加で物理攻撃力上昇＋１"
+      "name": "脂アイテム使用時、追加で物理攻撃力上昇＋１",
+      "desc": "脂アイテム使用から30秒間、物理ダメージ1.17倍"
     },
     "Physical attack power increases after using grease items +2": {
-      "name": "脂アイテム使用時、追加で物理攻撃力上昇＋２"
+      "name": "脂アイテム使用時、追加で物理攻撃力上昇＋２",
+      "desc": "脂アイテム使用から30秒間、物理ダメージ1.2倍"
     },
     "Poison Spraymist in possession at start of expedition": {
       "name": "出撃時に「毒の噴霧」を持つ"
@@ -1861,16 +2086,19 @@ window.__LOCALE_JP__ = {
       "name": "自身を除く、周囲の味方のスタミナ回復速度上昇"
     },
     "Runes and Item Discovery increased for each great enemy defeated at a Fort": {
-      "name": "小砦の強敵を倒す度、取得ルーン増加、発見力上昇"
+      "name": "小砦の強敵を倒す度、取得ルーン増加、発見力上昇",
+      "desc": "小砦のボス撃破ごとに発見力+16・取得ルーン1.055倍"
     },
     "Ruptured Crystal Tear in possession at start of expedition": {
       "name": "出撃時に「破裂した結晶雫」を持つ"
     },
     "Sleep in Vicinity Improves Attack Power": {
-      "name": "周囲で睡眠状態の発生時、攻撃力上昇"
+      "name": "周囲で睡眠状態の発生時、攻撃力上昇",
+      "desc": "周囲で睡眠発生後、ダメージ1.12倍"
     },
     "Sleep in Vicinity Improves Attack Power +1": {
-      "name": "周囲で睡眠状態の発生時、攻撃力上昇＋１"
+      "name": "周囲で睡眠状態の発生時、攻撃力上昇＋１",
+      "desc": "周囲で睡眠発生後、ダメージ1.22倍"
     },
     "Slowly restore HP for self and nearby allies when HP is low": {
       "name": "ＨＰ低下時、周囲の味方を含めＨＰをゆっくりと回復"
@@ -1912,7 +2140,8 @@ window.__LOCALE_JP__ = {
       "name": "ガード成功時、アーツゲージ増加＋１"
     },
     "Taking attacks improves attack power": {
-      "name": "攻撃を受けると攻撃力上昇"
+      "name": "攻撃を受けると攻撃力上昇",
+      "desc": "被弾から10秒間、ダメージ1.15倍"
     },
     "Thorny Cracked Tear in possession at start of expedition": {
       "name": "出撃時に「連棘の割れ雫」を持つ"
@@ -1921,13 +2150,16 @@ window.__LOCALE_JP__ = {
       "name": "出撃時に「細枝の割れ雫」を持つ"
     },
     "Ultimate Art Auto Charge +1": {
-      "name": "アーツゲージ自然蓄積＋１"
+      "name": "アーツゲージ自然蓄積＋１",
+      "desc": "アーツゲージ蓄積1.05倍"
     },
     "Ultimate Art Auto Charge +2": {
-      "name": "アーツゲージ自然蓄積＋２"
+      "name": "アーツゲージ自然蓄積＋２",
+      "desc": "アーツゲージ蓄積1.075倍"
     },
     "Ultimate Art Auto Charge +3": {
-      "name": "アーツゲージ自然蓄積＋３"
+      "name": "アーツゲージ自然蓄積＋３",
+      "desc": "アーツゲージ蓄積1.1倍"
     },
     "Uplifting Aromatic in possession at start of expedition": {
       "name": "出撃時に「高揚の香り」を持つ"
@@ -1936,76 +2168,100 @@ window.__LOCALE_JP__ = {
       "name": "出撃時に「風の結晶雫」を持つ"
     },
     "Stamina Recovery upon Landing Attacks +1": {
-      "name": "攻撃命中時、スタミナ回復+1"
+      "name": "攻撃命中時、スタミナ回復+1",
+      "desc": "連続攻撃でスタミナを3回復"
     },
     "Improved Critical Hits +1": {
-      "name": "致命の一撃強化+1"
+      "name": "致命の一撃強化+1",
+      "desc": "致命の一撃のダメージ1.23倍"
     },
     "Poison & Rot in Vicinity Increases Attack Power": {
-      "name": "周囲で毒/腐敗状態の発生時、攻撃力上昇"
+      "name": "周囲で毒/腐敗状態の発生時、攻撃力上昇",
+      "desc": "周囲で毒/腐敗発生後20秒間、ダメージ1.12倍"
     },
     "FP Restoration upon Successive Attacks": {
-      "name": "攻撃連続時、FP回復"
+      "name": "攻撃連続時、FP回復",
+      "desc": "連続攻撃で最大FPの5%を回復"
     },
     "Continuous HP Recovery": {
-      "name": "HP持続回復"
+      "name": "HP持続回復",
+      "desc": "HP +2/秒"
     },
     "Huge rune discount for shop purchases while on\nexpedition": {
-      "name": "出撃中、ショップでの購入に必要なルーンが大割引"
+      "name": "出撃中、ショップでの購入に必要なルーンが大割引",
+      "desc": "商人での購入が20%割引（通常の10%割引と重複）"
     },
     "Gesture \"Crossed Legs\" Builds Up Madness": {
-      "name": "ジェスチャー「あぐら」により、発狂が蓄積"
+      "name": "ジェスチャー「あぐら」により、発狂が蓄積",
+      "desc": "ジェスチャー「あぐら」中、2秒ごとに発狂蓄積10"
     },
     "Madness Continually Recovers FP": {
-      "name": "発狂状態になると、FP持続回復"
+      "name": "発狂状態になると、FP持続回復",
+      "desc": "発狂状態で25秒間FPを毎秒2回復"
     },
     "Boosts Attack Power of Added Affinity Attacks": {
-      "name": "属性攻撃力が付加された時、属性攻撃力上昇"
+      "name": "属性攻撃力が付加された時、属性攻撃力上昇",
+      "desc": "武器の属性ダメージ1.1倍（魔術・祈祷は対象外）"
     },
     "Frostbite in Vicinity Conceals Self": {
-      "name": "周囲で凍傷状態の発生時、自身の姿を隠す"
+      "name": "周囲で凍傷状態の発生時、自身の姿を隠す",
+      "desc": "周囲で凍傷状態の発生時、姿を隠す"
     },
     "Improved Melee Attack Power": {
-      "name": "近接攻撃力上昇"
+      "name": "近接攻撃力上昇",
+      "desc": "全攻撃力1.05倍（武器・戦技）"
     },
     "Improved Skill Attack Power": {
-      "name": "戦技攻撃力上昇"
+      "name": "戦技攻撃力上昇",
+      "desc": "戦技のダメージ1.15倍"
     },
     "Continuous FP Recovery": {
-      "name": "FP持続回復"
+      "name": "FP持続回復",
+      "desc": "5秒ごとにFPを1回復"
     },
     "Occasionally Nullify Attacks When Damage Negation is Lowered": {
-      "name": "カット率低下時、稀に敵から受ける攻撃を無効化"
+      "name": "カット率低下時、稀に敵から受ける攻撃を無効化",
+      "desc": "カット率低下中、20%の確率で被ダメージを無効化"
     },
     "Attacks Inflict Rot when Damage is Taken": {
-      "name": "被ダメージ時、腐敗の状態異常を付加"
+      "name": "被ダメージ時、腐敗の状態異常を付加",
+      "desc": "被ダメージ後12秒間、武器に腐敗蓄積+25"
     },
     "Rot in Vicinity Causes Continuous HP Recovery": {
-      "name": "周囲で腐敗状態の発生時、HP持続回復"
+      "name": "周囲で腐敗状態の発生時、HP持続回復",
+      "desc": "周囲で腐敗発生後15秒間、毎秒最大HPの0.15%+15を回復"
     },
     "Status Ailment Gauges Slowly Increase Attack Power": {
-      "name": "状態異常ゲージがある時、徐々に攻撃力上昇"
+      "name": "状態異常ゲージがある時、徐々に攻撃力上昇",
+      "desc": "状態異常ゲージがある間、20秒ごとにダメージ1.04倍（最大10スタック）"
     },
     "Switching Weapons Adds an Affinity Attack": {
-      "name": "武器の持ち替え時、いずれかの属性攻撃力を付加"
+      "name": "武器の持ち替え時、いずれかの属性攻撃力を付加",
+      "desc": "武器の持ち替えから10秒間、ランダムな属性の攻撃力+12"
     },
     "Switching Weapons Boosts Attack Power": {
-      "name": "武器の持ち替え時、物理攻撃力上昇"
+      "name": "武器の持ち替え時、物理攻撃力上昇",
+      "desc": "武器の持ち替えから10秒間、物理ダメージ1.1倍"
     },
     "Extended Spell Duration": {
-      "name": "魔術/祈祷、効果時間延長"
+      "name": "魔術/祈祷、効果時間延長",
+      "desc": "魔術・祈祷の効果時間+50%"
     },
     "Successive Attacks Boost Attack Power": {
-      "name": "攻撃連続時、攻撃力上昇"
+      "name": "攻撃連続時、攻撃力上昇",
+      "desc": "連続攻撃の段階ごとにダメージ1.05倍/1.065倍/1.09倍（累積で最大約1.219倍）"
     },
     "HP Recovery From Successful Guarding": {
-      "name": "ガード成功時、ＨＰ回復"
+      "name": "ガード成功時、ＨＰ回復",
+      "desc": "ガード成功時にHPを8回復"
     },
     "Improved Stance-Breaking when Two-Handing": {
-      "name": "両手持ちの、体勢を崩す力上昇"
+      "name": "両手持ちの、体勢を崩す力上昇",
+      "desc": "両手持ち時、体勢を崩す力1.05倍（弓は対象外）"
     },
     "Improved Stance-Breaking when Wielding Two Armaments": {
-      "name": "二刀持ちの、体勢を崩す力上昇"
+      "name": "二刀持ちの、体勢を崩す力上昇",
+      "desc": "二刀持ち時、体勢を崩す力1.05倍"
     }
   },
   "relics": {
@@ -2255,5 +2511,35 @@ window.__LOCALE_JP__ = {
   "conditionTemplates": {
     "hitsOnly": "{w}攻撃時のみ",
     "equipped3Plus": "{w}を3つ以上装備時"
+  },
+  "flatTemplates": {
+    "{v} all status resistances": "全状態異常耐性{v}",
+    "{v} HP/s": "HP {v}/秒",
+    "Taking damage inflicts {v} blood loss buildup": "被ダメージ時、出血蓄積{v}",
+    "Taking damage inflicts {v} death blight buildup": "被ダメージ時、死蓄積{v}",
+    "+{v} HP/s": "HP +{v}/秒",
+    "Taking damage adds {v} rot buildup to your weapon for 12s": "被ダメージ後12秒間、武器に腐敗蓄積{v}",
+    "Taking damage inflicts {v} frost buildup": "被ダメージ時、冷気蓄積{v}",
+    "Taking damage inflicts {v} madness buildup": "被ダメージ時、発狂蓄積{v}",
+    "Taking damage inflicts {v} poison buildup": "被ダメージ時、毒蓄積{v}",
+    "Taking damage inflicts {v} rot buildup": "被ダメージ時、腐敗蓄積{v}",
+    "Taking damage inflicts {v} sleep buildup": "被ダメージ時、睡眠蓄積{v}",
+    "{v} poison buildup per 0.22s": "0.22秒ごとに毒蓄積{v}",
+    "{v} rot buildup per 0.24s": "0.24秒ごとに腐敗蓄積{v}",
+    "+{v} blood loss resistance": "出血耐性+{v}",
+    "+{v} death blight resistance": "抗死耐性+{v}",
+    "+{v} frost resistance": "冷気耐性+{v}",
+    "+{v} madness resistance": "発狂耐性+{v}",
+    "+{v} poison resistance": "毒耐性+{v}",
+    "+{v} rot resistance": "腐敗耐性+{v}",
+    "+{v} sleep resistance": "睡眠耐性+{v}",
+    "{v} Max HP": "最大HP{v}",
+    "{v} Max FP": "最大FP{v}",
+    "{v} Max Stamina": "最大スタミナ{v}",
+    "{v} Strength": "筋力{v}",
+    "{v} Dexterity": "技量{v}",
+    "{v} Intelligence": "知力{v}",
+    "{v} Faith": "信仰{v}",
+    "{v} Arcane": "神秘{v}"
   }
 };

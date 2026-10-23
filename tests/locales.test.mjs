@@ -44,6 +44,34 @@ for (const [file, globalName] of [['jp.js', '__LOCALE_JP__'], ['kr.js', '__LOCAL
   for (const k of UI_KEYS) check(`${file}: ui.${k}`, !!loc?.ui?.[k]);
 }
 
+// Descriptions: every effect the app can show (regular + DON pools, curses,
+// guaranteed relics) that has an English description must have a jp/kr one
+// under the same raw-name key I18N.effectDesc() looks up.
+const J = f => JSON.parse(readFileSync(new URL(`../data/${f}`, import.meta.url), 'utf8'));
+const described = new Map();
+const addDesc = e => { if (e.desc && !described.has(e.name)) described.set(e.name, e.desc); };
+for (const d of [J('relic_data.json'), J('don_relic_data.json')]) {
+  for (const g of d.groups) g.effects.forEach(addDesc);
+  (d.curses || []).forEach(addDesc);
+}
+fixed.relics.forEach(r => r.effects.forEach(addDesc));
+// Flat-row templates ({v} = summed value): per-effect ones from
+// effect_multipliers.mjs plus the stat-pool ones hard-coded in index.html.
+const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const poolBlock = html.match(/const BUILD_FLAT_POOL_TEMPLATES = \{([\s\S]*?)\};/);
+const poolTemplates = poolBlock ? [...poolBlock[1].matchAll(/'([^']*\{v\}[^']*)'/g)].map(m => m[1]) : [];
+check('found the 8 stat-pool flat templates in index.html', poolTemplates.length === 8);
+const templates = [...new Set([...Object.values(EFFECT_MULTIPLIERS).filter(m => m.template).map(m => m.template), ...poolTemplates])];
+
+for (const [file, globalName] of [['jp.js', '__LOCALE_JP__'], ['kr.js', '__LOCALE_KR__']]) {
+  const loc = loadLocale(file, globalName);
+  for (const n of described.keys()) check(`${file}: description for "${n}"`, !!loc?.effects?.[n]?.desc);
+  for (const t of templates) {
+    const tr = loc?.flatTemplates?.[t];
+    check(`${file}: flat template "${t}" translated, keeping {v}`, !!tr && tr.includes('{v}'));
+  }
+}
+
 // Sanity: the condition list above really comes from EFFECT_MULTIPLIERS.
 check('conditions on fixed relics are classified conditions',
   conditions.every(c => Object.values(EFFECT_MULTIPLIERS).some(m => m.condition === c)));

@@ -311,8 +311,10 @@ function computeBuildTotals(effects, enabledSpecialNames) {
   // resistances" — the real combined effect — not the original −80 with a
   // count tag bolted on.
   function formatFlatValue(v) { return v < 0 ? '−' + Math.abs(v) : String(v); }
+  // `template` + `valueText` let the renderer swap in a translated template.
   const flatFromNames = [...flatByName.values()].map(f => ({
     ...f,
+    valueText: formatFlatValue(f.value),
     desc: f.template.replace('{v}', formatFlatValue(f.value)),
   }));
   // Pool totals can land on either side of zero (a curse can push a stat
@@ -322,6 +324,8 @@ function computeBuildTotals(effects, enabledSpecialNames) {
   function formatFlatPoolValue(v) { return (v < 0 ? '−' : '+') + Math.abs(v); }
   const flatFromPools = [...flatByPool.values()].map(p => ({
     pool: p.pool,
+    template: FLAT_POOL_TEMPLATES[p.pool],
+    valueText: formatFlatPoolValue(p.value),
     desc: FLAT_POOL_TEMPLATES[p.pool].replace('{v}', formatFlatPoolValue(p.value)),
     count: p.count,
   }));
@@ -1035,6 +1039,24 @@ function test(label, actual, expected, tolerance = 1e-9) {
   const fathom = computeBuildTotals([...feed(2031), ...feed(14002)]);
   test('Continuous HP Recovery from two relics sums to +4',
     fathom.flat.find(f => f.name === 'Continuous HP Recovery')?.value, 4);
+}
+
+// Flat rows carry their English template + formatted value so the renderer
+// can swap in a translated template (I18N.flatTemplate) instead of showing
+// the pre-built English desc.
+{
+  const resDown = { tier: 'flat', value: -80, template: '{v} all status resistances' };
+  const vigor = { tier: 'flat', pools: [{ pool: 'vigor', value: 20 }] };
+  const r = computeBuildTotals([
+    { name: 'All Resistances Down', mul: resDown }, { name: 'All Resistances Down', mul: resDown },
+    { name: 'Vigor +1', mul: vigor },
+  ]);
+  const res = r.flat.find(f => f.name === 'All Resistances Down');
+  const vig = r.flat.find(f => f.pool === 'vigor');
+  test('name-grouped flat row keeps its template', res.template, '{v} all status resistances');
+  test('name-grouped flat row exposes the summed, formatted value', res.valueText, '−160');
+  test('pool flat row exposes its pool template', vig.template, '{v} Max HP');
+  test('pool flat row exposes an explicitly signed value', vig.valueText, '+20');
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

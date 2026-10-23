@@ -136,52 +136,68 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「산 분무」 소지"
     },
     "All Resistances Down": {
-      "name": "모든 상태 이상 내성 저하"
+      "name": "모든 상태 이상 내성 저하",
+      "desc": "모든 상태 이상 내성 −80"
     },
     "Arcane +1": {
-      "name": "신비+1"
+      "name": "신비+1",
+      "desc": "신비 +1"
     },
     "Arcane +2": {
-      "name": "신비+2"
+      "name": "신비+2",
+      "desc": "신비 +2"
     },
     "Arcane +3": {
-      "name": "신비+3"
+      "name": "신비+3",
+      "desc": "신비 +3"
     },
     "Arcane increased for each great enemy defeated at a Ruin": {
-      "name": "유적의 강적을 쓰러뜨릴 때마다 신비 상승"
+      "name": "유적의 강적을 쓰러뜨릴 때마다 신비 상승",
+      "desc": "유적 보스를 쓰러뜨릴 때마다 신비 +4"
     },
     "Attack power increased for each Night Invader defeated": {
-      "name": "밤의 침입자를 쓰러뜨릴 때마다 공격력 상승"
+      "name": "밤의 침입자를 쓰러뜨릴 때마다 공격력 상승",
+      "desc": "밤의 침입자를 쓰러뜨릴 때마다 피해 1.07배"
     },
     "Attack power increased for each evergaol prisoner defeated": {
-      "name": "봉인감옥의 죄수를 쓰러뜨릴 때마다 공격력 상승"
+      "name": "봉인감옥의 죄수를 쓰러뜨릴 때마다 공격력 상승",
+      "desc": "봉인감옥 보스를 쓰러뜨릴 때마다 피해 1.05배"
     },
     "Attack power up when facing frostbite-afflicted\nenemy": {
-      "name": "동상 상태인 적에 대한 공격 강화"
+      "name": "동상 상태인 적에 대한 공격 강화",
+      "desc": "동상 상태인 적에게 주는 피해 1.1배"
     },
     "Attack power up when facing frostbite-afflicted enemy +1": {
-      "name": "동상 상태인 적에 대한 공격 강화+1"
+      "name": "동상 상태인 적에 대한 공격 강화+1",
+      "desc": "동상 상태인 적에게 주는 피해 1.16배"
     },
     "Attack power up when facing frostbite-afflicted enemy +2": {
-      "name": "동상 상태인 적에 대한 공격 강화+2"
+      "name": "동상 상태인 적에 대한 공격 강화+2",
+      "desc": "동상 상태인 적에게 주는 피해 1.2배"
     },
     "Attack power up when facing poison-afflicted enemy": {
-      "name": "독 상태인 적에 대한 공격 강화"
+      "name": "독 상태인 적에 대한 공격 강화",
+      "desc": "독 상태인 적에게 주는 피해 1.1배"
     },
     "Attack power up when facing poison-afflicted enemy +1": {
-      "name": "독 상태인 적에 대한 공격 강화+1"
+      "name": "독 상태인 적에 대한 공격 강화+1",
+      "desc": "독 상태인 적에게 주는 피해 1.16배"
     },
     "Attack power up when facing poison-afflicted enemy +2": {
-      "name": "독 상태인 적에 대한 공격 강화+2"
+      "name": "독 상태인 적에 대한 공격 강화+2",
+      "desc": "독 상태인 적에게 주는 피해 1.2배"
     },
     "Attack power up when facing scarlet rot-afflicted\nenemy": {
-      "name": "부패 상태인 적에 대한 공격 강화"
+      "name": "부패 상태인 적에 대한 공격 강화",
+      "desc": "부패 상태인 적에게 주는 피해 1.1배"
     },
     "Attack power up when facing scarlet rot-afflicted enemy +1": {
-      "name": "부패 상태인 적에 대한 공격 강화+1"
+      "name": "부패 상태인 적에 대한 공격 강화+1",
+      "desc": "부패 상태인 적에게 주는 피해 1.16배"
     },
     "Attack power up when facing scarlet rot-afflicted enemy +2": {
-      "name": "부패 상태인 적에 대한 공격 강화+2"
+      "name": "부패 상태인 적에 대한 공격 강화+2",
+      "desc": "부패 상태인 적에게 주는 피해 1.2배"
     },
     "Bewitching Branches in possession at start of\nexpedition": {
       "name": "출격 시 「유혹의 나뭇가지」 소지"
@@ -286,16 +302,20 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 무기의 마술 「밤의 돌팔매」 ※적용 가능한 무기종만"
     },
     "Character Skill Cooldown Reduction +1": {
-      "name": "스킬 쿨 타임 경감+1"
+      "name": "스킬 쿨 타임 경감+1",
+      "desc": "스킬 쿨 타임 0.95배"
     },
     "Character Skill Cooldown Reduction +2": {
-      "name": "스킬 쿨 타임 경감+2"
+      "name": "스킬 쿨 타임 경감+2",
+      "desc": "스킬 쿨 타임 0.925배"
     },
     "Character Skill Cooldown Reduction +3": {
-      "name": "스킬 쿨 타임 경감+3"
+      "name": "스킬 쿨 타임 경감+3",
+      "desc": "스킬 쿨 타임 0.9배"
     },
     "Continuous HP Loss": {
-      "name": "HP 지속 감소"
+      "name": "HP 지속 감소",
+      "desc": "HP −2/초"
     },
     "Crimson Bubbletear in possession at start of expedition": {
       "name": "출격 시 「붉은 거품 물방울」 소지"
@@ -343,13 +363,16 @@ window.__LOCALE_KR__ = {
       "name": "적을 쓰러뜨릴 시, 자신을 제외한 주위 아군의 HP 회복"
     },
     "Dexterity +1": {
-      "name": "기량+1"
+      "name": "기량+1",
+      "desc": "기량 +1"
     },
     "Dexterity +2": {
-      "name": "기량+2"
+      "name": "기량+2",
+      "desc": "기량 +2"
     },
     "Dexterity +3": {
-      "name": "기량+3"
+      "name": "기량+3",
+      "desc": "기량 +3"
     },
     "Dormant Power Helps Discover Axes": {
       "name": "잠재한 힘으로 도끼를 찾기 쉬워진다"
@@ -451,13 +474,16 @@ window.__LOCALE_KR__ = {
       "name": "가드 중 적에게 노려지기 쉬워짐"
     },
     "Endurance +1": {
-      "name": "지구력+1"
+      "name": "지구력+1",
+      "desc": "최대 스태미나 +2"
     },
     "Endurance +2": {
-      "name": "지구력+2"
+      "name": "지구력+2",
+      "desc": "최대 스태미나 +4"
     },
     "Endurance +3": {
-      "name": "지구력+3"
+      "name": "지구력+3",
+      "desc": "최대 스태미나 +6"
     },
     "FP Restoration upon Axe Attacks": {
       "name": "도끼 공격으로 FP 회복"
@@ -532,31 +558,40 @@ window.__LOCALE_KR__ = {
       "name": "채찍 공격으로 FP 회복"
     },
     "Faith +1": {
-      "name": "신앙+1"
+      "name": "신앙+1",
+      "desc": "신앙 +1"
     },
     "Faith +2": {
-      "name": "신앙+2"
+      "name": "신앙+2",
+      "desc": "신앙 +2"
     },
     "Faith +3": {
-      "name": "신앙+3"
+      "name": "신앙+3",
+      "desc": "신앙 +3"
     },
     "Fire Attack Power Up": {
-      "name": "화염 공격력 상승"
+      "name": "화염 공격력 상승",
+      "desc": "화염 피해 1.045배"
     },
     "Fire Attack Power Up +1": {
-      "name": "화염 공격력 상승+1"
+      "name": "화염 공격력 상승+1",
+      "desc": "화염 피해 1.055배"
     },
     "Fire Attack Power Up +2": {
-      "name": "화염 공격력 상승+2"
+      "name": "화염 공격력 상승+2",
+      "desc": "화염 피해 1.065배"
     },
     "Fire Attack Power Up +3": {
-      "name": "화염 공격력 상승+3"
+      "name": "화염 공격력 상승+3",
+      "desc": "화염 피해 1.105배"
     },
     "Fire Attack Power Up +4": {
-      "name": "화염 공격력 상승+4"
+      "name": "화염 공격력 상승+4",
+      "desc": "화염 피해 1.12배"
     },
     "Fire Damage Negation Up": {
-      "name": "화염 경감률 상승"
+      "name": "화염 경감률 상승",
+      "desc": "화염 경감률 +10%"
     },
     "Fire Grease in possession at start of expedition": {
       "name": "출격 시 「불기름」 소지"
@@ -568,7 +603,8 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「불꽃 두른 깨진 물방울」 소지"
     },
     "Flask Also Heals Allies": {
-      "name": "성배병 회복을 주위 아군에 분배"
+      "name": "성배병 회복을 주위 아군에 분배",
+      "desc": "성배병 회복량의 50%만큼 주위 아군도 회복"
     },
     "Glintstone Scraps in possession at start of\nexpedition": {
       "name": "출격 시 「부스러기 휘석」 소지"
@@ -583,7 +619,8 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「넘친 초록 결정 물방울」 소지"
     },
     "Guard counter is given a boost based on current HP": {
-      "name": "가드 카운터에 자신의 현재 HP의 일부를 추가"
+      "name": "가드 카운터에 자신의 현재 HP의 일부를 추가",
+      "desc": "가드 카운터에 현재 HP÷20의 고정 피해 추가"
     },
     "HP Restoration upon Axe Attacks": {
       "name": "도끼 공격으로 HP 회복"
@@ -649,7 +686,8 @@ window.__LOCALE_KR__ = {
       "name": "직검 공격으로 HP 회복"
     },
     "HP Restoration upon Thrusting Counterattack": {
-      "name": "관통 카운터 발생 시 HP 회복"
+      "name": "관통 카운터 발생 시 HP 회복",
+      "desc": "카운터 적중 시 [최대 HP × 0.025] HP 회복"
     },
     "HP Restoration upon Thrusting Counterattack +1": {
       "name": "관통 카운터 발생 시 HP 회복+1"
@@ -664,28 +702,35 @@ window.__LOCALE_KR__ = {
       "name": "채찍 공격으로 HP 회복"
     },
     "HP restored when using medicinal boluses, etc.": {
-      "name": "이끼약 등 아이템 사용 시 HP 회복"
+      "name": "이끼약 등 아이템 사용 시 HP 회복",
+      "desc": "소비 아이템 사용 시 HP 50 회복"
     },
     "HP restored when using medicinal boluses, etc. +1": {
       "name": "이끼약 등 아이템 사용 시 HP 회복+1"
     },
     "Holy Attack Power Up": {
-      "name": "신성 공격력 상승"
+      "name": "신성 공격력 상승",
+      "desc": "신성 피해 1.045배"
     },
     "Holy Attack Power Up +1": {
-      "name": "신성 공격력 상승+1"
+      "name": "신성 공격력 상승+1",
+      "desc": "신성 피해 1.055배"
     },
     "Holy Attack Power Up +2": {
-      "name": "신성 공격력 상승+2"
+      "name": "신성 공격력 상승+2",
+      "desc": "신성 피해 1.065배"
     },
     "Holy Attack Power Up +3": {
-      "name": "신성 공격력 상승+3"
+      "name": "신성 공격력 상승+3",
+      "desc": "신성 피해 1.105배"
     },
     "Holy Attack Power Up +4": {
-      "name": "신성 공격력 상승+4"
+      "name": "신성 공격력 상승+4",
+      "desc": "신성 피해 1.12배"
     },
     "Holy Damage Negation Up": {
-      "name": "신성 경감률 상승"
+      "name": "신성 경감률 상승",
+      "desc": "신성 경감률 +10%"
     },
     "Holy Grease in possession at start of expedition": {
       "name": "출격 시 「신성기름」 소지"
@@ -697,367 +742,486 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「신성 두른 깨진 물방울」 소지"
     },
     "Improved Affinity Attack Power": {
-      "name": "속성 공격력 상승"
+      "name": "속성 공격력 상승",
+      "desc": "속성 피해 1.05배"
     },
     "Improved Affinity Attack Power +1": {
-      "name": "속성 공격력 상승+1"
+      "name": "속성 공격력 상승+1",
+      "desc": "속성 피해 1.08배"
     },
     "Improved Affinity Attack Power +2": {
-      "name": "속성 공격력 상승+2"
+      "name": "속성 공격력 상승+2",
+      "desc": "속성 피해 1.1배"
     },
     "Improved Affinity Damage Negation": {
-      "name": "속성 경감률 상승"
+      "name": "속성 경감률 상승",
+      "desc": "속성 경감률 +6%"
     },
     "Improved Affinity Damage Negation +1": {
-      "name": "속성 경감률 상승+1"
+      "name": "속성 경감률 상승+1",
+      "desc": "속성 경감률 +10.5%"
     },
     "Improved Affinity Damage Negation +2": {
-      "name": "속성 경감률 상승+2"
+      "name": "속성 경감률 상승+2",
+      "desc": "속성 경감률 +12%"
     },
     "Improved Attack Power with 3+ Axes Equipped": {
-      "name": "도끼 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "도끼 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "도끼 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Bows Equipped": {
-      "name": "활 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "활 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "활 3개 이상 장착 시 피해 1.1배"
     },
     "Improved Attack Power with 3+ Claws Equipped": {
-      "name": "발톱 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "발톱 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "손톱 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Colossal Swords Equipped": {
-      "name": "특대검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "특대검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "특대검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Colossal Weapons Equipped": {
-      "name": "특대형 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "특대형 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "특대형 무기 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Curved Greatswords Equipped": {
-      "name": "대곡검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "대곡검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "대곡검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Curved Swords Equipped": {
-      "name": "곡검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "곡검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "곡검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Daggers Equipped": {
-      "name": "단검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "단검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "단검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Fists Equipped": {
-      "name": "주먹 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "주먹 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "주먹 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Flails Equipped": {
-      "name": "철퇴 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "철퇴 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "철퇴 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Great Hammers Equipped": {
-      "name": "대형 망치 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "대형 망치 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "대형 망치 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Great Spears Equipped": {
-      "name": "대형 창 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "대형 창 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "대형 창 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Greataxes Equipped": {
-      "name": "대형 도끼 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "대형 도끼 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "대형 도끼 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Greatswords Equipped": {
-      "name": "대검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "대검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "대검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Halberds Equipped": {
-      "name": "도끼창 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "도끼창 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "도끼창 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Hammers Equipped": {
-      "name": "망치 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "망치 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "망치 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Heavy Thrusting Swords Equipped": {
-      "name": "대자검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "대자검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "대자검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Katana Equipped": {
-      "name": "도 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "도 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "도 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Reapers Equipped": {
-      "name": "낫 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "낫 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "낫 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Spears Equipped": {
-      "name": "창 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "창 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "창 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Straight Swords Equipped": {
-      "name": "직검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "직검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "직검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Thrusting Swords Equipped": {
-      "name": "자검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "자검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "자검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Twinblades Equipped": {
-      "name": "쌍날검 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "쌍날검 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "쌍날검 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Attack Power with 3+ Whips Equipped": {
-      "name": "채찍 무기를 3개 이상 장비 시 공격력 상승"
+      "name": "채찍 무기를 3개 이상 장비 시 공격력 상승",
+      "desc": "채찍 3개 이상 장착 시 피해 1.2배"
     },
     "Improved Axe Attack Power": {
-      "name": "도끼 공격력 상승"
+      "name": "도끼 공격력 상승",
+      "desc": "도끼 피해 1.09배"
     },
     "Improved Bestial Incantations": {
-      "name": "짐승 기도 강화"
+      "name": "짐승 기도 강화",
+      "desc": "짐승 기도 피해 1.12배"
     },
     "Improved Blood Loss Resistance": {
-      "name": "출혈 내성 상승"
+      "name": "출혈 내성 상승",
+      "desc": "출혈 내성 +75"
     },
     "Improved Blood Loss Resistance +1": {
-      "name": "출혈 내성 상승+1"
+      "name": "출혈 내성 상승+1",
+      "desc": "출혈 내성 +110"
     },
     "Improved Bow Attack Power": {
-      "name": "활 공격력 상승"
+      "name": "활 공격력 상승",
+      "desc": "활 피해 1.06배"
     },
     "Improved Carian Sword Sorcery": {
-      "name": "카리아의 검 마술 강화"
+      "name": "카리아의 검 마술 강화",
+      "desc": "카리아의 검 마술 피해 1.12배"
     },
     "Improved Claw Attack Power": {
-      "name": "손톱 공격력 상승"
+      "name": "손톱 공격력 상승",
+      "desc": "손톱 피해 1.09배"
     },
     "Improved Colossal Sword Attack Power": {
-      "name": "특대검 공격력 상승"
+      "name": "특대검 공격력 상승",
+      "desc": "특대검 피해 1.09배"
     },
     "Improved Colossal Weapon Attack Power": {
-      "name": "특대형 무기 공격력 상승"
+      "name": "특대형 무기 공격력 상승",
+      "desc": "특대형 무기 피해 1.09배"
     },
     "Improved Critical Hits": {
-      "name": "치명적인 일격 강화"
+      "name": "치명적인 일격 강화",
+      "desc": "치명적인 일격 피해 1.18배"
     },
     "Improved Crystalian sorcery": {
-      "name": "결정인의 마술 강화"
+      "name": "결정인의 마술 강화",
+      "desc": "결정인의 마술 피해 1.12배"
     },
     "Improved Curved Greatsword Attack Power": {
-      "name": "대곡검 공격력 상승"
+      "name": "대곡검 공격력 상승",
+      "desc": "대곡검 피해 1.09배"
     },
     "Improved Curved Sword Attack Power": {
-      "name": "곡검 공격력 상승"
+      "name": "곡검 공격력 상승",
+      "desc": "곡검 피해 1.09배"
     },
     "Improved Dagger Attack Power": {
-      "name": "단검 공격력 상승"
+      "name": "단검 공격력 상승",
+      "desc": "단검 피해 1.09배"
     },
     "Improved Damage Negation at Low HP": {
-      "name": "HP 저하 시 경감률 상승"
+      "name": "HP 저하 시 경감률 상승",
+      "desc": "HP가 40% 미만일 때 경감률 +16%"
     },
     "Improved Death Blight Resistance": {
-      "name": "항사 내성 상승"
+      "name": "항사 내성 상승",
+      "desc": "죽음 내성 +75"
     },
     "Improved Death Blight Resistance +1": {
-      "name": "항사 내성 상승+1"
+      "name": "항사 내성 상승+1",
+      "desc": "죽음 내성 +110"
     },
     "Improved Dragon Communion Incantations": {
-      "name": "용찬 기도 강화"
+      "name": "용찬 기도 강화",
+      "desc": "용찬 기도 피해 1.12배"
     },
     "Improved Dragon Cult Incantations": {
-      "name": "도읍 고룡신앙 기도 강화"
+      "name": "도읍 고룡신앙 기도 강화",
+      "desc": "도읍 고룡신앙 기도 피해 1.12배"
     },
     "Improved Fire Damage Negation +1": {
-      "name": "화염 경감률 상승+1"
+      "name": "화염 경감률 상승+1",
+      "desc": "화염 경감률 +15%"
     },
     "Improved Fire Damage Negation +2": {
-      "name": "화염 경감률 상승+2"
+      "name": "화염 경감률 상승+2",
+      "desc": "화염 경감률 +16%"
     },
     "Improved Fist Attack Power": {
-      "name": "주먹 공격력 상승"
+      "name": "주먹 공격력 상승",
+      "desc": "주먹 피해 1.09배"
     },
     "Improved Flail Attack Power": {
-      "name": "철퇴 공격력 상승"
+      "name": "철퇴 공격력 상승",
+      "desc": "철퇴 피해 1.09배"
     },
     "Improved Flask HP Restoration": {
-      "name": "성배병 회복량 상승"
+      "name": "성배병 회복량 상승",
+      "desc": "성배병 HP 회복량 1.1배"
     },
     "Improved Frenzied Flame Incantations": {
-      "name": "미친 불 기도 강화"
+      "name": "미친 불 기도 강화",
+      "desc": "미친 불 기도 피해 1.12배"
     },
     "Improved Frost Resistance": {
-      "name": "동상 내성 상승"
+      "name": "동상 내성 상승",
+      "desc": "냉기 내성 +75"
     },
     "Improved Frost Resistance +1": {
-      "name": "동상 내성 상승+1"
+      "name": "동상 내성 상승+1",
+      "desc": "냉기 내성 +110"
     },
     "Improved Fundamentalist Incantations": {
-      "name": "황금률 원리주의 기도 강화"
+      "name": "황금률 원리주의 기도 강화",
+      "desc": "황금률 원리주의 기도 피해 1.12배"
     },
     "Improved Giants' Flame Incantations": {
-      "name": "거인의 불 기도 강화"
+      "name": "거인의 불 기도 강화",
+      "desc": "거인의 불 기도 피해 1.12배"
     },
     "Improved Glintblade Sorcery": {
-      "name": "휘검 마술 강화"
+      "name": "휘검 마술 강화",
+      "desc": "휘검 마술 피해 1.12배"
     },
     "Improved Glintstone and Gravity Stone Damage": {
-      "name": "휘석, 중력석 아이템의 공격력 상승"
+      "name": "휘석, 중력석 아이템의 공격력 상승",
+      "desc": "휘석·중력석 피해 1.15배"
     },
     "Improved Glintstone and Gravity Stone Damage +1": {
-      "name": "휘석, 중력석 아이템의 공격력 상승+1"
+      "name": "휘석, 중력석 아이템의 공격력 상승+1",
+      "desc": "휘석·중력석 피해 1.3배"
     },
     "Improved Godslayer Incantations": {
-      "name": "신 사냥 기도 강화"
+      "name": "신 사냥 기도 강화",
+      "desc": "신 사냥 기도 피해 1.12배"
     },
     "Improved Gravity Sorcery": {
-      "name": "중력 마술 강화"
+      "name": "중력 마술 강화",
+      "desc": "중력 마술 피해 1.12배"
     },
     "Improved Great Hammer Attack Power": {
-      "name": "대형 망치 공격력 상승"
+      "name": "대형 망치 공격력 상승",
+      "desc": "대형 망치 피해 1.09배"
     },
     "Improved Great Spear Attack Power": {
-      "name": "대형 창 공격력 상승"
+      "name": "대형 창 공격력 상승",
+      "desc": "대형 창 피해 1.09배"
     },
     "Improved Greataxe Attack Power": {
-      "name": "대형 도끼 공격력 상승"
+      "name": "대형 도끼 공격력 상승",
+      "desc": "대형 도끼 피해 1.09배"
     },
     "Improved Greatsword Attack Power": {
-      "name": "대검 공격력 상승"
+      "name": "대검 공격력 상승",
+      "desc": "대검 피해 1.09배"
     },
     "Improved Guard Counters": {
-      "name": "가드 카운터 강화"
+      "name": "가드 카운터 강화",
+      "desc": "가드 카운터 피해 1.17배"
     },
     "Improved Guard Counters +1": {
-      "name": "가드 카운터 강화+1"
+      "name": "가드 카운터 강화+1",
+      "desc": "가드 카운터 피해 1.25배"
     },
     "Improved Guard Counters +2": {
-      "name": "가드 카운터 강화+2"
+      "name": "가드 카운터 강화+2",
+      "desc": "가드 카운터 피해 1.29배"
     },
     "Improved Halberd Attack Power": {
-      "name": "도끼창 공격력 상승"
+      "name": "도끼창 공격력 상승",
+      "desc": "도끼창 피해 1.09배"
     },
     "Improved Hammer Attack Power": {
-      "name": "망치 공격력 상승"
+      "name": "망치 공격력 상승",
+      "desc": "망치 피해 1.09배"
     },
     "Improved Heavy Thrusting Sword Attack Power": {
-      "name": "대자검 공격력 상승"
+      "name": "대자검 공격력 상승",
+      "desc": "대자검 피해 1.09배"
     },
     "Improved Holy Damage Negation +1": {
-      "name": "신성 경감률 상승+1"
+      "name": "신성 경감률 상승+1",
+      "desc": "신성 경감률 +15%"
     },
     "Improved Holy Damage Negation +2": {
-      "name": "신성 경감률 상승+2"
+      "name": "신성 경감률 상승+2",
+      "desc": "신성 경감률 +16%"
     },
     "Improved Incantations": {
-      "name": "기도 강화"
+      "name": "기도 강화",
+      "desc": "기도 피해 1.05배"
     },
     "Improved Incantations +1": {
-      "name": "기도 강화+1"
+      "name": "기도 강화+1",
+      "desc": "기도 피해 1.085배"
     },
     "Improved Incantations +2": {
-      "name": "기도 강화+2"
+      "name": "기도 강화+2",
+      "desc": "기도 피해 1.1배"
     },
     "Improved Initial Standard Attack": {
-      "name": "일반 공격의 첫 공격 강화"
+      "name": "일반 공격의 첫 공격 강화",
+      "desc": "일반 공격 첫 타격 피해 1.15배"
     },
     "Improved Invisibility Sorcery": {
-      "name": "보이지 않는 마술 강화"
+      "name": "보이지 않는 마술 강화",
+      "desc": "보이지 않는 마술 피해 1.12배"
     },
     "Improved Katana Attack Power": {
-      "name": "도 공격력 상승"
+      "name": "도 공격력 상승",
+      "desc": "도 피해 1.09배"
     },
     "Improved Lightning Damage Negation +1": {
-      "name": "벼락 경감률 상승+1"
+      "name": "벼락 경감률 상승+1",
+      "desc": "번개 경감률 +15%"
     },
     "Improved Lightning Damage Negation +2": {
-      "name": "벼락 경감률 상승+2"
+      "name": "벼락 경감률 상승+2",
+      "desc": "번개 경감률 +16%"
     },
     "Improved Madness Resistance": {
-      "name": "발광 내성 상승"
+      "name": "발광 내성 상승",
+      "desc": "발광 내성 +75"
     },
     "Improved Madness Resistance +1": {
-      "name": "발광 내성 상승+1"
+      "name": "발광 내성 상승+1",
+      "desc": "발광 내성 +110"
     },
     "Improved Magic Damage Negation +1": {
-      "name": "마력 경감률 상승+1"
+      "name": "마력 경감률 상승+1",
+      "desc": "마력 경감률 +15%"
     },
     "Improved Magic Damage Negation +2": {
-      "name": "마력 경감률 상승+2"
+      "name": "마력 경감률 상승+2",
+      "desc": "마력 경감률 +16%"
     },
     "Improved Perfuming Arts +1": {
       "name": "조향술 강화+1"
     },
     "Improved Physical Damage Negation +1": {
-      "name": "물리 경감률 상승+1"
+      "name": "물리 경감률 상승+1",
+      "desc": "물리 경감률 +10.5%"
     },
     "Improved Physical Damage Negation +2": {
-      "name": "물리 경감률 상승+2"
+      "name": "물리 경감률 상승+2",
+      "desc": "물리 경감률 +12%"
     },
     "Improved Poise & Damage Negation When Knocked Back\nby Damage": {
-      "name": "대미지를 받아 날아갔을 때, 강인도와 경감률 상승"
+      "name": "대미지를 받아 날아갔을 때, 강인도와 경감률 상승",
+      "desc": "피격 후 20초간 경감률 +20%, 받는 강인도 피해 0.8배"
     },
     "Improved Poise Near Totem Stela": {
       "name": "토템 스텔라 주위에서 강인도 상승"
     },
     "Improved Poison Resistance": {
-      "name": "독 내성 상승"
+      "name": "독 내성 상승",
+      "desc": "독 내성 +75"
     },
     "Improved Poison Resistance +1": {
-      "name": "독 내성 상승+1"
+      "name": "독 내성 상승+1",
+      "desc": "독 내성 +110"
     },
     "Improved Reaper Attack Power": {
-      "name": "낫 공격력 상승"
+      "name": "낫 공격력 상승",
+      "desc": "낫 피해 1.09배"
     },
     "Improved Rot Resistance": {
-      "name": "부패 내성 상승"
+      "name": "부패 내성 상승",
+      "desc": "부패 내성 +75"
     },
     "Improved Rot Resistance +1": {
-      "name": "부패 내성 상승+1"
+      "name": "부패 내성 상승+1",
+      "desc": "부패 내성 +110"
     },
     "Improved Sleep Resistance": {
-      "name": "수면 내성 상승"
+      "name": "수면 내성 상승",
+      "desc": "수면 내성 +75"
     },
     "Improved Sleep Resistance +1": {
-      "name": "수면 내성 상승+1"
+      "name": "수면 내성 상승+1",
+      "desc": "수면 내성 +110"
     },
     "Improved Sorceries": {
-      "name": "마술 강화"
+      "name": "마술 강화",
+      "desc": "마술 피해 1.05배"
     },
     "Improved Sorceries +1": {
-      "name": "마술 강화+1"
+      "name": "마술 강화+1",
+      "desc": "마술 피해 1.085배"
     },
     "Improved Sorceries +2": {
-      "name": "마술 강화+2"
+      "name": "마술 강화+2",
+      "desc": "마술 피해 1.1배"
     },
     "Improved Spear Attack Power": {
-      "name": "창 공격력 상승"
+      "name": "창 공격력 상승",
+      "desc": "창 피해 1.09배"
     },
     "Improved Stonedigger Sorcery": {
-      "name": "채굴 마술 강화"
+      "name": "채굴 마술 강화",
+      "desc": "채굴 마술 피해 1.12배"
     },
     "Improved Straight Sword Attack Power": {
-      "name": "직검 공격력 상승"
+      "name": "직검 공격력 상승",
+      "desc": "직검 피해 1.09배"
     },
     "Improved Thorn Sorcery": {
-      "name": "가시 마술 강화"
+      "name": "가시 마술 강화",
+      "desc": "가시 마술 피해 1.12배"
     },
     "Improved Throwing Knife Damage": {
-      "name": "투척 나이프 공격력 상승"
+      "name": "투척 나이프 공격력 상승",
+      "desc": "투척 나이프 피해 1.15배"
     },
     "Improved Throwing Knife Damage +1": {
-      "name": "투척 나이프 공격력 상승+1"
+      "name": "투척 나이프 공격력 상승+1",
+      "desc": "투척 나이프 피해 1.3배"
     },
     "Improved Throwing Pot Damage": {
-      "name": "투척 항아리 공격력 상승"
+      "name": "투척 항아리 공격력 상승",
+      "desc": "투척 항아리 피해 1.15배"
     },
     "Improved Throwing Pot Damage +1": {
-      "name": "투척 항아리 공격력 상승+1"
+      "name": "투척 항아리 공격력 상승+1",
+      "desc": "투척 항아리 피해 1.3배"
     },
     "Improved Thrusting Sword Attack Power": {
-      "name": "자검 공격력 상승"
+      "name": "자검 공격력 상승",
+      "desc": "자검 피해 1.09배"
     },
     "Improved Twinblade Attack Power": {
-      "name": "쌍날검 공격력 상승"
+      "name": "쌍날검 공격력 상승",
+      "desc": "쌍날검 피해 1.09배"
     },
     "Improved Whip Attack Power": {
-      "name": "채찍 공격력 상승"
+      "name": "채찍 공격력 상승",
+      "desc": "채찍 피해 1.09배"
     },
     "Increased Maximum FP": {
-      "name": "최대 FP 상승"
+      "name": "최대 FP 상승",
+      "desc": "최대 FP 1.15배"
     },
     "Increased Maximum HP": {
-      "name": "최대 HP 상승"
+      "name": "최대 HP 상승",
+      "desc": "최대 HP 1.1배"
     },
     "Increased Maximum Stamina": {
-      "name": "최대 스태미나 상승"
+      "name": "최대 스태미나 상승",
+      "desc": "최대 스태미나 1.12배"
     },
     "Increased rune acquisition for self and allies": {
-      "name": "자신과 아군의 획득 룬 증가"
+      "name": "자신과 아군의 획득 룬 증가",
+      "desc": "자신과 아군의 획득 룬 1.035배"
     },
     "Intelligence +1": {
-      "name": "지력+1"
+      "name": "지력+1",
+      "desc": "지력 +1"
     },
     "Intelligence +2": {
-      "name": "지력+2"
+      "name": "지력+2",
+      "desc": "지력 +2"
     },
     "Intelligence +3": {
-      "name": "지력+3"
+      "name": "지력+3",
+      "desc": "지력 +3"
     },
     "Ironjar Aromatic in possession at start of expedition": {
       "name": "출격 시 「철 항아리 향약」 소지"
@@ -1069,22 +1233,28 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「납빛 굳은 물방울」 소지"
     },
     "Lightning Attack Power Up": {
-      "name": "벼락 공격력 상승"
+      "name": "벼락 공격력 상승",
+      "desc": "번개 피해 1.045배"
     },
     "Lightning Attack Power Up +1": {
-      "name": "벼락 공격력 상승+1"
+      "name": "벼락 공격력 상승+1",
+      "desc": "번개 피해 1.055배"
     },
     "Lightning Attack Power Up +2": {
-      "name": "벼락 공격력 상승+2"
+      "name": "벼락 공격력 상승+2",
+      "desc": "번개 피해 1.065배"
     },
     "Lightning Attack Power Up +3": {
-      "name": "벼락 공격력 상승+3"
+      "name": "벼락 공격력 상승+3",
+      "desc": "번개 피해 1.105배"
     },
     "Lightning Attack Power Up +4": {
-      "name": "벼락 공격력 상승+4"
+      "name": "벼락 공격력 상승+4",
+      "desc": "번개 피해 1.12배"
     },
     "Lightning Damage Negation Up": {
-      "name": "벼락 경감률 상승"
+      "name": "벼락 경감률 상승",
+      "desc": "번개 경감률 +10%"
     },
     "Lightning Grease in possession at start of\nexpedition": {
       "name": "출격 시 「벼락기름」 소지"
@@ -1096,31 +1266,40 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「벼락 두른 깨진 물방울」 소지"
     },
     "Lower Attack When Below Max HP": {
-      "name": "HP 최대 미만 시 공격력 저하"
+      "name": "HP 최대 미만 시 공격력 저하",
+      "desc": "HP가 85% 미만일 때 피해 0.915배"
     },
     "Madness in Vicinity Improves Attack Power": {
-      "name": "주위에서 발광 발생 시 공격력 상승"
+      "name": "주위에서 발광 발생 시 공격력 상승",
+      "desc": "주위에서 발광 발생 후 피해 1.12배"
     },
     "Madness in Vicinity Improves Attack Power +1": {
-      "name": "주위에서 발광 발생 시 공격력 상승+1"
+      "name": "주위에서 발광 발생 시 공격력 상승+1",
+      "desc": "주위에서 발광 발생 후 피해 1.22배"
     },
     "Magic Attack Power Up": {
-      "name": "마력 공격력 상승"
+      "name": "마력 공격력 상승",
+      "desc": "마력 피해 1.045배"
     },
     "Magic Attack Power Up +1": {
-      "name": "마력 공격력 상승+1"
+      "name": "마력 공격력 상승+1",
+      "desc": "마력 피해 1.055배"
     },
     "Magic Attack Power Up +2": {
-      "name": "마력 공격력 상승+2"
+      "name": "마력 공격력 상승+2",
+      "desc": "마력 피해 1.065배"
     },
     "Magic Attack Power Up +3": {
-      "name": "마력 공격력 상승+3"
+      "name": "마력 공격력 상승+3",
+      "desc": "마력 피해 1.105배"
     },
     "Magic Attack Power Up +4": {
-      "name": "마력 공격력 상승+4"
+      "name": "마력 공격력 상승+4",
+      "desc": "마력 피해 1.12배"
     },
     "Magic Damage Negation Up": {
-      "name": "마력 경감률 상승"
+      "name": "마력 경감률 상승",
+      "desc": "마력 경감률 +10%"
     },
     "Magic Grease in possession at start of expedition": {
       "name": "출격 시 「마력기름」 소지"
@@ -1150,22 +1329,28 @@ window.__LOCALE_KR__ = {
       "name": "소형 방패를 3개 이상 장비 시 최대 HP 상승"
     },
     "Max HP increased for each great enemy defeated at a Great Church.": {
-      "name": "대교회의 강적을 쓰러뜨릴 때마다 최대 HP 상승"
+      "name": "대교회의 강적을 쓰러뜨릴 때마다 최대 HP 상승",
+      "desc": "대교회 보스를 쓰러뜨릴 때마다 최대 HP 1.05배"
     },
     "Max stamina increased for each great enemy defeated at a Great Encampment": {
-      "name": "대야영지의 강적을 쓰러뜨릴 때마다 최대 스태미나 상승"
+      "name": "대야영지의 강적을 쓰러뜨릴 때마다 최대 스태미나 상승",
+      "desc": "대야영지 보스를 쓰러뜨릴 때마다 최대 스태미나 1.075배"
     },
     "Mind +1": {
-      "name": "정신력+1"
+      "name": "정신력+1",
+      "desc": "최대 FP +5"
     },
     "Mind +2": {
-      "name": "정신력+2"
+      "name": "정신력+2",
+      "desc": "최대 FP +10"
     },
     "Mind +3": {
-      "name": "정신력+3"
+      "name": "정신력+3",
+      "desc": "최대 FP +15"
     },
     "Near Death Reduces Max HP": {
-      "name": "빈사 시 최대 HP 저하"
+      "name": "빈사 시 최대 HP 저하",
+      "desc": "빈사 후 60초간 최대 HP 0.75배"
     },
     "Opaline Bubbletear in possession at start of expedition": {
       "name": "출격 시 「진주색 거품 물방울」 소지"
@@ -1174,7 +1359,8 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「진주색 굳은 물방울」 소지"
     },
     "Partial HP Restoration upon Post-Damage Attacks": {
-      "name": "대미지를 받은 직후 공격으로 HP 일부 회복"
+      "name": "대미지를 받은 직후 공격으로 HP 일부 회복",
+      "desc": "피해를 받은 직후 공격 적중 시 HP 회복"
     },
     "Partial HP Restoration upon Post-Damage Attacks +1": {
       "name": "대미지를 받은 직후 공격으로 HP 일부 회복+1"
@@ -1183,40 +1369,52 @@ window.__LOCALE_KR__ = {
       "name": "대미지를 받은 직후 공격으로 HP 일부 회복+2"
     },
     "Physical Attack Up": {
-      "name": "물리 공격력 상승"
+      "name": "물리 공격력 상승",
+      "desc": "물리 피해 1.04배"
     },
     "Physical Attack Up +1": {
-      "name": "물리 공격력 상승+1"
+      "name": "물리 공격력 상승+1",
+      "desc": "물리 피해 1.05배"
     },
     "Physical Attack Up +2": {
-      "name": "물리 공격력 상승+2"
+      "name": "물리 공격력 상승+2",
+      "desc": "물리 피해 1.06배"
     },
     "Physical Attack Up +3": {
-      "name": "물리 공격력 상승+3"
+      "name": "물리 공격력 상승+3",
+      "desc": "물리 피해 1.105배"
     },
     "Physical Attack Up +4": {
-      "name": "물리 공격력 상승+4"
+      "name": "물리 공격력 상승+4",
+      "desc": "물리 피해 1.12배"
     },
     "Physical attack power increases after using grease items": {
-      "name": "기름 아이템 사용 시 추가로 물리 공격력 상승"
+      "name": "기름 아이템 사용 시 추가로 물리 공격력 상승",
+      "desc": "기름 아이템 사용 후 30초간 물리 피해 1.1배"
     },
     "Physical attack power increases after using grease items +1": {
-      "name": "기름 아이템 사용 시 추가로 물리 공격력 상승+1"
+      "name": "기름 아이템 사용 시 추가로 물리 공격력 상승+1",
+      "desc": "기름 아이템 사용 후 30초간 물리 피해 1.17배"
     },
     "Physical attack power increases after using grease items +2": {
-      "name": "기름 아이템 사용 시 추가로 물리 공격력 상승+2"
+      "name": "기름 아이템 사용 시 추가로 물리 공격력 상승+2",
+      "desc": "기름 아이템 사용 후 30초간 물리 피해 1.2배"
     },
     "Poise +1": {
-      "name": "강인도+1"
+      "name": "강인도+1",
+      "desc": "받는 강인도 피해 0.95배"
     },
     "Poise +2": {
-      "name": "강인도+2"
+      "name": "강인도+2",
+      "desc": "받는 강인도 피해 0.9배"
     },
     "Poise +3": {
-      "name": "강인도+3"
+      "name": "강인도+3",
+      "desc": "받는 강인도 피해 0.85배"
     },
     "Poison Buildup When Below Max HP": {
-      "name": "HP 최대 미만 시 독 축적"
+      "name": "HP 최대 미만 시 독 축적",
+      "desc": "HP가 85% 미만일 때 0.22초마다 독 축적 2"
     },
     "Poison Spraymist in possession at start of expedition": {
       "name": "출격 시 「독 분무」 소지"
@@ -1225,46 +1423,59 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「투척 독 뼈화살」 소지"
     },
     "Reduced Damage Negation After Evading": {
-      "name": "회피 직후 경감률 저하"
+      "name": "회피 직후 경감률 저하",
+      "desc": "회피 직후 경감률 −45%"
     },
     "Reduced Damage Negation for Flask Usages": {
-      "name": "성배병 사용 시 경감률 저하"
+      "name": "성배병 사용 시 경감률 저하",
+      "desc": "성배병 사용 중 경감률 −45%"
     },
     "Reduced Dexterity and Faith": {
-      "name": "기량과 신앙 저하"
+      "name": "기량과 신앙 저하",
+      "desc": "기량과 신앙 −3"
     },
     "Reduced FP Consumption": {
-      "name": "소비 FP 경감"
+      "name": "소비 FP 경감",
+      "desc": "FP 소비 0.92배"
     },
     "Reduced Faith and Strength": {
-      "name": "신앙과 근력 저하"
+      "name": "신앙과 근력 저하",
+      "desc": "신앙과 근력 −3"
     },
     "Reduced Flask HP Restoration": {
-      "name": "성배병 회복량 저하"
+      "name": "성배병 회복량 저하",
+      "desc": "성배병 HP 회복량 0.85배"
     },
     "Reduced Intelligence and Dexterity": {
-      "name": "지력과 기량 저하"
+      "name": "지력과 기량 저하",
+      "desc": "지력과 기량 −3"
     },
     "Reduced Rune Acquisition": {
-      "name": "획득 룬 감소"
+      "name": "획득 룬 감소",
+      "desc": "획득 룬 0.9배"
     },
     "Reduced Strength and Intelligence": {
-      "name": "근력과 지력 저하"
+      "name": "근력과 지력 저하",
+      "desc": "근력과 지력 −3"
     },
     "Reduced Vigor and Arcane": {
-      "name": "생명력과 신비 저하"
+      "name": "생명력과 신비 저하",
+      "desc": "생명력과 신비 −3 (HP −60)"
     },
     "Repeated Evasions Lower Damage Negation": {
-      "name": "회피 연속 시 경감률 저하"
+      "name": "회피 연속 시 경감률 저하",
+      "desc": "연속 회피 시 15초간 경감률 −23%/−35%"
     },
     "Rot Buildup When Below Max HP": {
-      "name": "HP 최대 미만 시 부패 축적"
+      "name": "HP 최대 미만 시 부패 축적",
+      "desc": "HP가 85% 미만일 때 0.24초마다 부패 축적 2"
     },
     "Rune discount for shop purchases while on expedition": {
       "name": "출격 중 상점 구매에 필요한 룬 할인"
     },
     "Runes and Item Discovery increased for each great enemy defeated at a Fort": {
-      "name": "작은 성채의 강적을 쓰러뜨릴 때마다 획득 룬 증가, 발견력 상승"
+      "name": "작은 성채의 강적을 쓰러뜨릴 때마다 획득 룬 증가, 발견력 상승",
+      "desc": "작은 성채 보스를 쓰러뜨릴 때마다 발견력 +16, 획득 룬 1.055배"
     },
     "Ruptured Crystal Tear in possession at start of expedition": {
       "name": "출격 시 「파열된 결정 물방울」 소지"
@@ -1273,10 +1484,12 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「방패기름」 소지"
     },
     "Sleep in Vicinity Improves Attack Power": {
-      "name": "주위에서 수면 발생 시 공격력 상승"
+      "name": "주위에서 수면 발생 시 공격력 상승",
+      "desc": "주위에서 수면 발생 후 피해 1.12배"
     },
     "Sleep in Vicinity Improves Attack Power +1": {
-      "name": "주위에서 수면 발생 시 공격력 상승+1"
+      "name": "주위에서 수면 발생 시 공격력 상승+1",
+      "desc": "주위에서 수면 발생 후 피해 1.22배"
     },
     "Small Pouch in possession at start of expedition": {
       "name": "출격 시 「작은 파우치」 소지"
@@ -1324,13 +1537,16 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「석검 열쇠」 소지"
     },
     "Strength +1": {
-      "name": "근력+1"
+      "name": "근력+1",
+      "desc": "근력 +1"
     },
     "Strength +2": {
-      "name": "근력+2"
+      "name": "근력+2",
+      "desc": "근력 +2"
     },
     "Strength +3": {
-      "name": "근력+3"
+      "name": "근력+3",
+      "desc": "근력 +3"
     },
     "Successful guarding fills more of the Art gauge": {
       "name": "가드 성공 시 아츠 게이지 증가"
@@ -1339,28 +1555,36 @@ window.__LOCALE_KR__ = {
       "name": "가드 성공 시 아츠 게이지 증가+1"
     },
     "Taking Damage Causes Blood Loss Buildup": {
-      "name": "대미지를 받을 시 출혈 축적"
+      "name": "대미지를 받을 시 출혈 축적",
+      "desc": "피해를 받을 때 출혈 축적 44"
     },
     "Taking Damage Causes Death Buildup": {
-      "name": "대미지를 받을 시 죽음 축적"
+      "name": "대미지를 받을 시 죽음 축적",
+      "desc": "피해를 받을 때 죽음 축적 32"
     },
     "Taking Damage Causes Frost Buildup": {
-      "name": "대미지를 받을 시 동상 축적"
+      "name": "대미지를 받을 시 동상 축적",
+      "desc": "피해를 받을 때 냉기 축적 44"
     },
     "Taking Damage Causes Madness Buildup": {
-      "name": "대미지를 받을 시 발광 축적"
+      "name": "대미지를 받을 시 발광 축적",
+      "desc": "피해를 받을 때 발광 축적 40"
     },
     "Taking Damage Causes Poison Buildup": {
-      "name": "대미지를 받을 시 독 축적"
+      "name": "대미지를 받을 시 독 축적",
+      "desc": "피해를 받을 때 독 축적 52"
     },
     "Taking Damage Causes Rot Buildup": {
-      "name": "대미지를 받을 시 부패 축적"
+      "name": "대미지를 받을 시 부패 축적",
+      "desc": "피해를 받을 때 부패 축적 44"
     },
     "Taking Damage Causes Sleep Buildup": {
-      "name": "대미지를 받을 시 수면 축적"
+      "name": "대미지를 받을 시 수면 축적",
+      "desc": "피해를 받을 때 수면 축적 40"
     },
     "Taking attacks improves attack power": {
-      "name": "공격을 받으면 공격력 상승"
+      "name": "공격을 받으면 공격력 상승",
+      "desc": "피격 후 10초간 피해 1.15배"
     },
     "Thorny Cracked Tear in possession at start of expedition": {
       "name": "출격 시 「가시 깨진 물방울」 소지"
@@ -1375,28 +1599,35 @@ window.__LOCALE_KR__ = {
       "name": "출격 시 「가는 가지 깨진 물방울」 소지"
     },
     "Ultimate Art Auto Charge +1": {
-      "name": "아츠 게이지 자연 축적+1"
+      "name": "아츠 게이지 자연 축적+1",
+      "desc": "아츠 게이지 축적 1.05배"
     },
     "Ultimate Art Auto Charge +2": {
-      "name": "아츠 게이지 자연 축적+2"
+      "name": "아츠 게이지 자연 축적+2",
+      "desc": "아츠 게이지 축적 1.075배"
     },
     "Ultimate Art Auto Charge +3": {
-      "name": "아츠 게이지 자연 축적+3"
+      "name": "아츠 게이지 자연 축적+3",
+      "desc": "아츠 게이지 축적 1.1배"
     },
     "Ultimate Art Charging Impaired": {
-      "name": "아츠 게이지 축적 둔화"
+      "name": "아츠 게이지 축적 둔화",
+      "desc": "아츠 게이지 축적 0.85배"
     },
     "Uplifting Aromatic in possession at start of expedition": {
       "name": "출격 시 「고양의 향기」 소지"
     },
     "Vigor +1": {
-      "name": "생명력+1"
+      "name": "생명력+1",
+      "desc": "최대 HP +20"
     },
     "Vigor +2": {
-      "name": "생명력+2"
+      "name": "생명력+2",
+      "desc": "최대 HP +40"
     },
     "Vigor +3": {
-      "name": "생명력+3"
+      "name": "생명력+3",
+      "desc": "최대 HP +60"
     },
     "Windy Crystal Tear in possession at start of expedition": {
       "name": "출격 시 「바람 결정 물방울」 소지"
@@ -1609,79 +1840,104 @@ window.__LOCALE_KR__ = {
       "name": "HP 저하 시 주위 아군을 포함해 HP를 서서히 회복"
     },
     "Stamina Recovery upon Landing Attacks +1": {
-      "name": "공격 명중 시 스태미나 회복+1"
+      "name": "공격 명중 시 스태미나 회복+1",
+      "desc": "연속 공격 시 스태미나 3 회복"
     },
     "Improved Critical Hits +1": {
-      "name": "치명적인 일격 강화+1"
+      "name": "치명적인 일격 강화+1",
+      "desc": "치명적인 일격 피해 1.23배"
     },
     "Poison & Rot in Vicinity Increases Attack Power": {
-      "name": "주위에서 독 / 부패 발생 시 공격력 상승"
+      "name": "주위에서 독 / 부패 발생 시 공격력 상승",
+      "desc": "주위에서 독/부패 발생 후 20초간 피해 1.12배"
     },
     "FP Restoration upon Successive Attacks": {
-      "name": "공격 연속 시 FP 회복"
+      "name": "공격 연속 시 FP 회복",
+      "desc": "연속 공격 시 최대 FP의 5% 회복"
     },
     "Continuous HP Recovery": {
-      "name": "HP 지속 회복"
+      "name": "HP 지속 회복",
+      "desc": "HP +2/초"
     },
     "Huge rune discount for shop purchases while on\nexpedition": {
-      "name": "출격 중 상점 구매에 필요한 룬 대폭 할인"
+      "name": "출격 중 상점 구매에 필요한 룬 대폭 할인",
+      "desc": "상인 구매 20% 할인 (일반 10% 할인과 중첩)"
     },
     "Gesture \"Crossed Legs\" Builds Up Madness": {
-      "name": "제스처 「책상다리」로 발광 축적"
+      "name": "제스처 「책상다리」로 발광 축적",
+      "desc": "제스처 「책상다리」 중 2초마다 발광 축적 10"
     },
     "Madness Continually Recovers FP": {
-      "name": "발광 상태가 되면 FP 지속 회복"
+      "name": "발광 상태가 되면 FP 지속 회복",
+      "desc": "발광 상태에서 25초간 초당 FP 2 회복"
     },
     "Boosts Attack Power of Added Affinity Attacks": {
-      "name": "속성 공격력 부여 시 속성 공격력 상승"
+      "name": "속성 공격력 부여 시 속성 공격력 상승",
+      "desc": "무기의 속성 피해 1.1배 (마술·기도 제외)"
     },
     "Frostbite in Vicinity Conceals Self": {
-      "name": "주위에서 동상 발생 시 자신의 모습을 숨김"
+      "name": "주위에서 동상 발생 시 자신의 모습을 숨김",
+      "desc": "주위에서 동상 발생 시 모습을 숨김"
     },
     "Improved Physical Damage Negation": {
-      "name": "물리 경감률 상승"
+      "name": "물리 경감률 상승",
+      "desc": "물리 경감률 +10%"
     },
     "Improved Melee Attack Power": {
-      "name": "근접 공격력 상승"
+      "name": "근접 공격력 상승",
+      "desc": "모든 공격력 1.05배 (무기·전투 기술)"
     },
     "Improved Skill Attack Power": {
-      "name": "전투 기술 공격력 상승"
+      "name": "전투 기술 공격력 상승",
+      "desc": "전투 기술 피해 1.15배"
     },
     "Continuous FP Recovery": {
-      "name": "FP 지속 회복"
+      "name": "FP 지속 회복",
+      "desc": "5초마다 FP 1 회복"
     },
     "Occasionally Nullify Attacks When Damage Negation is Lowered": {
-      "name": "경감률 저하 시 드물게 적에게 받는 공격을 무효화"
+      "name": "경감률 저하 시 드물게 적에게 받는 공격을 무효화",
+      "desc": "경감률 저하 중 20% 확률로 받는 피해 무효화"
     },
     "Attacks Inflict Rot when Damage is Taken": {
-      "name": "대미지를 받을 시 부패 상태 이상 부여"
+      "name": "대미지를 받을 시 부패 상태 이상 부여",
+      "desc": "피해를 받은 후 12초간 무기에 부패 축적 +25"
     },
     "Rot in Vicinity Causes Continuous HP Recovery": {
-      "name": "주위에서 부패 상태 발생 시 HP 지속 회복"
+      "name": "주위에서 부패 상태 발생 시 HP 지속 회복",
+      "desc": "주위에서 부패 발생 후 15초간 초당 최대 HP의 0.15% + 15 회복"
     },
     "Status Ailment Gauges Slowly Increase Attack Power": {
-      "name": "상태 이상 게이지가 있을 때 서서히 공격력 상승"
+      "name": "상태 이상 게이지가 있을 때 서서히 공격력 상승",
+      "desc": "상태 이상 게이지가 있는 동안 20초마다 피해 1.04배 (최대 10중첩)"
     },
     "Switching Weapons Adds an Affinity Attack": {
-      "name": "무기 바꿔 들기 시 어느 한 속성 공격력 부여"
+      "name": "무기 바꿔 들기 시 어느 한 속성 공격력 부여",
+      "desc": "무기 바꿔 들기 후 10초간 무작위 속성 공격력 +12"
     },
     "Switching Weapons Boosts Attack Power": {
-      "name": "무기 바꿔 들기 시 물리 공격력 상승"
+      "name": "무기 바꿔 들기 시 물리 공격력 상승",
+      "desc": "무기 바꿔 들기 후 10초간 물리 피해 1.1배"
     },
     "Extended Spell Duration": {
-      "name": "마술/기도 효과 시간 연장"
+      "name": "마술/기도 효과 시간 연장",
+      "desc": "마술·기도 효과 시간 +50%"
     },
     "Successive Attacks Boost Attack Power": {
-      "name": "공격 연속 시 공격력 상승"
+      "name": "공격 연속 시 공격력 상승",
+      "desc": "연속 공격 단계마다 피해 1.05배/1.065배/1.09배 (누적 최대 약 1.219배)"
     },
     "HP Recovery From Successful Guarding": {
-      "name": "가드 성공 시 HP 회복"
+      "name": "가드 성공 시 HP 회복",
+      "desc": "가드 성공 시 HP 8 회복"
     },
     "Improved Stance-Breaking when Two-Handing": {
-      "name": "양손 잡기의 자세를 무너뜨리는 힘 상승"
+      "name": "양손 잡기의 자세를 무너뜨리는 힘 상승",
+      "desc": "양손 잡기 시 자세를 무너뜨리는 힘 1.05배 (활 제외)"
     },
     "Improved Stance-Breaking when Wielding Two Armaments": {
-      "name": "이도류의 자세를 무너뜨리는 힘 상승"
+      "name": "이도류의 자세를 무너뜨리는 힘 상승",
+      "desc": "이도류 시 자세를 무너뜨리는 힘 1.05배"
     }
   },
   "relics": {
@@ -1924,5 +2180,35 @@ window.__LOCALE_KR__ = {
   "conditionTemplates": {
     "hitsOnly": "{w} 공격 시에만",
     "equipped3Plus": "{w} 3개 이상 장착 시"
+  },
+  "flatTemplates": {
+    "{v} all status resistances": "모든 상태 이상 내성 {v}",
+    "{v} HP/s": "HP {v}/초",
+    "Taking damage inflicts {v} blood loss buildup": "피해를 받을 때 출혈 축적 {v}",
+    "Taking damage inflicts {v} death blight buildup": "피해를 받을 때 죽음 축적 {v}",
+    "+{v} HP/s": "HP +{v}/초",
+    "Taking damage adds {v} rot buildup to your weapon for 12s": "피해를 받은 후 12초간 무기에 부패 축적 {v}",
+    "Taking damage inflicts {v} frost buildup": "피해를 받을 때 냉기 축적 {v}",
+    "Taking damage inflicts {v} madness buildup": "피해를 받을 때 발광 축적 {v}",
+    "Taking damage inflicts {v} poison buildup": "피해를 받을 때 독 축적 {v}",
+    "Taking damage inflicts {v} rot buildup": "피해를 받을 때 부패 축적 {v}",
+    "Taking damage inflicts {v} sleep buildup": "피해를 받을 때 수면 축적 {v}",
+    "{v} poison buildup per 0.22s": "0.22초마다 독 축적 {v}",
+    "{v} rot buildup per 0.24s": "0.24초마다 부패 축적 {v}",
+    "+{v} blood loss resistance": "출혈 내성 +{v}",
+    "+{v} death blight resistance": "죽음 내성 +{v}",
+    "+{v} frost resistance": "냉기 내성 +{v}",
+    "+{v} madness resistance": "발광 내성 +{v}",
+    "+{v} poison resistance": "독 내성 +{v}",
+    "+{v} rot resistance": "부패 내성 +{v}",
+    "+{v} sleep resistance": "수면 내성 +{v}",
+    "{v} Max HP": "최대 HP {v}",
+    "{v} Max FP": "최대 FP {v}",
+    "{v} Max Stamina": "최대 스태미나 {v}",
+    "{v} Strength": "근력 {v}",
+    "{v} Dexterity": "기량 {v}",
+    "{v} Intelligence": "지력 {v}",
+    "{v} Faith": "신앙 {v}",
+    "{v} Arcane": "신비 {v}"
   }
 };

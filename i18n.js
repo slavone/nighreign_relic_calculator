@@ -70,6 +70,12 @@ const I18N = {
     return en;
   },
 
+  // Flat summary-row templates ("{v} all status resistances", "{v} Max HP"),
+  // keyed by the English template; {v} is filled with the summed value.
+  flatTemplate(en) {
+    return this.strings.flatTemplates?.[en] ?? en;
+  },
+
   // Guaranteed relic names (Effect Multipliers mode), keyed by English name.
   relicName(en) {
     return this.strings.relics?.[en] ?? en;
