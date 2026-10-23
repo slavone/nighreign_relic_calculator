@@ -98,7 +98,7 @@ infer the groups.
 |---|---|
 | **Boss** (18) | 2000, 2001, 2010, 2011, 2020, 2021, 2030, 2031, 2040, 2041, 2050, 2051, 2060, 2061, 2070, 2071, 2080, 2100 |
 | **Remembrance** (24) | 11000, 11001, 11002, 12000, 12001, 12002, 12003, 13001, 13002, 14000, 14001, 14002, 15000, 15002, 16001, 16002, 17001, 17002, 18000, 18002, 19000, 19001, 19050, 19051 |
-| **Collector Signboard** (39) | every ID in 1400–1920 that has a name in AntiqueName: 1400–1520 and 1600–1750 (step 10), plus 1800, 1820, 1830, 1850, 1860, 1870, 1880, 1890, 1900, 1920 |
+| **Collector Signboard** (39) | every ID in 1400–1920 that has a name in AntiqueName and at least one effect (1810, 1840, 1910 and 1930 have names but no effects, so they're excluded): 1400–1520 and 1600–1750 (step 10), plus 1800, 1820, 1830, 1850, 1860, 1870, 1880, 1890, 1900, 1920 |
 | **Misc** (3) | 10000 Old Pocketwatch, 10001 Besmirched Frame, 10002 Fell Omen Fetish |
 
 Some Boss relics (the Dark Night variants, Will of Balance) are bought at
@@ -112,13 +112,15 @@ beating Harmonia. The user's CSV note calling it "unreleased" is stale.
 
 A relic is DLC if its ID appears in `AntiqueName_dlc01.fmg.xml` and not in
 `AntiqueName.fmg.xml`. This is the same name-file rule the project used to
-identify DLC effects. It yields 32 DLC relics: 2070, 2071, 2080, 19000,
-19001, 19050, 19051, and Signboard 1600–1920 (25 relics).
+identify DLC effects. It yields 33 DLC relics: 2070, 2071, 2080, 19000,
+19001, 19050, 19051, and the 26 Signboard relics in 1600–1920. (The design
+conversation said "25"; that was a miscount. The table shown to the user
+listed all 26 IDs, and the user's decision was to hide all of them.)
 
-The user confirmed all 32 hide in Pre-DLC mode. Night of the Lord (2100) is
+The user confirmed all of these hide in Pre-DLC mode. Night of the Lord (2100) is
 base game, as both the name file and the user confirm.
 
-Within the 25 DLC Signboard relics, 19 carry only base-game effects. The
+Within the 26 DLC Signboard relics, 20 carry only base-game effects. The
 user chose to hide them anyway (best guess: Signboard stock added with the
 DLC). If an in-game check without the DLC proves otherwise, flipping them
 must be a one-line change to an override set in the prepare script. Design
@@ -248,11 +250,12 @@ independently confirmed.
   `stepValues.length`. Glass Necklace tier 2 = 1.05 × 1.065 ≈ 1.118, and
   tier 3 = × 1.09 ≈ 1.219. This matches the community sheet's 5% / 11.8% /
   21.9%.
-- The rest of the engine is unchanged. `getBuildEffects()` pushes N entries
-  as today, each carrying its step's value.
-- The summary must show the correct combined figure for a stepped effect
-  (the product of its steps, not `value^count`). Check how `baselineByName`
-  renders grouped duplicates.
+- The summary must show the correct combined figure for a stepped effect:
+  the product of its steps, not `value^count`. The plan meets this by
+  having `getBuildEffects()` push **one** entry whose value is the product
+  of the first N steps (none when N = 0). `computeBuildTotals` and the
+  summary rendering stay unchanged. Effects without `stepValues` still push
+  N copies, as today.
 - `tests/build.test.mjs` mirrors the engine. Update it too, and add cases
   for stepValues and for a fixed relic's effects reaching the totals.
 
