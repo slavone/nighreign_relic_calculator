@@ -86,9 +86,11 @@ python3 -c "
 import json, re
 with open('data/relic_data.json') as f: r = json.load(f)
 with open('data/don_relic_data.json') as f: d = json.load(f)
+with open('data/fixed_relics.json') as f: x = json.load(f)
 with open('index.html') as f: c = f.read()
 c = re.sub(r'const DATA = \{.*?\};', lambda m: 'const DATA = ' + json.dumps(r, separators=(',',':'), ensure_ascii=False) + ';', c, flags=re.DOTALL)
 c = re.sub(r'const DON_DATA = \{.*?\};', lambda m: 'const DON_DATA = ' + json.dumps(d, separators=(',',':'), ensure_ascii=False) + ';', c, flags=re.DOTALL)
+c = re.sub(r'const FIXED_RELICS = \{.*?\};\n', lambda m: 'const FIXED_RELICS = ' + json.dumps(x, separators=(',',':'), ensure_ascii=False) + ';\n', c, flags=re.DOTALL)
 with open('index.html', 'w') as f: f.write(c)
 "
 ```

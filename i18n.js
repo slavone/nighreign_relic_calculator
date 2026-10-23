@@ -70,6 +70,11 @@ const I18N = {
     return en;
   },
 
+  // Guaranteed relic names (Effect Multipliers mode), keyed by English name.
+  relicName(en) {
+    return this.strings.relics?.[en] ?? en;
+  },
+
   groupName(en) {
     return this.strings.groups?.[en] ?? en;
   },

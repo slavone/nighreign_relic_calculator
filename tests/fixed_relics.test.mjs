@@ -57,5 +57,16 @@ check('every relic has a name', relics.every(r => typeof r.name === 'string' && 
 const EXCLUDED = [...Array.from({ length: 32 }, (_, i) => 1000 + i * 10), 11003, 11004, 12004, 12005, 12006, 12007];
 check('Small Jar Bazaar relics and +1 quest pickups are excluded', EXCLUDED.every(id => !byId.has(id)));
 
+// index.html embeds this JSON as FIXED_RELICS (README embed script) — the
+// embedded copy must match the generated file, or the page silently ships
+// stale relic data.
+{
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const m = html.match(/const FIXED_RELICS = (\{.*?\});\n/s);
+  check('index.html embeds FIXED_RELICS', !!m);
+  check('embedded FIXED_RELICS matches data/fixed_relics.json',
+    !!m && JSON.stringify(JSON.parse(m[1])) === JSON.stringify(data));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
