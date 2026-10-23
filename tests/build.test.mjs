@@ -357,6 +357,16 @@ function countedEntries(effect, count) {
   return Array.from({ length: count }, () => ({ name, mul, desc }));
 }
 
+// Duplicated from index.html (share-link decode).
+// Decodes one Regular panel's guaranteed relic from a share link:
+// r{n}f=<relicId>, plus r{n}fn{k}=<count> for counted effects (k = 1-based
+// effect position; a relic has at most 3 effects).
+function parseFixedPanelParams(params, r) {
+  const raw = params.get(`r${r}f`);
+  const id = raw != null && /^\d+$/.test(raw) ? Number(raw) : null;
+  return { relicId: id, counts: [1, 2, 3].map(k => params.get(`r${r}fn${k}`)) };
+}
+
 // --- Test harness (matches tests/calc.test.mjs style) ---
 let passed = 0, failed = 0;
 function test(label, actual, expected, tolerance = 1e-9) {
@@ -965,6 +975,17 @@ function test(label, actual, expected, tolerance = 1e-9) {
   test('Evergaol ×3 → 1.05^3', computeBuildTotals(countedEntries(evergaol, 3)).damageBaseline.universal, Math.pow(1.05, 3));
   test('a non-counted effect ignores the count', countedEntries(plain, 5).length, 1);
   test('source effect mul is not mutated by collapsing', glass.mul.value, 1.05);
+}
+
+// Share-link decode for a Regular panel's guaranteed relic: r{n}f=<relicId>
+// plus r{n}fn{k}=<count> per counted effect (k = 1-based effect position).
+{
+  const p1 = parseFixedPanelParams(new URLSearchParams('r1f=19051&r1fn3=2'), 1);
+  test('relic id decodes as a number', p1.relicId, 19051);
+  test('count for effect 3 lands at index 2', JSON.stringify(p1.counts), JSON.stringify([null, null, '2']));
+  test('missing r{n}f → no relic', parseFixedPanelParams(new URLSearchParams('r1s1=7000000'), 1).relicId, null);
+  test('non-numeric r{n}f → no relic', parseFixedPanelParams(new URLSearchParams('r1f=abc'), 1).relicId, null);
+  test('other panels are not read', parseFixedPanelParams(new URLSearchParams('r2f=2100'), 1).relicId, null);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

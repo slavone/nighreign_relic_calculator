@@ -2184,6 +2184,17 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           const groups = activeBuildPreDLCGroups(pool);
           [...container.querySelectorAll('.relic-panel')].forEach((panel, pIdx) => {
             const relicNum = pIdx + 1;
+            // A guaranteed relic replaces the panel's free-form rows, so it's
+            // encoded instead of them (r{n}f + per-effect counts r{n}fn{k}).
+            const fixedSel = panel.querySelector('.fixed-relic-select');
+            if (fixedSel && fixedSel.value !== '') {
+              sp.set(`${prefix}${relicNum}f`, fixedSel.value);
+              panel.querySelectorAll('.fixed-effect-row').forEach(row => {
+                const countSel = row.querySelector('.count-select');
+                if (countSel) sp.set(`${prefix}${relicNum}fn${parseInt(row.dataset.effectIdx) + 1}`, countSel.value);
+              });
+              return;
+            }
             [...panel.querySelectorAll('.slot-block')].forEach((block, sIdx) => {
               const slotNum = sIdx + 1;
               const gIdx = parseInt(block.querySelector('.group-select').value);
@@ -2270,6 +2281,7 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
           regular: [1, 2, 3].map(r => ({
             slots: [1, 2, 3].map(s => params.get(`r${r}s${s}`)),
             counts: [1, 2, 3].map(s => params.get(`r${r}n${s}`)),
+            fixed: parseFixedPanelParams(params, r),
           })),
           don: [1, 2, 3].map(r => ({
             slots: [1, 2, 3].map(s => params.get(`d${r}s${s}`)),
@@ -2280,7 +2292,16 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
       };
     }
 
-    function applyRestoredBuildPanel(panel, pool, slotKeys, curseKeys, countKeys) {
+    // Decodes one Regular panel's guaranteed relic from a share link:
+    // r{n}f=<relicId>, plus r{n}fn{k}=<count> for counted effects (k = 1-based
+    // effect position; a relic has at most 3 effects).
+    function parseFixedPanelParams(params, r) {
+      const raw = params.get(`r${r}f`);
+      const id = raw != null && /^\d+$/.test(raw) ? Number(raw) : null;
+      return { relicId: id, counts: [1, 2, 3].map(k => params.get(`r${r}fn${k}`)) };
+    }
+
+        function applyRestoredBuildPanel(panel, pool, slotKeys, curseKeys, countKeys) {
       const groups = activeBuildPreDLCGroups(pool);
       const maxIdx = slotKeys.reduce((m, k, i) => k != null ? i + 1 : m, 0);
       const addBtn = panel.querySelector('.add-effect-btn');
@@ -2378,9 +2399,23 @@ efSlots([t, …], D) = Σ_d (w_d[t] / W_t) · efSlots(rest, D∖d)        [desir
         updateAddBtn();
       } else {
         const regularPanels = [...document.getElementById('build-regular-relics').querySelectorAll('.relic-panel')];
+        // A guaranteed relic takes priority over any free-form keys for the same
+        // panel. Unknown ids, DLC relics under Pre-DLC, and a relic already
+        // restored into an earlier panel (one relic can't be equipped twice)
+        // all leave the panel to the free-form restore instead.
+        const usedFixed = new Set();
         restored.build.regular.forEach((r, i) => {
-          if (regularPanels[i]) applyRestoredBuildPanel(regularPanels[i], DATA, r.slots, null, r.counts);
+          const panel = regularPanels[i];
+          if (!panel) return;
+          const id = r.fixed?.relicId;
+          if (id != null && fixedRelicById(id) && !usedFixed.has(id)) {
+            usedFixed.add(id);
+            setPanelFixedRelic(panel, id, r.fixed.counts);
+            return;
+          }
+          applyRestoredBuildPanel(panel, DATA, r.slots, null, r.counts);
         });
+        refreshFixedRelicDropdowns();
         if (restored.build.donIncluded) {
           const donPanels = [...document.getElementById('build-don-relics').querySelectorAll('.relic-panel')];
           restored.build.don.forEach((r, i) => {
