@@ -1,0 +1,2803 @@
+{
+  "groups": [
+    "boss",
+    "remembrance",
+    "signboard",
+    "misc"
+  ],
+  "relics": [
+    {
+      "id": 2000,
+      "name": "Night of the Beast",
+      "group": "boss",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7100110,
+          "name": "Stamina Recovery upon Landing Attacks +1",
+          "desc": "Restores 3 stamina on successive attacks"
+        },
+        {
+          "id": 7120100,
+          "name": "Starting armament deals fire damage"
+        }
+      ]
+    },
+    {
+      "id": 2001,
+      "name": "Dark Night of the Beast",
+      "group": "boss",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7100110,
+          "name": "Stamina Recovery upon Landing Attacks +1",
+          "desc": "Restores 3 stamina on successive attacks"
+        },
+        {
+          "id": 100000,
+          "name": "Taking attacks improves attack power",
+          "desc": "1.15× damage for 10s after taking a hit",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 1.15,
+            "condition": "10s after taking a hit"
+          }
+        },
+        {
+          "id": 7001602,
+          "name": "Fire Attack Power Up +2",
+          "desc": "1.065× fire damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "fire"
+            ],
+            "value": 1.065
+          }
+        }
+      ]
+    },
+    {
+      "id": 2010,
+      "name": "Night of the Baron",
+      "group": "boss",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7040201,
+          "name": "Improved Critical Hits +1",
+          "desc": "1.23× critical hit damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "hitType",
+            "value": 1.23,
+            "condition": "On critical hits"
+          }
+        },
+        {
+          "id": 7030800,
+          "name": "Critical hits fill more of the Art gauge"
+        },
+        {
+          "id": 7035100,
+          "name": "Critical Hit Boosts Stamina Recovery Speed"
+        }
+      ]
+    },
+    {
+      "id": 2011,
+      "name": "Dark Night of the Baron",
+      "group": "boss",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7040201,
+          "name": "Improved Critical Hits +1",
+          "desc": "1.23× critical hit damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "hitType",
+            "value": 1.23,
+            "condition": "On critical hits"
+          }
+        },
+        {
+          "id": 7040200,
+          "name": "Improved Critical Hits",
+          "desc": "1.18× critical hit damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "hitType",
+            "value": 1.18,
+            "condition": "On critical hits"
+          }
+        },
+        {
+          "id": 7031900,
+          "name": "Critical Hits Earn Runes"
+        }
+      ]
+    },
+    {
+      "id": 2020,
+      "name": "Night of the Wise",
+      "group": "boss",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7000190,
+          "name": "Increased Maximum FP",
+          "desc": "1.15× maximum FP",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "maxFP",
+            "value": 1.15
+          }
+        },
+        {
+          "id": 7120500,
+          "name": "Starting armament inflicts poison"
+        },
+        {
+          "id": 7260800,
+          "name": "Poison & Rot in Vicinity Increases Attack Power",
+          "desc": "1.12× damage for 20s after poison or rot procs nearby",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 1.12,
+            "condition": "20s after poison/rot procs nearby"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2021,
+      "name": "Dark Night of the Wise",
+      "group": "boss",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7000190,
+          "name": "Increased Maximum FP",
+          "desc": "1.15× maximum FP",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "maxFP",
+            "value": 1.15
+          }
+        },
+        {
+          "id": 7060100,
+          "name": "Max FP increased for each Sorcerer's Rise unlocked"
+        },
+        {
+          "id": 7036000,
+          "name": "FP Restoration upon Successive Attacks",
+          "desc": "Restores 5% of max FP on successive attacks"
+        }
+      ]
+    },
+    {
+      "id": 2030,
+      "name": "Night of the Fathom",
+      "group": "boss",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7000090,
+          "name": "Increased Maximum HP",
+          "desc": "1.1× maximum HP",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "maxHP",
+            "value": 1.1
+          }
+        },
+        {
+          "id": 7010200,
+          "name": "Flask Also Heals Allies",
+          "desc": "Heals allies for 50% of flask HP in a radius"
+        },
+        {
+          "id": 7050100,
+          "name": "Items confer effect to all nearby allies"
+        }
+      ]
+    },
+    {
+      "id": 2031,
+      "name": "Dark Night of the Fathom",
+      "group": "boss",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7000090,
+          "name": "Increased Maximum HP",
+          "desc": "1.1× maximum HP",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "maxHP",
+            "value": 1.1
+          }
+        },
+        {
+          "id": 7012200,
+          "name": "Slowly restore HP for self and nearby allies when HP is low"
+        },
+        {
+          "id": 7001100,
+          "name": "Continuous HP Recovery",
+          "desc": "+2 HP/s",
+          "mul": {
+            "tier": "flat",
+            "value": 2,
+            "template": "+{v} HP/s"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2040,
+      "name": "Night of the Demon",
+      "group": "boss",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7230001,
+          "name": "Huge rune discount for shop purchases while on expedition",
+          "desc": "20% discount at merchants (stacks with the regular 10% discount)"
+        },
+        {
+          "id": 7035400,
+          "name": "Gesture \"Crossed Legs\" Builds Up Madness",
+          "desc": "Inflicts 10 madness buildup every 2s while doing the Crossed Legs gesture"
+        },
+        {
+          "id": 7035500,
+          "name": "Madness Continually Recovers FP",
+          "desc": "Restores 2 FP/s for 25s while maddened"
+        }
+      ]
+    },
+    {
+      "id": 2041,
+      "name": "Dark Night of the Demon",
+      "group": "boss",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7032200,
+          "name": "Taking attacks improves attack power",
+          "desc": "1.15× damage for 10s after taking a hit",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 1.15,
+            "condition": "10s after taking a hit"
+          }
+        },
+        {
+          "id": 7035410,
+          "name": "Gesture \"Crossed Legs\" Builds Up Madness",
+          "desc": "Inflicts 10 madness buildup every 2s while doing the Crossed Legs gesture"
+        },
+        {
+          "id": 7035510,
+          "name": "Madness Continually Recovers FP",
+          "desc": "Restores 2 FP/s for 25s while maddened"
+        }
+      ]
+    },
+    {
+      "id": 2050,
+      "name": "Night of the Champion",
+      "group": "boss",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7000290,
+          "name": "Increased Maximum Stamina",
+          "desc": "1.12× maximum stamina",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "maxStamina",
+            "value": 1.12
+          }
+        },
+        {
+          "id": 7150000,
+          "name": "Guard counter is given a boost based on current HP",
+          "desc": "Adds HP÷20 flat damage to guard counters"
+        },
+        {
+          "id": 7160000,
+          "name": "HP Restoration upon Thrusting Counterattack",
+          "desc": "Restores [MaxHP × 0.025] HP on counterhits"
+        }
+      ]
+    },
+    {
+      "id": 2051,
+      "name": "Dark Night of the Champion",
+      "group": "boss",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7000290,
+          "name": "Increased Maximum Stamina",
+          "desc": "1.12× maximum stamina",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "maxStamina",
+            "value": 1.12
+          }
+        },
+        {
+          "id": 7035800,
+          "name": "Boosts Attack Power of Added Affinity Attacks",
+          "desc": "1.1× elemental damage on weapons (not sorceries/incantations)",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "group": "weapon",
+            "value": 1.1,
+            "condition": "Elemental damage on weapons only (not spells)"
+          }
+        },
+        {
+          "id": 7090000,
+          "name": "Defeating enemies fills more of the Art gauge"
+        }
+      ]
+    },
+    {
+      "id": 2060,
+      "name": "Night of the Miasma",
+      "group": "boss",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7260700,
+          "name": "Frostbite in Vicinity Conceals Self",
+          "desc": "Become hidden when frostbite procs nearby"
+        },
+        {
+          "id": 7123900,
+          "name": "Changes compatible armament's skill to Chilling Mist at start of expedition"
+        },
+        {
+          "id": 7260400,
+          "name": "Attack power up when facing frostbite-afflicted enemy",
+          "desc": "1.1× damage vs frostbite-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 1.1,
+            "condition": "vs frostbite-afflicted enemies"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2061,
+      "name": "Dark Night of the Miasma",
+      "group": "boss",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7260700,
+          "name": "Frostbite in Vicinity Conceals Self",
+          "desc": "Become hidden when frostbite procs nearby"
+        },
+        {
+          "id": 7120400,
+          "name": "Starting armament inflicts frost"
+        },
+        {
+          "id": 7006200,
+          "name": "Improved Physical Damage Negation",
+          "desc": "+10% physical damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "physical"
+            ],
+            "value": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": 2070,
+      "name": "The Will of the Balancers",
+      "group": "boss",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7006600,
+          "name": "Improved Melee Attack Power",
+          "desc": "1.05× all attack power (weapon and skills)",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.05
+          }
+        },
+        {
+          "id": 7006700,
+          "name": "Improved Skill Attack Power",
+          "desc": "1.15× weapon skill damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "hitType",
+            "value": 1.15,
+            "condition": "Weapon skills only"
+          }
+        },
+        {
+          "id": 7006500,
+          "name": "Continuous FP Recovery",
+          "desc": "+1 FP every 5s"
+        }
+      ]
+    },
+    {
+      "id": 2071,
+      "name": "The Will of Balance",
+      "group": "boss",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7006600,
+          "name": "Improved Melee Attack Power",
+          "desc": "1.05× all attack power (weapon and skills)",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.05
+          }
+        },
+        {
+          "id": 7006700,
+          "name": "Improved Skill Attack Power",
+          "desc": "1.15× weapon skill damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "hitType",
+            "value": 1.15,
+            "condition": "Weapon skills only"
+          }
+        },
+        {
+          "id": 7037800,
+          "name": "Occasionally Nullify Attacks When Damage Negation is Lowered",
+          "desc": "20% chance to take no damage while any damage negation is lowered"
+        }
+      ]
+    },
+    {
+      "id": 2080,
+      "name": "The Night of Dregs",
+      "group": "boss",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7170100,
+          "name": "Attacks Inflict Rot when Damage is Taken",
+          "desc": "+25 rot buildup on your weapon for 12s after taking damage",
+          "mul": {
+            "tier": "flat",
+            "value": 25,
+            "template": "Taking damage adds {v} rot buildup to your weapon for 12s"
+          }
+        },
+        {
+          "id": 7260900,
+          "name": "Rot in Vicinity Causes Continuous HP Recovery",
+          "desc": "Restores 0.15% max HP + 15 HP/s for 15s after rot procs nearby"
+        },
+        {
+          "id": 7037700,
+          "name": "Status Ailment Gauges Slowly Increase Attack Power",
+          "desc": "1.04× damage every 20s while a status gauge is visible (up to 10 stacks)",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.04,
+            "variableCount": true,
+            "maxCount": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": 2100,
+      "name": "Night of the Lord",
+      "group": "boss",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7035700,
+          "name": "Switching Weapons Adds an Affinity Attack",
+          "desc": "+12 AP of a random element for 10s after switching weapons"
+        },
+        {
+          "id": 7035800,
+          "name": "Boosts Attack Power of Added Affinity Attacks",
+          "desc": "1.1× elemental damage on weapons (not sorceries/incantations)",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "group": "weapon",
+            "value": 1.1,
+            "condition": "Elemental damage on weapons only (not spells)"
+          }
+        },
+        {
+          "id": 7035900,
+          "name": "Switching Weapons Boosts Attack Power",
+          "desc": "1.1× physical damage for 10s after switching weapons",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "status",
+            "value": 1.1,
+            "condition": "10s after switching weapons"
+          }
+        }
+      ]
+    },
+    {
+      "id": 11000,
+      "name": "Slate Whetstone",
+      "group": "remembrance",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7020000,
+          "name": "[Wylder] Standard attacks enhanced with fiery follow-ups when using Character Skill (greatsword only)"
+        },
+        {
+          "id": 7001400,
+          "name": "Physical Attack Up",
+          "desc": "1.04× physical damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": 11001,
+      "name": "The Wylder's Earring",
+      "group": "remembrance",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7010500,
+          "name": "[Wylder] Art activation spreads fire in area"
+        },
+        {
+          "id": 11000,
+          "name": "[Wylder] +1 additional Character Skill use"
+        },
+        {
+          "id": 7100100,
+          "name": "Stamina Recovery upon Landing Attacks"
+        }
+      ]
+    },
+    {
+      "id": 11002,
+      "name": "Silver Tear",
+      "group": "remembrance",
+      "color": 0,
+      "effects": [
+        {
+          "id": 11002,
+          "name": "[Wylder] Art gauge greatly filled when ability is activated"
+        },
+        {
+          "id": 7000902,
+          "name": "Ultimate Art Auto Charge +3",
+          "desc": "1.1× ultimate gauge gain",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "ultimateCharge",
+            "value": 1.1
+          }
+        },
+        {
+          "id": 7000702,
+          "name": "Arcane +3",
+          "desc": "+3 Arcane",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "arcane",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 12000,
+      "name": "Third Volume",
+      "group": "remembrance",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7011600,
+          "name": "[Guardian] Creates whirlwind when charging halberd attacks"
+        },
+        {
+          "id": 7341800,
+          "name": "HP Restoration upon Halberd Attacks"
+        }
+      ]
+    },
+    {
+      "id": 12001,
+      "name": "Stone Stake",
+      "group": "remembrance",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7011000,
+          "name": "[Guardian] Increased duration for Character Skill"
+        },
+        {
+          "id": 7000802,
+          "name": "Character Skill Cooldown Reduction +3",
+          "desc": "0.9× skill cooldown",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "cooldown",
+            "value": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": 12002,
+      "name": "Witch's Brooch",
+      "group": "remembrance",
+      "color": 1,
+      "effects": [
+        {
+          "id": 12002,
+          "name": "[Guardian] Slowly restores nearby allies' HP while Art is active"
+        },
+        {
+          "id": 7033400,
+          "name": "[Guardian] Successful guards send out shockwaves while ability is active"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 12003,
+      "name": "Cracked Witch's Brooch",
+      "group": "remembrance",
+      "color": 1,
+      "effects": [
+        {
+          "id": 12002,
+          "name": "[Guardian] Slowly restores nearby allies' HP while Art is active"
+        },
+        {
+          "id": 7033400,
+          "name": "[Guardian] Successful guards send out shockwaves while ability is active"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 13001,
+      "name": "Cracked Sealing Wax",
+      "group": "remembrance",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7280000,
+          "name": "[Ironeye] Extends duration of weak point"
+        },
+        {
+          "id": 7031900,
+          "name": "Critical Hits Earn Runes"
+        }
+      ]
+    },
+    {
+      "id": 13002,
+      "name": "Edge of Order",
+      "group": "remembrance",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7034700,
+          "name": "[Ironeye] Boosts thrusting counterattacks after executing Art"
+        },
+        {
+          "id": 7120300,
+          "name": "Starting armament deals holy damage"
+        },
+        {
+          "id": 7332400,
+          "name": "Improved Bow Attack Power",
+          "desc": "1.06× Bow damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "weapon",
+            "value": 1.06,
+            "condition": "Bow hits only"
+          }
+        }
+      ]
+    },
+    {
+      "id": 14000,
+      "name": "Golden Dew",
+      "group": "remembrance",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7290000,
+          "name": "[Duchess] Improved Character Skill Attack Power"
+        },
+        {
+          "id": 7035800,
+          "name": "Boosts Attack Power of Added Affinity Attacks",
+          "desc": "1.1× elemental damage on weapons (not sorceries/incantations)",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "group": "weapon",
+            "value": 1.1,
+            "condition": "Elemental damage on weapons only (not spells)"
+          }
+        }
+      ]
+    },
+    {
+      "id": 14001,
+      "name": "Crown Medal",
+      "group": "remembrance",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7010700,
+          "name": "[Duchess] Successive dagger attack reprises event upon nearby enemies"
+        },
+        {
+          "id": 7330000,
+          "name": "Improved Dagger Attack Power",
+          "desc": "1.09× Dagger damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "weapon",
+            "value": 1.09,
+            "condition": "Dagger hits only"
+          }
+        }
+      ]
+    },
+    {
+      "id": 14002,
+      "name": "Blessed Iron Coin",
+      "group": "remembrance",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7032700,
+          "name": "[Duchess] Defeating enemies while Art is active ups attack power"
+        },
+        {
+          "id": 7001100,
+          "name": "Continuous HP Recovery",
+          "desc": "+2 HP/s",
+          "mul": {
+            "tier": "flat",
+            "value": 2,
+            "template": "+{v} HP/s"
+          }
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 15000,
+      "name": "Torn Braided Cord",
+      "group": "remembrance",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7031300,
+          "name": "[Raider] Damage taken while using Character Skill improves attack power and stamina"
+        },
+        {
+          "id": 7000302,
+          "name": "Strength +3",
+          "desc": "+3 Strength",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "strength",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 15002,
+      "name": "Black Claw Necklace",
+      "group": "remembrance",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7090300,
+          "name": "Defeating enemies near Totem Stela restores HP"
+        },
+        {
+          "id": 7090000,
+          "name": "Defeating enemies fills more of the Art gauge"
+        },
+        {
+          "id": 7001002,
+          "name": "Poise +3",
+          "desc": "0.85× incoming poise damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "poiseDamageTaken",
+            "value": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": 16001,
+      "name": "Small Makeup Brush",
+      "group": "remembrance",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7220000,
+          "name": "[Revenant] Power up while fighting alongside family"
+        },
+        {
+          "id": 7110000,
+          "name": "Increased rune acquisition for self and allies",
+          "desc": "1.035× rune gain for self and allies",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "runeGain",
+            "value": 1.035
+          }
+        }
+      ]
+    },
+    {
+      "id": 16002,
+      "name": "Old Portrait",
+      "group": "remembrance",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7011200,
+          "name": "[Revenant] Trigger ghostflame explosion during Ultimate Art activation"
+        },
+        {
+          "id": 16002,
+          "name": "[Revenant] Expend own HP to fully heal nearby allies when activating Art"
+        },
+        {
+          "id": 7090000,
+          "name": "Defeating enemies fills more of the Art gauge"
+        }
+      ]
+    },
+    {
+      "id": 17001,
+      "name": "Vestige of Night",
+      "group": "remembrance",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7032800,
+          "name": "[Recluse] Collecting affinity residue activates Terra Magica"
+        },
+        {
+          "id": 7001502,
+          "name": "Magic Attack Power Up +2",
+          "desc": "1.065× magic damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "value": 1.065
+          }
+        }
+      ]
+    },
+    {
+      "id": 17002,
+      "name": "Bone-Like Stone",
+      "group": "remembrance",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7034100,
+          "name": "[Recluse] Activating Ultimate Art raises Max HP"
+        },
+        {
+          "id": 17002,
+          "name": "[Recluse] Suffer blood loss and increase attack power upon Art activation"
+        },
+        {
+          "id": 7000502,
+          "name": "Intelligence +3",
+          "desc": "+3 Intelligence",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "intelligence",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 18000,
+      "name": "Blessed Flowers",
+      "group": "remembrance",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7034500,
+          "name": "[Executor] While Character Skill is active, unlocking use of cursed sword restores HP"
+        },
+        {
+          "id": 7000402,
+          "name": "Dexterity +3",
+          "desc": "+3 Dexterity",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "dexterity",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 18002,
+      "name": "Golden Sprout",
+      "group": "remembrance",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7011700,
+          "name": "[Executor] Roaring restores HP while Art is active"
+        },
+        {
+          "id": 7012200,
+          "name": "Slowly restore HP for self and nearby allies when HP is low"
+        },
+        {
+          "id": 7036100,
+          "name": "HP Recovery From Successful Guarding",
+          "desc": "Restores 8 HP after blocking an attack"
+        }
+      ]
+    },
+    {
+      "id": 19000,
+      "name": "Cleansing Tear",
+      "group": "remembrance",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7036400,
+          "name": "[Scholar] Continuous damage inflicted on targets threaded by Ultimate Art"
+        },
+        {
+          "id": 7090000,
+          "name": "Defeating enemies fills more of the Art gauge"
+        },
+        {
+          "id": 7006300,
+          "name": "Improved Affinity Damage Negation",
+          "desc": "+6% magic/fire/lightning/holy damage negation",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "negation",
+            "axes": [
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "value": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": 19001,
+      "name": "Note \"My Dear Successor\"",
+      "group": "remembrance",
+      "color": 2,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7036200,
+          "name": "[Scholar] Prevent slowing of Character Skill progress"
+        },
+        {
+          "id": 19001,
+          "name": "[Scholar] Allies targeted by Character Skill gain boosted attack"
+        },
+        {
+          "id": 7000802,
+          "name": "Character Skill Cooldown Reduction +3",
+          "desc": "0.9× skill cooldown",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "cooldown",
+            "value": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": 19050,
+      "name": "Leather Monocle Case",
+      "group": "remembrance",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7037000,
+          "name": "[Undertaker] Physical attacks boosted while assist effect from incantation is active for self"
+        },
+        {
+          "id": 7001402,
+          "name": "Physical Attack Up +2",
+          "desc": "1.06× physical damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.06
+          }
+        },
+        {
+          "id": 7006400,
+          "name": "Extended Spell Duration",
+          "desc": "+50% spell duration"
+        }
+      ]
+    },
+    {
+      "id": 19051,
+      "name": "Glass Necklace",
+      "group": "remembrance",
+      "color": 3,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7036800,
+          "name": "[Undertaker] Activating Ultimate Art increases attack power"
+        },
+        {
+          "id": 7000902,
+          "name": "Ultimate Art Auto Charge +3",
+          "desc": "1.1× ultimate gauge gain",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "ultimateCharge",
+            "value": 1.1
+          }
+        },
+        {
+          "id": 7037600,
+          "name": "Successive Attacks Boost Attack Power",
+          "desc": "1.05× / 1.065× / 1.09× damage per successive-attack tier (stacking: up to ~1.219×)",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.05,
+            "variableCount": true,
+            "maxCount": 3,
+            "stepValues": [
+              1.05,
+              1.065,
+              1.09
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1400,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7010500,
+          "name": "[Wylder] Art activation spreads fire in area"
+        },
+        {
+          "id": 7122900,
+          "name": "Changes compatible armament's skill to Flaming Strike at start of expedition"
+        },
+        {
+          "id": 7001602,
+          "name": "Fire Attack Power Up +2",
+          "desc": "1.065× fire damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "fire"
+            ],
+            "value": 1.065
+          }
+        }
+      ]
+    },
+    {
+      "id": 1410,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7033400,
+          "name": "[Guardian] Successful guards send out shockwaves while ability is active"
+        },
+        {
+          "id": 7030600,
+          "name": "Successful guarding fills more of the Art gauge"
+        },
+        {
+          "id": 7000202,
+          "name": "Endurance +3",
+          "desc": "+6 Max Stamina",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "endurance",
+                "value": 6
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1420,
+      "name": "Grand Tranquil Scene",
+      "group": "signboard",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7031800,
+          "name": "[Duchess] Become difficult to spot and silence footsteps after landing critical from behind"
+        },
+        {
+          "id": 7040200,
+          "name": "Improved Critical Hits",
+          "desc": "1.18× critical hit damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "hitType",
+            "value": 1.18,
+            "condition": "On critical hits"
+          }
+        },
+        {
+          "id": 7000801,
+          "name": "Character Skill Cooldown Reduction +2",
+          "desc": "0.925× skill cooldown",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "cooldown",
+            "value": 0.925
+          }
+        }
+      ]
+    },
+    {
+      "id": 1430,
+      "name": "Grand Tranquil Scene",
+      "group": "signboard",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7082500,
+          "name": "Max FP Up with 3+ Staves Equipped"
+        },
+        {
+          "id": 7060100,
+          "name": "Max FP increased for each Sorcerer's Rise unlocked"
+        },
+        {
+          "id": 7001500,
+          "name": "Magic Attack Power Up",
+          "desc": "1.045× magic damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "magic"
+            ],
+            "value": 1.045
+          }
+        }
+      ]
+    },
+    {
+      "id": 1440,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7034600,
+          "name": "[Ironeye] Art Charge Activation Adds Poison Effect"
+        },
+        {
+          "id": 7260000,
+          "name": "Attack power up when facing poison-afflicted enemy",
+          "desc": "1.1× damage vs poison-afflicted targets",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 1.1,
+            "condition": "vs poison-afflicted enemies"
+          }
+        },
+        {
+          "id": 7000902,
+          "name": "Ultimate Art Auto Charge +3",
+          "desc": "1.1× ultimate gauge gain",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "ultimateCharge",
+            "value": 1.1
+          }
+        }
+      ]
+    },
+    {
+      "id": 1450,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7310000,
+          "name": "[Raider] Duration of Ultimate Art extended"
+        },
+        {
+          "id": 7332300,
+          "name": "Improved Colossal Weapon Attack Power",
+          "desc": "1.09× Colossal Weapon damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "weapon",
+            "value": 1.09,
+            "condition": "Colossal Weapon hits only"
+          }
+        },
+        {
+          "id": 7000202,
+          "name": "Endurance +3",
+          "desc": "+6 Max Stamina",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "endurance",
+                "value": 6
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1460,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7031200,
+          "name": "[Revenant] Strengthens family and allies when Ultimate Art is activated"
+        },
+        {
+          "id": 7050100,
+          "name": "Items confer effect to all nearby allies"
+        },
+        {
+          "id": 7126000,
+          "name": "Starlight Shards in possession at start of expedition"
+        }
+      ]
+    },
+    {
+      "id": 1470,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7034400,
+          "name": "[Executor] Character Skill Boosts Attack but Attacking Drains HP"
+        },
+        {
+          "id": 7036100,
+          "name": "HP Recovery From Successful Guarding",
+          "desc": "Restores 8 HP after blocking an attack"
+        },
+        {
+          "id": 7030600,
+          "name": "Successful guarding fills more of the Art gauge"
+        }
+      ]
+    },
+    {
+      "id": 1480,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7012200,
+          "name": "Slowly restore HP for self and nearby allies when HP is low"
+        },
+        {
+          "id": 7012300,
+          "name": "Improved Damage Negation at Low HP",
+          "desc": "+16% damage negation when HP is below 40%",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "negation",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 0.16,
+            "condition": "While HP is below 40%"
+          }
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1490,
+      "name": "Grand Tranquil Scene",
+      "group": "signboard",
+      "color": 3,
+      "effects": [
+        {
+          "id": 7006001,
+          "name": "Improved Stance-Breaking when Two-Handing",
+          "desc": "1.05× poise damage when two-handing (not bows)"
+        },
+        {
+          "id": 7040000,
+          "name": "Improved Initial Standard Attack",
+          "desc": "1.15× first light attack damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "hitType",
+            "value": 1.15,
+            "condition": "First light attack only"
+          }
+        },
+        {
+          "id": 7001002,
+          "name": "Poise +3",
+          "desc": "0.85× incoming poise damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "poiseDamageTaken",
+            "value": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": 1500,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "effects": [
+        {
+          "id": 7006101,
+          "name": "Improved Stance-Breaking when Wielding Two Armaments",
+          "desc": "1.05× poise damage when power-stancing"
+        },
+        {
+          "id": 7100100,
+          "name": "Stamina Recovery upon Landing Attacks"
+        },
+        {
+          "id": 7000202,
+          "name": "Endurance +3",
+          "desc": "+6 Max Stamina",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "endurance",
+                "value": 6
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1510,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "effects": [
+        {
+          "id": 7060000,
+          "name": "Attack power increased for each evergaol prisoner defeated",
+          "desc": "1.05× damage per Evergaol boss defeated",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "value": 1.05,
+            "variableCount": true,
+            "maxCount": 7
+          }
+        },
+        {
+          "id": 7120900,
+          "name": "Stonesword Key in possession at start of expedition"
+        },
+        {
+          "id": 7070000,
+          "name": "Treasure marked upon map"
+        }
+      ]
+    },
+    {
+      "id": 1520,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "effects": [
+        {
+          "id": 7126000,
+          "name": "Starlight Shards in possession at start of expedition"
+        },
+        {
+          "id": 7126001,
+          "name": "Starlight Shards in possession at start of expedition"
+        },
+        {
+          "id": 7126002,
+          "name": "Starlight Shards in possession at start of expedition"
+        }
+      ]
+    },
+    {
+      "id": 1600,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7036500,
+          "name": "[Scholar] Earn runes for each additional specimen acquired with Character Skill"
+        },
+        {
+          "id": 7121000,
+          "name": "Small Pouch in possession at start of expedition"
+        },
+        {
+          "id": 7121001,
+          "name": "Small Pouch in possession at start of expedition"
+        }
+      ]
+    },
+    {
+      "id": 1610,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7037300,
+          "name": "[Undertaker] Contact with allies restores their HP while Ultimate Art is activated"
+        },
+        {
+          "id": 7005600,
+          "name": "Partial HP Restoration upon Post-Damage Attacks",
+          "desc": "Replenishes HP on hit briefly after taking damage"
+        },
+        {
+          "id": 7090000,
+          "name": "Defeating enemies fills more of the Art gauge"
+        }
+      ]
+    },
+    {
+      "id": 1620,
+      "name": "Grand Tranquil Scene",
+      "group": "signboard",
+      "color": 3,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6642000,
+          "name": "[Ironeye] Improved Arcane, Reduced Dexterity"
+        },
+        {
+          "id": 7000402,
+          "name": "Dexterity +3",
+          "desc": "+3 Dexterity",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "dexterity",
+                "value": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000702,
+          "name": "Arcane +3",
+          "desc": "+3 Arcane",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "arcane",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1630,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6641100,
+          "name": "[Guardian] Improved Mind and Faith, Reduced Vigor"
+        },
+        {
+          "id": 7000102,
+          "name": "Mind +3",
+          "desc": "+15 Max FP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "mind",
+                "value": 15
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000602,
+          "name": "Faith +3",
+          "desc": "+3 Faith",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "faith",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1640,
+      "name": "Grand Tranquil Scene",
+      "group": "signboard",
+      "color": 3,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6644100,
+          "name": "[Raider] Improved Arcane, Reduced Vigor"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000702,
+          "name": "Arcane +3",
+          "desc": "+3 Arcane",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "arcane",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1650,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6640000,
+          "name": "[Wylder] Improved Mind, Reduced Vigor"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000102,
+          "name": "Mind +3",
+          "desc": "+15 Max FP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "mind",
+                "value": 15
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1660,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6641000,
+          "name": "[Guardian] Improved Strength and Dexterity, Reduced Vigor"
+        },
+        {
+          "id": 7000302,
+          "name": "Strength +3",
+          "desc": "+3 Strength",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "strength",
+                "value": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000402,
+          "name": "Dexterity +3",
+          "desc": "+3 Dexterity",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "dexterity",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1670,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6642100,
+          "name": "[Ironeye] Improved Vigor and Strength, Reduced Dexterity"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000302,
+          "name": "Strength +3",
+          "desc": "+3 Strength",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "strength",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1680,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6640100,
+          "name": "[Wylder] Improved Intelligence and Faith, Reduced Strength and Dexterity"
+        },
+        {
+          "id": 7000502,
+          "name": "Intelligence +3",
+          "desc": "+3 Intelligence",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "intelligence",
+                "value": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000602,
+          "name": "Faith +3",
+          "desc": "+3 Faith",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "faith",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1690,
+      "name": "Grand Tranquil Scene",
+      "group": "signboard",
+      "color": 3,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6646100,
+          "name": "[Recluse] Improved Intelligence and Faith, Reduced Mind"
+        },
+        {
+          "id": 7000502,
+          "name": "Intelligence +3",
+          "desc": "+3 Intelligence",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "intelligence",
+                "value": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000602,
+          "name": "Faith +3",
+          "desc": "+3 Faith",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "faith",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1700,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6643100,
+          "name": "[Duchess] Improved Mind and Faith, Reduced Intelligence"
+        },
+        {
+          "id": 7000102,
+          "name": "Mind +3",
+          "desc": "+15 Max FP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "mind",
+                "value": 15
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000602,
+          "name": "Faith +3",
+          "desc": "+3 Faith",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "faith",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1710,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6643000,
+          "name": "[Duchess] Improved Vigor and Strength, Reduced Mind"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000302,
+          "name": "Strength +3",
+          "desc": "+3 Strength",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "strength",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1720,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7121000,
+          "name": "Small Pouch in possession at start of expedition"
+        },
+        {
+          "id": 7050100,
+          "name": "Items confer effect to all nearby allies"
+        },
+        {
+          "id": 7030200,
+          "name": "HP restored when using medicinal boluses, etc.",
+          "desc": "Restores 50 HP on consumable use"
+        }
+      ]
+    },
+    {
+      "id": 1730,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6060300,
+          "name": "Max HP increased for each great enemy defeated at a Great Church.",
+          "desc": "1.05× max HP per Great Church boss"
+        },
+        {
+          "id": 7060100,
+          "name": "Max FP increased for each Sorcerer's Rise unlocked"
+        },
+        {
+          "id": 6060500,
+          "name": "Arcane increased for each great enemy defeated at a Ruin",
+          "desc": "+4 Arcane per Ruin boss"
+        }
+      ]
+    },
+    {
+      "id": 1740,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7000902,
+          "name": "Ultimate Art Auto Charge +3",
+          "desc": "1.1× ultimate gauge gain",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "resource",
+            "stat": "ultimateCharge",
+            "value": 1.1
+          }
+        },
+        {
+          "id": 7030800,
+          "name": "Critical hits fill more of the Art gauge"
+        },
+        {
+          "id": 7090000,
+          "name": "Defeating enemies fills more of the Art gauge"
+        }
+      ]
+    },
+    {
+      "id": 1750,
+      "name": "Grand Tranquil Scene",
+      "group": "signboard",
+      "color": 3,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 7240000,
+          "name": "Improved Poise & Damage Negation When Knocked Back by Damage",
+          "desc": "20% damage negation and 0.8× poise damage taken for 20s after being hit",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "negation",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 0.2,
+            "condition": "20s after being hit"
+          }
+        },
+        {
+          "id": 7032200,
+          "name": "Taking attacks improves attack power",
+          "desc": "1.15× damage for 10s after taking a hit",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 1.15,
+            "condition": "10s after taking a hit"
+          }
+        },
+        {
+          "id": 7001409,
+          "name": "Physical Attack Up +2",
+          "desc": "1.06× physical damage",
+          "mul": {
+            "tier": "baseline",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "value": 1.06
+          }
+        }
+      ]
+    },
+    {
+      "id": 1800,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6645100,
+          "name": "[Revenant] Improved Strength, Reduced Faith"
+        },
+        {
+          "id": 7000302,
+          "name": "Strength +3",
+          "desc": "+3 Strength",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "strength",
+                "value": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000602,
+          "name": "Faith +3",
+          "desc": "+3 Faith",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "faith",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1820,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6645000,
+          "name": "[Revenant] Improved Vigor and Endurance, Reduced Mind"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000202,
+          "name": "Endurance +3",
+          "desc": "+6 Max Stamina",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "endurance",
+                "value": 6
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1830,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6646000,
+          "name": "[Recluse] Improved Vigor, Endurance, and Dexterity, Reduced Intelligence and Faith"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000202,
+          "name": "Endurance +3",
+          "desc": "+6 Max Stamina",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "endurance",
+                "value": 6
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1850,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6644000,
+          "name": "[Raider] Improved Mind and Intelligence, Reduced Vigor and Endurance"
+        },
+        {
+          "id": 7000102,
+          "name": "Mind +3",
+          "desc": "+15 Max FP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "mind",
+                "value": 15
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000502,
+          "name": "Intelligence +3",
+          "desc": "+3 Intelligence",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "intelligence",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1860,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6647000,
+          "name": "[Executor] Improved Vigor and Endurance, Reduced Arcane"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000202,
+          "name": "Endurance +3",
+          "desc": "+6 Max Stamina",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "endurance",
+                "value": 6
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1870,
+      "name": "Grand Drizzly Scene",
+      "group": "signboard",
+      "color": 1,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6647400,
+          "name": "[Undertaker] Improved Dexterity, Reduced Vigor and Faith"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000402,
+          "name": "Dexterity +3",
+          "desc": "+3 Dexterity",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "dexterity",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1880,
+      "name": "Grand Tranquil Scene",
+      "group": "signboard",
+      "color": 3,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6647500,
+          "name": "[Undertaker] Improved Mind and Faith, Reduced Strength"
+        },
+        {
+          "id": 7000102,
+          "name": "Mind +3",
+          "desc": "+15 Max FP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "mind",
+                "value": 15
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000602,
+          "name": "Faith +3",
+          "desc": "+3 Faith",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "faith",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1890,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6647100,
+          "name": "[Executor] Improved Dexterity and Arcane, Reduced Vigor"
+        },
+        {
+          "id": 7000402,
+          "name": "Dexterity +3",
+          "desc": "+3 Dexterity",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "dexterity",
+                "value": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000702,
+          "name": "Arcane +3",
+          "desc": "+3 Arcane",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "arcane",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1900,
+      "name": "Grand Burning Scene",
+      "group": "signboard",
+      "color": 0,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6647200,
+          "name": "[Scholar] Improved Mind, Reduced Vigor"
+        },
+        {
+          "id": 7000002,
+          "name": "Vigor +3",
+          "desc": "+60 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 60
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000102,
+          "name": "Mind +3",
+          "desc": "+15 Max FP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "mind",
+                "value": 15
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1920,
+      "name": "Grand Luminous Scene",
+      "group": "signboard",
+      "color": 2,
+      "dlc": true,
+      "effects": [
+        {
+          "id": 6647300,
+          "name": "[Scholar] Improved Endurance and Dexterity, Reduced Intelligence and Arcane"
+        },
+        {
+          "id": 7000202,
+          "name": "Endurance +3",
+          "desc": "+6 Max Stamina",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "endurance",
+                "value": 6
+              }
+            ]
+          }
+        },
+        {
+          "id": 7000402,
+          "name": "Dexterity +3",
+          "desc": "+3 Dexterity",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "dexterity",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 10000,
+      "name": "Old Pocketwatch",
+      "group": "misc",
+      "color": 3,
+      "effects": [
+        {
+          "id": 10000,
+          "name": "FP Restoration upon Successive Attacks",
+          "desc": "Restores 5% of max FP on successive attacks"
+        },
+        {
+          "id": 7000402,
+          "name": "Dexterity +3",
+          "desc": "+3 Dexterity",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "dexterity",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 10001,
+      "name": "Besmirched Frame",
+      "group": "misc",
+      "color": 1,
+      "effects": [
+        {
+          "id": 10001,
+          "name": "Taking attacks improves attack power",
+          "desc": "1.15× damage for 10s after taking a hit",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "universal"
+            ],
+            "group": "status",
+            "value": 1.15,
+            "condition": "10s after taking a hit"
+          }
+        },
+        {
+          "id": 7000602,
+          "name": "Faith +3",
+          "desc": "+3 Faith",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "faith",
+                "value": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 10002,
+      "name": "Fell Omen Fetish",
+      "group": "misc",
+      "color": 1,
+      "effects": [
+        {
+          "id": 10002,
+          "name": "Switching Weapons Boosts Attack Power",
+          "desc": "1.1× physical damage for 10s after switching weapons",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "status",
+            "value": 1.1,
+            "condition": "10s after switching weapons"
+          }
+        },
+        {
+          "id": 7040400,
+          "name": "Improved Throwing Knife Damage",
+          "desc": "1.15× throwing knife damage",
+          "mul": {
+            "tier": "conditional",
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "weapon",
+            "value": 1.15,
+            "condition": "Throwing Knife throws only"
+          }
+        },
+        {
+          "id": 7000000,
+          "name": "Vigor +1",
+          "desc": "+20 Max HP",
+          "mul": {
+            "tier": "flat",
+            "pools": [
+              {
+                "pool": "vigor",
+                "value": 20
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

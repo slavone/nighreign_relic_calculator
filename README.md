@@ -70,12 +70,13 @@ as effect descriptions.
 
 ## Regenerating Data
 
-Raw game files go in `data/`. Then run:
+Raw game files go in `data/` (`EquipParamAntique.csv` and `AntiqueName*.fmg.xml` from the same game-data repo are used for guaranteed relics). Then run:
 
 ```bash
 node parse_relics.mjs        # produces data/relic_groups.json
 node prepare_data.mjs        # produces data/relic_data.json (regular pool)
 node prepare_don_data.mjs    # produces data/don_relic_data.json (DON pool)
+node prepare_fixed_relics.mjs # produces data/fixed_relics.json (guaranteed relics, Effect Multipliers mode)
 ```
 
 Then paste the JSON into `index.html` (the `DATA` and `DON_DATA` constants), or run the embed script:
