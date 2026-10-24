@@ -1243,7 +1243,8 @@ window.__LOCALE_JP__ = {
       "name": "【葬儀屋】精神力／信仰上昇、筋力低下"
     },
     "[Undertaker] Physical attacks boosted while assist effect from incantation is active for self": {
-      "name": "【葬儀屋】祈祷で自身に補助効果発生時、物理攻撃力上昇"
+      "name": "【葬儀屋】祈祷で自身に補助効果発生時、物理攻撃力上昇",
+      "desc": "祈祷で自身に補助効果発生から60秒間、物理ダメージ1.19倍"
     },
     "All Resistances Down": {
       "name": "全耐性低下",
@@ -2426,6 +2427,7 @@ window.__LOCALE_JP__ = {
     "15s after repeated evasions (escalates from −23% to −35%)": "回避を繰り返した後15秒間（−23%から−35%まで悪化）",
     "20s after being hit": "被弾から20秒間",
     "30s after using grease items": "脂アイテム使用から30秒間",
+    "60s after an incantation buffs self": "祈祷で自身に補助効果発生から60秒間",
     "60s after being downed": "ダウンしてから60秒間",
     "After madness procs nearby": "近くで発狂状態が発生した後",
     "After sleep procs nearby": "近くで睡眠状態が発生した後",

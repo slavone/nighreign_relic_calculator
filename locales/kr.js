@@ -1808,7 +1808,8 @@ window.__LOCALE_KR__ = {
       "name": "[장의사]정신력/신앙 상승, 근력 저하"
     },
     "[Undertaker] Physical attacks boosted while assist effect from incantation is active for self": {
-      "name": "[장의사]기도 사용으로 자신에게 보조 효과 발생 시 물리 공격력 상승"
+      "name": "[장의사]기도 사용으로 자신에게 보조 효과 발생 시 물리 공격력 상승",
+      "desc": "기도로 자신에게 보조 효과 발생 후 60초간 물리 피해 1.19배"
     },
     "[Wylder] +1 additional Character Skill use": {
       "name": "[추적자]스킬 사용 횟수 +1"
@@ -2095,6 +2096,7 @@ window.__LOCALE_KR__ = {
     "15s after repeated evasions (escalates from −23% to −35%)": "회피를 반복한 후 15초간(−23%에서 −35%까지 악화)",
     "20s after being hit": "피격 후 20초간",
     "30s after using grease items": "기름 아이템 사용 후 30초간",
+    "60s after an incantation buffs self": "기도로 자신에게 보조 효과 발생 후 60초간",
     "60s after being downed": "다운 후 60초간",
     "After madness procs nearby": "근처에서 발광 발생 후",
     "After sleep procs nearby": "근처에서 수면 발생 후",

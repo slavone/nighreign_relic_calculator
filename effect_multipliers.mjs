@@ -200,6 +200,8 @@ export const EFFECT_MULTIPLIERS = {
   'Boosts Attack Power of Added Affinity Attacks': { tier: 'conditional', bucket: 'damage', axes: ['magic', 'fire', 'lightning', 'holy'], group: 'weapon', value: 1.1, condition: 'Elemental damage on weapons only (not spells)' },
   'Switching Weapons Boosts Attack Power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['physical'], group: 'status', value: 1.1, condition: '10s after switching weapons' },
   'Poison & Rot in Vicinity Increases Attack Power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.12, condition: '20s after poison/rot procs nearby' },
+  // Undertaker character relic (game data: 1.19x physical for 60s after applying an incant buff to self).
+  '[Undertaker] Physical attacks boosted while assist effect from incantation is active for self': { tier: 'conditional', special: true, bucket: 'damage', axes: ['physical'], group: 'status', value: 1.19, condition: '60s after an incantation buffs self' },
   'Taking attacks improves attack power': { tier: 'conditional', special: true, bucket: 'damage', axes: ['universal'], group: 'status', value: 1.15, condition: '10s after taking a hit' },
   'Improved Guard Counters': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.17, condition: 'On guard counters' },
   'Improved Guard Counters +1': { tier: 'conditional', bucket: 'damage', axes: ['physical'], group: 'hitType', value: 1.25, condition: 'On guard counters' },

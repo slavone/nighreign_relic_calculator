@@ -1923,6 +1923,18 @@
             53,
             53
           ],
+          "desc": "1.19× physical damage for 60s after an incantation buffs self",
+          "mul": {
+            "tier": "conditional",
+            "special": true,
+            "bucket": "damage",
+            "axes": [
+              "physical"
+            ],
+            "group": "status",
+            "value": 1.19,
+            "condition": "60s after an incantation buffs self"
+          },
           "dlc": true
         },
         {

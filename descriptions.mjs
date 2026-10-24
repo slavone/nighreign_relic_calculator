@@ -293,6 +293,7 @@ export const EFFECT_DESCRIPTIONS = {
   'Boosts Attack Power of Added Affinity Attacks':       '1.1× elemental damage on weapons (not sorceries/incantations)',
   'Switching Weapons Adds an Affinity Attack':           '+12 AP of a random element for 10s after switching weapons',
   'Switching Weapons Boosts Attack Power':               '1.1× physical damage for 10s after switching weapons',
+  '[Undertaker] Physical attacks boosted while assist effect from incantation is active for self': '1.19× physical damage for 60s after an incantation buffs self',
   'Successive Attacks Boost Attack Power':               '1.05× / 1.065× / 1.09× damage per successive-attack tier (stacking: up to ~1.219×)',
   'Poison & Rot in Vicinity Increases Attack Power':     '1.12× damage for 20s after poison or rot procs nearby',
   'Status Ailment Gauges Slowly Increase Attack Power':  '1.04× damage every 20s while a status gauge is visible (up to 10 stacks)',
